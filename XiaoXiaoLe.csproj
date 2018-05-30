@@ -241,7 +241,6 @@
     <Compile Include="Assets\Sprites\Data\ReadData.cs" />
     <Compile Include="Assets\Sprites\Data\WriteData.cs" />
     <Compile Include="Assets\Sprites\Manager\AudioManager.cs" />
-    <Compile Include="Assets\Sprites\Manager\DataBase.cs" />
     <Compile Include="Assets\Sprites\Manager\DBOperation.cs" />
     <Compile Include="Assets\Sprites\Manager\GamePlatformManager.cs" />
     <Compile Include="Assets\Sprites\Manager\ManagerBase.cs" />
@@ -260,7 +259,6 @@
     <None Include="Assets\PhysicsMaterials\临时添加.txt" />
     <None Include="Assets\Resources\Audios\BGMusic\临时添加.txt" />
     <None Include="Assets\Resources\Audios\SoundEffect\临时添加.txt" />
-    <None Include="Assets\Resources\Mytest_5_30.txt" />
     <None Include="Assets\Resources\Prefabs\UIPrefabs\临时添加.txt" />
     <None Include="Assets\Resources\Texture\BG\临时添加.txt" />
     <None Include="Assets\Resources\Texture\Enemy\临时添加.txt" />
