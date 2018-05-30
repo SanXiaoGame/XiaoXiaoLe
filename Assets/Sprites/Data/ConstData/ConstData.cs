@@ -86,6 +86,14 @@ public struct ConstData
     /// </summary>
     public const string DELETE = "DELETE ";
     /// <summary>
+    /// 更新:UPDATE
+    /// </summary>
+    public const string UPDATE = "UPDATE ";
+    /// <summary>
+    /// 改:SET
+    /// </summary>
+    public const string SET = " SET ";
+    /// <summary>
     /// 过滤重复数据:DISTINCT
     /// </summary>
     public const string DISTINCT = " DISTINCT ";
