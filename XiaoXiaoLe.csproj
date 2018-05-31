@@ -240,9 +240,9 @@
     <Compile Include="Assets\Sprites\Data\PlayerData.cs" />
     <Compile Include="Assets\Sprites\Data\ReadData.cs" />
     <Compile Include="Assets\Sprites\Data\WriteData.cs" />
+    <Compile Include="Assets\Sprites\Game\BlockObjectTouch.cs" />
     <Compile Include="Assets\Sprites\Manager\AudioManager.cs" />
     <Compile Include="Assets\Sprites\Manager\DBOperation.cs" />
-    <Compile Include="Assets\Sprites\Manager\GamePlatformManager.cs" />
     <Compile Include="Assets\Sprites\Manager\ManagerBase.cs" />
     <Compile Include="Assets\Sprites\Manager\ResourcesManager.cs" />
     <Compile Include="Assets\Sprites\Manager\SQLiteManager.cs" />
