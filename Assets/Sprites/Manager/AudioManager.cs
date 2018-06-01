@@ -36,6 +36,9 @@ public class AudioManager : ManagerBase<AudioManager>
         return null;
     }
 
+    /// <summary>
+    /// 查找所有效果音乐音源
+    /// </summary>
     void FindAlleffectMusicAudioSource()
     {
         for (int i = 0; i < transform.childCount; i++)

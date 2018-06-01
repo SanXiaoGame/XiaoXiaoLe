@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 /// <summary>
 /// 字符串拼接工具
 /// </summary>
@@ -19,5 +20,24 @@ public struct StringSplicingTool
         }
         Debug.Log(SplicingString);
         return SplicingString;
+    }
+    /// <summary>
+    /// 拼接金币专用
+    /// </summary>
+    /// <param 金币数组="coin"></param>
+    /// <returns></returns>
+    public static string StringSplicing(string coin)
+    {
+        string GoldCoinNumber = coin[coin.Length - 1].ToString();
+        for (int i = coin.Length - 2; i >= 0; i--)
+        {
+            GoldCoinNumber = string.Format("{0}{1}", coin[i].ToString(), GoldCoinNumber);
+            if (i != 0 && (coin.Length - i) % 3 == 0)
+            {
+                GoldCoinNumber = string.Format("{0}{1}", ",", GoldCoinNumber);
+            }
+        }
+        Debug.Log(GoldCoinNumber);
+        return GoldCoinNumber;
     }
 }

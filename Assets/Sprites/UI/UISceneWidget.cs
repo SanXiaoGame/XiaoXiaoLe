@@ -24,18 +24,6 @@ public class UISceneWidget : EventTrigger
     public event Action<BaseEventData> Submit;
     public event Action<BaseEventData> UpdateSelected;
 
-    /// <summary>
-    /// 获取指定UGUI游戏物体的事件监听器
-    /// </summary>
-    /// <param name="go"></param>
-    /// <returns></returns>
-    public static UISceneWidget Get(GameObject go)
-    {
-        UISceneWidget widget = go.GetComponent<UISceneWidget>();
-        if (!widget) widget = go.AddComponent<UISceneWidget>();
-        return widget;
-    }
-
     public override void OnBeginDrag(PointerEventData eventData)
     {
         if (BeginDrag != null) BeginDrag(eventData);

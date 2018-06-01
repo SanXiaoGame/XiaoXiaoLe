@@ -7,6 +7,13 @@ public struct ConstData
     public const string UIPrefabsPath = "Prefabs/UIPrefabs";
     #endregion
 
+    #region 所有游戏预制体文件夹
+    //所有初始块的预制体
+    public const string BlockPrefabs = "Prefabs/BlockPrefabs";
+    //所有特殊块的预制体
+    public const string SkillBlockPrefabs = "Prefabs/SkillBlockPrefabs";
+    #endregion
+
     #region 音乐文件夹
     public const string BGMusic = "Audios/BGMusic";
     #endregion
