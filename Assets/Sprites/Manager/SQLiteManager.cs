@@ -50,7 +50,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         writeData = new WriteData(dataBasePath);
 
         //取出数据存入字典
-        readData.GetData();
+        readData.GetData("表名01");
     }
 
     /// <summary>
