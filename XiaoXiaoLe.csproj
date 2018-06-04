@@ -237,9 +237,13 @@
     <Compile Include="Assets\Sprites\Data\EnemyData.cs" />
     <Compile Include="Assets\Sprites\Data\EnumData\GameType.cs" />
     <Compile Include="Assets\Sprites\Data\EnumData\MusicType.cs" />
+    <Compile Include="Assets\Sprites\Data\EquipmentData.cs" />
     <Compile Include="Assets\Sprites\Data\ItemData.cs" />
+    <Compile Include="Assets\Sprites\Data\LVData.cs" />
     <Compile Include="Assets\Sprites\Data\PlayerData.cs" />
     <Compile Include="Assets\Sprites\Data\ReadData.cs" />
+    <Compile Include="Assets\Sprites\Data\SkillData.cs" />
+    <Compile Include="Assets\Sprites\Data\StateData.cs" />
     <Compile Include="Assets\Sprites\Data\WriteData.cs" />
     <Compile Include="Assets\Sprites\Game\BlockObject.cs" />
     <Compile Include="Assets\Sprites\Game\BlockObjectTouch.cs" />

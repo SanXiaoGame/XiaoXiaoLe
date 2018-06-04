@@ -22,7 +22,27 @@ public struct ConstData
     public const string SoundEffect = "Audios/SoundEffect";
     #endregion
 
-    #region 主要常用名称
+    #region 职业进化所需材料
+    /// <summary>
+    /// 剑士进阶石
+    /// </summary>
+    public const int SwordsmanIntoTheStone = 2301;
+    /// <summary>
+    /// 骑士进阶石
+    /// </summary>
+    public const int CavaliersSteppingStone = 2302;
+    /// <summary>
+    /// 猎人进阶石
+    /// </summary>
+    public const int TheHunterEntersTheStone = 2303;
+    /// <summary>
+    /// 魔法师进阶石
+    /// </summary>
+    public const int TheMagicianIntoTheStone = 2304;
+    /// <summary>
+    /// 狂战士进阶石
+    /// </summary>
+    public const int FrenzyIntoAStone = 2305;
     #endregion
 
     #region 固定位置

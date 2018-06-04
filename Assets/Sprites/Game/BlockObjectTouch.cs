@@ -34,7 +34,7 @@ public class BlockObjectTouch : UISceneWidget
     //块选中的方法,未实现
     private void BlockSelect(BaseEventData eventData)
     {
-
+        
     }
 
     //块开始拖拽,未实现

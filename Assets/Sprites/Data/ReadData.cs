@@ -26,15 +26,23 @@ public class ReadData
     /// <summary>
     /// 获取所有数据
     /// </summary>
-    public void GetData()
+    public void GetData(string tbName)
     {
         //清空数据
         SQLiteManager.Instance.dataSource.Clear();
         //执行查询操作
-        SqliteDataReader reader = dbOperation.GetAllDataFromSQLTable("表名");
+        SqliteDataReader reader = dbOperation.GetAllDataFromSQLTable(tbName);
 
         while (reader.Read())
         {
+            if (reader.GetInt32(reader.GetOrdinal("class"))==0)
+            {
+                int ID02 = 5;
+            }
+            else
+            {
+                int ID01 = 5;
+            }
             /*//获取读到内容中的字段,来保存对应的值
             int ID = reader.GetInt32(reader.GetOrdinal("id"));
             string ItemName = reader.GetString(reader.GetOrdinal("Item_Name"));
@@ -60,11 +68,11 @@ public class ReadData
         }
     }
     /// <summary>
-    /// 获取指定数据
+    /// 读取指定数据
     /// </summary>
     /// <param 条件="codition"></param>
-    public void GetData(string codition)
-    {
+    //public void GetData(string codition)
+    //{
         
-    }
+    //}
 }
