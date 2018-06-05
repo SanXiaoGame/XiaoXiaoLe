@@ -16,7 +16,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
     WriteData writeData;
 
     //数据源：用来保存读到的数据模型
-    public Dictionary<int, ItemData> dataSource;
+    public Dictionary<int, object> dataSource;
 
     protected override void Awake()
     {
@@ -24,7 +24,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         //初始化数据源字典
         if (dataSource == null)
         {
-            dataSource = new Dictionary<int, ItemData>();
+            dataSource = new Dictionary<int, object>();
         }
 
         //启动流路径(将需要操作的文件从流路径拷贝到沙盒中)
@@ -33,7 +33,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         //是否拷贝完成
         StreamsLoading.onCopyFinished += OnLoadFinished;
         //开始拷贝（输入对应的表名）
-        StreamsLoading.LoadWitgPath(new string[] { "输入对应的表名","表名" });
+        StreamsLoading.LoadWitgPath(new string[] { ConstData.SQLITE_NAME});
     }
 
     /// <summary>
@@ -44,36 +44,73 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
     {
         Debug.Log("路径拷贝完成");
         //数据库存放沙盒的路径
-        dataBasePath = System.IO.Path.Combine(Application.persistentDataPath, "输入对应的表名");
+        dataBasePath = System.IO.Path.Combine(Application.persistentDataPath, ConstData.SQLITE_NAME);
         //初始化读和写的功能
         readData = new ReadData(dataBasePath);
         writeData = new WriteData(dataBasePath);
 
         //取出数据存入字典
-        readData.GetData("表名01");
+        readData.GetData(ConstData.CharacterList);
+        readData.GetData(ConstData.Enemy);
+        readData.GetData(ConstData.Item);
+        readData.GetData(ConstData.Level);
+        readData.GetData(ConstData.Player);
+        readData.GetData(ConstData.Skill);
+        readData.GetData(ConstData.State);
     }
 
     /// <summary>
-    /// 插入一条数据到数据库(没完成)
+    /// 插入一条新的数据到存档中
     /// </summary>
-    /// <param name="s_id"></param>
-    /// <param name="s_name"></param>
-    /// <param name="s_ave"></param>
-    public void InsetDataToTable(string s_id, string s_name, string s_ave)
+    /// <param 表名="tbName"></param>
+    /// <param 表id="id"></param>
+    /// <param 角色名="player_Name"></param>
+    /// <param 角色类型="player_Class"></param>
+    /// <param 角色介绍="player_Description"></param>
+    /// <param 血量="player_HP"></param>
+    /// <param 物攻="player_AD"></param>
+    /// <param 魔攻="player_AP"></param>
+    /// <param 物防="player_DEF"></param>
+    /// <param 魔防="player_RES"></param>
+    /// <param 技能01="player_SkillOneID"></param>
+    /// <param 技能02="player_SkillTwoID"></param>
+    /// <param 技能03="player_SkillThreeID"></param>
+    /// <param 进化后血量="player_EXHP"></param>
+    /// <param 进化后物攻="player_EXAD"></param>
+    /// <param 进化后魔攻="player_EXAP"></param>
+    /// <param 进化后物防="player_EXDEF"></param>
+    /// <param 进化后魔防="player_EXRES"></param>
+    /// <param 携带武器="player_Weapon"></param>
+    /// <param 携带装备="player_Equipment"></param>
+    /// <param 等级="player_Level"></param>
+    /// <param 经验="player_EXP"></param>
+    public void InsetDataToTable(int id, string player_Name, string player_Class, string player_Description, int player_HP, int player_AD, int player_AP, int player_DEF, int player_RES, int player_SkillOneID, int player_SkillTwoID, int player_SkillThreeID, int player_EXHP, int player_EXAD, int player_EXAP, int player_EXDEF, int player_EXRES, int player_Weapon, int player_Equipment, int player_Level, int player_EXP)
     {
-        string[] values = new string[] { s_id, s_name, s_ave };
-        writeData.InsertDataToSQL(values);
+        string[] values = new string[] { id.ToString(), player_Name, player_Class, player_Description, player_HP.ToString(), player_AD.ToString(), player_AP.ToString(), player_DEF.ToString(), player_RES.ToString(), player_SkillOneID.ToString(), player_SkillTwoID.ToString(), player_SkillThreeID.ToString(), player_EXHP.ToString(), player_EXAD.ToString(), player_EXAP.ToString(), player_EXDEF.ToString(), player_EXRES.ToString(), player_Weapon.ToString(), player_Equipment.ToString(), player_Level.ToString(), player_EXP.ToString() };
+        writeData.InsertDataToSQL(ConstData.Player, values);
     }
 
     /// <summary>
-    /// 更新数据中的某条数据(没完成)
+    /// 更新指定存档数据
     /// </summary>
-    /// <param name="cols"></param>
-    /// <param name="colsValue"></param>
-    /// <param name="key"></param>
-    /// <param name="keyValue"></param>
-    public void UpdataDataFromTable(string cols, int colsValue, string key, string keyValue)
+    /// <param 表名="tbName"></param>
+    /// <param 更新的字段="field"></param>
+    /// <param 更新字段的值="fieldValue"></param>
+    /// <param 条件字段="key"></param>
+    /// <param 条件字段的值="keyValue"></param>
+    public void UpdataDataFromTable(string tbName, string field, int fieldValue, string key, int keyValue)
     {
-        writeData.UpdataDataFromSQL(cols, colsValue, key, keyValue);
+        writeData.UpdataDataFromSQL(tbName, field, fieldValue, key, keyValue);
+    }
+
+    /// <summary>
+    /// 删除存档中一行指定的数据
+    /// </summary>
+    /// <param 表名="tbName"></param>
+    /// <param 对应字段="key"></param>
+    /// <param 对应ID号="keyValue"></param>
+    public void DeleteTableData(string tbName, string key, int keyValue)
+    {
+        writeData.DeleteInTableData(tbName, key, keyValue);
     }
 }

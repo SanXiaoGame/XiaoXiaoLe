@@ -28,23 +28,35 @@ public class WriteData
     }
 
     /// <summary>
-    /// 插入一条数据到数据库
+    /// 插入一条新数据到数据库
     /// </summary>
     /// <param 要插入数据各个字段的值得集合="values"></param>
-    public void InsertDataToSQL(string[] values)
+    public void InsertDataToSQL(string tbName, string[] values)
     {
-        dbOperation.InsertDataToTable("表名", values);
+        dbOperation.InsertDataToTable(tbName, values);
     }
 
     /// <summary>
-    /// 更新数据中的某条数据
+    /// 更新指定存档数据
     /// </summary>
-    /// <param name="cols"></param>
-    /// <param name="colsValue"></param>
-    /// <param name="key"></param>
-    /// <param name="keyValue"></param>
-    public void UpdataDataFromSQL(string cols, int colsValue, string key, string keyValue)
+    /// <param 表名="tbName"></param>
+    /// <param 更新的字段="field"></param>
+    /// <param 更新字段的值="fieldValue"></param>
+    /// <param 条件字段="key"></param>
+    /// <param 条件字段的值="keyValue"></param>
+    public void UpdataDataFromSQL(string tbName, string field, int fieldValue, string key, int keyValue)
     {
-        dbOperation.UpdataDataFormTable("表名", cols, colsValue, key, keyValue);
+        dbOperation.UpdataDataFormTable(tbName, field, fieldValue, key, keyValue);
+    }
+
+    /// <summary>
+    /// 删除存档中一行指定的数据
+    /// </summary>
+    /// <param 表名="tbName"></param>
+    /// <param 对应字段="key"></param>
+    /// <param 对应ID号="keyValue"></param>
+    public void DeleteInTableData(string tbName, string key, int keyValue)
+    {
+        dbOperation.DeleteTableData(tbName, key, keyValue);
     }
 }

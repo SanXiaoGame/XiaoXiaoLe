@@ -248,6 +248,7 @@
     <Compile Include="Assets\Sprites\Game\BlockObject.cs" />
     <Compile Include="Assets\Sprites\Game\BlockObjectTouch.cs" />
     <Compile Include="Assets\Sprites\Game\ColumnScript.cs" />
+    <Compile Include="Assets\Sprites\Game\SpecialBlockObject.cs" />
     <Compile Include="Assets\Sprites\Manager\AudioManager.cs" />
     <Compile Include="Assets\Sprites\Manager\ColumnManager.cs" />
     <Compile Include="Assets\Sprites\Manager\DBOperation.cs" />
@@ -270,6 +271,7 @@
     <None Include="Assets\Resources\Audios\BGMusic\临时添加.txt" />
     <None Include="Assets\Resources\Audios\SoundEffect\临时添加.txt" />
     <None Include="Assets\Resources\Prefabs\BlockPrefabs\临时添加.txt" />
+    <None Include="Assets\Resources\Prefabs\LevelPrefabs\临时添加.txt" />
     <None Include="Assets\Resources\Prefabs\SkillBlockPrefabs\临时添加.txt" />
     <None Include="Assets\Resources\Prefabs\UIPrefabs\临时添加.txt" />
     <None Include="Assets\Resources\Texture\BG\临时添加.txt" />
