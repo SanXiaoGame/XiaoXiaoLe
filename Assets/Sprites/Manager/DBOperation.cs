@@ -101,45 +101,46 @@ public class DBOperation
     }
 
     /// <summary>
-    /// 插入一条数据到表中
+    /// 插入一条新数据到表中
     /// </summary>
     /// <param 表名="tbName"></param>
     /// <param 值集合="values"></param>
     public void InsertDataToTable(string tbName, string[] values)
     {
-        string sqlQuery = ConstData.InsertLine01 + tbName + ConstData.InsertLine02 + "'" + values[0] + "'";
-        for (int i = 1; i < values.Length; i++)
+        string sqlQuery = "INSERT INTO " + tbName + " VALUES(" + values[0] + "'" + values[1] + "'" + "'" + values[2] + "'" + "'" + values[3] + "'";
+        for (int i = 0; i < values.Length - 4; i++)
         {
-            sqlQuery += "," + "'" + values[i] + "'";
+            sqlQuery = StringSplicingTool.StringSplicing(sqlQuery, values[i]);
         }
-        sqlQuery += ")";
+        sqlQuery = StringSplicingTool.StringSplicing(sqlQuery, ")");
         ExcuteSQLQuery(sqlQuery);
     }
 
     /// <summary>
-    /// 更新一条数据
+    /// 更新指定存档数据
     /// </summary>
     /// <param 表名="tbName"></param>
-    /// <param 更新的字段集合="cols"></param>
-    /// <param 更新字段的值="colsValue"></param>
+    /// <param 更新的字段="field"></param>
+    /// <param 更新字段的值="fieldValue"></param>
     /// <param 条件字段="key"></param>
     /// <param 条件字段的值="keyValue"></param>
-    public void UpdataDataFormTable(string tbName, string cols, int colsValue, string key, string keyValue)
+    public void UpdataDataFormTable(string tbName, string field, int fieldValue, string key, int keyValue)
     {
-        string query = ConstData.UPDATE + tbName + ConstData.SET + cols + " = " + colsValue + ConstData.WHERE + key + " = " + "'" + keyValue + "'";
+        string query = ConstData.UPDATE + tbName + ConstData.SET + field + " = " + fieldValue + ConstData.WHERE + key + " = " + keyValue;
         Debug.Log(query);
         ExcuteSQLQuery(query);
     }
-    //暂不使用
-    /*public void UpdataDataFormTable(string tbName,string[] cols, string[] colsValue, string key, string keyValue)
+
+    /// <summary>
+    /// 删除存档中一行指定的数据
+    /// </summary>
+    /// <param 表名="tbName"></param>
+    /// <param 对应字段="key"></param>
+    /// <param 对应ID号="keyValue"></param>
+    public void DeleteTableData(string tbName, string key, int keyValue)
     {
-        string query = "UPDATE " + tbName + " SET " + cols[0] + "=" + "'" + colsValue[0] + "'";
-        for (int i = 1; i < cols.Length; i++)
-        {
-            query += "," + cols[i] + "=" + "'" + colsValue[i] + "'";
-        }
-        query += "WHERE " + key + "=" + "'" + keyValue + "'";
+        string query = ConstData.DELETE + ConstData.FROM02 + tbName + ConstData.WHERE + key + " = " + keyValue;
         Debug.Log(query);
         ExcuteSQLQuery(query);
-    }*/
+    }
 }

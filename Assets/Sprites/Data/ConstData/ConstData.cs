@@ -48,6 +48,10 @@ public struct ConstData
     #region 固定位置
     #endregion
 
+    #region 金币上限
+    public const ulong GoldCoinMax = 999999999;
+    #endregion
+
     #region 动画的行为
     /// <summary>
     /// 空闲
@@ -88,7 +92,47 @@ public struct ConstData
     #endregion
 
     #region 游戏数据库表名
-    public const string TableName01 = "还没有";
+    /// <summary>
+    /// 要连接的数据库文件路径
+    /// </summary>
+    public const string SQLITE_NAME = "SQLite/NereisQuest.sqlite";
+    /// <summary>
+    /// 人物列表
+    /// </summary>
+    public const string CharacterList = "CharacterList";
+    /// <summary>
+    /// 敌人表
+    /// </summary>
+    public const string Enemy = "Enemy";
+    /// <summary>
+    /// 装备表
+    /// </summary>
+    public const string Equipment = "Equipment";
+    /// <summary>
+    /// 物品表
+    /// </summary>
+    public const string Item = "Item";
+    /// <summary>
+    /// 等级经验表
+    /// </summary>
+    public const string Level = "Level";
+    /// <summary>
+    /// 角色存档表
+    /// </summary>
+    public const string Player = "Player";
+    /// <summary>
+    /// 技能表
+    /// </summary>
+    public const string Skill = "Skill";
+    /// <summary>
+    /// 状态表
+    /// </summary>
+    public const string State = "State";
+    #endregion
+
+    #region 角色或敌人默认速度值
+    public const float attackSpeed = 0f;
+    public const float movingSpeed = 0f;
     #endregion
 
     #region 数据库命令大全
