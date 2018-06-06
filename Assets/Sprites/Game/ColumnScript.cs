@@ -13,6 +13,8 @@ public class ColumnScript : MonoBehaviour
     internal List<BlockObject> BlockObjectsScriptList;
     //实例化初始块用的临时变量
     GameObject objectPrefab;
+    //存放临时随机数
+    int randomNumber;
 
     private void Start()
     {
@@ -26,9 +28,35 @@ public class ColumnScript : MonoBehaviour
     /// </summary>
     void PopulateInitialColumn()
     {
+        //记录当前列数
+        ColumnManager.Instance.ColumnNumber++;
         for (int i = 0; i < ColumnManager.Instance.numberOfColumns; i++)
         {
             int index = Random.Range(0, GameManager.Instance.normalBlockNumber);
+
+            while (objectPrefab != null && index == randomNumber)
+            {
+                index = Random.Range(0, 6);
+            }
+            //新的随机数
+            randomNumber = index;
+            if (ColumnManager.Instance.ColumnNumber % 2 == 0 && ColumnManager.Instance.PreviousColumnBlock(i).name == StringSplicingTool.StringSplicing(GameManager.Instance.playingObjectPrefabs[index].name, "(Clone)"))
+            {
+                if (index != 0 && index != 5)
+                {
+                    while (index == randomNumber)
+                    {
+                        index = Random.Range(0, 6);
+                    }
+                }
+                else
+                {
+                    index = index == 0 ? 5 : 0;
+                }
+                //新的随机数
+                randomNumber = index;
+            }
+
             objectPrefab = GameManager.Instance.playingObjectPrefabs[index] as GameObject;
             GameObject block = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
             block.transform.parent = transform;

@@ -13,6 +13,8 @@ public class ColumnManager : ManagerBase<ColumnManager>
     internal int numberOfColumns = 6;
     //总行数 默认6
     internal int numberOfRows = 6;
+    //记录当前的列（最开始左边的列数等于-1）
+    internal int ColumnNumber = -1;
 
     //列未定的X值
     float ColumnX = 2.5f;
@@ -43,10 +45,11 @@ public class ColumnManager : ManagerBase<ColumnManager>
     }
 
     /// <summary>
-    /// 指派(赋值)相连块
+    /// 返回前一列相连块（左边）
     /// </summary>
-    internal void AssignNeighbours()
+    internal GameObject PreviousColumnBlock(int i)
     {
-        
+        int num = ColumnNumber;
+        return transform.GetChild(num - 1).GetChild(i).gameObject;
     }
 }
