@@ -11,5 +11,6 @@ public struct SkillData
     public string skill_Type;
     public int skill_DamageLevel;
     public string skill_Description;
-    public int skill_AddStateID;
+    public int skill_AddStateID1;
+    public int skill_AddStateID2;
 }

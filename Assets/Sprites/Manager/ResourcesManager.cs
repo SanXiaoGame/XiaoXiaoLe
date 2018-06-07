@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class ResourcesManager : ManagerBase<ResourcesManager>
 {
-    //所有音效
+    //所有声音
     AudioClip[] audioClipAll;
     //所有特殊块的预制体
     Object[] skillBlockAll;
@@ -21,15 +21,15 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
         audioClipAll = Resources.LoadAll<AudioClip>(ConstData.SoundEffect);
     }
     /// <summary>
-    /// 返回一个指定的音效
+    /// 返回一个指定的歌
     /// </summary>
-    /// <param 音效名="clipName"></param>
+    /// <param 歌名="clipName"></param>
     /// <returns></returns>
-    public AudioClip FindAudioClip(string clipName)
+    public AudioClip FindAudioClip<T>(T clipType) where T : struct
     {
         for (int i = 0; i < audioClipAll.Length; i++)
         {
-            if (audioClipAll[i].name == clipName)
+            if (audioClipAll[i].name == clipType.ToString())
             {
                 return audioClipAll[i];
             }

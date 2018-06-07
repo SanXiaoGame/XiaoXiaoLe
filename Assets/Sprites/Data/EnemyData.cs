@@ -13,5 +13,7 @@ public struct EnemyData
     public int DEF;
     public int RES;
     public int EXP;
-    public int Skill_ID;
+    public int enemy_SkillID1;
+    public int enemy_SkillID2;
+    public int enemy_SkillID3;
 }

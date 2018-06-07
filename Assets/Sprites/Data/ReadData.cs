@@ -119,7 +119,9 @@ public class ReadData
             int DEF = reader.GetInt32(reader.GetOrdinal("enemy_DEF"));
             int RES = reader.GetInt32(reader.GetOrdinal("enemy_RES"));
             int EXP = reader.GetInt32(reader.GetOrdinal("enemy_EXP"));
-            int Skill_ID = reader.GetInt32(reader.GetOrdinal("enemy_SkillID"));
+            int enemy_SkillID1 = reader.GetInt32(reader.GetOrdinal("enemy_SkillID1"));
+            int enemy_SkillID2 = reader.GetInt32(reader.GetOrdinal("enemy_SkillID2"));
+            int enemy_SkillID3 = reader.GetInt32(reader.GetOrdinal("enemy_SkillID3"));
             //创建模型
             EnemyData enemyData = new EnemyData
             {
@@ -132,7 +134,9 @@ public class ReadData
                 DEF = DEF,
                 RES = RES,
                 EXP = EXP,
-                Skill_ID = Skill_ID
+                enemy_SkillID1 = enemy_SkillID1,
+                enemy_SkillID2 = enemy_SkillID2,
+                enemy_SkillID3 = enemy_SkillID3,
             };
             //加入到数据库
             SQLiteManager.Instance.dataSource.Add(enemyData.enemy_Id, enemyData);
@@ -275,7 +279,8 @@ public class ReadData
             string skill_Type = reader.GetString(reader.GetOrdinal("skill_Type"));
             int skill_DamageLevel = reader.GetInt32(reader.GetOrdinal("skill_DamageLevel"));
             string skill_Description = reader.GetString(reader.GetOrdinal("skill_Description"));
-            int skill_AddStateID = reader.GetInt32(reader.GetOrdinal("skill_AddStateID"));
+            int skill_AddStateID1 = reader.GetInt32(reader.GetOrdinal("skill_AddStateID1"));
+            int skill_AddStateID2 = reader.GetInt32(reader.GetOrdinal("skill_AddStateID2"));
             //创建模型
             SkillData skillData = new SkillData
             {
@@ -284,7 +289,8 @@ public class ReadData
                 skill_Type = skill_Type,
                 skill_DamageLevel = skill_DamageLevel,
                 skill_Description = skill_Description,
-                skill_AddStateID = skill_AddStateID,
+                skill_AddStateID1 = skill_AddStateID1,
+                skill_AddStateID2 = skill_AddStateID2,
             };
             //加入到数据库
             SQLiteManager.Instance.dataSource.Add(skillData.skill_ID, skillData);

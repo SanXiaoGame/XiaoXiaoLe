@@ -59,6 +59,7 @@ public class ColumnScript : MonoBehaviour
 
             objectPrefab = GameManager.Instance.playingObjectPrefabs[index] as GameObject;
             GameObject block = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
+            block.name = objectPrefab.name;
             block.transform.parent = transform;
             block.transform.localPosition = new Vector3(0, -i, 0);
             block.GetComponent<BlockObject>().myColumnScript = this;
@@ -113,6 +114,7 @@ public class ColumnScript : MonoBehaviour
             int index = Random.Range(0, GameManager.Instance.normalBlockNumber);
             objectPrefab= GameManager.Instance.playingObjectPrefabs[index] as GameObject;
             GameObject block = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
+            block.name = objectPrefab.name;
             block.transform.parent = transform;
             block.transform.localPosition = new Vector3(0, i + 1, 0);
             //赋值新的ColumnScript类
@@ -132,7 +134,6 @@ public class ColumnScript : MonoBehaviour
         //动画相关（未实现）
 
         //播放下降音效(未实现)
-        float valume = 1f;//默认音量(测试用)
-        //AudioManager.Instance.PlayEffectMusic("音效名", transform.position, valume);
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.Attack);
     }
 }

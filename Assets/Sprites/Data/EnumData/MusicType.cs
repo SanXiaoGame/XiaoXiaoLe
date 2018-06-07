@@ -3,10 +3,10 @@
 /// </summary>
 public enum BGM
 {
-
+    MainCityBGM,
 }
 
 public enum SoundEffect
 {
-
+    Attack,
 }
