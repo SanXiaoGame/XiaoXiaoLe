@@ -133,6 +133,6 @@ public class ColumnScript : MonoBehaviour
 
         //播放下降音效(未实现)
         float valume = 1f;//默认音量(测试用)
-        AudioManager.Instance.PlayEffectBase("音效名", transform.position, valume);
+        //AudioManager.Instance.PlayEffectMusic("音效名", transform.position, valume);
     }
 }

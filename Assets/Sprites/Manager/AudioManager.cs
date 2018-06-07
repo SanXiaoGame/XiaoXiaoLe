@@ -13,14 +13,30 @@ public class AudioManager : ManagerBase<AudioManager>
     //保存所有音效播放器
     Dictionary<string, AudioSource> effectMusic = new Dictionary<string, AudioSource>();
 
+    //是否静音
+    bool bgMusicMute = false;
+    bool effectMusicMute = false;
+    //临时存储静音值
+    int intMute;
+
+    //音乐音量和音效音量 默认1f
+    float bgMusicVolume = 1f;
+    float effectVolume = 1f;
+
     //初始化播放器管理类
     protected override void Awake()
     {
         base.Awake();
+        //获取是否静音
+        bgMusicMute = PlayerPrefs.GetInt("BGMMute") == 1 ? false : true;
+        effectMusicMute = PlayerPrefs.GetInt("effectMute") == 1 ? false : true;
+        //获取设置音量
+        bgMusicVolume = PlayerPrefs.GetFloat("bgMusicVolume");
+        effectVolume = PlayerPrefs.GetFloat("effectVolume");
     }
 
     /// <summary>
-    /// 返回指定的播放器
+    /// 返回指定的音效播放器(暂存)
     /// </summary>
     /// <param 播放器所在游戏物体名="audioNumber"></param>
     /// <returns></returns>
@@ -36,108 +52,77 @@ public class AudioManager : ManagerBase<AudioManager>
         return null;
     }
 
-    /// <summary>
-    /// 查找所有效果音乐音源
-    /// </summary>
-    void FindAlleffectMusicAudioSource()
-    {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            effectMusic.Add(transform.GetChild(i).name, transform.GetChild(i).GetComponent<AudioSource>());
-        }
-    }
-
     //背景播放器静音开关
-    public bool BGMute
+    public void BGMute(bool isMute)
     {
-        get
-        {
-            return bgMusic.mute;
-        }
-        set
-        {
-            bgMusic.mute = value;
-        }
+        bgMusicMute = isMute;
+        intMute = isMute == false ? 1 : 0;
+        PlayerPrefs.SetInt("BGMMute", intMute);
     }
 
     //音效播放器静音开关
     public void EffectMute(bool isMute)
     {
-        FindAlleffectMusicAudioSource();
-        foreach (string key in effectMusic.Keys)
-        {
-            effectMusic[key].mute = isMute;
-        }
+        effectMusicMute = isMute;
+        intMute = isMute == false ? 1 : 0;
+        PlayerPrefs.SetInt("effectMute", intMute);
     }
 
     //控制音乐音量大小
-    public float BgVolume
+    public void BgVolume(float value)
     {
-        get
-        {
-            return bgMusic.volume;
-        }
-        set
-        {
-            bgMusic.volume = value;
-        }
+        bgMusicVolume = value;
+        PlayerPrefs.SetFloat("bgMusicVolume", value);
     }
 
     //控制音效音量大小
     public void EffectVolmue(float value)
     {
-        FindAlleffectMusicAudioSource();
-        foreach (string key in effectMusic.Keys)
-        {
-            effectMusic[key].volume = value;
-        }
-    }
-
-    //播放器总开关
-    public bool AudioMute(bool isMute)
-    {
-        bgMusic.mute = isMute;
-        foreach (string key in effectMusic.Keys)
-        {
-            effectMusic[key].mute = isMute;
-        }
-        return bgMusic.mute;
-    }
-
-    //总音量控制
-    public float AudioVolume(float value)
-    {
-        FindAlleffectMusicAudioSource();
-        bgMusic.volume = value;
-        foreach (string key in effectMusic.Keys)
-        {
-            effectMusic[key].volume = value;
-        }
-        return bgMusic.volume;
+        effectVolume = value;
+        PlayerPrefs.SetFloat("effectVolume", value);
     }
 
     /// <summary>
-    /// 播放指定的音效
+    /// 播放音效
     /// </summary>
-    /// <param 音效名="effectName"></param>
-    /// <param 指定生成播放器的位置="AudioPosition"></param>
-    /// <param 播放器初始音量="volume"></param>
-    /// <param 是否直接播放="defAudio"></param>
-    public void PlayEffectBase(string effectName, Vector3 AudioPosition, float volume, bool defAudio = true)
+    /// <param name="musicName"></param>
+    /// <param name="volume"></param>
+    /// <param name="is2D"></param>
+    public void PlayEffectMusic(string musicName, float is2D = 0f)
     {
         //根据查找路径加载对应的音频剪辑  
-        AudioClip clip = ResourcesManager.Instance.FindAudioClip(effectName);
-        //如果为空的画，直接报错，然后跳出  
+        AudioClip clip = ResourcesManager.Instance.FindAudioClip(musicName);
         if (clip == null)
         {
             Debug.Log("没有找到音效片段");
             return;
         }
-        //如果defAudio=true，直接播放  
-        if (defAudio)
+        //是否已经有这个音效播放器了
+        if (effectMusic[musicName] != null)
         {
-            //指定点播放  
-            AudioSource.PlayClipAtPoint(clip, AudioPosition, volume);
+            effectMusic[musicName].gameObject.SetActive(true);
+            effectMusic[musicName].Play();
         }
+        else
+        {
+            //没有就创建新的
+            AudioSource effectAudio = new GameObject(musicName).AddComponent<AudioSource>();
+            effectAudio.clip = clip;
+            effectMusic.Add(musicName, effectAudio);
+            effectAudio.spatialBlend = is2D;
+            effectAudio.volume = effectVolume;
+            StartCoroutine("EffectMusicState", effectAudio);
+        }
+    }
+    /// <summary>
+    /// 音效状态
+    /// </summary>
+    /// <param 对应播放器="effectAudio"></param>
+    /// <returns></returns>
+    IEnumerator EffectMusicState(AudioSource effectAudio)
+    {
+        yield return new WaitForSeconds(effectAudio.clip.length);
+        effectAudio.Stop();
+        effectAudio.gameObject.SetActive(false);
     }
 }
