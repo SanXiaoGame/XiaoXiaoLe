@@ -16,16 +16,23 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
     WriteData writeData;
 
     //数据源：用来保存读到的数据模型
-    public Dictionary<int, object> dataSource;
+    //public Dictionary<int, object> dataSource;
+    public Dictionary<int, CharacterListData> characterDataSource = new Dictionary<int, CharacterListData>();
+    public Dictionary<int, EnemyData> enemyDataSource = new Dictionary<int, EnemyData>();
+    public Dictionary<int, ItemData> itemDataSource = new Dictionary<int, ItemData>();
+    public Dictionary<int, LVData> lVDataSource = new Dictionary<int, LVData>();
+    public Dictionary<int, PlayerData> playerDataSource = new Dictionary<int, PlayerData>();
+    public Dictionary<int, SkillData> skillDataSource = new Dictionary<int, SkillData>();
+    public Dictionary<int, StateData> stateDataSource = new Dictionary<int, StateData>();
 
     protected override void Awake()
     {
         base.Awake();
         //初始化数据源字典
-        if (dataSource == null)
+        /*if (dataSource == null)
         {
             dataSource = new Dictionary<int, object>();
-        }
+        }*/
 
         //启动流路径(将需要操作的文件从流路径拷贝到沙盒中)
         StreamsLoading = gameObject.AddComponent<DataStreamsLoading>();
