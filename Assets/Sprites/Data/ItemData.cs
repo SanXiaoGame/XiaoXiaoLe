@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct ItemData
+public class ItemData
 {
     public int item_Id;
     public string item_Name;
