@@ -29,7 +29,14 @@ public class ReadData
     public void GetData(string tbName)
     {
         //清空数据
-        SQLiteManager.Instance.dataSource.Clear();
+        //SQLiteManager.Instance.dataSource.Clear();
+        SQLiteManager.Instance.characterDataSource.Clear();
+        SQLiteManager.Instance.enemyDataSource.Clear();
+        SQLiteManager.Instance.itemDataSource.Clear();
+        SQLiteManager.Instance.lVDataSource.Clear();
+        SQLiteManager.Instance.playerDataSource.Clear();
+        SQLiteManager.Instance.skillDataSource.Clear();
+        SQLiteManager.Instance.stateDataSource.Clear();
         //执行查询操作
         SqliteDataReader reader = dbOperation.GetAllDataFromSQLTable(tbName);
         //读取所有表
@@ -96,8 +103,9 @@ public class ReadData
             characterListData.character_Level = character_Level;
             characterListData.character_Weapon = character_Weapon;
             characterListData.character_Equipment = character_Equipment;
+
             //加入到数据库
-            SQLiteManager.Instance.dataSource.Add(characterListData.character_Id, characterListData);
+            SQLiteManager.Instance.characterDataSource.Add(characterListData.character_Id, characterListData);
         }
     }
     /// <summary>
@@ -139,7 +147,7 @@ public class ReadData
                 enemy_SkillID3 = enemy_SkillID3,
             };
             //加入到数据库
-            SQLiteManager.Instance.dataSource.Add(enemyData.enemy_Id, enemyData);
+            SQLiteManager.Instance.enemyDataSource.Add(enemyData.enemy_Id, enemyData);
         }
     }
     /// <summary>
@@ -171,7 +179,7 @@ public class ReadData
                 Stockpile = Stockpile,
             };
             //加入到数据库
-            SQLiteManager.Instance.dataSource.Add(itemData.item_Id, itemData);
+            SQLiteManager.Instance.itemDataSource.Add(itemData.item_Id, itemData);
         }
     }
     /// <summary>
@@ -203,7 +211,7 @@ public class ReadData
                 level_RES = level_RES,
             };
             //加入到数据库
-            SQLiteManager.Instance.dataSource.Add(lVData.level, lVData);
+            SQLiteManager.Instance.lVDataSource.Add(lVData.level, lVData);
         }
     }
     /// <summary>
@@ -261,7 +269,7 @@ public class ReadData
             playerData.Weapon = player_Weapon;
             playerData.Equipment = player_Equipment;
             //加入到数据库
-            SQLiteManager.Instance.dataSource.Add(playerData.player_Id, playerData);
+            SQLiteManager.Instance.playerDataSource.Add(playerData.player_Id, playerData);
         }
     }
     /// <summary>
@@ -293,7 +301,7 @@ public class ReadData
                 skill_AddStateID2 = skill_AddStateID2,
             };
             //加入到数据库
-            SQLiteManager.Instance.dataSource.Add(skillData.skill_ID, skillData);
+            SQLiteManager.Instance.skillDataSource.Add(skillData.skill_ID, skillData);
         }
     }
     /// <summary>
@@ -323,7 +331,7 @@ public class ReadData
                 state_Description = state_Description
             };
             //加入到数据库
-            SQLiteManager.Instance.dataSource.Add(stateData.StateID, stateData);
+            SQLiteManager.Instance.stateDataSource.Add(stateData.StateID, stateData);
         }
     }
 

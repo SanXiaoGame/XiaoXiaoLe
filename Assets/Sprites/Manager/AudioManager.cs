@@ -47,7 +47,7 @@ public class AudioManager : ManagerBase<AudioManager>
     {
         switch (bgmType)
         {
-            case BGM.MainCityBGM:
+            case BGM.MainCity:
                 clip = ResourcesManager.Instance.FindAudioClip(bgmType);
                 break;
         }
@@ -158,5 +158,6 @@ public class AudioManager : ManagerBase<AudioManager>
         effectAudio.Stop();
         //隐藏播放器物体
         effectAudio.gameObject.SetActive(false);
+        StopCoroutine("EffectMusicState");
     }
 }

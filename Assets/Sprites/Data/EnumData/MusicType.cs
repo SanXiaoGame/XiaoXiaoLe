@@ -3,7 +3,8 @@
 /// </summary>
 public enum BGM
 {
-    MainCityBGM,
+    MainCity,
+    Battle,
 }
 
 public enum SoundEffect
