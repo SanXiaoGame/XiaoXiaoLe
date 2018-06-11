@@ -50,6 +50,35 @@ public class ReadData
     }
 
     /// <summary>
+    /// 是否是背包表
+    /// </summary>
+    /// <param 表名="tbName"></param>
+    /// <param 数据阅读器="reader"></param>
+    private void IsBag(string tbName, SqliteDataReader reader)
+    {
+        while (reader.Read() && tbName == ConstData.Bag)
+        {
+            //获取读到内容中的字段,来保存对应的值
+            int Bag_Grid = reader.GetInt32(reader.GetOrdinal("Bag_Grid"));
+            int Bag_Weapon = reader.GetInt32(reader.GetOrdinal("Bag_Weapon"));
+            int Bag_Equipment = reader.GetInt32(reader.GetOrdinal("Bag_Equipment"));
+            int Bag_Consumable = reader.GetInt32(reader.GetOrdinal("Bag_Consumable"));
+            int Bag_Material = reader.GetInt32(reader.GetOrdinal("Bag_Material"));
+            //创建模型
+            BagData bagData = new BagData
+            {
+                Bag_Grid = Bag_Grid,
+                Bag_Weapon = Bag_Weapon,
+                Bag_Equipment = Bag_Equipment,
+                Bag_Consumable = Bag_Consumable,
+                Bag_Material = Bag_Material,
+            };
+            //加入到数据库
+            SQLiteManager.Instance.bagDataSource.Add(bagData.Bag_Grid, bagData);
+        }
+    }
+
+    /// <summary>
     /// 是否是人物表
     /// </summary>
     /// <param 表名="tbName"></param>
@@ -283,6 +312,8 @@ public class ReadData
             int player_Level = reader.GetInt32(reader.GetOrdinal("player_Level"));
             int player_Weapon = reader.GetInt32(reader.GetOrdinal("player_Weapon"));
             int player_Equipment = reader.GetInt32(reader.GetOrdinal("player_Equipment"));
+            ulong GoldCoin = (ulong)reader.GetInt32(reader.GetOrdinal("GoldCoin"));
+            int Diamond = reader.GetInt32(reader.GetOrdinal("Diamond"));
             //创建模型
             PlayerData playerData = new PlayerData();
             playerData.player_Id = player_Id;
@@ -306,6 +337,8 @@ public class ReadData
             playerData.Level = player_Level;
             playerData.Weapon = player_Weapon;
             playerData.Equipment = player_Equipment;
+            playerData.GoldCoin = GoldCoin;
+            playerData.Diamond = Diamond;
             //加入到数据库
             SQLiteManager.Instance.playerDataSource.Add(playerData.player_Id, playerData);
         }

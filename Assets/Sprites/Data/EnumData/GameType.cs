@@ -16,9 +16,5 @@ public enum BlockObjectType
     /// <summary>
     /// 全屏块
     /// </summary>
-    HighSkillType,
-    /// <summary>
-    /// 静止移动块
-    /// </summary>
-    MovementStopType
+    HighSkillType
 }
