@@ -17,6 +17,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
 
     //数据源：用来保存读到的数据模型
     //public Dictionary<int, object> dataSource;
+    public Dictionary<int, BagData> bagDataSource = new Dictionary<int, BagData>();
     public Dictionary<int, CharacterListData> characterDataSource = new Dictionary<int, CharacterListData>();
     public Dictionary<int, EnemyData> enemyDataSource = new Dictionary<int, EnemyData>();
     public Dictionary<int, EquipmentData> equipmentDataSource = new Dictionary<int, EquipmentData>();

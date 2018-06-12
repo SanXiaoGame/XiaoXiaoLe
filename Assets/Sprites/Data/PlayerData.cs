@@ -22,6 +22,8 @@ public class PlayerData
     public int skillThreeID;
     public int Weapon;
     public int Equipment;
+    public ulong GoldCoin;
+    public int Diamond;
     //进化后对应数值
     public int EXHP;
     public int EXAD;

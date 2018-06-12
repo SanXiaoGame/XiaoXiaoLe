@@ -97,6 +97,10 @@ public struct ConstData
     /// </summary>
     public const string SQLITE_NAME = "SQLite/NereisQuest.sqlite";
     /// <summary>
+    /// 背包表
+    /// </summary>
+    public const string Bag = "Bag";
+    /// <summary>
     /// 人物列表
     /// </summary>
     public const string CharacterList = "CharacterList";

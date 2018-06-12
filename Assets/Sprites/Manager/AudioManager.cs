@@ -105,9 +105,8 @@ public class AudioManager : ManagerBase<AudioManager>
     /// <summary>
     /// 播放音效
     /// </summary>
-    /// <param name="musicName"></param>
-    /// <param name="volume"></param>
-    /// <param name="is2D"></param>
+    /// <param 音效名="musicType"></param>
+    /// <param 是否是2D播发器="is2D"></param>
     public void PlayEffectMusic(SoundEffect musicType, float is2D = 0f)
     {
         //根据查找路径加载对应的音频剪辑  

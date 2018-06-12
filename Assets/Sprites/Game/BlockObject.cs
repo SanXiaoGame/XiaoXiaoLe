@@ -7,20 +7,19 @@ using UnityEngine;
 /// </summary>
 public class BlockObject : MonoBehaviour
 {
-    //块的初始类型选择
-    internal BlockObjectType blockObjectType = BlockObjectType.NormalType;
     //技能块预制体
     GameObject skillBlock;
     //清屏块预制体
     GameObject highSkillBlock;
-    //不能移动块预制体
-    GameObject movementStopBlock;
     //邻近的块身上的“块基类”
-    internal BlockObject[] adjacentItems;
+    //internal BlockObject[] adjacentItems;
+    public BlockObject[] adjacentItems;
     //特殊块的形成
     internal GameObject specialObjectToForm = null;
     //用于实例化时赋值ColumnScript类
     internal ColumnScript myColumnScript;
+    //可否摧毁
+    internal bool brust = false;
     //是否被消
     bool isDestroyed = false;
     //块所在的列编号
@@ -43,24 +42,12 @@ public class BlockObject : MonoBehaviour
 
     static BlockObject parentCallingScript;
 
-    private void Awake()
-    {
-        if (GetComponent<BlockObjectTouch>() == null)
-        {
-            gameObject.AddComponent<BlockObjectTouch>();
-        }
-        if (GetComponent<UISceneWidget>() == null)
-        {
-            gameObject.AddComponent<UISceneWidget>();
-        }
-    }
     private void Start()
     {
         skillBlock = ResourcesManager.Instance.FindBlock(BlockObjectType.SkillType);
         highSkillBlock = ResourcesManager.Instance.FindBlock(BlockObjectType.HighSkillType);
-        movementStopBlock = ResourcesManager.Instance.FindBlock(BlockObjectType.MovementStopType);
         //默认邻近的块为4个
-        adjacentItems = new BlockObject[4];
+        adjacentItems = new BlockObject[8];
     }
 
     /// <summary>
@@ -159,6 +146,26 @@ public class BlockObject : MonoBehaviour
     }
 
     /// <summary>
+    /// 是否可以移动
+    /// </summary>
+    /// <param 反向ID="dir"></param>
+    /// <returns></returns>
+    internal bool isMovePossibleInDirection(int dir)
+    {
+        parentCallingScript = this;
+
+        if (adjacentItems[dir])
+        {
+            if (adjacentItems[dir].JustCheckIfCanBrust(name, dir))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
     /// 检测是否可以交换
     /// </summary>
     /// <param 被移动的块名="objName"></param>
@@ -167,7 +174,7 @@ public class BlockObject : MonoBehaviour
     internal bool JustCheckIfCanBrust(string objName, int parentIndex)
     {
         AssignLRUD();
-
+        
         if (parentIndex == 0)
             right1 = "right1";
         if (parentIndex == 1)
@@ -189,6 +196,25 @@ public class BlockObject : MonoBehaviour
     }
 
     /// <summary>
+    /// 检测是否能消
+    /// </summary>
+    internal void CheckIfCanBrust()
+    {
+        if (isDestroyed)
+        {
+            return;
+        }
+
+        AssignLRUD();
+
+        if ((name == left1 && name == left2) || (name == left1 && name == right1) || (name == right1 && name == right2) || (name == up1 && name == up2) || (name == up1 && name == down1) || (name == down1 && name == down2))
+        {
+            brust = true;
+            GameManager.Instance.doesHaveBrustItem = true;
+        }
+    }
+
+    /// <summary>
     /// 摧毁块自己
     /// </summary>
     internal void DestroyBlock()
@@ -205,10 +231,18 @@ public class BlockObject : MonoBehaviour
         //执行消除动画
 
         //动画结束后摧毁块,延迟时间未定
-        Invoke("AnimationeEndDestroyBlock", 1f);
+        //Invoke("AnimationeEndDestroyBlock", 0.2f);
+        StartCoroutine("AnimationeEndDestroyBlock");
     }
-    void AnimationeEndDestroyBlock()
+    IEnumerator AnimationeEndDestroyBlock()
     {
+        yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
+        StopCoroutine("AnimationeEndDestroyBlock");
     }
+
+    //void AnimationeEndDestroyBlock()
+    //{
+    //    Destroy(gameObject);
+    //}
 }
