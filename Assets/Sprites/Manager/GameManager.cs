@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,21 +11,44 @@ public class GameManager : ManagerBase<GameManager>
     //一次被消除的块数量
     internal int RemoveBlockNumber;
     //普通块所有预制体
-    internal Object[] playingObjectPrefabs;
-    //初始块种类数量 默认4
-    internal int normalBlockNumber = 4;
+    internal object[] playingObjectPrefabs;
+    //初始块种类数量 默认5
+    internal int normalBlockNumber = 5;
     //块下降的时间 默认0.45
     internal float objectFallingDuration = 0.45f;
+    //是否在造作中
+    internal bool isBusy = false;
+    //是否有可以消的块
+    internal bool doesHaveBrustItem = false;
 
     protected override void Awake()
     {
         base.Awake();
         playingObjectPrefabs = ResourcesManager.Instance.FindBlockAll(BlockObjectType.NormalType);
+        Input.multiTouchEnabled = false;
     }
 
     private void Start()
     {
-        Invoke("AssignNeighbours", .5f);
+        Invoke("AssignNeighbours", 0.5f);
+    }
+
+    /// <summary>
+    /// 添加缺失块
+    /// </summary>
+    internal void AddMissingBlock()
+    {
+        float delay = 0;
+        for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
+        {
+            if (ColumnManager.Instance.gameColumns[i].GetNumberOfItemsToAdd() > 0)
+            {
+                ColumnManager.Instance.gameColumns[i].Invoke("AddMissingBlock", delay);
+                delay += 0.05f;
+            }
+        }
+        //指派邻居
+        Invoke("AssignNeighbours", delay + 0.1f);
     }
 
     /// <summary>
@@ -36,15 +60,65 @@ public class GameManager : ManagerBase<GameManager>
         {
             ColumnManager.Instance.gameColumns[i].AssignNeighbours();
         }
-
-
+        //检查全部块状态
+        Invoke("CheckBoardState", Instance.objectFallingDuration);
     }
 
     /// <summary>
-    /// 计分
+    /// 检查全部块状态
+    /// </summary>
+    internal void CheckBoardState()
+    {
+        //print("检查全部块状态");
+        //isBusy = true;
+        doesHaveBrustItem = false;
+        for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
+        {
+            for (int j = 0; j < ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList.Count; j++)
+            {
+                if (ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList[j] != null)
+                {
+                    ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList[j].CheckIfCanBrust();
+                }
+            }
+        }
+        if (doesHaveBrustItem)
+        {
+            //播放消的声音
+
+            RemoveBrustBlock();
+            AddMissingBlock();
+        }
+        else
+        {
+            //isBusy = false;
+        }
+    }
+
+    /// <summary>
+    /// 去除块
+    /// </summary>
+    internal void RemoveBrustBlock()
+    {
+        for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
+        {
+            ColumnManager.Instance.gameColumns[i].DeleteBrustedBlock();
+        }
+    }
+
+    /// <summary>
+    /// 计分(可能用来算伤害)
     /// </summary>
     internal void AddScore()
     {
 
+    }
+
+    /// <summary>
+    /// 退出游戏关闭所有协程
+    /// </summary>
+    private void OnApplicationQuit()
+    {
+        StopAllCoroutines();
     }
 }
