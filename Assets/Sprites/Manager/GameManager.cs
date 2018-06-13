@@ -38,6 +38,7 @@ public class GameManager : ManagerBase<GameManager>
     /// </summary>
     internal void AddMissingBlock()
     {
+
         float delay = 0;
         for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
         {
@@ -70,7 +71,6 @@ public class GameManager : ManagerBase<GameManager>
     internal void CheckBoardState()
     {
         //print("检查全部块状态");
-        //isBusy = true;
         doesHaveBrustItem = false;
         for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
         {
@@ -82,16 +82,13 @@ public class GameManager : ManagerBase<GameManager>
                 }
             }
         }
+
         if (doesHaveBrustItem)
         {
             //播放消的声音
 
             RemoveBrustBlock();
             AddMissingBlock();
-        }
-        else
-        {
-            //isBusy = false;
         }
     }
 

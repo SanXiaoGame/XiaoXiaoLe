@@ -61,10 +61,13 @@ public class ColumnScript : MonoBehaviour
             }
 
             objectPrefab = GameManager.Instance.playingObjectPrefabs[index] as GameObject;
-            GameObject block = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
-            block.name = objectPrefab.name;
-            block.transform.parent = transform;
 
+            /*GameObject block = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
+            block.name = objectPrefab.name;*/
+
+            GameObject block = ObjectPoolManager.Instance.InstantiateBlockObject(objectPrefab);
+
+            block.transform.parent = transform;
             block.transform.localPosition = new Vector3(0, -i * 200, 0);
             block.GetComponent<RectTransform>().localScale = Vector3.one;
             block.GetComponent<BlockObject>().myColumnScript = this;
@@ -123,9 +126,23 @@ public class ColumnScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 获取要添加的块的数目
+    /// </summary>
+    /// <returns></returns>
     internal int GetNumberOfItemsToAdd()
     {
         return ColumnManager.Instance.numberOfRows - BlockObjectsScriptList.Count;
+    }
+
+    /// <summary>
+    /// 生成特殊块
+    /// </summary>
+    /// <param 块之前的位置="index"></param>
+    /// <param 特殊块的预制体="specialBlock"></param>
+    internal void InstantiateSpecialBlock(int index, GameObject specialBlock)
+    {
+
     }
 
     /// <summary>
@@ -140,13 +157,22 @@ public class ColumnScript : MonoBehaviour
                 if (BlockObjectsScriptList[i].brust)
                 {
                     BlockObjectsScriptList[i].DestroyBlock();
-                    BlockObjectsScriptList[i] = null;
+
+                    //特殊块的预制体
+                    GameObject specialBlock = BlockObjectsScriptList[i].specialObjectToForm;
+                    if (specialBlock)
+                    {
+                        InstantiateSpecialBlock(i, specialBlock);
+                    }
+                    else
+                    {
+                        BlockObjectsScriptList[i] = null;
+                    }
                 }
             }
         }
-
-        int count = 0;
-        for (int i = 0; i < BlockObjectsScriptList.Count; i++, count++)
+        //清除对应块的元素
+        for (int i = 0; i < BlockObjectsScriptList.Count; i++)
         {
             if (BlockObjectsScriptList[i] == null)
             {
@@ -172,8 +198,12 @@ public class ColumnScript : MonoBehaviour
         {
             int index = Random.Range(0, GameManager.Instance.normalBlockNumber);
             objectPrefab= GameManager.Instance.playingObjectPrefabs[index] as GameObject;
-            GameObject block = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
-            block.name = objectPrefab.name;
+
+            /*GameObject block = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
+            block.name = objectPrefab.name;*/
+
+            GameObject block = ObjectPoolManager.Instance.InstantiateBlockObject(objectPrefab);
+
             block.transform.parent = transform;
             block.GetComponent<RectTransform>().localScale = Vector3.one;
             block.transform.localPosition = new Vector3(0, (i + 1) * 200, 0);
@@ -202,14 +232,22 @@ public class ColumnScript : MonoBehaviour
             //下降的动画
             BlockObjectsScriptList[i].transform.DOLocalMoveY(-i * 200, 0.1f).SetDelay(0.1f).SetEase(Ease.Linear).OnComplete(delegate ()
             {
-                if (i == numberOfItemsToAdd)
-                {
-                    GameManager.Instance.isBusy = false;
-                }
+                Invoke("DelayDOTween", 0.5f);
             });
         }
 
         //播放下降音效(未实现)
         AudioManager.Instance.PlayEffectMusic(SoundEffect.Attack);
+    }
+
+    /// <summary>
+    /// 延迟检测是否还有块在消
+    /// </summary>
+    void DelayDOTween()
+    {
+        if (!GameManager.Instance.doesHaveBrustItem)
+        {
+            GameManager.Instance.isBusy = false;
+        }
     }
 }

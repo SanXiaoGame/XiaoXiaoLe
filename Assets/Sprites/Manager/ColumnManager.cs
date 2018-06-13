@@ -19,9 +19,6 @@ public class ColumnManager : ManagerBase<ColumnManager>
 
     Transform columnParent;
 
-    //列未定的X值
-    float ColumnX = -440.55f;
-
     protected override void Awake()
     {
         base.Awake();
