@@ -58,13 +58,6 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
     /// <returns></returns>
     public GameObject FindBlock(BlockObjectType blockType)
     {
-        for (int i = 0; i < skillBlockAll.Length; i++)
-        {
-            if (skillBlockAll[i].name == blockType.ToString())
-            {
-                return skillBlockAll[i] as GameObject;
-            }
-        }
-        return null;
+        return (blockType == BlockObjectType.SkillType ? skillBlockAll[0] : skillBlockAll[1]) as GameObject;
     }
 }

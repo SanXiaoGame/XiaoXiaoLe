@@ -4,7 +4,7 @@ using System.Collections.Generic;
 /// <summary>
 /// 角色数据类
 /// </summary>
-public struct PlayerData
+public class PlayerData
 {
     public int player_Id;
     public string player_Name;
@@ -22,6 +22,8 @@ public struct PlayerData
     public int skillThreeID;
     public int Weapon;
     public int Equipment;
+    public ulong GoldCoin;
+    public int Diamond;
     //进化后对应数值
     public int EXHP;
     public int EXAD;

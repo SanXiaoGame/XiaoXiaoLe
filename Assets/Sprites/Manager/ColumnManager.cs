@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// 每列块的管理类
@@ -16,12 +17,15 @@ public class ColumnManager : ManagerBase<ColumnManager>
     //记录当前的列（最开始左边的列数等于-1）
     internal int ColumnNumber = -1;
 
+    Transform columnParent;
+
     //列未定的X值
-    float ColumnX = 2.5f;
+    float ColumnX = -440.55f;
 
     protected override void Awake()
     {
         base.Awake();
+        columnParent = transform.Find("/Canvas/BG");
     }
 
     private void Start()
@@ -32,15 +36,17 @@ public class ColumnManager : ManagerBase<ColumnManager>
             //实例化出对应的列空物体，添加ColumnScript
             GameObject blockTemp = new GameObject();
             gameColumns[i] = blockTemp.AddComponent<ColumnScript>();
+            //blockTemp.transform.parent = columnParent;
             blockTemp.transform.parent = transform;
-            blockTemp.name = StringSplicingTool.StringSplicing("Column ", i.ToString());
+            blockTemp.transform.localScale = Vector3.one;
+            blockTemp.name = "Column" + i;
         }
 
         //列的排序
         for (int i = 0; i < gameColumns.Length; i++)
         {
             gameColumns[i].columnIndex = i;
-            gameColumns[i].transform.localPosition = new Vector3(ColumnX - i, 0f, 0f);
+            gameColumns[i].transform.localPosition = new Vector3(-500 + i * 200f, 500f, 0f);
         }
     }
 

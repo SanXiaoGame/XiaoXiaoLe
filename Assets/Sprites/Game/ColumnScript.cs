@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// 列的功能类
@@ -13,13 +15,14 @@ public class ColumnScript : MonoBehaviour
     internal List<BlockObject> BlockObjectsScriptList;
     //实例化初始块用的临时变量
     GameObject objectPrefab;
+    //需要添加块数
+    int numberOfItemsToAdd;
     //存放临时随机数
     int randomNumber;
 
     private void Start()
     {
         BlockObjectsScriptList = new List<BlockObject>();
-        //Invoke("PopulateInitialColumn", .2f);
         PopulateInitialColumn();
     }
 
@@ -36,22 +39,22 @@ public class ColumnScript : MonoBehaviour
 
             while (objectPrefab != null && index == randomNumber)
             {
-                index = Random.Range(0, 6);
+                index = Random.Range(0, GameManager.Instance.normalBlockNumber);
             }
             //新的随机数
             randomNumber = index;
-            if (ColumnManager.Instance.ColumnNumber % 2 == 0 && ColumnManager.Instance.PreviousColumnBlock(i).name == StringSplicingTool.StringSplicing(GameManager.Instance.playingObjectPrefabs[index].name, "(Clone)"))
+            if (ColumnManager.Instance.ColumnNumber != 0 && ColumnManager.Instance.ColumnNumber % 2 == 0 && ColumnManager.Instance.PreviousColumnBlock(i).name == (GameManager.Instance.playingObjectPrefabs[index]as GameObject).name)
             {
-                if (index != 0 && index != 5)
+                if (index != 0 && index != 4)
                 {
                     while (index == randomNumber)
                     {
-                        index = Random.Range(0, 6);
+                        index = Random.Range(0, GameManager.Instance.normalBlockNumber);
                     }
                 }
                 else
                 {
-                    index = index == 0 ? 5 : 0;
+                    index = index == 0 ? 4 : 0;
                 }
                 //新的随机数
                 randomNumber = index;
@@ -61,7 +64,9 @@ public class ColumnScript : MonoBehaviour
             GameObject block = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
             block.name = objectPrefab.name;
             block.transform.parent = transform;
-            block.transform.localPosition = new Vector3(0, -i, 0);
+
+            block.transform.localPosition = new Vector3(0, -i * 200, 0);
+            block.GetComponent<RectTransform>().localScale = Vector3.one;
             block.GetComponent<BlockObject>().myColumnScript = this;
             block.GetComponent<BlockObject>().ColumnNumber = i;
             BlockObjectsScriptList.Add(block.GetComponent<BlockObject>());
@@ -73,6 +78,7 @@ public class ColumnScript : MonoBehaviour
     /// </summary>
     internal void AssignNeighbours()
     {
+        //print(BlockObjectsScriptList.Count-1);
         for (int i = 0; i < BlockObjectsScriptList.Count; i++)
         {
             if (BlockObjectsScriptList[i] == null)
@@ -82,18 +88,71 @@ public class ColumnScript : MonoBehaviour
             //检测是最左边,统一等于null
             //不是就当前列号减一，找左边对应位置的块脚本BlockObject,存在数组0位
             BlockObjectsScriptList[i].adjacentItems[0] = columnIndex == 0 ? null : ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i];
+            if (columnIndex == 0)
+            {
+                BlockObjectsScriptList[i].adjacentItems[4] = null;
+                BlockObjectsScriptList[i].adjacentItems[6] = null;
+            }
+            else if (i > 0 && i < BlockObjectsScriptList.Count - 1)
+            {
+                BlockObjectsScriptList[i].adjacentItems[4] = ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i - 1];
+                BlockObjectsScriptList[i].adjacentItems[6] = ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i + 1];
+            }
 
             //检测是最右边,统一等于null
             //不是就当前列号加一，找右边对应位置的块脚本BlockObject,存在数组1位
             BlockObjectsScriptList[i].adjacentItems[1] = columnIndex == ColumnManager.Instance.gameColumns.Length - 1 ? null : ColumnManager.Instance.gameColumns[columnIndex + 1].BlockObjectsScriptList[i];
+            if (columnIndex == ColumnManager.Instance.gameColumns.Length - 1)
+            {
+                BlockObjectsScriptList[i].adjacentItems[5] = null;
+                BlockObjectsScriptList[i].adjacentItems[7] = null;
+            }
+            else if (i > 0 && i < BlockObjectsScriptList.Count - 1)
+            {
+                BlockObjectsScriptList[i].adjacentItems[5] = ColumnManager.Instance.gameColumns[columnIndex + 1].BlockObjectsScriptList[i - 1];
+                BlockObjectsScriptList[i].adjacentItems[7] = ColumnManager.Instance.gameColumns[columnIndex + 1].BlockObjectsScriptList[i + 1];
+            }
 
             //检测是最上边,统一等于null
-            //不是就当前行表减一，找左边对应位置的块脚本BlockObject,存在数组2位
+            //不是就当前行表减一，找上边对应位置的块脚本BlockObject,存在数组2位
             BlockObjectsScriptList[i].adjacentItems[2] = i == 0 ? null : BlockObjectsScriptList[i - 1];
 
-            //检测是最上边,统一等于null
-            //不是就当前行表减一，找左边对应位置的块脚本BlockObject,存在数组3位
-            BlockObjectsScriptList[i].adjacentItems[3] = i == 0 ? null : BlockObjectsScriptList[i + 1];
+            //检测是最下边,统一等于null
+            //不是就当前行表减一，找下边对应位置的块脚本BlockObject,存在数组3位
+            BlockObjectsScriptList[i].adjacentItems[3] = i == ColumnManager.Instance.numberOfRows - 1 ? null : BlockObjectsScriptList[i + 1];
+        }
+    }
+
+    internal int GetNumberOfItemsToAdd()
+    {
+        return ColumnManager.Instance.numberOfRows - BlockObjectsScriptList.Count;
+    }
+
+    /// <summary>
+    /// 删除能消的块
+    /// </summary>
+    internal void DeleteBrustedBlock()
+    {
+        for (int i = 0; i < ColumnManager.Instance.numberOfRows; i++)
+        {
+            if (BlockObjectsScriptList[i] != null)
+            {
+                if (BlockObjectsScriptList[i].brust)
+                {
+                    BlockObjectsScriptList[i].DestroyBlock();
+                    BlockObjectsScriptList[i] = null;
+                }
+            }
+        }
+
+        int count = 0;
+        for (int i = 0; i < BlockObjectsScriptList.Count; i++, count++)
+        {
+            if (BlockObjectsScriptList[i] == null)
+            {
+                BlockObjectsScriptList.RemoveAt(i);
+                i--;
+            }
         }
     }
 
@@ -103,7 +162,7 @@ public class ColumnScript : MonoBehaviour
     internal void AddMissingBlock()
     {
         //需要添加块数 = 总行（默认6） - 剩余子物体（BlockObjectsScript脚本）
-        int numberOfItemsToAdd = LevelManager.Instance.numberOfRows - BlockObjectsScriptList.Count;
+        numberOfItemsToAdd = LevelManager.Instance.numberOfRows - BlockObjectsScriptList.Count;
         if (numberOfItemsToAdd == 0)
         {
             return;
@@ -116,7 +175,8 @@ public class ColumnScript : MonoBehaviour
             GameObject block = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
             block.name = objectPrefab.name;
             block.transform.parent = transform;
-            block.transform.localPosition = new Vector3(0, i + 1, 0);
+            block.GetComponent<RectTransform>().localScale = Vector3.one;
+            block.transform.localPosition = new Vector3(0, (i + 1) * 200, 0);
             //赋值新的ColumnScript类
             block.GetComponent<BlockObject>().myColumnScript = this;
             //Insert，在指定的位置插入一个元素
@@ -130,8 +190,24 @@ public class ColumnScript : MonoBehaviour
                 BlockObjectsScriptList[i].ColumnNumber = i;
             }
         }
+        //旧的块下降
+        for (int i = numberOfItemsToAdd; i < BlockObjectsScriptList.Count; i++)
+        {
+            BlockObjectsScriptList[i].transform.DOLocalMoveY(-i * 200, 0.1f).SetDelay(0.1f).SetEase(Ease.Linear);
+        }
 
-        //动画相关（未实现）
+        //新的块下降
+        for (int i = 0; i < numberOfItemsToAdd; i++)
+        {
+            //下降的动画
+            BlockObjectsScriptList[i].transform.DOLocalMoveY(-i * 200, 0.1f).SetDelay(0.1f).SetEase(Ease.Linear).OnComplete(delegate ()
+            {
+                if (i == numberOfItemsToAdd)
+                {
+                    GameManager.Instance.isBusy = false;
+                }
+            });
+        }
 
         //播放下降音效(未实现)
         AudioManager.Instance.PlayEffectMusic(SoundEffect.Attack);
