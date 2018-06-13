@@ -14,8 +14,8 @@ public class GameManager : ManagerBase<GameManager>
     internal object[] playingObjectPrefabs;
     //初始块种类数量 默认5
     internal int normalBlockNumber = 5;
-    //块下降的时间 默认0.45
-    internal float objectFallingDuration = 0.45f;
+    //块下降的时间
+    internal float objectFallingDuration = 0.35f;
     //是否在造作中
     internal bool isBusy = false;
     //是否有可以消的块
@@ -38,7 +38,6 @@ public class GameManager : ManagerBase<GameManager>
     /// </summary>
     internal void AddMissingBlock()
     {
-
         float delay = 0;
         for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
         {

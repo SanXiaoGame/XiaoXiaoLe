@@ -18,6 +18,7 @@ public class BlockObjectTouch : UISceneWidget
     Transform blockPos1;
     Transform blockPos2;
 
+    #region 存放鼠标移动前后的位置
     float fingerBeginX;
     float fingerBeginY;
 
@@ -26,6 +27,7 @@ public class BlockObjectTouch : UISceneWidget
 
     float fingerSegmentX;
     float fingerSegmentY;
+    #endregion
 
     private void Awake()
     {

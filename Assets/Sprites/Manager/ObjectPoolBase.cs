@@ -32,7 +32,6 @@ public class ObjectPoolBase
         else
         {
             block = Object.Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
-            block.name = objectPrefab.name;
         }
         block.SetActive(true);
         return block;

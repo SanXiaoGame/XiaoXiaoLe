@@ -8,7 +8,7 @@ public enum BlockObjectType
     /// <summary>
     /// 初始块
     /// </summary>
-    NormalType,
+    NormalType = 0,
     /// <summary>
     /// 技能块
     /// </summary>

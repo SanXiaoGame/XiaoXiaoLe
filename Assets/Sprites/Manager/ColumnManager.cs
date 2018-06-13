@@ -17,12 +17,9 @@ public class ColumnManager : ManagerBase<ColumnManager>
     //记录当前的列（最开始左边的列数等于-1）
     internal int ColumnNumber = -1;
 
-    Transform columnParent;
-
     protected override void Awake()
     {
         base.Awake();
-        columnParent = transform.Find("/Canvas/BG");
     }
 
     private void Start()

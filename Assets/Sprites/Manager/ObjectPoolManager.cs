@@ -18,14 +18,12 @@ public class ObjectPoolManager : ManagerBase<ObjectPoolManager>
     /// <returns></returns>
     internal GameObject InstantiateBlockObject(GameObject block)
     {
-        GameObject blockObject;
         if (!objectPoolDictionary.ContainsKey(block.name))
         {
             ObjectPoolBase newPool = new ObjectPoolBase(block);
             objectPoolDictionary.Add(newPool.Name, newPool);
         }
-        blockObject = objectPoolDictionary[block.name].InstantiateBlock();
-        return blockObject;
+        return objectPoolDictionary[block.name].InstantiateBlock();
     }
 
     /// <summary>

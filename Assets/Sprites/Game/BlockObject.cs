@@ -14,10 +14,10 @@ public class BlockObject : MonoBehaviour
     GameObject skillBlock;
     //清屏块预制体
     GameObject highSkillBlock;
-    //邻近的块身上的“块基类”
-    internal BlockObject[] adjacentItems;
     //特殊块的形成
     internal GameObject specialObjectToForm = null;
+    //邻近的块身上的“块基类”
+    public BlockObject[] adjacentItems;
     //用于实例化时赋值ColumnScript类
     internal ColumnScript myColumnScript;
     //可否摧毁
@@ -48,7 +48,7 @@ public class BlockObject : MonoBehaviour
     {
         skillBlock = ResourcesManager.Instance.FindBlock(BlockObjectType.SkillType);
         highSkillBlock = ResourcesManager.Instance.FindBlock(BlockObjectType.HighSkillType);
-        //默认邻近的块为4个
+        //默认邻近的块为8个
         adjacentItems = new BlockObject[8];
     }
 
@@ -243,15 +243,29 @@ public class BlockObject : MonoBehaviour
     }
     void AnimationeEndDestroyBlock()
     {
-        //Destroy(gameObject);
-        print(gameObject);
-        ObjectPoolManager.Instance.RecycleBlockObject(gameObject);
-        //特殊块的形成
-        specialObjectToForm = null;
         //可否摧毁
         brust = false;
         //是否被消
         isDestroyed = false;
-        parentCallingScript = null;
+        if (objectType== BlockObjectType.NormalType)
+        {
+            //重置块的邻近组合
+            left1 = "left1";
+            left2 = "left2";
+            left3 = "left3";
+            right1 = "right1";
+            right2 = "right2";
+            right3 = "right3";
+            up1 = "up1";
+            up2 = "up2";
+            up3 = "up3";
+            down1 = "down1";
+            down2 = "down2";
+            down3 = "down3";
+        }
+
+        ObjectPoolManager.Instance.RecycleBlockObject(gameObject);
+
+        //Destroy(gameObject);
     }
 }

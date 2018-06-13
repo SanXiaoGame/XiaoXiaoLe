@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// 列的功能类
@@ -62,11 +61,11 @@ public class ColumnScript : MonoBehaviour
 
             objectPrefab = GameManager.Instance.playingObjectPrefabs[index] as GameObject;
 
-            /*GameObject block = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
-            block.name = objectPrefab.name;*/
+            //GameObject block = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
 
             GameObject block = ObjectPoolManager.Instance.InstantiateBlockObject(objectPrefab);
 
+            block.name = objectPrefab.name;
             block.transform.parent = transform;
             block.transform.localPosition = new Vector3(0, -i * 200, 0);
             block.GetComponent<RectTransform>().localScale = Vector3.one;
@@ -129,7 +128,6 @@ public class ColumnScript : MonoBehaviour
     /// <summary>
     /// 获取要添加的块的数目
     /// </summary>
-    /// <returns></returns>
     internal int GetNumberOfItemsToAdd()
     {
         return ColumnManager.Instance.numberOfRows - BlockObjectsScriptList.Count;
@@ -142,7 +140,16 @@ public class ColumnScript : MonoBehaviour
     /// <param 特殊块的预制体="specialBlock"></param>
     internal void InstantiateSpecialBlock(int index, GameObject specialBlock)
     {
+        GameObject block = ObjectPoolManager.Instance.InstantiateBlockObject(specialBlock);
 
+        block.name = specialBlock.name;
+        block.tag = ConstData.SpecialBlock;
+        block.transform.parent = transform;
+        block.transform.localPosition = new Vector3(0, -index * 200, 0);
+        block.GetComponent<RectTransform>().localScale = Vector3.one;
+        block.GetComponent<BlockObject>().myColumnScript = this;
+        block.GetComponent<BlockObject>().ColumnNumber = index;
+        BlockObjectsScriptList[index] = block.GetComponent<BlockObject>();
     }
 
     /// <summary>
@@ -160,6 +167,7 @@ public class ColumnScript : MonoBehaviour
 
                     //特殊块的预制体
                     GameObject specialBlock = BlockObjectsScriptList[i].specialObjectToForm;
+                    
                     if (specialBlock)
                     {
                         InstantiateSpecialBlock(i, specialBlock);
@@ -196,14 +204,15 @@ public class ColumnScript : MonoBehaviour
         //添加块实例
         for (int i = 0; i < numberOfItemsToAdd; i++)
         {
+            
             int index = Random.Range(0, GameManager.Instance.normalBlockNumber);
             objectPrefab= GameManager.Instance.playingObjectPrefabs[index] as GameObject;
 
-            /*GameObject block = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
-            block.name = objectPrefab.name;*/
+            //GameObject block = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
 
             GameObject block = ObjectPoolManager.Instance.InstantiateBlockObject(objectPrefab);
 
+            block.name = objectPrefab.name;
             block.transform.parent = transform;
             block.GetComponent<RectTransform>().localScale = Vector3.one;
             block.transform.localPosition = new Vector3(0, (i + 1) * 200, 0);
