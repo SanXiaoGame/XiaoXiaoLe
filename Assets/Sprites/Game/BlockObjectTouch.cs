@@ -125,37 +125,43 @@ public class BlockObjectTouch : UISceneWidget
             fingerSegmentX = 0;
         }
 
-        // fingerSegmentX=0 则是上下拖动
-        if (fingerSegmentX == 0)
+        try
         {
-            if (fingerSegmentY > 0)
+            // fingerSegmentX=0 则是上下拖动
+            if (fingerSegmentX == 0)
             {
-                blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[2].transform;
-                //Debug.Log("up:" + blockPos2);
+                if (fingerSegmentY > 0)
+                {
+                    blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[2].transform;
+                    //Debug.Log("up:" + blockPos2);
+                }
+                else
+                {
+                    blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[3].transform;
+                    //Debug.Log("down:" + blockPos2);
+                }
             }
-            else
+            else if (fingerSegmentY == 0)
             {
-                blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[3].transform;
-                //Debug.Log("down:" + blockPos2);
+                if (fingerSegmentX > 0)
+                {
+                    blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[1].transform;
+                    //Debug.Log("right:" + blockPos2);
+                }
+                else
+                {
+                    blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[0].transform;
+                    //Debug.Log("left:" + blockPos2);
+                }
             }
         }
-        else if (fingerSegmentY == 0)
+        catch (System.Exception ex)
         {
-            if (fingerSegmentX > 0)
+            if (blockPos2 == null)
             {
-                blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[1].transform;
-                //Debug.Log("right:" + blockPos2);
+                print("blockPos2等于null" + ex);
+                GameManager.Instance.isBusy = false;
             }
-            else
-            {
-                blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[0].transform;
-                //Debug.Log("left:" + blockPos2);
-            }
-        }
-        if (blockPos2 == null)
-        {
-            print("blockPos2等于null");
-            GameManager.Instance.isBusy = false;
         }
     }
 

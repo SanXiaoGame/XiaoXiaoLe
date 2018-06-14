@@ -8,8 +8,6 @@ using UnityEngine;
 /// </summary>
 public class GameManager : ManagerBase<GameManager>
 {
-    //一次被消除的块数量
-    internal int RemoveBlockNumber;
     //普通块所有预制体
     internal object[] playingObjectPrefabs;
     //初始块种类数量 默认5
@@ -86,7 +84,7 @@ public class GameManager : ManagerBase<GameManager>
         {
             //播放消的声音
 
-            RemoveBrustBlock();
+            RemoveBlock();
             AddMissingBlock();
         }
     }
@@ -94,7 +92,7 @@ public class GameManager : ManagerBase<GameManager>
     /// <summary>
     /// 去除块
     /// </summary>
-    internal void RemoveBrustBlock()
+    internal void RemoveBlock()
     {
         for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
         {

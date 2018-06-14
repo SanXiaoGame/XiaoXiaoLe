@@ -14,28 +14,58 @@ public class SpecialBlockObject : MonoBehaviour
     {
         myPlayingObject = GetComponent<BlockObject>();
         //绑定块的点击事件
-        blockClick = gameObject.AddComponent<UISceneWidget>();
-
-        transform.DOScale(Vector3.one, 0.35f).OnComplete(delegate() 
+        blockClick = GetComponent<UISceneWidget>();
+        if (blockClick != null)
         {
-            if (blockClick != null)
-            {
-                blockClick.PointerDown += BlockOnPointerDown;
-            }
-        });
+            blockClick.PointerDown += BlockOnPointerDown;
+            blockClick.PointerUp += BlockOnPointerUp;
+        }
     }
 
+    /// <summary>
+    /// 点击特殊块
+    /// </summary>
+    /// <param name="eventData"></param>
     private void BlockOnPointerDown(PointerEventData eventData)
     {
-        print("点击了特殊块");
-        if (myPlayingObject.objectType == BlockObjectType.SkillType)
+        if (!GameManager.Instance.isBusy)
         {
-            //技能块
+            if (myPlayingObject.objectType == BlockObjectType.SkillType)
+            {
+                //技能块
+                for (int i = 0; i < myPlayingObject.adjacentItems.Length; i++)
+                {
+                    if (myPlayingObject.adjacentItems[i] != null)
+                    {
+                        myPlayingObject.adjacentItems[i].brust = true;
+                    }
+                }
+            }
+            else
+            {
+                //高级技能块
+                for (int i = 0; i < ColumnManager.Instance.numberOfColumns; i++)
+                {
+                    for (int j = 0; j < ColumnManager.Instance.numberOfRows; j++)
+                    {
+                        ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList[j].brust = true;
+                    }
+                }
+            }
+            transform.DOScale(Vector3.zero, 0.34f).OnComplete(delegate ()
+            {
+                GameManager.Instance.RemoveBlock();
+                GameManager.Instance.AddMissingBlock();
+            });
         }
-        else
-        {
-            //高级技能块
-        }
-        ObjectPoolManager.Instance.RecycleBlockObject(gameObject);
+    }
+
+    /// <summary>
+    /// 鼠标弹起
+    /// </summary>
+    /// <param name="eventData"></param>
+    private void BlockOnPointerUp(PointerEventData eventData)
+    {
+        GameManager.Instance.isBusy = false;
     }
 }

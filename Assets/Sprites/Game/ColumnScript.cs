@@ -138,7 +138,7 @@ public class ColumnScript : MonoBehaviour
     /// </summary>
     /// <param 块之前的位置="index"></param>
     /// <param 特殊块的预制体="specialBlock"></param>
-    internal void InstantiateSpecialBlock(int index, GameObject specialBlock)
+    internal void InstantiateSpecialBlock(int index, GameObject specialBlock,BlockObjectType type)
     {
         GameObject block = ObjectPoolManager.Instance.InstantiateBlockObject(specialBlock);
 
@@ -146,10 +146,12 @@ public class ColumnScript : MonoBehaviour
         block.tag = ConstData.SpecialBlock;
         block.transform.parent = transform;
         block.transform.localPosition = new Vector3(0, -index * 200, 0);
-        block.GetComponent<RectTransform>().localScale = Vector3.one;
+        block.GetComponent<RectTransform>().localScale = Vector3.zero;
         block.GetComponent<BlockObject>().myColumnScript = this;
         block.GetComponent<BlockObject>().ColumnNumber = index;
+        block.GetComponent<BlockObject>().objectType = type;
         BlockObjectsScriptList[index] = block.GetComponent<BlockObject>();
+        block.transform.DOScale(Vector3.one, 0.35f);
     }
 
     /// <summary>
@@ -159,23 +161,29 @@ public class ColumnScript : MonoBehaviour
     {
         for (int i = 0; i < ColumnManager.Instance.numberOfRows; i++)
         {
-            if (BlockObjectsScriptList[i] != null)
+            if ((BlockObjectsScriptList[i] != null && BlockObjectsScriptList[i].brust))
             {
-                if (BlockObjectsScriptList[i].brust)
-                {
-                    BlockObjectsScriptList[i].DestroyBlock();
+                BlockObjectsScriptList[i].DestroyBlock();
 
-                    //特殊块的预制体
-                    GameObject specialBlock = BlockObjectsScriptList[i].specialObjectToForm;
-                    
-                    if (specialBlock)
+                //特殊块的预制体
+                GameObject specialBlock = BlockObjectsScriptList[i].specialObjectToForm;
+
+                if (specialBlock)
+                {
+                    BlockObjectType type;
+                    if (specialBlock.name == "Flag")
                     {
-                        InstantiateSpecialBlock(i, specialBlock);
+                        type = BlockObjectType.SkillType;
                     }
                     else
                     {
-                        BlockObjectsScriptList[i] = null;
+                        type = BlockObjectType.HighSkillType;
                     }
+                    InstantiateSpecialBlock(i, specialBlock, type);
+                }
+                else
+                {
+                    BlockObjectsScriptList[i] = null;
                 }
             }
         }
@@ -197,6 +205,7 @@ public class ColumnScript : MonoBehaviour
     {
         //需要添加块数 = 总行（默认6） - 剩余子物体（BlockObjectsScript脚本）
         numberOfItemsToAdd = LevelManager.Instance.numberOfRows - BlockObjectsScriptList.Count;
+        //print(numberOfItemsToAdd);
         if (numberOfItemsToAdd == 0)
         {
             return;
@@ -204,7 +213,6 @@ public class ColumnScript : MonoBehaviour
         //添加块实例
         for (int i = 0; i < numberOfItemsToAdd; i++)
         {
-            
             int index = Random.Range(0, GameManager.Instance.normalBlockNumber);
             objectPrefab= GameManager.Instance.playingObjectPrefabs[index] as GameObject;
 

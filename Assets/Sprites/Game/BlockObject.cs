@@ -9,7 +9,7 @@ using DG.Tweening;
 public class BlockObject : MonoBehaviour
 {
     //这个块当前的类型
-    internal BlockObjectType objectType = BlockObjectType.NormalType;
+    internal BlockObjectType objectType;
     //技能块预制体
     GameObject skillBlock;
     //清屏块预制体
@@ -57,6 +57,10 @@ public class BlockObject : MonoBehaviour
     /// </summary>
     private void AssignLRUD()
     {
+        if (tag == ConstData.SpecialBlock)
+        {
+            return;
+        }
         //选中块左边有块
         if (adjacentItems[0])
         {
@@ -231,8 +235,6 @@ public class BlockObject : MonoBehaviour
         }
         //摧毁开关
         isDestroyed = true;
-        //累加消除的块数
-        GameManager.Instance.RemoveBlockNumber++;
 
         //执行消除动画
         transform.DOScale(Vector3.zero, 0.2f).OnComplete(delegate() 
@@ -247,23 +249,24 @@ public class BlockObject : MonoBehaviour
         brust = false;
         //是否被消
         isDestroyed = false;
-        if (objectType== BlockObjectType.NormalType)
-        {
-            //重置块的邻近组合
-            left1 = "left1";
-            left2 = "left2";
-            left3 = "left3";
-            right1 = "right1";
-            right2 = "right2";
-            right3 = "right3";
-            up1 = "up1";
-            up2 = "up2";
-            up3 = "up3";
-            down1 = "down1";
-            down2 = "down2";
-            down3 = "down3";
-        }
 
+        //重置块的邻近组合
+        left1 = "left1";
+        left2 = "left2";
+        left3 = "left3";
+        right1 = "right1";
+        right2 = "right2";
+        right3 = "right3";
+        up1 = "up1";
+        up2 = "up2";
+        up3 = "up3";
+        down1 = "down1";
+        down2 = "down2";
+        down3 = "down3";
+
+        specialObjectToForm = null;
+        myColumnScript = null;
+        ColumnNumber = -1;
         ObjectPoolManager.Instance.RecycleBlockObject(gameObject);
 
         //Destroy(gameObject);

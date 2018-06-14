@@ -45,6 +45,29 @@ public class ColumnManager : ManagerBase<ColumnManager>
     }
 
     /// <summary>
+    /// 特殊药水的方法
+    /// </summary>
+    internal void MedicinalWaterProp()
+    {
+        for (int i = 0; i < numberOfColumns; i++)
+        {
+            for (int j = 0; j < numberOfRows; j++)
+            {
+                gameColumns[i].BlockObjectsScriptList[j].brust = true;
+            }
+        }
+        Invoke("MedicinalWaterAddMissingBlock", 0.35f);
+    }
+    /// <summary>
+    /// 用于补充药水消的块
+    /// </summary>
+    void MedicinalWaterAddMissingBlock()
+    {
+        GameManager.Instance.RemoveBlock();
+        GameManager.Instance.AddMissingBlock();
+    }
+
+    /// <summary>
     /// 返回前一列相连块（左边）
     /// </summary>
     internal GameObject PreviousColumnBlock(int i)
