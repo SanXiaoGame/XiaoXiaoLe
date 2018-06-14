@@ -21,10 +21,12 @@ GameObject:
   - component: {fileID: 224323892171521508}
   - component: {fileID: 222369606092996392}
   - component: {fileID: 114474974303430550}
+  - component: {fileID: 114711271009370308}
+  - component: {fileID: 114560461600496878}
   - component: {fileID: 114240535500929462}
   m_Layer: 5
   m_Name: FlagUp
-  m_TagString: Block
+  m_TagString: SpecialBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,7 +61,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 97a0b0125677a9245899a7fe2e34acda, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3032854f2097a204e9cd3eb177e807a0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -67,6 +69,30 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114560461600496878
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118324286434028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edc84ab8bae8dbe44b4059ed2ea9017e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  delegates: []
+--- !u!114 &114711271009370308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118324286434028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a2ec877cccb6045b94d7851727511e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &222369606092996392
 CanvasRenderer:
   m_ObjectHideFlags: 1

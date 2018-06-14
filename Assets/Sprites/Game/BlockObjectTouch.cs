@@ -14,11 +14,11 @@ public class BlockObjectTouch : UISceneWidget
     Image blockImage;
     //定义UI点击事件的基类
     UISceneWidget blockClick;
-
     //临时存储选中块和交换块的位置
     Transform blockPos1;
     Transform blockPos2;
 
+    #region 存放鼠标移动前后的位置
     float fingerBeginX;
     float fingerBeginY;
 
@@ -27,6 +27,7 @@ public class BlockObjectTouch : UISceneWidget
 
     float fingerSegmentX;
     float fingerSegmentY;
+    #endregion
 
     private void Awake()
     {
@@ -49,14 +50,25 @@ public class BlockObjectTouch : UISceneWidget
     //点击块的方法
     private void BlockOnPointerDown(PointerEventData eventData)
     {
-        if (eventData.pointerEnter.tag == "Block")
+        try
         {
-            blockPos1 = eventData.pointerEnter.transform;
-            blockImage.color = Color.red;
+            if (eventData.pointerEnter.tag == "Block")
+            {
+                //播放点击音效
 
-            fingerBeginX = Input.mousePosition.x;
-            fingerBeginY = Input.mousePosition.y;
+                blockPos1 = eventData.pointerEnter.transform;
+                blockImage.color = Color.red;
+
+                fingerBeginX = Input.mousePosition.x;
+                fingerBeginY = Input.mousePosition.y;
+            }
         }
+        catch (System.Exception ex)
+        {
+            blockPos1 = transform;
+            Debug.Log("点击了屏幕外，选中块为空");
+        }
+        
     }
 
     //块完成点击的方法(只适用于编辑器)
@@ -70,7 +82,6 @@ public class BlockObjectTouch : UISceneWidget
         if (eventData.pointerEnter.tag == "Block" && !GameManager.Instance.isBusy)
         {
             GameManager.Instance.isBusy = true;
-
             fingerCurrentX = Input.mousePosition.x;
             fingerCurrentY = Input.mousePosition.y;
 
@@ -114,37 +125,43 @@ public class BlockObjectTouch : UISceneWidget
             fingerSegmentX = 0;
         }
 
-        // fingerSegmentX=0 则是上下拖动
-        if (fingerSegmentX == 0)
+        try
         {
-            if (fingerSegmentY > 0)
+            // fingerSegmentX=0 则是上下拖动
+            if (fingerSegmentX == 0)
             {
-                blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[2].transform;
-                Debug.Log("up:" + blockPos2);
+                if (fingerSegmentY > 0)
+                {
+                    blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[2].transform;
+                    //Debug.Log("up:" + blockPos2);
+                }
+                else
+                {
+                    blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[3].transform;
+                    //Debug.Log("down:" + blockPos2);
+                }
             }
-            else
+            else if (fingerSegmentY == 0)
             {
-                Debug.Log("down:" + blockPos2);
-                blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[3].transform;
+                if (fingerSegmentX > 0)
+                {
+                    blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[1].transform;
+                    //Debug.Log("right:" + blockPos2);
+                }
+                else
+                {
+                    blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[0].transform;
+                    //Debug.Log("left:" + blockPos2);
+                }
             }
         }
-        else if (fingerSegmentY == 0)
+        catch (System.Exception ex)
         {
-            if (fingerSegmentX > 0)
+            if (blockPos2 == null)
             {
-                blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[1].transform;
-                Debug.Log("right:" + blockPos2);
+                print("blockPos2等于null" + ex);
+                GameManager.Instance.isBusy = false;
             }
-            else
-            {
-                blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[0].transform;
-                Debug.Log("left:" + blockPos2);
-            }
-        }
-        if (blockPos2 == null)
-        {
-            print("blockPos2等于null");
-            GameManager.Instance.isBusy = false;
         }
     }
 

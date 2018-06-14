@@ -17,15 +17,9 @@ public class ColumnManager : ManagerBase<ColumnManager>
     //记录当前的列（最开始左边的列数等于-1）
     internal int ColumnNumber = -1;
 
-    Transform columnParent;
-
-    //列未定的X值
-    float ColumnX = -440.55f;
-
     protected override void Awake()
     {
         base.Awake();
-        columnParent = transform.Find("/Canvas/BG");
     }
 
     private void Start()
@@ -48,6 +42,29 @@ public class ColumnManager : ManagerBase<ColumnManager>
             gameColumns[i].columnIndex = i;
             gameColumns[i].transform.localPosition = new Vector3(-500 + i * 200f, 500f, 0f);
         }
+    }
+
+    /// <summary>
+    /// 特殊药水的方法
+    /// </summary>
+    internal void MedicinalWaterProp()
+    {
+        for (int i = 0; i < numberOfColumns; i++)
+        {
+            for (int j = 0; j < numberOfRows; j++)
+            {
+                gameColumns[i].BlockObjectsScriptList[j].brust = true;
+            }
+        }
+        Invoke("MedicinalWaterAddMissingBlock", 0.35f);
+    }
+    /// <summary>
+    /// 用于补充药水消的块
+    /// </summary>
+    void MedicinalWaterAddMissingBlock()
+    {
+        GameManager.Instance.RemoveBlock();
+        GameManager.Instance.AddMissingBlock();
     }
 
     /// <summary>
