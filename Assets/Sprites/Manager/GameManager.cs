@@ -8,14 +8,12 @@ using UnityEngine;
 /// </summary>
 public class GameManager : ManagerBase<GameManager>
 {
-    //一次被消除的块数量
-    internal int RemoveBlockNumber;
     //普通块所有预制体
     internal object[] playingObjectPrefabs;
     //初始块种类数量 默认5
     internal int normalBlockNumber = 5;
-    //块下降的时间 默认0.45
-    internal float objectFallingDuration = 0.45f;
+    //块下降的时间
+    internal float objectFallingDuration = 0.35f;
     //是否在造作中
     internal bool isBusy = false;
     //是否有可以消的块
@@ -70,7 +68,6 @@ public class GameManager : ManagerBase<GameManager>
     internal void CheckBoardState()
     {
         //print("检查全部块状态");
-        //isBusy = true;
         doesHaveBrustItem = false;
         for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
         {
@@ -82,23 +79,20 @@ public class GameManager : ManagerBase<GameManager>
                 }
             }
         }
+
         if (doesHaveBrustItem)
         {
             //播放消的声音
 
-            RemoveBrustBlock();
+            RemoveBlock();
             AddMissingBlock();
-        }
-        else
-        {
-            //isBusy = false;
         }
     }
 
     /// <summary>
     /// 去除块
     /// </summary>
-    internal void RemoveBrustBlock()
+    internal void RemoveBlock()
     {
         for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
         {

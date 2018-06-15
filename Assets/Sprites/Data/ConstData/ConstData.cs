@@ -197,4 +197,15 @@ public struct ConstData
     /// </summary>
     public const string DescendingOrder02 = " DESC";
     #endregion
+
+    #region 块的tag标签
+    /// <summary>
+    /// 初始块
+    /// </summary>
+    public const string Block = "Block";
+    /// <summary>
+    /// 高级块
+    /// </summary>
+    public const string SpecialBlock = "SpecialBlock";
+    #endregion
 }

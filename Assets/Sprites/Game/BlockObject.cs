@@ -1,21 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 /// <summary>
 /// 块的功能类
 /// </summary>
 public class BlockObject : MonoBehaviour
 {
+    //这个块当前的类型
+    internal BlockObjectType objectType;
     //技能块预制体
     GameObject skillBlock;
     //清屏块预制体
     GameObject highSkillBlock;
-    //邻近的块身上的“块基类”
-    //internal BlockObject[] adjacentItems;
-    public BlockObject[] adjacentItems;
     //特殊块的形成
     internal GameObject specialObjectToForm = null;
+    //邻近的块身上的“块基类”
+    internal BlockObject[] adjacentItems;
     //用于实例化时赋值ColumnScript类
     internal ColumnScript myColumnScript;
     //可否摧毁
@@ -46,7 +48,7 @@ public class BlockObject : MonoBehaviour
     {
         skillBlock = ResourcesManager.Instance.FindBlock(BlockObjectType.SkillType);
         highSkillBlock = ResourcesManager.Instance.FindBlock(BlockObjectType.HighSkillType);
-        //默认邻近的块为4个
+        //默认邻近的块为8个
         adjacentItems = new BlockObject[8];
     }
 
@@ -55,6 +57,10 @@ public class BlockObject : MonoBehaviour
     /// </summary>
     private void AssignLRUD()
     {
+        if (tag == ConstData.SpecialBlock)
+        {
+            return;
+        }
         //选中块左边有块
         if (adjacentItems[0])
         {
@@ -127,21 +133,25 @@ public class BlockObject : MonoBehaviour
         if (objName == left2 && objName == left1 && objName == right1 && objName == right2)
         {
             parentCallingScript.specialObjectToForm = highSkillBlock;
+            objectType = BlockObjectType.HighSkillType;
         }
         //垂直5连方块
         else if (objName == up2 && objName == up1 && objName == down1 && objName == down2)
         {
             parentCallingScript.specialObjectToForm = highSkillBlock;
+            objectType = BlockObjectType.HighSkillType;
         }
         //水平4连方块
         else if ((objName == left2 && objName == left1 && objName == right1) || (objName == left1 && objName == right1 && objName == right2))
         {
             parentCallingScript.specialObjectToForm = skillBlock;
+            objectType = BlockObjectType.SkillType;
         }
         //垂直4连方块
         else if ((objName == up2 && objName == up1 && objName == down1) || (objName == up1 && objName == down1 && objName == down2))
         {
             parentCallingScript.specialObjectToForm = skillBlock;
+            objectType = BlockObjectType.SkillType;
         }
     }
 
@@ -225,24 +235,41 @@ public class BlockObject : MonoBehaviour
         }
         //摧毁开关
         isDestroyed = true;
-        //累加消除的块数
-        GameManager.Instance.RemoveBlockNumber++;
 
         //执行消除动画
-
-        //动画结束后摧毁块,延迟时间未定
-        //Invoke("AnimationeEndDestroyBlock", 0.2f);
-        StartCoroutine("AnimationeEndDestroyBlock");
+        transform.DOScale(Vector3.zero, 0.2f).OnComplete(delegate() 
+        {
+            //动画结束后摧毁块,延迟时间未定
+            AnimationeEndDestroyBlock();
+        });
     }
-    IEnumerator AnimationeEndDestroyBlock()
+    void AnimationeEndDestroyBlock()
     {
-        yield return new WaitForSeconds(0.1f);
-        Destroy(gameObject);
-        StopCoroutine("AnimationeEndDestroyBlock");
-    }
+        //可否摧毁
+        brust = false;
+        //是否被消
+        isDestroyed = false;
 
-    //void AnimationeEndDestroyBlock()
-    //{
-    //    Destroy(gameObject);
-    //}
+        //重置块的邻近组合
+        left1 = "left1";
+        left2 = "left2";
+        left3 = "left3";
+        right1 = "right1";
+        right2 = "right2";
+        right3 = "right3";
+        up1 = "up1";
+        up2 = "up2";
+        up3 = "up3";
+        down1 = "down1";
+        down2 = "down2";
+        down3 = "down3";
+
+        specialObjectToForm = null;
+        myColumnScript = null;
+        ColumnNumber = -1;
+        adjacentItems = new BlockObject[8];
+        ObjectPoolManager.Instance.RecycleBlockObject(gameObject);
+
+        //Destroy(gameObject);
+    }
 }
