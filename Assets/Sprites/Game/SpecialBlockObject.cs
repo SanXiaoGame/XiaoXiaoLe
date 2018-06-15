@@ -33,6 +33,7 @@ public class SpecialBlockObject : MonoBehaviour
             if (myPlayingObject.objectType == BlockObjectType.SkillType)
             {
                 //技能块
+                myPlayingObject.brust = true;
                 for (int i = 0; i < myPlayingObject.adjacentItems.Length; i++)
                 {
                     if (myPlayingObject.adjacentItems[i] != null)
