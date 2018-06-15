@@ -17,11 +17,11 @@ public class BlockObject : MonoBehaviour
     //特殊块的形成
     internal GameObject specialObjectToForm = null;
     //邻近的块身上的“块基类”
-    public BlockObject[] adjacentItems;
+    internal BlockObject[] adjacentItems;
     //用于实例化时赋值ColumnScript类
     internal ColumnScript myColumnScript;
     //可否摧毁
-    public bool brust = false;
+    internal bool brust = false;
     //是否被消
     bool isDestroyed = false;
     //块所在的列编号
