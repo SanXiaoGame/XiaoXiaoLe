@@ -80,7 +80,6 @@ public class ColumnScript : MonoBehaviour
     /// </summary>
     internal void AssignNeighbours()
     {
-        //print(BlockObjectsScriptList.Count-1);
         for (int i = 0; i < BlockObjectsScriptList.Count; i++)
         {
             if (BlockObjectsScriptList[i] == null)
@@ -90,38 +89,52 @@ public class ColumnScript : MonoBehaviour
             //检测是最左边,统一等于null
             //不是就当前列号减一，找左边对应位置的块脚本BlockObject,存在数组0位
             BlockObjectsScriptList[i].adjacentItems[0] = columnIndex == 0 ? null : ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i];
+            //检测是最右边,统一等于null
+            //不是就当前列号加一，找右边对应位置的块脚本BlockObject,存在数组1位
+            BlockObjectsScriptList[i].adjacentItems[1] = columnIndex == ColumnManager.Instance.gameColumns.Length - 1 ? null : ColumnManager.Instance.gameColumns[columnIndex + 1].BlockObjectsScriptList[i];
+            //检测是最上边,统一等于null
+            //不是就当前行表减一，找上边对应位置的块脚本BlockObject,存在数组2位
+            BlockObjectsScriptList[i].adjacentItems[2] = i == 0 ? null : BlockObjectsScriptList[i - 1];
+            //检测是最下边,统一等于null
+            //不是就当前行表减一，找下边对应位置的块脚本BlockObject,存在数组3位
+            BlockObjectsScriptList[i].adjacentItems[3] = i == ColumnManager.Instance.numberOfRows - 1 ? null : BlockObjectsScriptList[i + 1];
+
             if (columnIndex == 0)
             {
                 BlockObjectsScriptList[i].adjacentItems[4] = null;
                 BlockObjectsScriptList[i].adjacentItems[6] = null;
+                if (i < ColumnManager.Instance.numberOfRows - 1)
+                {
+                    BlockObjectsScriptList[i].adjacentItems[7] = ColumnManager.Instance.gameColumns[columnIndex + 1].BlockObjectsScriptList[i + 1];
+                }
+                if (i > 0)
+                {
+                    BlockObjectsScriptList[i].adjacentItems[5] = ColumnManager.Instance.gameColumns[columnIndex + 1].BlockObjectsScriptList[i - 1];
+                }
             }
-            else if (i > 0 && i < BlockObjectsScriptList.Count - 1)
-            {
-                BlockObjectsScriptList[i].adjacentItems[4] = ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i - 1];
-                BlockObjectsScriptList[i].adjacentItems[6] = ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i + 1];
-            }
-
-            //检测是最右边,统一等于null
-            //不是就当前列号加一，找右边对应位置的块脚本BlockObject,存在数组1位
-            BlockObjectsScriptList[i].adjacentItems[1] = columnIndex == ColumnManager.Instance.gameColumns.Length - 1 ? null : ColumnManager.Instance.gameColumns[columnIndex + 1].BlockObjectsScriptList[i];
-            if (columnIndex == ColumnManager.Instance.gameColumns.Length - 1)
+            else if (columnIndex == ColumnManager.Instance.gameColumns.Length - 1)
             {
                 BlockObjectsScriptList[i].adjacentItems[5] = null;
                 BlockObjectsScriptList[i].adjacentItems[7] = null;
+                if (i < ColumnManager.Instance.numberOfRows - 1)
+                {
+                    BlockObjectsScriptList[i].adjacentItems[6] = ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i + 1];
+                }
+                if (i > 0)
+                {
+                    BlockObjectsScriptList[i].adjacentItems[4] = ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i - 1];
+                }
             }
-            else if (i > 0 && i < BlockObjectsScriptList.Count - 1)
+            else if (i > 0)
             {
+                BlockObjectsScriptList[i].adjacentItems[4] = ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i - 1];
                 BlockObjectsScriptList[i].adjacentItems[5] = ColumnManager.Instance.gameColumns[columnIndex + 1].BlockObjectsScriptList[i - 1];
+            }
+            else if(i < ColumnManager.Instance.numberOfRows - 1)
+            {
+                BlockObjectsScriptList[i].adjacentItems[6] = ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i + 1];
                 BlockObjectsScriptList[i].adjacentItems[7] = ColumnManager.Instance.gameColumns[columnIndex + 1].BlockObjectsScriptList[i + 1];
             }
-
-            //检测是最上边,统一等于null
-            //不是就当前行表减一，找上边对应位置的块脚本BlockObject,存在数组2位
-            BlockObjectsScriptList[i].adjacentItems[2] = i == 0 ? null : BlockObjectsScriptList[i - 1];
-
-            //检测是最下边,统一等于null
-            //不是就当前行表减一，找下边对应位置的块脚本BlockObject,存在数组3位
-            BlockObjectsScriptList[i].adjacentItems[3] = i == ColumnManager.Instance.numberOfRows - 1 ? null : BlockObjectsScriptList[i + 1];
         }
     }
 
