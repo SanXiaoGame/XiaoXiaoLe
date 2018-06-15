@@ -1,0 +1,388 @@
+fileFormatVersion: 2
+guid: e72ed965dddad774cb8a85fc00649c66
+timeCreated: 1528942711
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Hero_Berserker11_jack-O_0
+    21300002: Hero_Berserker11_jack-O_1
+    21300004: Hero_Berserker11_jack-O_2
+    21300006: Hero_Berserker11_jack-O_3
+    21300008: Hero_Berserker11_jack-O_4
+    21300010: Hero_Berserker11_jack-O_5
+    21300012: Hero_Berserker11_jack-O_6
+    21300014: Hero_Berserker11_jack-O_7
+    21300016: Hero_Berserker11_jack-O_8
+    21300018: Hero_Berserker11_jack-O_9
+    21300020: Hero_Berserker11_jack-O_10
+    21300022: Hero_Berserker11_jack-O_11
+    21300024: Hero_Berserker11_jack-O_12
+    21300026: Hero_Berserker11_jack-O_13
+    21300028: Hero_Berserker11_jack-O_14
+    21300030: Hero_Berserker11_jack-O_15
+    21300032: Hero_Berserker11_jack-O_16
+    21300034: Hero_Berserker11_jack-O_17
+    21300036: Hero_Berserker11_jack-O_18
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 191
+        width: 74
+        height: 65
+      alignment: 9
+      pivot: {x: 0.47972974, y: 0.52307695}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_1
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 189
+        width: 59
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_2
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 170
+        width: 33
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_3
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 221
+        width: 52
+        height: 35
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5285714}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_4
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 226
+        width: 42
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_5
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 195
+        width: 42
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_6
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 195
+        width: 42
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_7
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 163
+        width: 42
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_8
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 158
+        width: 52
+        height: 37
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_9
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 95
+        width: 35
+        height: 38
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_10
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 95
+        width: 35
+        height: 38
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_11
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 116.92285
+        width: 89
+        height: 49
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49137038}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_12
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 58.975487
+        width: 92
+        height: 67
+      alignment: 9
+      pivot: {x: 0.5, y: 0.50782853}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_13
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 41
+        width: 19
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_14
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 34
+        width: 28
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_15
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 41
+        width: 19
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_16
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 28
+        width: 19
+        height: 19
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_17
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 29
+        width: 16
+        height: 19
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker11_jack-O_18
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 13
+        width: 22
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 100200789363688
+  assetBundleName: 
+  assetBundleVariant: 

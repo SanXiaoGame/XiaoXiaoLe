@@ -1,0 +1,388 @@
+fileFormatVersion: 2
+guid: 3171217e8f859d341884758d2daaa435
+timeCreated: 1528900956
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Hero_Berserker7_elisabera_0
+    21300002: Hero_Berserker7_elisabera_1
+    21300004: Hero_Berserker7_elisabera_2
+    21300006: Hero_Berserker7_elisabera_3
+    21300008: Hero_Berserker7_elisabera_4
+    21300010: Hero_Berserker7_elisabera_5
+    21300012: Hero_Berserker7_elisabera_6
+    21300014: Hero_Berserker7_elisabera_7
+    21300016: Hero_Berserker7_elisabera_8
+    21300018: Hero_Berserker7_elisabera_9
+    21300020: Hero_Berserker7_elisabera_10
+    21300022: Hero_Berserker7_elisabera_11
+    21300024: Hero_Berserker7_elisabera_12
+    21300026: Hero_Berserker7_elisabera_13
+    21300028: Hero_Berserker7_elisabera_14
+    21300030: Hero_Berserker7_elisabera_15
+    21300032: Hero_Berserker7_elisabera_16
+    21300034: Hero_Berserker7_elisabera_17
+    21300036: Hero_Berserker7_elisabera_18
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_0
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 183
+        width: 38
+        height: 56
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_1
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 221
+        width: 52
+        height: 35
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5285714}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_2
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 226
+        width: 42
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_3
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 214
+        width: 18
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_4
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 195
+        width: 42
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_5
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 195
+        width: 42
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_6
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 204
+        width: 18
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_7
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 193
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_8
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 163
+        width: 42
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_9
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 158
+        width: 52
+        height: 37
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_10
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 39
+        width: 83
+        height: 110
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.49999997}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_11
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 57
+        width: 44
+        height: 44
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_12
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 81.71947
+        width: 83
+        height: 80
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.49100667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_13
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 65
+        width: 19
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_14
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 48
+        width: 41
+        height: 41
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.49999997}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_15
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 64
+        width: 16
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_16
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 45
+        width: 22
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_17
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 51
+        width: 16
+        height: 19
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker7_elisabera_18
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 27
+        width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 100198052719453
+  assetBundleName: 
+  assetBundleVariant: 

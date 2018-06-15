@@ -1,0 +1,433 @@
+fileFormatVersion: 2
+guid: f17fde444f7f86e4a8dde17777728397
+timeCreated: 1529031842
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Hero_Caster9_urflanm2_0
+    21300002: Hero_Caster9_urflanm2_1
+    21300004: Hero_Caster9_urflanm2_2
+    21300006: Hero_Caster9_urflanm2_3
+    21300008: Hero_Caster9_urflanm2_4
+    21300010: Hero_Caster9_urflanm2_5
+    21300012: Hero_Caster9_urflanm2_6
+    21300014: Hero_Caster9_urflanm2_7
+    21300016: Hero_Caster9_urflanm2_8
+    21300018: Hero_Caster9_urflanm2_9
+    21300020: Hero_Caster9_urflanm2_10
+    21300022: Hero_Caster9_urflanm2_11
+    21300024: Hero_Caster9_urflanm2_12
+    21300026: Hero_Caster9_urflanm2_13
+    21300028: Hero_Caster9_urflanm2_14
+    21300030: Hero_Caster9_urflanm2_15
+    21300032: Hero_Caster9_urflanm2_16
+    21300034: Hero_Caster9_urflanm2_17
+    21300036: Hero_Caster9_urflanm2_18
+    21300038: Hero_Caster9_urflanm2_19
+    21300040: Hero_Caster9_urflanm2_20
+    21300042: Hero_Caster9_urflanm2_21
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_0
+      rect:
+        serializedVersion: 2
+        x: 12.629343
+        y: 226.96419
+        width: 21.999998
+        height: 23
+      alignment: 9
+      pivot: {x: 0.49412084, y: 0.47981793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_1
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 235
+        width: 18
+        height: 15
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_2
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 221
+        width: 52
+        height: 35
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5285714}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_3
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 226
+        width: 42
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_4
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 228
+        width: 18
+        height: 15
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_5
+      rect:
+        serializedVersion: 2
+        x: 12.825943
+        y: 179
+        width: 27
+        height: 24
+      alignment: 9
+      pivot: {x: 0.50644654, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_6
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 186
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_7
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 186
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_8
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 195
+        width: 42
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_9
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 195
+        width: 42
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_10
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 185
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_11
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 163
+        width: 42
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_12
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 158
+        width: 52
+        height: 37
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_13
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 79
+        width: 47
+        height: 65
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_14
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 52.287056
+        width: 122
+        height: 108.99999
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.49277934}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_15
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 12
+        width: 50
+        height: 44
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_16
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 36
+        width: 19
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_17
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 28
+        width: 40
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_18
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 36
+        width: 16
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_19
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 21
+        width: 16
+        height: 19
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_20
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 8
+        width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Caster9_urflanm2_21
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 22
+        width: 16
+        height: 19
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 100206630617154
+  assetBundleName: 
+  assetBundleVariant: 
