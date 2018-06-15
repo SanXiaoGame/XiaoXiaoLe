@@ -21,7 +21,7 @@ public class BlockObject : MonoBehaviour
     //用于实例化时赋值ColumnScript类
     internal ColumnScript myColumnScript;
     //可否摧毁
-    internal bool brust = false;
+    public bool brust = false;
     //是否被消
     bool isDestroyed = false;
     //块所在的列编号
@@ -267,6 +267,7 @@ public class BlockObject : MonoBehaviour
         specialObjectToForm = null;
         myColumnScript = null;
         ColumnNumber = -1;
+        adjacentItems = new BlockObject[8];
         ObjectPoolManager.Instance.RecycleBlockObject(gameObject);
 
         //Destroy(gameObject);
