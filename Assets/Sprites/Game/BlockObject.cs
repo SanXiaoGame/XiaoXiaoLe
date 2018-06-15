@@ -17,7 +17,7 @@ public class BlockObject : MonoBehaviour
     //特殊块的形成
     internal GameObject specialObjectToForm = null;
     //邻近的块身上的“块基类”
-    public BlockObject[] adjacentItems;
+    internal BlockObject[] adjacentItems;
     //用于实例化时赋值ColumnScript类
     internal ColumnScript myColumnScript;
     //可否摧毁
@@ -267,6 +267,7 @@ public class BlockObject : MonoBehaviour
         specialObjectToForm = null;
         myColumnScript = null;
         ColumnNumber = -1;
+        adjacentItems = new BlockObject[8];
         ObjectPoolManager.Instance.RecycleBlockObject(gameObject);
 
         //Destroy(gameObject);

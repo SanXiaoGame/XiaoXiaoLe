@@ -36,7 +36,7 @@ public class SpecialBlockObject : MonoBehaviour
                 myPlayingObject.brust = true;
                 for (int i = 0; i < myPlayingObject.adjacentItems.Length; i++)
                 {
-                    if (myPlayingObject.adjacentItems[i] != null)
+                    if (myPlayingObject.adjacentItems[i] != null && myPlayingObject.adjacentItems[i].gameObject.activeSelf)
                     {
                         myPlayingObject.adjacentItems[i].brust = true;
                     }
