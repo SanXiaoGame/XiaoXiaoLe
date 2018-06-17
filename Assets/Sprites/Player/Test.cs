@@ -43,38 +43,45 @@ public class Test : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             //改变玩家英雄的状态
-            SkillsManager.Instance.ChangeHeroState(Profession.Swordsman.GetHashCode(), HeroState.idle.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Knight.GetHashCode(), HeroState.idle.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Master.GetHashCode(), HeroState.idle.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Berserker.GetHashCode(), HeroState.idle.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Hunter.GetHashCode(), HeroState.idle.GetHashCode());
+            SkillsManager.Instance.ChangeHerosIdle();
+            //SkillsManager.Instance.ChangeHeroState(Profession.Knight.GetHashCode(), HeroState.idle.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Master.GetHashCode(), HeroState.idle.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Berserker.GetHashCode(), HeroState.idle.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Hunter.GetHashCode(), HeroState.idle.GetHashCode());
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
             //改变玩家英雄的状态
-            SkillsManager.Instance.ChangeHeroState(Profession.Swordsman.GetHashCode(), HeroState.move.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Knight.GetHashCode(), HeroState.move.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Master.GetHashCode(), HeroState.move.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Berserker.GetHashCode(), HeroState.move.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Hunter.GetHashCode(), HeroState.move.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Swordsman.GetHashCode(), HeroState.move.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Knight.GetHashCode(), HeroState.move.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Master.GetHashCode(), HeroState.move.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Berserker.GetHashCode(), HeroState.move.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Hunter.GetHashCode(), HeroState.move.GetHashCode());
+            SkillsManager.Instance.ChangeHerosRun();
+
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            //改变玩家英雄的状态
-            SkillsManager.Instance.ChangeHeroState(Profession.Swordsman.GetHashCode(), HeroState.diz.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Knight.GetHashCode(), HeroState.diz.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Master.GetHashCode(), HeroState.diz.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Berserker.GetHashCode(), HeroState.diz.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Hunter.GetHashCode(), HeroState.diz.GetHashCode());
+            ////改变玩家英雄的状态
+            //SkillsManager.Instance.ChangeHeroState(Profession.Swordsman.GetHashCode(), HeroState.diz.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Knight.GetHashCode(), HeroState.diz.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Master.GetHashCode(), HeroState.diz.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Berserker.GetHashCode(), HeroState.diz.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Hunter.GetHashCode(), HeroState.diz.GetHashCode());
+
+            SkillsManager.Instance.ChangeHerosDiz();
+
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
             //改变玩家英雄的状态
-            SkillsManager.Instance.ChangeHeroState(Profession.Swordsman.GetHashCode(), HeroState.win.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Knight.GetHashCode(), HeroState.win.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Master.GetHashCode(), HeroState.win.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Berserker.GetHashCode(), HeroState.win.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Hunter.GetHashCode(), HeroState.win.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Swordsman.GetHashCode(), HeroState.win.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Knight.GetHashCode(), HeroState.win.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Master.GetHashCode(), HeroState.win.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Berserker.GetHashCode(), HeroState.win.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Hunter.GetHashCode(), HeroState.win.GetHashCode());
+
+            SkillsManager.Instance.ChangeHerosWin();
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
@@ -88,11 +95,12 @@ public class Test : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             //改变玩家英雄的状态
-            SkillsManager.Instance.ChangeHeroState(Profession.Swordsman.GetHashCode(), HeroState.commonAttack.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Knight.GetHashCode(), HeroState.commonAttack.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Master.GetHashCode(), HeroState.commonAttack.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Berserker.GetHashCode(), HeroState.commonAttack.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Hunter.GetHashCode(), HeroState.commonAttack.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Swordsman.GetHashCode(), HeroState.commonAttack.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Knight.GetHashCode(), HeroState.commonAttack.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Master.GetHashCode(), HeroState.commonAttack.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Berserker.GetHashCode(), HeroState.commonAttack.GetHashCode());
+            //SkillsManager.Instance.ChangeHeroState(Profession.Hunter.GetHashCode(), HeroState.commonAttack.GetHashCode());
+            SkillsManager.Instance.ChangeHerosCommonAttack();
         }
         //-----------------------------剑士
         if (Input.GetKeyDown(KeyCode.Alpha1))

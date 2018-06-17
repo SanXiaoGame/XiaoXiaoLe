@@ -30,11 +30,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D myRigidbody;
     Animator heroAnimator;
     public PlayerData playerData;
-    ////将多个游戏对象的当前状态存入字典
-    //public static Dictionary<string, State> heroSkillState = new Dictionary<string, State>();
-    //public static Dictionary<string, State> EnemySkillState = new Dictionary<string, State>();
-    //游戏对象的状态
-    //public  enum State { Idle, Move, Attack, FirstAttack, SecondAttack, ThirdAttack, GetHit, Dead, Recover, Reset };
+  
     ////测试用临时变量
     //int startHP;
     Hero hero;
@@ -77,7 +73,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("playerName:" + playerName);
 
         JudgeHeroProfession();
-
+        //InvokeRepeating("FindEnemy", 0, 5f);
     }
     private void Start()
     {
@@ -104,6 +100,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         //OnStateListion();
+        //FindEnemy();
     }
 
     #region  OnStateListion() 英雄的状态监听及触发
@@ -122,17 +119,19 @@ public class PlayerController : MonoBehaviour
                 {
                     heroAnimator.SetBool("SaberOneSkill", false);   //取消剑士一技能
                     //Debug.Log("取消剑士一技能,释放普通攻击");
-                    heroAnimator.SetTrigger("Attack");
+                    heroAnimator.SetTrigger("Attack"); 
+                    SkillsManager.Instance.FireSkill(hero, 0);
                 }
                 else if (transform.name.Contains("Knight") || transform.name.Contains("Caster"))    //骑士,法师英雄普通攻击
                 {
                     heroAnimator.SetTrigger("AttackPoke");
+                    SkillsManager.Instance.FireSkill(hero, 0);
                 }
                 else if (transform.name.Contains("Hunter"))     //猎人英雄普通攻击
                 {
                     heroAnimator.SetTrigger("AttackBow");
+                    SkillsManager.Instance.FireSkill(hero, 0);
                 }
-                SkillsManager.Instance.FireSkill(hero, 0);
 
                 break;
             #endregion
@@ -274,7 +273,8 @@ public class PlayerController : MonoBehaviour
     {
         //hero.myRigidbody.velocity = Vector3.right * ConstData.movingSpeed;
         //果然,rigidbaody执行了两次,也就是两个物体上的rigidbody都使用了一个指针地址;
-        myRigidbody.position += Vector2.right;
+        //myRigidbody.position += Vector2.right;
+        myRigidbody.velocity = Vector2.right * 1f;
         Debug.Log("Move--->");
         SkillsManager.Instance.ChangeHeroState(hero.playerData.player_Id, HeroState.idle.GetHashCode());
 
@@ -397,6 +397,21 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    void FindEnemy()
+    {
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
+        if (enemy==null)
+        {
+            //此时没有敌人
+            Debug.Log("没有敌人,英雄们现在应该是跑动状态");
+            SkillsManager.Instance.ChangeHerosRun();
+        }
+        else
+        {
+            //如果有敌人,则对敌人释放普通攻击
+            SkillsManager.Instance.ChangeHerosCommonAttack();
 
+        }
+    }
   
 }

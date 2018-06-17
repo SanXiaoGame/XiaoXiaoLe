@@ -294,10 +294,10 @@
     <Compile Include="Assets\Sprites\Manager\LevelManager.cs" />
     <Compile Include="Assets\Sprites\Manager\ManagerBase.cs" />
     <Compile Include="Assets\Sprites\Manager\ResourcesManager.cs" />
+    <Compile Include="Assets\Sprites\Manager\SkillsManager.cs" />
     <Compile Include="Assets\Sprites\Manager\SQLiteManager.cs" />
     <Compile Include="Assets\Sprites\Manager\UIManager.cs" />
     <Compile Include="Assets\Sprites\Player\PlayerController.cs" />
-    <Compile Include="Assets\Sprites\Player\SkillsManager.cs" />
     <Compile Include="Assets\Sprites\Player\Test.cs" />
     <Compile Include="Assets\Sprites\Skill\IceCube.cs" />
     <Compile Include="Assets\Sprites\Skill\IceCubeBoom.cs" />
