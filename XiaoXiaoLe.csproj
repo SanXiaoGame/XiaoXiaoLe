@@ -293,6 +293,8 @@
     <Compile Include="Assets\Sprites\Manager\GameManager.cs" />
     <Compile Include="Assets\Sprites\Manager\LevelManager.cs" />
     <Compile Include="Assets\Sprites\Manager\ManagerBase.cs" />
+    <Compile Include="Assets\Sprites\Manager\ObjectPoolBase.cs" />
+    <Compile Include="Assets\Sprites\Manager\ObjectPoolManager.cs" />
     <Compile Include="Assets\Sprites\Manager\ResourcesManager.cs" />
     <Compile Include="Assets\Sprites\Manager\SkillsManager.cs" />
     <Compile Include="Assets\Sprites\Manager\SQLiteManager.cs" />
