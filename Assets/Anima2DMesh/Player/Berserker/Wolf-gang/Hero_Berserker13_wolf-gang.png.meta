@@ -1,0 +1,358 @@
+fileFormatVersion: 2
+guid: cf99123dd110a234c94d73b4ead7c379
+timeCreated: 1528945769
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Hero_Berserker13_wolf-gang_0
+    21300002: Hero_Berserker13_wolf-gang_1
+    21300004: Hero_Berserker13_wolf-gang_2
+    21300006: Hero_Berserker13_wolf-gang_3
+    21300008: Hero_Berserker13_wolf-gang_4
+    21300010: Hero_Berserker13_wolf-gang_5
+    21300012: Hero_Berserker13_wolf-gang_6
+    21300014: Hero_Berserker13_wolf-gang_7
+    21300016: Hero_Berserker13_wolf-gang_8
+    21300018: Hero_Berserker13_wolf-gang_9
+    21300020: Hero_Berserker13_wolf-gang_10
+    21300022: Hero_Berserker13_wolf-gang_11
+    21300024: Hero_Berserker13_wolf-gang_12
+    21300026: Hero_Berserker13_wolf-gang_13
+    21300028: Hero_Berserker13_wolf-gang_14
+    21300030: Hero_Berserker13_wolf-gang_15
+    21300032: Hero_Berserker13_wolf-gang_16
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Hero_Berserker13_wolf-gang_0
+      rect:
+        serializedVersion: 2
+        x: 34.35689
+        y: 198
+        width: 50.999996
+        height: 50
+      alignment: 9
+      pivot: {x: 0.49300215, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker13_wolf-gang_1
+      rect:
+        serializedVersion: 2
+        x: 76.70652
+        y: 199.32864
+        width: 45
+        height: 45
+      alignment: 9
+      pivot: {x: 0.48429957, y: 0.49269682}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker13_wolf-gang_2
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 221
+        width: 46
+        height: 35
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5285714}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker13_wolf-gang_3
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 226
+        width: 36
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker13_wolf-gang_4
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 195
+        width: 36
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker13_wolf-gang_5
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 195
+        width: 36
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker13_wolf-gang_6
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 153
+        width: 74
+        height: 44
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker13_wolf-gang_7
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 163
+        width: 36
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker13_wolf-gang_8
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 158
+        width: 46
+        height: 37
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker13_wolf-gang_9
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 8
+        width: 121
+        height: 121
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.49999997}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker13_wolf-gang_10
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 94.692154
+        width: 71
+        height: 71
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49025133}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker13_wolf-gang_11
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 72
+        width: 19
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker13_wolf-gang_12
+      rect:
+        serializedVersion: 2
+        x: 196.1715
+        y: 59.634995
+        width: 36
+        height: 42
+      alignment: 9
+      pivot: {x: 0.4952363, y: 0.4848811}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker13_wolf-gang_13
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 74
+        width: 19
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker13_wolf-gang_14
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 63
+        width: 19
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker13_wolf-gang_15
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 60
+        width: 19
+        height: 19
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Berserker13_wolf-gang_16
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 43
+        width: 16
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 100200989395536
+  assetBundleName: 
+  assetBundleVariant: 

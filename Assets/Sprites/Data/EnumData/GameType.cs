@@ -2,7 +2,7 @@
 /// 游戏中所需的所有枚举类型
 /// </summary>
 
-//块的类型
+//块的类型(暂存)
 public enum BlockObjectType
 {
     /// <summary>

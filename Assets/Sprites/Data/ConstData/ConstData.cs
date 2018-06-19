@@ -204,8 +204,58 @@ public struct ConstData
     /// </summary>
     public const string Block = "Block";
     /// <summary>
+    /// 技能块
+    /// </summary>
+    public const string SkillBlock = "SkillBlock";
+    /// <summary>
     /// 高级块
     /// </summary>
     public const string SpecialBlock = "SpecialBlock";
+    #endregion
+
+    #region 消块分数
+    /// <summary>
+    /// 三消技能
+    /// </summary>
+    public const int SkillOne = 9;
+    /// <summary>
+    /// 四消技能
+    /// </summary>
+    public const int SkillTwo = 12;
+    /// <summary>
+    /// 五消技能
+    /// </summary>
+    public const int SkillThree = 15;
+    /// <summary>
+    /// 九宫技能
+    /// </summary>
+    public const int BlastSkill = 35;
+    /// <summary>
+    /// 全屏技能
+    /// </summary>
+    public const int SpecialSkill = 148;
+    #endregion
+
+    #region 块的名字
+    /// <summary>
+    /// 战士块名
+    /// </summary>
+    public const string Berserker = "Berserker";
+    /// <summary>
+    /// 法师块名
+    /// </summary>
+    public const string Caster = "Caster";
+    /// <summary>
+    /// 猎人块名
+    /// </summary>
+    public const string Hunter = "Hunter";
+    /// <summary>
+    /// 骑士块名
+    /// </summary>
+    public const string Knight = "Knight";
+    /// <summary>
+    /// 剑士块名
+    /// </summary>
+    public const string Saber = "Saber";
     #endregion
 }

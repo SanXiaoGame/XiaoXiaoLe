@@ -20,11 +20,11 @@ public class AnimationTest : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D))
         {
-            anim.SetBool("Run", true);
+            anim.SetBool("isRun", true);
         }
         if (Input.GetKeyUp(KeyCode.D))
         {
-            anim.SetBool("Run", false);
+            anim.SetBool("isRun", false);
         }
         if (Input.GetMouseButtonDown(0))
         {
@@ -56,11 +56,11 @@ public class AnimationTest : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Q))
         {
-            anim.SetBool("Diz", true);
+            anim.SetBool("isDiz", true);
         }
         if (Input.GetKeyUp(KeyCode.Q))
         {
-            anim.SetBool("Diz", false);
+            anim.SetBool("isDiz", false);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
@@ -68,19 +68,19 @@ public class AnimationTest : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.T))
         {
-            anim.SetBool("Wait",true);
+            anim.SetBool("isWait",true);
         }
         if (Input.GetKeyUp(KeyCode.T))
         {
-            anim.SetBool("Wait",false);
+            anim.SetBool("isWait",false);
         }
         if (Input.GetKey(KeyCode.L))
         {
-            anim.SetBool("Sprint", true);
+            anim.SetBool("isSprint", true);
         }
         if (Input.GetKeyUp(KeyCode.L))
         {
-            anim.SetBool("Sprint", false);
+            anim.SetBool("isSprint", false);
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {

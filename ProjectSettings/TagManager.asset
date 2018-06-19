@@ -7,6 +7,8 @@ TagManager:
   - Plane
   - Block
   - SpecialBlock
+  - SkillBlock
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -44,6 +46,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: FlagMan
+  - name: Berserker
     uniqueID: 683132381
+    locked: 0
+  - name: Caster
+    uniqueID: 1808701587
+    locked: 0
+  - name: Hunter
+    uniqueID: 2730283241
     locked: 0

@@ -37,7 +37,15 @@ public class BlockObjectTouch : UISceneWidget
     private void Start()
     {
         //绑定块的拖拽事件
-        blockClick = gameObject.AddComponent<UISceneWidget>();
+        if (gameObject.GetComponent<UISceneWidget>() == null)
+        {
+            blockClick = gameObject.AddComponent<UISceneWidget>();
+        }
+        else
+        {
+            blockClick = gameObject.GetComponent<UISceneWidget>();
+        }
+        
         if (blockClick != null)
         {
             blockClick.PointerDown += BlockOnPointerDown;
@@ -66,7 +74,7 @@ public class BlockObjectTouch : UISceneWidget
         catch (System.Exception ex)
         {
             blockPos1 = transform;
-            Debug.Log("点击了屏幕外，选中块为空");
+            Debug.Log(StringSplicingTool.StringSplicing("点击了屏幕外，选中块为空", ex.ToString()));
         }
         
     }
