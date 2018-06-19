@@ -63,3 +63,6 @@ public struct CharacterListData
     //角色状态临时存储
     public int stateID;
 }
+
+
+

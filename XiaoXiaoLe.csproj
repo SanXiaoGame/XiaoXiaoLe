@@ -7,14 +7,13 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4BE935C5-A908-03AD-6EE2-D30975FB67D2}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp.dll</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
-    <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>2017.2.0f3</UnityVersion>
@@ -294,11 +293,12 @@
     <Compile Include="Assets\Sprites\Manager\GameManager.cs" />
     <Compile Include="Assets\Sprites\Manager\LevelManager.cs" />
     <Compile Include="Assets\Sprites\Manager\ManagerBase.cs" />
-    <Compile Include="Assets\Sprites\Manager\ObjectPoolBase.cs" />
-    <Compile Include="Assets\Sprites\Manager\ObjectPoolManager.cs" />
     <Compile Include="Assets\Sprites\Manager\ResourcesManager.cs" />
     <Compile Include="Assets\Sprites\Manager\SQLiteManager.cs" />
     <Compile Include="Assets\Sprites\Manager\UIManager.cs" />
+    <Compile Include="Assets\Sprites\Player\PlayerController.cs" />
+    <Compile Include="Assets\Sprites\Player\SkillsManager.cs" />
+    <Compile Include="Assets\Sprites\Player\Test.cs" />
     <Compile Include="Assets\Sprites\Skill\IceCube.cs" />
     <Compile Include="Assets\Sprites\Skill\IceCubeBoom.cs" />
     <Compile Include="Assets\Sprites\ToolClass\StringSplicingTool.cs" />
@@ -333,7 +333,7 @@
     <None Include="Assets\Resources\Prefabs\LevelPrefabs\临时添加.txt" />
     <None Include="Assets\Resources\Texture\Enemy\临时添加.txt" />
     <None Include="Assets\Resources\Texture\Player\临时添加.txt" />
-    <None Include="Assets\Scene\临时添加.txt" />
+    <None Include="Assets\Scene\ReadmeForSkillAnimation.txt" />
     <None Include="Assets\Sprites\AI\临时添加.txt" />
     <None Include="Assets\Sprites\Player\临时添加.txt" />
   </ItemGroup>
