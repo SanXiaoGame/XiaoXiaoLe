@@ -2,26 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 /// <summary>
 /// 块的功能类
 /// </summary>
 public class BlockObject : MonoBehaviour
 {
-    //这个块当前的类型
-    internal BlockObjectType objectType;
     //技能块预制体
     GameObject skillBlock;
     //清屏块预制体
     GameObject highSkillBlock;
     //特殊块的形成
-    internal GameObject specialObjectToForm = null;
+    public GameObject specialObjectToForm = null;
     //邻近的块身上的“块基类”
-    internal BlockObject[] adjacentItems;
+    public BlockObject[] adjacentItems;
     //用于实例化时赋值ColumnScript类
     internal ColumnScript myColumnScript;
     //可否摧毁
-    internal bool brust = false;
+    public bool brust = false;
     //是否被消
     bool isDestroyed = false;
     //块所在的列编号
@@ -133,25 +132,25 @@ public class BlockObject : MonoBehaviour
         if (objName == left2 && objName == left1 && objName == right1 && objName == right2)
         {
             parentCallingScript.specialObjectToForm = highSkillBlock;
-            objectType = BlockObjectType.HighSkillType;
+            GameManager.Instance.AddScore(ConstData.SkillThree);
         }
         //垂直5连方块
         else if (objName == up2 && objName == up1 && objName == down1 && objName == down2)
         {
             parentCallingScript.specialObjectToForm = highSkillBlock;
-            objectType = BlockObjectType.HighSkillType;
+            GameManager.Instance.AddScore(ConstData.SkillThree);
         }
         //水平4连方块
         else if ((objName == left2 && objName == left1 && objName == right1) || (objName == left1 && objName == right1 && objName == right2))
         {
             parentCallingScript.specialObjectToForm = skillBlock;
-            objectType = BlockObjectType.SkillType;
+            GameManager.Instance.AddScore(ConstData.SkillTwo);
         }
         //垂直4连方块
         else if ((objName == up2 && objName == up1 && objName == down1) || (objName == up1 && objName == down1 && objName == down2))
         {
             parentCallingScript.specialObjectToForm = skillBlock;
-            objectType = BlockObjectType.SkillType;
+            GameManager.Instance.AddScore(ConstData.SkillTwo);
         }
     }
 
@@ -221,6 +220,7 @@ public class BlockObject : MonoBehaviour
         {
             brust = true;
             GameManager.Instance.doesHaveBrustItem = true;
+            GameManager.Instance.AddScore(ConstData.SkillOne);
         }
     }
 
@@ -250,6 +250,11 @@ public class BlockObject : MonoBehaviour
         //是否被消
         isDestroyed = false;
 
+        specialObjectToForm = null;
+        myColumnScript = null;
+        ColumnNumber = -1;
+        Array.Clear(adjacentItems, 0, adjacentItems.Length);
+        
         //重置块的邻近组合
         left1 = "left1";
         left2 = "left2";
@@ -264,12 +269,6 @@ public class BlockObject : MonoBehaviour
         down2 = "down2";
         down3 = "down3";
 
-        specialObjectToForm = null;
-        myColumnScript = null;
-        ColumnNumber = -1;
-        adjacentItems = new BlockObject[8];
         ObjectPoolManager.Instance.RecycleBlockObject(gameObject);
-
-        //Destroy(gameObject);
     }
 }

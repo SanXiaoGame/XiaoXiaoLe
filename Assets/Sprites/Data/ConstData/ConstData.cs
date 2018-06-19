@@ -204,8 +204,35 @@ public struct ConstData
     /// </summary>
     public const string Block = "Block";
     /// <summary>
+    /// 技能块
+    /// </summary>
+    public const string SkillBlock = "SkillBlock";
+    /// <summary>
     /// 高级块
     /// </summary>
     public const string SpecialBlock = "SpecialBlock";
+    #endregion
+
+    #region 消块分数
+    /// <summary>
+    /// 三消技能
+    /// </summary>
+    public const int SkillOne = 9;
+    /// <summary>
+    /// 四消技能
+    /// </summary>
+    public const int SkillTwo = 12;
+    /// <summary>
+    /// 五消技能
+    /// </summary>
+    public const int SkillThree = 15;
+    /// <summary>
+    /// 九宫技能
+    /// </summary>
+    public const int BlastSkill = 35;
+    /// <summary>
+    /// 全屏技能
+    /// </summary>
+    public const int SpecialSkill = 148;
     #endregion
 }

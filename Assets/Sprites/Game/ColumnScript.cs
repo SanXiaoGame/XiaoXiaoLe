@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,11 +35,11 @@ public class ColumnScript : MonoBehaviour
         ColumnManager.Instance.ColumnNumber++;
         for (int i = 0; i < ColumnManager.Instance.numberOfColumns; i++)
         {
-            int index = Random.Range(0, GameManager.Instance.normalBlockNumber);
+            int index = UnityEngine.Random.Range(0, GameManager.Instance.normalBlockNumber);
 
             while (objectPrefab != null && index == randomNumber)
             {
-                index = Random.Range(0, GameManager.Instance.normalBlockNumber);
+                index = UnityEngine.Random.Range(0, GameManager.Instance.normalBlockNumber);
             }
             //新的随机数
             randomNumber = index;
@@ -48,7 +49,7 @@ public class ColumnScript : MonoBehaviour
                 {
                     while (index == randomNumber)
                     {
-                        index = Random.Range(0, GameManager.Instance.normalBlockNumber);
+                        index = UnityEngine.Random.Range(0, GameManager.Instance.normalBlockNumber);
                     }
                 }
                 else
@@ -86,6 +87,9 @@ public class ColumnScript : MonoBehaviour
             {
                 continue;
             }
+            //先清除之前的邻居数据
+            Array.Clear(BlockObjectsScriptList[i].adjacentItems, 0, BlockObjectsScriptList[i].adjacentItems.Length);
+            
             //检测是最左边,统一等于null
             //不是就当前列号减一，找左边对应位置的块脚本BlockObject,存在数组0位
             BlockObjectsScriptList[i].adjacentItems[0] = columnIndex == 0 ? null : ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i];
@@ -154,18 +158,17 @@ public class ColumnScript : MonoBehaviour
     /// </summary>
     /// <param 块之前的位置="index"></param>
     /// <param 特殊块的预制体="specialBlock"></param>
-    internal void InstantiateSpecialBlock(int index, GameObject specialBlock,BlockObjectType type)
+    internal void InstantiateSpecialBlock(int index, GameObject specialBlock)
     {
         GameObject block = ObjectPoolManager.Instance.InstantiateBlockObject(specialBlock);
 
         block.name = specialBlock.name;
-        block.tag = ConstData.SpecialBlock;
         block.transform.parent = transform;
         block.transform.localPosition = new Vector3(0, -index * 200, 0);
         block.GetComponent<RectTransform>().localScale = Vector3.zero;
         block.GetComponent<BlockObject>().myColumnScript = this;
         block.GetComponent<BlockObject>().ColumnNumber = index;
-        block.GetComponent<BlockObject>().objectType = type;
+
         BlockObjectsScriptList[index] = block.GetComponent<BlockObject>();
         block.transform.DOScale(Vector3.one, 0.35f);
     }
@@ -186,16 +189,8 @@ public class ColumnScript : MonoBehaviour
 
                 if (specialBlock)
                 {
-                    BlockObjectType type;
-                    if (specialBlock.name == "Flag")
-                    {
-                        type = BlockObjectType.SkillType;
-                    }
-                    else
-                    {
-                        type = BlockObjectType.HighSkillType;
-                    }
-                    InstantiateSpecialBlock(i, specialBlock, type);
+                    InstantiateSpecialBlock(i, specialBlock);
+                    print("特殊块");
                 }
                 else
                 {
@@ -229,7 +224,7 @@ public class ColumnScript : MonoBehaviour
         //添加块实例
         for (int i = 0; i < numberOfItemsToAdd; i++)
         {
-            int index = Random.Range(0, GameManager.Instance.normalBlockNumber);
+            int index = UnityEngine.Random.Range(0, GameManager.Instance.normalBlockNumber);
             objectPrefab= GameManager.Instance.playingObjectPrefabs[index] as GameObject;
 
             //GameObject block = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);

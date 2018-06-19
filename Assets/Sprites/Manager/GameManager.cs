@@ -18,6 +18,8 @@ public class GameManager : ManagerBase<GameManager>
     internal bool isBusy = false;
     //是否有可以消的块
     internal bool doesHaveBrustItem = false;
+    //总分，结算用
+    internal int totalScore = 0;
 
     protected override void Awake()
     {
@@ -101,11 +103,11 @@ public class GameManager : ManagerBase<GameManager>
     }
 
     /// <summary>
-    /// 计分(可能用来算伤害)
+    /// 计分算战果
     /// </summary>
-    internal void AddScore()
+    internal void AddScore(int number)
     {
-
+        totalScore += number;
     }
 
     /// <summary>
