@@ -20,6 +20,8 @@ public class GameManager : ManagerBase<GameManager>
     internal bool doesHaveBrustItem = false;
     //总分，结算用
     internal int totalScore = 0;
+    //游戏暂停开关
+    bool isGamePause = false;
 
     protected override void Awake()
     {
@@ -108,6 +110,15 @@ public class GameManager : ManagerBase<GameManager>
     internal void AddScore(int number)
     {
         totalScore += number;
+    }
+
+    /// <summary>
+    /// 游戏暂停
+    /// </summary>
+    internal void GamePause()
+    {
+        isGamePause = !isGamePause;
+        Time.timeScale = isGamePause == true ? 0 : 1;
     }
 
     /// <summary>
