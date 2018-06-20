@@ -116,8 +116,8 @@ public class AudioManager : ManagerBase<AudioManager>
             Debug.Log("没有找到音效片段");
             return;
         }
-        //是否已经有这个音效播放器了
-        if (effectMusic[musicType] != null)
+        //是否已经有这个音效播放器,并且没有播放音效
+        if (effectMusic[musicType] != null && !effectMusic[musicType].isPlaying)
         {
             //重启播放器物体
             effectMusic[musicType].gameObject.SetActive(true);
