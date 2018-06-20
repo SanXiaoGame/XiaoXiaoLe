@@ -9,9 +9,10 @@ public class AudioManager : ManagerBase<AudioManager>
 {
     //保存背景播放器
     AudioSource bgMusic;
-
     //保存所有音效播放器
-    Dictionary<SoundEffect, AudioSource> effectMusic = new Dictionary<SoundEffect, AudioSource>();
+    Queue<AudioSource> effectMusic = new Queue<AudioSource>();
+    //临时存储队列的播放器
+    AudioSource tempAudio;
 
     //是否静音
     bool bgMusicMute = false;
@@ -60,7 +61,7 @@ public class AudioManager : ManagerBase<AudioManager>
     /// </summary>
     /// <param 播放器所在游戏物体名="audioNumber"></param>
     /// <returns></returns>
-    public AudioSource GameAudio(SoundEffect audioType)
+    /*public AudioSource GameAudio(SoundEffect audioType)
     {
         foreach (SoundEffect key in effectMusic.Keys)
         {
@@ -70,7 +71,7 @@ public class AudioManager : ManagerBase<AudioManager>
             }
         }
         return null;
-    }
+    }*/
 
     //背景播放器静音开关
     public void BGMute(bool isMute)
@@ -116,13 +117,20 @@ public class AudioManager : ManagerBase<AudioManager>
             Debug.Log("没有找到音效片段");
             return;
         }
-        //是否已经有这个音效播放器,并且没有播放音效
-        if (effectMusic[musicType] != null && !effectMusic[musicType].isPlaying)
+        //是否已经有音效播放器,并且没有播放音效
+        if (effectMusic.Count > 0)
+        {
+            //备用播放器出队
+            tempAudio = effectMusic.Dequeue();
+        }
+        if (tempAudio != null && !tempAudio.isPlaying)
         {
             //重启播放器物体
-            effectMusic[musicType].gameObject.SetActive(true);
+            tempAudio.gameObject.SetActive(true);
+            //换音效
+            tempAudio.clip = clip;
             //开始播放
-            effectMusic[musicType].Play();
+            tempAudio.Play();
         }
         else
         {
@@ -132,8 +140,8 @@ public class AudioManager : ManagerBase<AudioManager>
             effectAudio.clip = clip;
             //成为AudioManager的子物体
             effectAudio.transform.parent = transform;
-            //加入字典
-            effectMusic.Add(musicType, effectAudio);
+            //加入队列
+            effectMusic.Enqueue(effectAudio);
             //不使用循环播放
             effectAudio.loop = false;
             //设置2D/3D 默认2D
