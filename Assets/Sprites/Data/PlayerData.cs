@@ -24,6 +24,7 @@ public class PlayerData
     public int Equipment;
     public ulong GoldCoin;
     public int Diamond;
+    public int PrefabsID;
     //进化后对应数值
     public int EXHP;
     public int EXAD;
