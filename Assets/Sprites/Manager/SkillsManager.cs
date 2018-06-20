@@ -17,9 +17,10 @@ public class SkillsManager : ManagerBase<SkillsManager>
     {
         if (Listion != null)
         {
-            Listion();
+            Listion( );
         }
     }
+    delegate void Action(int heroID, int stateID);
 
     protected override void Awake()
     {
@@ -75,7 +76,8 @@ public class SkillsManager : ManagerBase<SkillsManager>
                 SaberCommonAttack(hero);
                 break;
             case 1:
-                SaberOneSkill(hero);
+                //SaberOneSkill(hero);
+                StartCoroutine(SaberOneSkill(hero));
                 break;
             case 2:
                 SaberTwoSkill(hero);
@@ -232,7 +234,7 @@ public class SkillsManager : ManagerBase<SkillsManager>
     /// 技能名:突刺;技能等级:一级
     /// </summary>
     /// <param name="hero">Hero.</param>
-    public void SaberOneSkill(Hero hero)
+    IEnumerator  SaberOneSkill(Hero hero)
     {
         hero.skillData = SQLiteManager.Instance.skillDataSource[SwordsmanSkillID.oneSkill.GetHashCode()];
 
@@ -242,7 +244,11 @@ public class SkillsManager : ManagerBase<SkillsManager>
                   " 技能等级:" + hero.skillData.skill_DamageLevel);        //播放动画....//播放一技能动画
         //GameObject gameObject = new GameObject();
         //gameObject.AddComponent<BoxCollider2D>();
-        hero.myRigidbody.velocity = Vector2.right * ConstData.movingSpeed * Time.deltaTime;
+        hero.myRigidbody.velocity = Vector2.left * ConstData.movingSpeed;
+        yield return new WaitForSeconds(1f);
+        hero.myRigidbody.velocity = Vector2.right * ConstData.movingSpeed;
+        yield return new WaitForSeconds(1f);
+
         //播放音效
 
         //伤害计算业务处理
