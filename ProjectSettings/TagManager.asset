@@ -8,6 +8,7 @@ TagManager:
   - Block
   - SpecialBlock
   - SkillBlock
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -50,4 +51,13 @@ TagManager:
     locked: 0
   - name: Caster
     uniqueID: 1808701587
+    locked: 0
+  - name: Hunter
+    uniqueID: 2730283241
+    locked: 0
+  - name: Knight
+    uniqueID: 1435651741
+    locked: 0
+  - name: Saber
+    uniqueID: 1724628997
     locked: 0

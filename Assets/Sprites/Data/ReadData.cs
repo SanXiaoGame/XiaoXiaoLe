@@ -314,6 +314,7 @@ public class ReadData
             int player_Equipment = reader.GetInt32(reader.GetOrdinal("player_Equipment"));
             ulong GoldCoin = (ulong)reader.GetInt32(reader.GetOrdinal("GoldCoin"));
             int Diamond = reader.GetInt32(reader.GetOrdinal("Diamond"));
+            int PrefabsID = reader.GetInt32(reader.GetOrdinal("PrefabsID"));
             //创建模型
             PlayerData playerData = new PlayerData();
             playerData.player_Id = player_Id;
@@ -339,6 +340,7 @@ public class ReadData
             playerData.Equipment = player_Equipment;
             playerData.GoldCoin = GoldCoin;
             playerData.Diamond = Diamond;
+            playerData.PrefabsID = PrefabsID;
             //加入到数据库
             SQLiteManager.Instance.playerDataSource.Add(playerData.player_Id, playerData);
         }
