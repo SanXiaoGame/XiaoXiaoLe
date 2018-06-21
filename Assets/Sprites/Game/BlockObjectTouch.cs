@@ -37,15 +37,8 @@ public class BlockObjectTouch : UISceneWidget
     private void Start()
     {
         //绑定块的拖拽事件
-        if (gameObject.GetComponent<UISceneWidget>() == null)
-        {
-            blockClick = gameObject.AddComponent<UISceneWidget>();
-        }
-        else
-        {
-            blockClick = gameObject.GetComponent<UISceneWidget>();
-        }
-        
+        blockClick = Get(gameObject);
+
         if (blockClick != null)
         {
             blockClick.PointerDown += BlockOnPointerDown;
