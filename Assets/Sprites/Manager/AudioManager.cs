@@ -46,14 +46,12 @@ public class AudioManager : ManagerBase<AudioManager>
     /// <param 歌名="bgmName"></param>
     public void ReplaceBGM(BGM bgmType)
     {
-        switch (bgmType)
-        {
-            case BGM.MainCity:
-                clip = ResourcesManager.Instance.FindAudioClip(bgmType);
-                break;
-        }
+        clip = ResourcesManager.Instance.FindAudioClip(bgmType);
+        bgMusic.clip = null;
+        bgMusic.clip = clip;
         bgMusic.spatialBlend = 0f;
         bgMusic.loop = true;
+        bgMusic.Play();
     }
 
     /// <summary>
