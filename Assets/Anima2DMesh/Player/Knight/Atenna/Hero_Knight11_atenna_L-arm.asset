@@ -9,11 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c10c0be6d28fe4d539c4a39822fe301c, type: 3}
-  m_Name: Hero_Caster4_librarian_L-arm
+  m_Name: Hero_Knight11_atenna_L-arm
   m_EditorClassIdentifier: 
   m_ApiVersion: 4
-  m_Sprite: {fileID: 21300024, guid: 3629007e1f2917a469d25c993082109d, type: 3}
-  m_SharedMesh: {fileID: 43119399955277640}
+  m_Sprite: {fileID: 21300024, guid: f699702f4b6569f43a24bd8c673a660a, type: 3}
+  m_SharedMesh: {fileID: 43738097121310332}
   pivotPoint: {x: 0, y: 0}
   texVertices: []
   edges: []
@@ -21,12 +21,12 @@ MonoBehaviour:
   indices: 
   bindPoses: []
   m_SharedMaterials: []
---- !u!43 &43119399955277640
+--- !u!43 &43738097121310332
 Mesh:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Hero_Caster4_librarian_L-arm
+  m_Name: Hero_Knight11_atenna_L-arm
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -47,11 +47,11 @@ Mesh:
   - e00: -0.37913343
     e01: -0.9253423
     e02: 0
-    e03: 0.0775723
+    e03: 0.06003586
     e10: 0.9253423
     e11: -0.37913343
     e12: 0
-    e13: -0.015968375
+    e13: -0.028556833
     e20: 0
     e21: 0
     e22: 0.99999994
@@ -137,7 +137,7 @@ Mesh:
       format: 0
       dimension: 4
     m_DataSize: 192
-    _typelessdata: ec5138bd8fc2753d000000000000000000000000000080bf0000803f0000000000000000000080bfec51383d8fc2753d000000000000000000000000000080bf0000803f0000000000000000000080bfec5138bd8fc275bd000000000000000000000000000080bf0000803f0000000000000000000080bfec51383d8fc275bd000000000000000000000000000080bf0000803f0000000000000000000080bf0000353f0000923e00003e3f0000923e0000353f0000743e00003e3f0000743e
+    _typelessdata: ec5138bd8fc2753d000000000000000000000000000080bf0000803f0000000000000000000080bfec51383d8fc2753d000000000000000000000000000080bf0000803f0000000000000000000080bfec5138bd8fc275bd000000000000000000000000000080bf0000803f0000000000000000000080bfec51383d8fc275bd000000000000000000000000000080bf0000803f0000000000000000000080bf00003f3f00005c3e0000483f00005c3e00003f3f00002c3e0000483f00002c3e
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -197,7 +197,7 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
---- !u!114 &114381674307712584
+--- !u!114 &114076864605150952
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -206,14 +206,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e715ea371f114f4a8d2584ad476634d, type: 3}
-  m_Name: Hero_Caster4_librarian_12_Data
+  m_Name: Hero_Knight11_atenna_12_Data
   m_EditorClassIdentifier: 
-  m_PivotPoint: {x: 185.5, y: 67}
+  m_PivotPoint: {x: 195.5, y: 49}
   m_Vertices:
-  - {x: 181, y: 73}
-  - {x: 190, y: 73}
-  - {x: 181, y: 61}
-  - {x: 190, y: 61}
+  - {x: 191, y: 55}
+  - {x: 200, y: 55}
+  - {x: 191, y: 43}
+  - {x: 200, y: 43}
   m_BoneWeights:
   - weight0: 1
     weight1: 0
@@ -263,11 +263,11 @@ MonoBehaviour:
       e00: -0.37913343
       e01: -0.9253423
       e02: 0
-      e03: 0.0775723
+      e03: 0.06003586
       e10: 0.9253423
       e11: -0.37913343
       e12: 0
-      e13: -0.015968375
+      e13: -0.028556833
       e20: 0
       e21: 0
       e22: 0.99999994

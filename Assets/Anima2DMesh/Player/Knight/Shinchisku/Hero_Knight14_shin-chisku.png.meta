@@ -1,27 +1,24 @@
 fileFormatVersion: 2
-guid: 3629007e1f2917a469d25c993082109d
-timeCreated: 1529504511
+guid: d1d67f58b1644b54abeb230d51c1859a
+timeCreated: 1529507026
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Hero_Caster4_librarian_0
-    21300002: Hero_Caster4_librarian_1
-    21300004: Hero_Caster4_librarian_2
-    21300006: Hero_Caster4_librarian_3
-    21300008: Hero_Caster4_librarian_4
-    21300010: Hero_Caster4_librarian_5
-    21300012: Hero_Caster4_librarian_6
-    21300014: Hero_Caster4_librarian_7
-    21300016: Hero_Caster4_librarian_8
-    21300018: Hero_Caster4_librarian_9
-    21300020: Hero_Caster4_librarian_10
-    21300022: Hero_Caster4_librarian_11
-    21300024: Hero_Caster4_librarian_12
-    21300026: Hero_Caster4_librarian_13
-    21300028: Hero_Caster4_librarian_14
-    21300030: Hero_Caster4_librarian_15
-    21300032: Hero_Caster4_librarian_16
-    21300034: Hero_Caster4_librarian_17
+    21300000: Hero_Knight14_shin-chisku_0
+    21300002: Hero_Knight14_shin-chisku_1
+    21300004: Hero_Knight14_shin-chisku_2
+    21300006: Hero_Knight14_shin-chisku_3
+    21300008: Hero_Knight14_shin-chisku_4
+    21300010: Hero_Knight14_shin-chisku_5
+    21300012: Hero_Knight14_shin-chisku_6
+    21300014: Hero_Knight14_shin-chisku_7
+    21300016: Hero_Knight14_shin-chisku_8
+    21300018: Hero_Knight14_shin-chisku_9
+    21300020: Hero_Knight14_shin-chisku_10
+    21300022: Hero_Knight14_shin-chisku_11
+    21300024: Hero_Knight14_shin-chisku_12
+    21300026: Hero_Knight14_shin-chisku_13
+    21300028: Hero_Knight14_shin-chisku_14
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -114,35 +111,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_0
-      rect:
-        serializedVersion: 2
-        x: 11
-        y: 193
-        width: 56
-        height: 41
-      alignment: 9
-      pivot: {x: 0.5, y: 0.49999997}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Hero_Caster4_librarian_1
-      rect:
-        serializedVersion: 2
-        x: 75
-        y: 218
-        width: 33
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Hero_Caster4_librarian_2
+      name: Hero_Knight14_shin-chisku_0
       rect:
         serializedVersion: 2
         x: 157
@@ -156,7 +125,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_3
+      name: Hero_Knight14_shin-chisku_1
       rect:
         serializedVersion: 2
         x: 209
@@ -170,21 +139,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_4
-      rect:
-        serializedVersion: 2
-        x: 71
-        y: 166
-        width: 47
-        height: 41
-      alignment: 9
-      pivot: {x: 0.49999997, y: 0.49999997}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Hero_Caster4_librarian_5
+      name: Hero_Knight14_shin-chisku_2
       rect:
         serializedVersion: 2
         x: 162
@@ -198,7 +153,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_6
+      name: Hero_Knight14_shin-chisku_3
       rect:
         serializedVersion: 2
         x: 209
@@ -212,21 +167,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_7
-      rect:
-        serializedVersion: 2
-        x: 31
-        y: 166
-        width: 24
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Hero_Caster4_librarian_8
+      name: Hero_Knight14_shin-chisku_4
       rect:
         serializedVersion: 2
         x: 162
@@ -240,7 +181,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_9
+      name: Hero_Knight14_shin-chisku_5
       rect:
         serializedVersion: 2
         x: 204
@@ -254,13 +195,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_10
+      name: Hero_Knight14_shin-chisku_6
       rect:
         serializedVersion: 2
-        x: 71
-        y: 123
-        width: 56
-        height: 41
+        x: 18.499996
+        y: 16
+        width: 122
+        height: 116
+      alignment: 9
+      pivot: {x: 0.48770493, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Knight14_shin-chisku_7
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 78
+        width: 91
+        height: 82
       alignment: 9
       pivot: {x: 0.5, y: 0.49999997}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -268,27 +223,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_11
+      name: Hero_Knight14_shin-chisku_8
       rect:
         serializedVersion: 2
-        x: 164
-        y: 74
-        width: 83
-        height: 86
+        x: 170
+        y: 56
+        width: 22
+        height: 22
       alignment: 9
-      pivot: {x: 0.49999997, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_12
+      name: Hero_Knight14_shin-chisku_9
       rect:
         serializedVersion: 2
-        x: 176
+        x: 185
+        y: 44
+        width: 37
+        height: 40
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Knight14_shin-chisku_10
+      rect:
+        serializedVersion: 2
+        x: 217
         y: 56
         width: 19
-        height: 22
+        height: 25
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -296,40 +265,12 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_13
+      name: Hero_Knight14_shin-chisku_11
       rect:
         serializedVersion: 2
-        x: 193
-        y: 48
-        width: 34
-        height: 31
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Hero_Caster4_librarian_14
-      rect:
-        serializedVersion: 2
-        x: 225
-        y: 55
+        x: 173
+        y: 44
         width: 16
-        height: 22
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Hero_Caster4_librarian_15
-      rect:
-        serializedVersion: 2
-        x: 174
-        y: 41
-        width: 22
         height: 19
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
@@ -338,12 +279,12 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_16
+      name: Hero_Knight14_shin-chisku_12
       rect:
         serializedVersion: 2
-        x: 225
-        y: 40
-        width: 19
+        x: 220
+        y: 44
+        width: 16
         height: 19
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
@@ -352,12 +293,26 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_17
+      name: Hero_Knight14_shin-chisku_13
       rect:
         serializedVersion: 2
-        x: 205
-        y: 24
+        x: 198
+        y: 23
         width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Knight14_shin-chisku_14
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 0.9999995
+        width: 37
         height: 25
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
@@ -368,6 +323,6 @@ TextureImporter:
     outline: []
     physicsShape: []
   spritePackingTag: 
-  userData: 100237607419733
+  userData: 100237771172897
   assetBundleName: 
   assetBundleVariant: 

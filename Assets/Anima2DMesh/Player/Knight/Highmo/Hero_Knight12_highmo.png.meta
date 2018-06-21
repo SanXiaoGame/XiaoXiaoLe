@@ -1,27 +1,25 @@
 fileFormatVersion: 2
-guid: 3629007e1f2917a469d25c993082109d
-timeCreated: 1529504511
+guid: 923468f9c311a974c87097b21fea4b20
+timeCreated: 1529505018
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Hero_Caster4_librarian_0
-    21300002: Hero_Caster4_librarian_1
-    21300004: Hero_Caster4_librarian_2
-    21300006: Hero_Caster4_librarian_3
-    21300008: Hero_Caster4_librarian_4
-    21300010: Hero_Caster4_librarian_5
-    21300012: Hero_Caster4_librarian_6
-    21300014: Hero_Caster4_librarian_7
-    21300016: Hero_Caster4_librarian_8
-    21300018: Hero_Caster4_librarian_9
-    21300020: Hero_Caster4_librarian_10
-    21300022: Hero_Caster4_librarian_11
-    21300024: Hero_Caster4_librarian_12
-    21300026: Hero_Caster4_librarian_13
-    21300028: Hero_Caster4_librarian_14
-    21300030: Hero_Caster4_librarian_15
-    21300032: Hero_Caster4_librarian_16
-    21300034: Hero_Caster4_librarian_17
+    21300000: Hero_Knight12_highmo_0
+    21300002: Hero_Knight12_highmo_1
+    21300004: Hero_Knight12_highmo_2
+    21300006: Hero_Knight12_highmo_3
+    21300008: Hero_Knight12_highmo_4
+    21300010: Hero_Knight12_highmo_5
+    21300012: Hero_Knight12_highmo_6
+    21300014: Hero_Knight12_highmo_7
+    21300016: Hero_Knight12_highmo_8
+    21300018: Hero_Knight12_highmo_9
+    21300020: Hero_Knight12_highmo_10
+    21300022: Hero_Knight12_highmo_11
+    21300024: Hero_Knight12_highmo_12
+    21300026: Hero_Knight12_highmo_13
+    21300028: Hero_Knight12_highmo_14
+    21300030: Hero_Knight12_highmo_15
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -114,35 +112,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_0
-      rect:
-        serializedVersion: 2
-        x: 11
-        y: 193
-        width: 56
-        height: 41
-      alignment: 9
-      pivot: {x: 0.5, y: 0.49999997}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Hero_Caster4_librarian_1
-      rect:
-        serializedVersion: 2
-        x: 75
-        y: 218
-        width: 33
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Hero_Caster4_librarian_2
+      name: Hero_Knight12_highmo_0
       rect:
         serializedVersion: 2
         x: 157
@@ -156,7 +126,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_3
+      name: Hero_Knight12_highmo_1
       rect:
         serializedVersion: 2
         x: 209
@@ -170,21 +140,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_4
-      rect:
-        serializedVersion: 2
-        x: 71
-        y: 166
-        width: 47
-        height: 41
-      alignment: 9
-      pivot: {x: 0.49999997, y: 0.49999997}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Hero_Caster4_librarian_5
+      name: Hero_Knight12_highmo_2
       rect:
         serializedVersion: 2
         x: 162
@@ -198,7 +154,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_6
+      name: Hero_Knight12_highmo_3
       rect:
         serializedVersion: 2
         x: 209
@@ -212,21 +168,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_7
-      rect:
-        serializedVersion: 2
-        x: 31
-        y: 166
-        width: 24
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Hero_Caster4_librarian_8
+      name: Hero_Knight12_highmo_4
       rect:
         serializedVersion: 2
         x: 162
@@ -240,7 +182,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_9
+      name: Hero_Knight12_highmo_5
       rect:
         serializedVersion: 2
         x: 204
@@ -254,39 +196,67 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_10
+      name: Hero_Knight12_highmo_6
       rect:
         serializedVersion: 2
-        x: 71
-        y: 123
-        width: 56
-        height: 41
+        x: 41
+        y: 100
+        width: 37
+        height: 37
       alignment: 9
-      pivot: {x: 0.5, y: 0.49999997}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_11
+      name: Hero_Knight12_highmo_7
       rect:
         serializedVersion: 2
-        x: 164
-        y: 74
-        width: 83
-        height: 86
+        x: 74
+        y: 100
+        width: 37
+        height: 37
       alignment: 9
-      pivot: {x: 0.49999997, y: 0.5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_12
+      name: Hero_Knight12_highmo_8
       rect:
         serializedVersion: 2
-        x: 176
-        y: 56
+        x: 158
+        y: 86
+        width: 80
+        height: 71
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Knight12_highmo_9
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 58
+        width: 58
+        height: 40
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Knight12_highmo_10
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 68
         width: 19
         height: 22
       alignment: 9
@@ -296,13 +266,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_13
+      name: Hero_Knight12_highmo_11
       rect:
         serializedVersion: 2
-        x: 193
-        y: 48
-        width: 34
-        height: 31
+        x: 183
+        y: 55
+        width: 40
+        height: 37
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -310,26 +280,26 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_14
+      name: Hero_Knight12_highmo_12
       rect:
         serializedVersion: 2
-        x: 225
+        x: 217
+        y: 68
+        width: 16
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Knight12_highmo_13
+      rect:
+        serializedVersion: 2
+        x: 171
         y: 55
         width: 16
-        height: 22
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Hero_Caster4_librarian_15
-      rect:
-        serializedVersion: 2
-        x: 174
-        y: 41
-        width: 22
         height: 19
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
@@ -338,27 +308,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Hero_Caster4_librarian_16
+      name: Hero_Knight12_highmo_14
       rect:
         serializedVersion: 2
-        x: 225
-        y: 40
-        width: 19
-        height: 19
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Hero_Caster4_librarian_17
-      rect:
-        serializedVersion: 2
-        x: 205
-        y: 24
+        x: 217
+        y: 54
         width: 16
-        height: 25
+        height: 19
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hero_Knight12_highmo_15
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 36
+        width: 16
+        height: 22
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -368,6 +338,6 @@ TextureImporter:
     outline: []
     physicsShape: []
   spritePackingTag: 
-  userData: 100237607419733
+  userData: 100237640700676
   assetBundleName: 
   assetBundleVariant: 
