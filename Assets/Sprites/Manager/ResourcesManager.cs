@@ -18,7 +18,7 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
         base.Awake();
         blockAll = Resources.LoadAll(ConstData.BlockPrefabs);
         skillBlockAll = Resources.LoadAll(ConstData.SkillBlockPrefabs);
-        audioClipAll = Resources.LoadAll<AudioClip>(ConstData.SoundEffect);
+        audioClipAll = Resources.LoadAll<AudioClip>(ConstData.Sound);
     }
     /// <summary>
     /// 返回一个指定的歌
