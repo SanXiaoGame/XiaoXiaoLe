@@ -236,10 +236,10 @@ public class SkillsManager : ManagerBase<SkillsManager>
     /// <param name="hero">Hero.</param>
     IEnumerator  SaberOneSkill(Hero hero)
     {
-        hero.skillData = SQLiteManager.Instance.skillDataSource[SwordsmanSkillID.oneSkill.GetHashCode()];
+        hero.skillData = SQLiteManager.Instance.skillDataSource[SaberSkillID.oneSkill.GetHashCode()];
 
         Debug.Log(" 突刺:这是" + hero.playerData.player_Name +
-                  " 技能ID:" + SQLiteManager.Instance.skillDataSource[SwordsmanSkillID.oneSkill.GetHashCode()].skill_ID +
+                  " 技能ID:" + SQLiteManager.Instance.skillDataSource[SaberSkillID.oneSkill.GetHashCode()].skill_ID +
                   " 释放的攻击,技能名为:" + hero.skillData.skill_Name + 
                   " 技能等级:" + hero.skillData.skill_DamageLevel);        //播放动画....//播放一技能动画
         //GameObject gameObject = new GameObject();
@@ -262,7 +262,7 @@ public class SkillsManager : ManagerBase<SkillsManager>
     /// <param name="hero">Hero.</param>
     public void SaberTwoSkill(Hero hero)
     {
-        hero.skillData = SQLiteManager.Instance.skillDataSource[SwordsmanSkillID.twoSkill.GetHashCode()];
+        hero.skillData = SQLiteManager.Instance.skillDataSource[SaberSkillID.twoSkill.GetHashCode()];
         Debug.Log(" 这是" + hero.playerData.player_Name + 
                   " 技能ID:"+hero.skillData.skill_ID +
                   " 释放的攻击,技能名为:" + hero.skillData.skill_Name + 
@@ -289,7 +289,7 @@ public class SkillsManager : ManagerBase<SkillsManager>
     /// <param name="hero">Hero.</param>
     public void SaberThreeSkill(Hero hero)
     {
-        hero.skillData = SQLiteManager.Instance.skillDataSource[SwordsmanSkillID.threeSkill.GetHashCode()];
+        hero.skillData = SQLiteManager.Instance.skillDataSource[SaberSkillID.threeSkill.GetHashCode()];
         Debug.Log(" 这是" + hero.playerData.player_Name +
                   " 技能ID:" + hero.skillData.skill_ID +
                   " 释放的攻击,技能名为:" + hero.skillData.skill_Name + 
@@ -384,7 +384,7 @@ public class SkillsManager : ManagerBase<SkillsManager>
     /// <param name="hero">Hero.</param>
     public void CasterOneSkill(Hero hero)
     {
-        hero.skillData = SQLiteManager.Instance.skillDataSource[MasterSkillID.oneSkill.GetHashCode()];
+        hero.skillData = SQLiteManager.Instance.skillDataSource[CasterSkillID.oneSkill.GetHashCode()];
         Debug.Log(" 这是" + hero.playerData.player_Name +
                   " 技能ID:" + hero.skillData.skill_ID +
                   " 释放的攻击,技能名为:" + hero.skillData.skill_Name +
@@ -405,7 +405,7 @@ public class SkillsManager : ManagerBase<SkillsManager>
     /// <param name="hero">Hero.</param>
     public void CasterTwoSkill(Hero hero)
     {
-        hero.skillData = SQLiteManager.Instance.skillDataSource[MasterSkillID.twoSkill.GetHashCode()];
+        hero.skillData = SQLiteManager.Instance.skillDataSource[CasterSkillID.twoSkill.GetHashCode()];
         Debug.Log(" 这是" + hero.playerData.player_Name +
                   " 技能ID:" + hero.skillData.skill_ID +
                   " 释放的攻击,技能名为:" + hero.skillData.skill_Name +
@@ -431,7 +431,7 @@ public class SkillsManager : ManagerBase<SkillsManager>
     /// <param name="hero">Hero.</param>
     public void CasterThreeSkill(Hero hero)
     {
-        hero.skillData = SQLiteManager.Instance.skillDataSource[MasterSkillID.threeSkill.GetHashCode()];
+        hero.skillData = SQLiteManager.Instance.skillDataSource[CasterSkillID.threeSkill.GetHashCode()];
         Debug.Log(" 这是" + hero.playerData.player_Name +
                   " 技能ID:" + hero.skillData.skill_ID +
                   " 释放的攻击,技能名为:" + hero.skillData.skill_Name +
@@ -624,61 +624,161 @@ public class SkillsManager : ManagerBase<SkillsManager>
     #endregion
 
     #region void ChangeHerosIdle() 改变英雄们为Idle状态
-    public void ChangeHerosIdle()
+    public void ChangeHerosIdle(int ProfessionID)
     {
-        UpdateHeroState(Profession.Swordsman.GetHashCode(), HeroState.idle.GetHashCode());
-        UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.idle.GetHashCode());
-        UpdateHeroState(Profession.Master.GetHashCode(), HeroState.idle.GetHashCode());
-        UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.idle.GetHashCode());
-        UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.idle.GetHashCode());
-        //经过状态更新后,以后再监听的状态才会改变
+        switch (ProfessionID)
+        {
+            case 1002:
+                UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.idle.GetHashCode());
+                break;
+            case 1003:
+                UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.idle.GetHashCode());
+                break;
+            case 1004:
+                UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.idle.GetHashCode());
+                break;
+            case 1005:
+                UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.idle.GetHashCode());
+                break;
+            case 1006:
+                UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.idle.GetHashCode());
+                break;
+            default:
+                break;
+        }
+        //UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.idle.GetHashCode());
+        //UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.idle.GetHashCode());
+        //UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.idle.GetHashCode());
+        //UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.idle.GetHashCode());
+        //UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.idle.GetHashCode());
+        ////经过状态更新后,以后再监听的状态才会改变
         ListionChangeState();
     }
     #endregion
     #region void ChangeHerosRun() 改变英雄们为跑动状态
-    public void ChangeHerosRun()
+    public void ChangeHerosRun(int ProfessionID)
     {
-        UpdateHeroState(Profession.Swordsman.GetHashCode(), HeroState.move.GetHashCode());
-        UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.move.GetHashCode());
-        UpdateHeroState(Profession.Master.GetHashCode(), HeroState.move.GetHashCode());
-        UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.move.GetHashCode());
-        UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.move.GetHashCode());
+        switch (ProfessionID)
+        {
+            case 1002:
+                UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.move.GetHashCode());
+                break;
+            case 1003:
+                UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.move.GetHashCode());
+                break;
+            case 1004:
+                UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.move.GetHashCode());
+                break;
+            case 1005:
+                UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.move.GetHashCode());
+                break;
+            case 1006:
+                UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.move.GetHashCode());
+                break;
+            default:
+                break;
+        }
+        //UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.move.GetHashCode());
+        //UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.move.GetHashCode());
+        //UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.move.GetHashCode());
+        //UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.move.GetHashCode());
         //经过状态更新后,以后再监听的状态才会改变
         ListionChangeState();
     }
     #endregion
     #region void ChangeHerosCommonAttack() 改变英雄们为普通攻击状态
-    public void ChangeHerosCommonAttack()
+    public void ChangeHerosCommonAttack(int ProfessionID)
     {
-        UpdateHeroState(Profession.Swordsman.GetHashCode(), HeroState.commonAttack.GetHashCode());
-        UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.commonAttack.GetHashCode());
-        UpdateHeroState(Profession.Master.GetHashCode(), HeroState.commonAttack.GetHashCode());
-        UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.commonAttack.GetHashCode());
-        UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.commonAttack.GetHashCode());
+        switch (ProfessionID)
+        {
+            case 1002:
+                UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.commonAttack.GetHashCode());
+                break;
+            case 1003:
+                UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.commonAttack.GetHashCode());
+                break;
+            case 1004:
+                UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.commonAttack.GetHashCode());
+                break;
+            case 1005:
+                UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.commonAttack.GetHashCode());
+                break;
+            case 1006:
+                UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.commonAttack.GetHashCode());
+                break;
+            default:
+                break;
+        }
+        //UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.commonAttack.GetHashCode());
+        //UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.commonAttack.GetHashCode());
+        //UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.commonAttack.GetHashCode());
+        //UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.commonAttack.GetHashCode());
+        //UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.commonAttack.GetHashCode());
         //经过状态更新后,以后再监听的状态才会改变
         ListionChangeState();
     }
     #endregion
     #region void ChangeHerosWin() 改变英雄们为胜利状态
-    public void ChangeHerosWin()
+    public void ChangeHerosWin(int ProfessionID)
     {
-        UpdateHeroState(Profession.Swordsman.GetHashCode(), HeroState.win.GetHashCode());
-        UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.win.GetHashCode());
-        UpdateHeroState(Profession.Master.GetHashCode(), HeroState.win.GetHashCode());
-        UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.win.GetHashCode());
-        UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.win.GetHashCode());
+
+        switch (ProfessionID)
+        {
+            case 1002:
+                UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.win.GetHashCode());
+                break;
+            case 1003:
+                UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.win.GetHashCode());
+                break;
+            case 1004:
+                UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.win.GetHashCode());
+                break;
+            case 1005:
+                UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.win.GetHashCode());
+                break;
+            case 1006:
+                UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.win.GetHashCode());
+                break;
+            default:
+                break;
+        }
+        //UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.win.GetHashCode());
+        //UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.win.GetHashCode());
+        //UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.win.GetHashCode());
+        //UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.win.GetHashCode());
+        //UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.win.GetHashCode());
         //经过状态更新后,以后再监听的状态才会改变
         ListionChangeState();
     }
     #endregion
     #region void ChangeHerosDiz() 改变英雄们为眩晕状态
-    public void ChangeHerosDiz()
+    public void ChangeHerosDiz(int ProfessionID)
     {
-        UpdateHeroState(Profession.Swordsman.GetHashCode(), HeroState.diz.GetHashCode());
-        UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.diz.GetHashCode());
-        UpdateHeroState(Profession.Master.GetHashCode(), HeroState.diz.GetHashCode());
-        UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.diz.GetHashCode());
-        UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.diz.GetHashCode());
+        switch (ProfessionID)
+        {
+            case 1002:
+                UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.diz.GetHashCode());
+                break;
+            case 1003:
+                UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.diz.GetHashCode());
+                break;
+            case 1004:
+                UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.diz.GetHashCode());
+                break;
+            case 1005:
+                UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.diz.GetHashCode());
+                break;
+            case 1006:
+                UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.diz.GetHashCode());
+                break;
+            default:
+                break;
+        }
+        //UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.diz.GetHashCode());
+        //UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.diz.GetHashCode());
+        //UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.diz.GetHashCode());
+        //UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.diz.GetHashCode());
+        //UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.diz.GetHashCode());
         //经过状态更新后,以后再监听的状态才会改变
         ListionChangeState();
     }

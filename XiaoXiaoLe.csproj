@@ -283,6 +283,7 @@
     <Compile Include="Assets\Sprites\Data\SkillData.cs" />
     <Compile Include="Assets\Sprites\Data\StateData.cs" />
     <Compile Include="Assets\Sprites\Data\WriteData.cs" />
+    <Compile Include="Assets\Sprites\Enemy\EnemyController.cs" />
     <Compile Include="Assets\Sprites\Game\BlockObject.cs" />
     <Compile Include="Assets\Sprites\Game\BlockObjectTouch.cs" />
     <Compile Include="Assets\Sprites\Game\ColumnScript.cs" />

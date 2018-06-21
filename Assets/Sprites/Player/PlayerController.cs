@@ -38,8 +38,19 @@ public class PlayerController : MonoBehaviour
     SkillData skillData;
     int ProfessionID;
     bool isFindEnemy = false;
-    private float distance = 1f;         //英雄与敌人开始攻击的临界值
+   public static bool isAttackEnemy = false;
+    bool isWin = false;
+    private float distance = 0.9f;         //英雄与敌人开始攻击的临界值
 
+    Transform weaponLeft;
+    Transform weaponRight;
+    Transform weapon;
+
+    Ray2D findRay;           //探敌射线
+    RaycastHit2D findHit;    //探敌射线碰撞信息
+    int findMask;          //探敌碰撞层
+
+    Queue<GameObject> enemyQueue;
     void JudgeHeroProfession()
     {
         string heroName = transform.name;
@@ -68,14 +79,13 @@ public class PlayerController : MonoBehaviour
     }
     private void Awake()
     {
-        //enemyTarget = enemy.GetComponent<EnemyController>();
-
-        //int playerName = int.Parse(transform.name);
-        ////hero = SQLiteManager.Instance.team[playerName];
-        //Debug.Log("playerName:" + playerName);
-
+      
         JudgeHeroProfession();
-       
+
+        findRay = new Ray2D();
+        findMask = LayerMask.GetMask("EnemyLayer");
+
+        enemyQueue = new Queue<GameObject>();
     }
     private void Start()
     {
@@ -90,7 +100,10 @@ public class PlayerController : MonoBehaviour
         myRigidbody = new Rigidbody2D();
         myRigidbody = transform.GetComponent<Rigidbody2D>();
         hero.myRigidbody = myRigidbody;
-
+        weaponLeft = transform.Find("Bones/Torso/L-arm/L-fist/Weapon");
+        weaponRight = transform.Find("Bones/Torso/R-arm/R-fist/Weapon2");
+        weapon = weaponLeft.transform.GetChild(0);
+        Debug.Log("武器的名字为:" + weapon.name);
         //Debug.Log("该英雄的ID:" + hero.playerData.player_Id);
         //Debug.Log("该英雄de名字:" + hero.playerData.player_Name);
         //Debug.Log("该英雄de当前状态ID:" + hero.playerData.stateID);
@@ -98,31 +111,57 @@ public class PlayerController : MonoBehaviour
 
         //监听hero状态
         //SkillsManager.Listion += OnStateListion;
-        //每秒查询是否有敌人
-        InvokeRepeating("FindEnemy", 0f, 1.5f);
+        
+        InvokeRepeating("HeroGo", 0f, 1f);
+        InvokeRepeating("FindEnemyLive", 0f, 0.1f); //每0.1秒查询是否有敌人
+
     }
-    int aa = 0;
 
-    private void Update()
+    /// <summary>
+    /// 探敌方法,检测是否有敌人
+    /// </summary>
+    void FindEnemyLive()
     {
-        //OnStateListion();
-        //FindEnemy();
-        aa++;
-
-        if (aa%60==0)
+        findRay.origin = transform.position;
+        findRay.direction = Vector2.right;
+        //设置枪线的初始位置
+        //探敌射线的碰撞检测
+        //Debug.Log("有敌人探测方法调用");
+        ContactFilter2D contactFilter2D;
+        Vector2 myPos = new Vector2(transform.position.x+0.2f,transform.position.y);
+        RaycastHit2D hit = Physics2D.Raycast(myPos, Vector2.right, 5f,findMask);
+        if (hit)
         {
-            aa = 0;
-
+            //Debug.Log("有敌人发现");
+            if (hit.transform.tag== "Enemy")
+            {
+                isFindEnemy = true;
+                enemy = hit.transform.gameObject;
+                Debug.Log("有敌人发现");
+            }
+        }
+        else
+        {
+            isFindEnemy = false;
         }
     }
 
-    void Listison()
-    {
-        
-        StartCoroutine("OnStateListion");
-        //InvokeRepeating("FindEnemy", 0f, 1f);
+    int aa = 0;
 
-    }
+    //private void Update()
+    //{
+    //    //OnStateListion();
+    //    //FindEnemy();
+      
+    //}
+
+    //void Listison()
+    //{
+        
+    //    StartCoroutine("OnStateListion");
+    //    //InvokeRepeating("FindEnemy", 0f, 1f);
+
+    //}
 
     #region  OnStateListion() 英雄的状态监听及触发
     /// <summary>
@@ -245,21 +284,25 @@ public class PlayerController : MonoBehaviour
             //case StateName.Idle:
             case "Idle":
                 //heroAnimator.SetTrigger("Idle");    //暂时用不上
+                weapon.GetComponent<PolygonCollider2D>().enabled = false;        //武器,剑士的剑关闭触发器
                 myRigidbody.velocity = Vector2.zero;
                 break;
             case "Await":
-                heroAnimator.SetBool("isWait", true);           //非战斗等待
                 myRigidbody.velocity = Vector2.zero;
+                heroAnimator.SetBool("isWait", true);           //非战斗等待
 
                 break;
             case "Move":
+                weapon.GetComponent<PolygonCollider2D>().enabled = true;        //武器,剑士的剑激活触发器
                 heroAnimator.SetBool("isRun", true);        //所有英雄移动
                 myRigidbody.velocity = Vector2.right * ConstData.movingSpeed;
                 break;
             case "Diz":
+                myRigidbody.velocity = Vector2.zero;
                 heroAnimator.SetBool("isDiz",true);         //眩晕
                 break;
             case "Win":
+                myRigidbody.velocity = Vector2.zero;
                 heroAnimator.SetTrigger("Win");             //胜利
                 break;
             case "GetHit":                          
@@ -428,123 +471,75 @@ public class PlayerController : MonoBehaviour
 
     bool isMove = true;
     
-    void dfsdfds()
+    void AttackBegin()
     {
-        isMove = false;
+        weapon.GetComponent<PolygonCollider2D>().enabled = true;
     }
-    void FFF()
+    void AttackWhile()
     {
-        isMove = true;
     }
+    void AttackAfter()
+    {
+        weapon.GetComponent<PolygonCollider2D>().enabled = false;
 
-    void FindEnemy()
+    }
+    void HeroGo()
     {
-        if (isMove)
-        {
-            
-        }
+        //轮询英雄状态
         OnStateListion();
-        if (!isFindEnemy)
+
+        if (!isFindEnemy && !isWin)
         {
             //此时没有敌人
-            Debug.Log("没有敌人,英雄们现在应该是跑动状态");
-            SkillsManager.Instance.ChangeHerosRun();
+            Debug.Log("没有发现敌人,英雄们现在应该是跑动状态");
+            SkillsManager.Instance.ChangeHerosRun(ProfessionID);
         }
-        else
+        else if (isFindEnemy&&enemy!=null)
         {
             //此时有敌人了,则判断是否在其攻击范围内,没有则继续跑动,否则开启普通攻击
-            if (Vector2.Distance(this.transform.position, enemy.transform.position) >= distance)
-            {
-                
+            //if (Vector2.Distance(this.transform.position, enemy.transform.position) >= distance)
+            if (!isAttackEnemy)
+                {
                 if (hero.stateData.state_Name != "Move")
                 {
                     //英雄为普通攻击状态
-                    SkillsManager.Instance.ChangeHerosRun();
+                    SkillsManager.Instance.ChangeHerosRun(ProfessionID);
                 }
                 Debug.Log("已发现敌人,进入查找范围,正在跑动");
             }
             else
             {   //进入英雄的攻击范围
-                if (hero.stateData.state_Name!= "CommonAttack")
+                if (hero.stateData.state_Name != "CommonAttack")
                 {
-                    //英雄为普通攻击状态
-                    SkillsManager.Instance.ChangeHerosCommonAttack();
+                    if (enemy != null)
+                    {
+                        //英雄为普通攻击状态
+                        SkillsManager.Instance.ChangeHerosCommonAttack(ProfessionID);
+                    }
                 }
-                //Debug.Log("敌人的状态前:" + hero.stateData.state_Name);
-                //Debug.Log("敌人的状态后:" + hero.stateData.state_Name);
             }
         }
         //StartCoroutine(OnStateListion());
-        
-
+        if (isWin && !isFindEnemy)
+        {
+            heroAnimator.SetBool("isRun", false);        //英雄移动置为FALSE
+            SkillsManager.Instance.ChangeHerosWin(ProfessionID);
+        }
     }
-
-    IEnumerator  HeroAttack()
-    {
-        Debug.Log("hhh");
-        yield return 0;
-    }
-
-
+ 
+    //进入攻击范围
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag=="Enemy")
         {
-            //Debug.Log("有敌人发现,并执行跑动");
-            enemy = collision.gameObject;
-            isFindEnemy = true;
-            //if (Vector2.Distance(this.transform.position, collision.transform.position) >= distance)
-            //{
-            //    //英雄为跑动状态
-            //    SkillsManager.Instance.ChangeHerosRun();
-            //    Debug.Log("正在跑动");
-            //}
-            //else
-            //{
-            //    //英雄为普通攻击状态
-            //    SkillsManager.Instance.ChangeHerosCommonAttack();
-            //    Debug.Log("正在普通攻击,此时");
-            //    Debug.Log("距离:" + Vector2.Distance(this.transform.position, collision.transform.position));
-
-            //}
+            isAttackEnemy = true;
+            weapon.GetComponent<PolygonCollider2D>().enabled = false;
+            myRigidbody.velocity = Vector2.zero;
         }
-        else
+        else if (collision.tag == "WinFlag")
         {
-            //isFindEnemy = false;
+            isWin = true;
+            Debug.Log("触碰到胜利开关");
         }
     }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.tag == "Enemy")
-        {
-            isFindEnemy = true;
-            //Debug.Log("距离:" + Vector2.Distance(this.transform.position, collision.transform.position));
-            //Debug.Log("敌人在视野内,如果距离大于1则跑动,小于1则攻击");
-            //if (Vector2.Distance(this.transform.position, collision.transform.position) >= distance)
-            //{
-            //    //英雄为跑动状态
-            //    SkillsManager.Instance.ChangeHerosRun();
-            //    Debug.Log("正在跑动");
-            //}
-            //else
-            //{
-            //    //英雄为普通攻击状态
-            //    SkillsManager.Instance.ChangeHerosCommonAttack();
-            //    Debug.Log("正在普通攻击,此时");
-            //    Debug.Log("距离:" + Vector2.Distance(this.transform.position, collision.transform.position));
-
-            //}
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Enemy")
-        {
-            Debug.Log("敌人跑了或者被打死了");
-            isFindEnemy = false;
-
-
-        }
-    }
-
 }
