@@ -198,8 +198,8 @@ public class BlockObjectTouch : UISceneWidget
     /// </summary>
     void ChangePositionBack(Transform block1, Transform block2)
     {
-        //播放交换的音效
-        AudioManager.Instance.PlayEffectMusic(SoundEffect.Attack);
+        //播放交换的音效(暂时不用)
+        //AudioManager.Instance.PlayEffectMusic(SoundEffect.Attack);
         //交换回来的动画
         Vector3 tempPos = block1.position;
         blockPos1.DOMove(blockPos1.position, 0.2f).SetDelay(0.25f);

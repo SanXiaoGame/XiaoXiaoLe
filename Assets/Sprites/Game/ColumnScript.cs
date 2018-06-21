@@ -190,7 +190,6 @@ public class ColumnScript : MonoBehaviour
                 if (specialBlock)
                 {
                     InstantiateSpecialBlock(i, specialBlock);
-                    print("特殊块");
                 }
                 else
                 {
@@ -264,8 +263,8 @@ public class ColumnScript : MonoBehaviour
             });
         }
 
-        //播放下降音效(未实现)
-        AudioManager.Instance.PlayEffectMusic(SoundEffect.Attack);
+        //播放下降音效(暂时不用)
+        //AudioManager.Instance.PlayEffectMusic(SoundEffect.Attack);
     }
 
     /// <summary>
