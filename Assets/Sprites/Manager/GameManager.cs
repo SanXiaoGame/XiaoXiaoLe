@@ -86,8 +86,6 @@ public class GameManager : ManagerBase<GameManager>
 
         if (doesHaveBrustItem)
         {
-            //播放消的声音
-
             RemoveBlock();
             AddMissingBlock();
         }
@@ -98,6 +96,9 @@ public class GameManager : ManagerBase<GameManager>
     /// </summary>
     internal void RemoveBlock()
     {
+        //播放消的声音
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.ClearCube);
+
         for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
         {
             ColumnManager.Instance.gameColumns[i].DeleteBrustedBlock();

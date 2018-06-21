@@ -9,5 +9,6 @@ public enum BGM
 
 public enum SoundEffect
 {
+    ClearCube,
     Attack,
 }

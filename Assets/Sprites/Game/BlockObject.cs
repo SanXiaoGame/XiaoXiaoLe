@@ -56,7 +56,7 @@ public class BlockObject : MonoBehaviour
     /// </summary>
     private void AssignLRUD()
     {
-        if (tag == ConstData.SpecialBlock)
+        if (tag == ConstData.SpecialBlock || tag == ConstData.SkillBlock)
         {
             return;
         }
