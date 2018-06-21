@@ -8,7 +8,7 @@ using System;
 /// 该类用来处理数据库操作命令
 /// 数据库核心类:该类负责数据库连接，操作数据库，更新数据库，关闭数据库等所有和数据库相关的操作
 /// </summary>
-public class DBOperation
+public class DBOperation:MonoBehaviour
 {
     //数据库连接对象
     SqliteConnection dbconnect;
@@ -22,7 +22,108 @@ public class DBOperation
         //建立连接
         OpenDB(path);
     }
+    private void Awake()
+    {
+        for (int i = 1301; i < 1306; i++)
+        {
+            ReadCharacterData(i);
+            ReadSkillData(SQLiteManager.Instance.characterDataSource[i].character_SkillOneID);
+            ReadSkillData(SQLiteManager.Instance.characterDataSource[i].character_SkillTwoID);
+            ReadSkillData(SQLiteManager.Instance.characterDataSource[i].character_SkillThreeID);
+        }
+        for (int i = 2001; i < 2064; i++)
+        {
+            ReadEquipmentData(i);
+        }
+        for (int i = 2101; i < 2126; i++)
+        {
+            ReadEquipmentData(i);
+        }
 
+    }
+    public void ReadCharacterData(int id)
+    {
+        string path = "Data Source =" + Application.streamingAssetsPath + "/SQLite/NereisQuest.sqlite";
+        OpenDB(path);
+        string query = string.Format("SELECT ID,player_Name,player_Class,player_HP,player_AD,player_AP,player_DEF,player_RES,player_SkillOneID,player_SkillTwoID,player_SkillThreeID,player_Level,player_EXP FROM Player WHERE ID = {0}", id);
+        SqliteCommand cmd = dbconnect.CreateCommand();
+        cmd.CommandText = query;
+        SqliteDataReader read = cmd.ExecuteReader();
+        CharacterListData characterListData = new CharacterListData();
+        characterListData.character_Id = int.Parse(read[0].ToString());
+        characterListData.character_Name = read[1].ToString();
+        characterListData.character_Class = read[2].ToString();
+        characterListData.character_HP = int.Parse(read[3].ToString());
+        characterListData.character_AD = int.Parse(read[4].ToString());
+        characterListData.character_AP = int.Parse(read[5].ToString());
+        characterListData.character_DEF = int.Parse(read[6].ToString());
+        characterListData.character_RES = int.Parse(read[7].ToString());
+        characterListData.character_SkillOneID = int.Parse(read[8].ToString());
+        characterListData.character_SkillTwoID = int.Parse(read[9].ToString());
+        characterListData.character_SkillThreeID = int.Parse(read[10].ToString());
+        characterListData.character_EXP = int.Parse(read[11].ToString());
+        SQLiteManager.Instance.characterDataSource.Add(id, characterListData);
+        cmd.Dispose();
+        cmd = null;
+    }
+    public void ReadSkillData(int id)
+    {
+        string path = "Data Source =" + Application.streamingAssetsPath + "/SQLite/NereisQuest.sqlite";
+        OpenDB(path);
+        string query = string.Format("SELECT *FROM Skill WHERE ID = {0}", id);
+        SqliteCommand cmd = dbconnect.CreateCommand();
+        cmd.CommandText = query;
+        SqliteDataReader read = cmd.ExecuteReader();
+        SkillData skillData = new SkillData();
+        skillData.skill_ID = int.Parse(read[0].ToString());
+        skillData.skill_Name = read[1].ToString();
+        skillData.skill_Type = read[2].ToString();
+        skillData.skill_DamageLevel = int.Parse(read[3].ToString());
+        skillData.skill_Description = read[4].ToString();
+        SQLiteManager.Instance.skillDataSource.Add(id, skillData);
+        cmd.Dispose();
+        cmd = null;
+    }
+    public void ReadItemData(int id)
+    {
+        string path = "Data Source =" + Application.streamingAssetsPath + "/SQLite/NereisQuest.sqlite";
+        OpenDB(path);
+        string query = string.Format("SELECT *FROM Item WHERE ID = {0}", id);
+        SqliteCommand cmd = dbconnect.CreateCommand();
+        cmd.CommandText = query;
+        SqliteDataReader read = cmd.ExecuteReader();
+        ItemData itemData = new ItemData();
+        itemData.item_Id = int.Parse(read[0].ToString());
+        itemData.item_Name = read[1].ToString();
+        itemData.item_Type = read[2].ToString();
+        itemData.item_Price = int.Parse(read[3].ToString());
+        SQLiteManager.Instance.itemDataSource.Add(id, itemData);
+        cmd.Dispose();
+        cmd = null;
+    }
+    public void ReadEquipmentData(int id)
+    {
+        string path = "Data Source =" + Application.streamingAssetsPath + "/SQLite/NereisQuest.sqlite";
+        OpenDB(path);
+        string query = string.Format("SELECT *FROM Equipment WHERE ID = {0}", id);
+        SqliteCommand cmd = dbconnect.CreateCommand();
+        cmd.CommandText = query;
+        SqliteDataReader read = cmd.ExecuteReader();
+        EquipmentData equipmentData = new EquipmentData();
+        equipmentData.equipment_Id = int.Parse(read[0].ToString());
+        equipmentData.equipmentNmae = read[1].ToString();
+        equipmentData.equipmentType = read[2].ToString();
+        equipmentData.equipmentClass = read[3].ToString();
+        equipmentData.equipment_HP = int.Parse(read[4].ToString());
+        equipmentData.equipment_AD = int.Parse(read[5].ToString());
+        equipmentData.equipment_AP = int.Parse(read[6].ToString());
+        equipmentData.equipment_DEF = int.Parse(read[7].ToString());
+        equipmentData.equipment_RES = int.Parse(read[8].ToString());
+        equipmentData.equipmentPrice = ulong.Parse(read[9].ToString());
+        SQLiteManager.Instance.equipmentDataSource.Add(id, equipmentData);
+        cmd.Dispose();
+        cmd = null;
+    }
     /// <summary>
     /// 建立数据库连接
     /// </summary>
