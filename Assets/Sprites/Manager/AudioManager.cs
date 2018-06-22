@@ -127,8 +127,8 @@ public class AudioManager : ManagerBase<AudioManager>
             tempAudio.clip = clip;
             //开始播放
             tempAudio.Play();
-            //启动状态延迟的协程
-            StartCoroutine("EffectMusicState", tempAudio);
+            //启动状态延迟
+            vp_Timer.In(tempAudio.clip.length, new vp_Timer.Callback(delegate () { EffectMusicEnqueue(tempAudio); }));
         }
         else
         {
@@ -148,20 +148,9 @@ public class AudioManager : ManagerBase<AudioManager>
             tempAudio.volume = effectVolume;
             //播放
             tempAudio.Play();
-            //启动状态延迟的协程
-            StartCoroutine("EffectMusicState", tempAudio);
+            //启动状态延迟
+            vp_Timer.In(tempAudio.clip.length, new vp_Timer.Callback(delegate () { EffectMusicEnqueue(tempAudio); }));
         }
-    }
-    /// <summary>
-    /// 音效状态
-    /// </summary>
-    /// <param 对应播放器="effectAudio"></param>
-    /// <returns></returns>
-    IEnumerator EffectMusicState(AudioSource tempAudio)
-    {
-        //等待音效播放完
-        yield return new WaitForSeconds(tempAudio.clip.length);
-        EffectMusicEnqueue(tempAudio);
     }
 
     /// <summary>
@@ -175,6 +164,5 @@ public class AudioManager : ManagerBase<AudioManager>
         tempAudio.clip = null;
         //加入队列
         effectMusic.Enqueue(tempAudio);
-        StopCoroutine("EffectMusicState");
     }
 }

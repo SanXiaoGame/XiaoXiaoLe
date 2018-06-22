@@ -32,7 +32,7 @@ public class GameManager : ManagerBase<GameManager>
 
     private void Start()
     {
-        Invoke("AssignNeighbours", 0.5f);
+        vp_Timer.In(0.5f, new vp_Timer.Callback(AssignNeighbours));
         AudioManager.Instance.ReplaceBGM(BGM.maincity);
     }
 
@@ -46,12 +46,12 @@ public class GameManager : ManagerBase<GameManager>
         {
             if (ColumnManager.Instance.gameColumns[i].GetNumberOfItemsToAdd() > 0)
             {
-                ColumnManager.Instance.gameColumns[i].Invoke("AddMissingBlock", delay);
+                ColumnManager.Instance.gameColumns[i].CallAddMissingBlock(delay);
                 delay += 0.05f;
             }
         }
         //指派邻居
-        Invoke("AssignNeighbours", delay + 0.1f);
+        vp_Timer.In(delay + 0.1f, new vp_Timer.Callback(AssignNeighbours));
     }
 
     /// <summary>
@@ -64,7 +64,7 @@ public class GameManager : ManagerBase<GameManager>
             ColumnManager.Instance.gameColumns[i].AssignNeighbours();
         }
         //检查全部块状态
-        Invoke("CheckBoardState", Instance.objectFallingDuration);
+        vp_Timer.In(objectFallingDuration, new vp_Timer.Callback(CheckBoardState));
     }
 
     /// <summary>
