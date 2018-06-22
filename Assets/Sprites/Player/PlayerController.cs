@@ -2,44 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//public class HeroData
-//{
-//    public GameObject enemy;
-//    public Rigidbody2D myRigidbody;
-//    public Animator animator;
-
-//    public PlayerData playerData;
-//    public StateData stateData;
-//    public SkillData skillData;
-
-//    public int starHP;
-//    public int currentHP;
-//    public int currentAD;
-//    public int currentAP;
-//    public int currentDEF;
-//    public int currentRES;
-//    public int currentStateID;
-
-//    public Transform transform;
-//    //public int heroID;
-//}
 
 public class PlayerController : MonoBehaviour
 {
     GameObject enemy;
-    //EnemyController enemyTarget;
     Rigidbody2D myRigidbody;
     Animator heroAnimator;
     public PlayerData playerData;
   
-    ////测试用临时变量
-    //int startHP;
     HeroData hero;
     StateData stateData;
     SkillData skillData;
     int ProfessionID;
     bool isFindEnemy = false;
-   public static bool isAttackEnemy = false;
+    public static bool isAttackEnemy = false;
     bool isWin = false;
     private float distance = 0.9f;         //英雄与敌人开始攻击的临界值
 
@@ -204,8 +180,11 @@ public class PlayerController : MonoBehaviour
             else
             {
                 //所有敌人都消灭了
-                SkillsManager.Instance.ChangeHerosWin(ProfessionID);
-                OnStateListion();       //切换完成立即轮询执行
+                if (hero.stateData.state_Name != "Win")
+                {
+                    SkillsManager.Instance.ChangeHerosWin(ProfessionID);
+                    OnStateListion();       //切换完成立即轮询执行
+                }
                 Debug.Log("没有敌人发现,英雄胜利");
 
             }

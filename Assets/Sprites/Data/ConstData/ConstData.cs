@@ -14,6 +14,11 @@ public struct ConstData
     public const string SkillBlockPrefabs = "Prefabs/SkillBlockPrefabs";
     #endregion
 
+    #region 所有游戏英雄技能特效的预制体文件夹
+    //所有英雄技能特效的预制体
+    public const string SkillPrefabs = "Prefabs/SkillPrefabs";
+    #endregion
+
     #region 音乐文件夹
     public const string BGMusic = "Audios/BGMusic";
     #endregion

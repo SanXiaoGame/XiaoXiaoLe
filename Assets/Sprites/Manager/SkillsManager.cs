@@ -246,8 +246,14 @@ public class SkillsManager : ManagerBase<SkillsManager>
         //gameObject.AddComponent<BoxCollider2D>();
         hero.myRigidbody.velocity = Vector2.left * ConstData.movingSpeed * hero.transform.localScale.x;
         yield return new WaitForSeconds(1f);
-        hero.myRigidbody.velocity = Vector2.right * ConstData.movingSpeed *3* hero.transform.localScale.x;
+        hero.myRigidbody.velocity = Vector2.right * ConstData.movingSpeed *5* hero.transform.localScale.x;
         yield return new WaitForSeconds(1f);
+
+        //生成技能特效
+        GameObject iceOne =  ResourcesManager.Instance.FindSkillEffect(SkillEffectType.SkillEffect.IceCubeOne);
+        GameObject tempObj = Instantiate(iceOne) as GameObject;
+        GameObject weaponLeft =hero.transform.Find("Bones/Torso/L-arm/L-fist/Weapon").gameObject;
+        tempObj.transform.parent = weaponLeft.transform;
 
         //播放音效
 
