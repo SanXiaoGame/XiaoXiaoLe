@@ -8,7 +8,7 @@ public struct StringSplicingTool
     public static string StringSplicing(string stringA, string stringB)
     {
 
-        Debug.Log(string.Format("{0}{1}", stringA, stringB));
+        //Debug.Log(string.Format("{0}{1}", stringA, stringB));
         return string.Format("{0}{1}", stringA, stringB);
     }
     public static string StringSplicing(string[] stringN)

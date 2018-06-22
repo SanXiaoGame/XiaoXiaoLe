@@ -62,7 +62,7 @@ public class ColumnScript : MonoBehaviour
 
             objectPrefab = GameManager.Instance.playingObjectPrefabs[index] as GameObject;
 
-            GameObject block = ObjectPoolManager.Instance.InstantiateBlockObject(objectPrefab);
+            GameObject block = ObjectPoolManager.Instance.InstantiateMyGameObject(objectPrefab);
 
             block.name = objectPrefab.name;
             block.transform.parent = transform;
@@ -118,7 +118,7 @@ public class ColumnScript : MonoBehaviour
     /// <param 特殊块的预制体="specialBlock"></param>
     internal void InstantiateSpecialBlock(int index, GameObject specialBlock)
     {
-        GameObject block = ObjectPoolManager.Instance.InstantiateBlockObject(specialBlock);
+        GameObject block = ObjectPoolManager.Instance.InstantiateMyGameObject(specialBlock);
 
         block.name = specialBlock.name;
         block.transform.parent = transform;
@@ -184,10 +184,7 @@ public class ColumnScript : MonoBehaviour
             int index = UnityEngine.Random.Range(0, GameManager.Instance.normalBlockNumber);
             objectPrefab= GameManager.Instance.playingObjectPrefabs[index] as GameObject;
 
-            //GameObject block = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
-
-            GameObject block = ObjectPoolManager.Instance.InstantiateBlockObject(objectPrefab);
-
+            GameObject block = ObjectPoolManager.Instance.InstantiateMyGameObject(objectPrefab);
             block.name = objectPrefab.name;
             block.transform.parent = transform;
             block.GetComponent<RectTransform>().localScale = Vector3.one;
@@ -208,14 +205,14 @@ public class ColumnScript : MonoBehaviour
         //旧的块下降
         for (int i = numberOfItemsToAdd; i < BlockObjectsScriptList.Count; i++)
         {
-            BlockObjectsScriptList[i].transform.DOLocalMoveY(-i * 200, 0.1f).SetDelay(0.1f).SetEase(Ease.Linear);
+            BlockObjectsScriptList[i].transform.DOLocalMoveY(-i * 200, 0.1f).SetDelay(0.2f).SetEase(Ease.Linear);
         }
 
         //新的块下降
         for (int i = 0; i < numberOfItemsToAdd; i++)
         {
             //下降的动画
-            BlockObjectsScriptList[i].transform.DOLocalMoveY(-i * 200, 0.1f).SetDelay(0.1f).SetEase(Ease.Linear).OnComplete(delegate ()
+            BlockObjectsScriptList[i].transform.DOLocalMoveY(-i * 200, 0.1f).SetDelay(0.2f).SetEase(Ease.Linear).OnComplete(delegate ()
             {
                 Invoke("DelayDOTween", 0.5f);
             });
