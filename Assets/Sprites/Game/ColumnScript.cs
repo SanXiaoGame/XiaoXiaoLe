@@ -167,6 +167,14 @@ public class ColumnScript : MonoBehaviour
     }
 
     /// <summary>
+    /// 用于外部调用AddMissingBlock方法
+    /// </summary>
+    internal void CallAddMissingBlock(float delay)
+    {
+        vp_Timer.In(delay, new vp_Timer.Callback(AddMissingBlock));
+    }
+
+    /// <summary>
     /// 添加消除的块
     /// </summary>
     internal void AddMissingBlock()
@@ -214,7 +222,7 @@ public class ColumnScript : MonoBehaviour
             //下降的动画
             BlockObjectsScriptList[i].transform.DOLocalMoveY(-i * 200, 0.1f).SetDelay(0.2f).SetEase(Ease.Linear).OnComplete(delegate ()
             {
-                Invoke("DelayDOTween", 0.5f);
+                vp_Timer.In(0.5f, new vp_Timer.Callback(DelayDOTween));
             });
         }
 
