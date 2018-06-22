@@ -2,6 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//public class DelayedTest : MonoBehaviour
+//{
+//    private void Awake()
+//    {
+//        print("吔屎啦");
+//        vp_Timer.In(5f, new vp_Timer.Callback(delegate () { fuck(); }));
+//    }
+//    void fuck()
+//    {
+//        print("妈卖批");
+//    }
+//}
+
+/// <summary>
+/// 新的延时工具
+/// </summary>
 public class vp_Timer : MonoBehaviour
 {
     private static GameObject m_GameObject = null;
