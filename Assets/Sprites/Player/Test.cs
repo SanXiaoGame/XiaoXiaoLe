@@ -20,7 +20,7 @@ public class Test : MonoBehaviour
      * 通过按键条件,测试切换状态
     */
     PlayerData playerData;
-    Hero hero;
+    HeroData hero;
     //StateData stateData;
     SkillData skillData;
     private void Awake()
@@ -661,7 +661,7 @@ public class Test : MonoBehaviour
         };
         SQLiteManager.Instance.playerDataSource.Add(playerData.player_Id, playerData);
         #endregion
-        hero = new Hero();
+        hero = new HeroData();
         hero.playerData = SQLiteManager.Instance.playerDataSource[playerData.player_Id];
         hero.stateData = SQLiteManager.Instance.stateDataSource[playerData.stateID];
         hero.skillData = SQLiteManager.Instance.skillDataSource[playerData.skillOneID];
@@ -677,7 +677,7 @@ public class Test : MonoBehaviour
 
         #endregion
         #region *构建一个初始骑士的英雄
-        hero = new Hero();
+        hero = new HeroData();
         playerData = new PlayerData
         {
             player_Id = 1003,
@@ -710,7 +710,7 @@ public class Test : MonoBehaviour
         SQLiteManager.Instance.team.Add(playerData.player_Id, hero);        //将英雄添加到字典team
         #endregion
         #region *构建一个初始法师的英雄
-        hero = new Hero();
+        hero = new HeroData();
         #region 构建英雄数据PlayerDate
         playerData = new PlayerData
         {
@@ -745,7 +745,7 @@ public class Test : MonoBehaviour
 
         #endregion
         #region *构建一个初始狂战的英雄
-        hero = new Hero();
+        hero = new HeroData();
         #region 构建英雄数据PlayerDate
         playerData = new PlayerData
         {
@@ -780,7 +780,7 @@ public class Test : MonoBehaviour
 
         #endregion
         #region *构建一个初始猎人的英雄
-        hero = new Hero();
+        hero = new HeroData();
         #region 构建英雄数据PlayerDate
         playerData = new PlayerData
         {
