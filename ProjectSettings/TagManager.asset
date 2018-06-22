@@ -9,10 +9,6 @@ TagManager:
   - SpecialBlock
   - SkillBlock
   - Enemy
-  - PlayerWeapon
-  - SaberWeapon
-  - BerserkerWeapon
-  - WinFlag
   layers:
   - Default
   - TransparentFX
@@ -22,9 +18,9 @@ TagManager:
   - UI
   - 
   - 
-  - EnemyLayer
-  - 
-  - 
+  - Background
+  - Scene
+  - Player
   - 
   - 
   - 
@@ -50,6 +46,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Enemy_Slime
+    uniqueID: 834181153
+    locked: 0
+  - name: Scene
+    uniqueID: 2051978015
+    locked: 0
   - name: Berserker
     uniqueID: 683132381
     locked: 0
@@ -64,4 +66,10 @@ TagManager:
     locked: 0
   - name: Saber
     uniqueID: 1724628997
+    locked: 0
+  - name: State
+    uniqueID: 3975882857
+    locked: 0
+  - name: Effect
+    uniqueID: 3758324469
     locked: 0
