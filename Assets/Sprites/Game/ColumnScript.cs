@@ -62,8 +62,6 @@ public class ColumnScript : MonoBehaviour
 
             objectPrefab = GameManager.Instance.playingObjectPrefabs[index] as GameObject;
 
-            //GameObject block = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
-
             GameObject block = ObjectPoolManager.Instance.InstantiateBlockObject(objectPrefab);
 
             block.name = objectPrefab.name;
@@ -102,46 +100,6 @@ public class ColumnScript : MonoBehaviour
             //检测是最下边,统一等于null
             //不是就当前行表减一，找下边对应位置的块脚本BlockObject,存在数组3位
             BlockObjectsScriptList[i].adjacentItems[3] = i == ColumnManager.Instance.numberOfRows - 1 ? null : BlockObjectsScriptList[i + 1];
-
-            if (columnIndex == 0)
-            {
-                BlockObjectsScriptList[i].adjacentItems[4] = null;
-                BlockObjectsScriptList[i].adjacentItems[6] = null;
-                if (i < ColumnManager.Instance.numberOfRows - 1)
-                {
-                    BlockObjectsScriptList[i].adjacentItems[7] = ColumnManager.Instance.gameColumns[columnIndex + 1].BlockObjectsScriptList[i + 1];
-                }
-                if (i > 0)
-                {
-                    BlockObjectsScriptList[i].adjacentItems[5] = ColumnManager.Instance.gameColumns[columnIndex + 1].BlockObjectsScriptList[i - 1];
-                }
-            }
-            else if (columnIndex == ColumnManager.Instance.gameColumns.Length - 1)
-            {
-                BlockObjectsScriptList[i].adjacentItems[5] = null;
-                BlockObjectsScriptList[i].adjacentItems[7] = null;
-                if (i < ColumnManager.Instance.numberOfRows - 1)
-                {
-                    BlockObjectsScriptList[i].adjacentItems[6] = ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i + 1];
-                }
-                if (i > 0)
-                {
-                    BlockObjectsScriptList[i].adjacentItems[4] = ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i - 1];
-                }
-            }
-            else
-            {
-                if (i > 0)
-                {
-                    BlockObjectsScriptList[i].adjacentItems[4] = ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i - 1];
-                    BlockObjectsScriptList[i].adjacentItems[5] = ColumnManager.Instance.gameColumns[columnIndex + 1].BlockObjectsScriptList[i - 1];
-                }
-                if (i < ColumnManager.Instance.numberOfRows - 1)
-                {
-                    BlockObjectsScriptList[i].adjacentItems[6] = ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i + 1];
-                    BlockObjectsScriptList[i].adjacentItems[7] = ColumnManager.Instance.gameColumns[columnIndex + 1].BlockObjectsScriptList[i + 1];
-                }
-            }
         }
     }
 
@@ -190,7 +148,6 @@ public class ColumnScript : MonoBehaviour
                 if (specialBlock)
                 {
                     InstantiateSpecialBlock(i, specialBlock);
-                    print("特殊块");
                 }
                 else
                 {
@@ -264,8 +221,8 @@ public class ColumnScript : MonoBehaviour
             });
         }
 
-        //播放下降音效(未实现)
-        AudioManager.Instance.PlayEffectMusic(SoundEffect.Attack);
+        //播放下降音效(暂时不用)
+        //AudioManager.Instance.PlayEffectMusic(SoundEffect.Attack);
     }
 
     /// <summary>

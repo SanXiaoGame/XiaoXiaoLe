@@ -47,8 +47,8 @@ public class BlockObject : MonoBehaviour
     {
         skillBlock = ResourcesManager.Instance.FindBlock(BlockObjectType.SkillType);
         highSkillBlock = ResourcesManager.Instance.FindBlock(BlockObjectType.HighSkillType);
-        //默认邻近的块为8个
-        adjacentItems = new BlockObject[8];
+        //默认邻近的块为4个
+        adjacentItems = new BlockObject[4];
     }
 
     /// <summary>
@@ -56,7 +56,7 @@ public class BlockObject : MonoBehaviour
     /// </summary>
     private void AssignLRUD()
     {
-        if (tag == ConstData.SpecialBlock)
+        if (tag == ConstData.SpecialBlock || tag == ConstData.SkillBlock)
         {
             return;
         }
