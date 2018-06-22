@@ -136,7 +136,7 @@ public struct ConstData
 
     #region 角色或敌人默认速度值
     public const float attackSpeed = 0f;
-    public const float movingSpeed = 0f;
+    public const float movingSpeed = 1f;
     #endregion
 
     #region 数据库命令大全

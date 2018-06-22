@@ -384,13 +384,14 @@ GameObject:
   - component: {fileID: 95690907645703334}
   - component: {fileID: 50793661256588846}
   - component: {fileID: 114933709602130354}
+  - component: {fileID: 70171344778400086}
   m_Layer: 0
   m_Name: OriginCaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1811914477793352
 GameObject:
   m_ObjectHideFlags: 1
@@ -657,7 +658,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1794427362626832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.937, y: 1.368, z: 0.2172852}
+  m_LocalPosition: {x: -2.78, y: 1.226, z: 0.2172852}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 4617709957665762}
@@ -938,12 +939,27 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!70 &70171344778400086
+CapsuleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1794427362626832}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.3}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
 --- !u!95 &95690907645703334
 Animator:
   serializedVersion: 3
@@ -953,7 +969,7 @@ Animator:
   m_GameObject: {fileID: 1794427362626832}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c38df7a2965112b4291dcc1a48661091, type: 2}
+  m_Controller: {fileID: 9100000, guid: d05555cc164831045955d35b15ba56b1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1229,7 +1245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Length: 0.12000024
+  m_Length: 0.12000035
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4040709456067368}
   m_AttachedIK: {fileID: 0}
@@ -1321,7 +1337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Length: 0.1500014
+  m_Length: 0.15000102
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4690117876555520}
   m_AttachedIK: {fileID: 0}
@@ -1369,7 +1385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Length: 0.120000154
+  m_Length: 0.12000031
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4683841550556990}
   m_AttachedIK: {fileID: 0}
