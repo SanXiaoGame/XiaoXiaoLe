@@ -8,7 +8,7 @@ using DG.Tweening;
 /// <summary>
 /// 块的点击功能类
 /// </summary>
-public class BlockObjectTouch : UISceneWidget
+public class BlockObjectTouch : MonoBehaviour
 {
     //块的Image组件
     Image blockImage;
@@ -37,7 +37,7 @@ public class BlockObjectTouch : UISceneWidget
     private void Start()
     {
         //绑定块的拖拽事件
-        blockClick = Get(gameObject);
+        blockClick = UISceneWidget.Get(gameObject);
 
         if (blockClick != null)
         {
