@@ -111,6 +111,8 @@ public class PlayerController : MonoBehaviour
         //ContactFilter2D contactFilter2D;
         Vector2 myPos = new Vector2(transform.position.x+0.2f,transform.position.y);
         RaycastHit2D hit = Physics2D.Raycast(myPos, Vector2.right, 10f,findMask);
+        Debug.DrawRay(myPos, findRay.direction, Color.green);
+
         if (hit)
         {
             //Debug.Log("有敌人发现");

@@ -53,7 +53,7 @@ public class IceCubeBoom : MonoBehaviour
     bool NONONO = false;
     private void Update()
     {
-        if (tim > 150 && NONONO == false)
+        if (tim > 100 && NONONO == false)
         {
             ci1.enabled = true;
             ci2.enabled = true;
@@ -76,7 +76,7 @@ public class IceCubeBoom : MonoBehaviour
             ic9.gravityScale = 1;
             ic10.gravityScale = 1;
             NONONO = true;
-            Destroy(gameObject, 2f);
+            Destroy(gameObject, 1f);
         }
         tim++;
     }
