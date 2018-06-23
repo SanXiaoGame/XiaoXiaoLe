@@ -6028,8 +6028,8 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_Events:
-  - time: 0.6666667
-    functionName: SkillFinishedChange
+  - time: 0.083333336
+    functionName: SaberOneSkillEffectStart
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
