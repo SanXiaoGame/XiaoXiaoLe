@@ -98,9 +98,9 @@ public struct ConstData
 
     #region 游戏数据库表名
     /// <summary>
-    /// 要连接的数据库文件路径
+    /// 要连接的数据库文件
     /// </summary>
-    public const string SQLITE_NAME = "SQLite/NereisQuest.sqlite";
+    public const string SQLITE_NAME = "NereisQuest.sqlite";
     /// <summary>
     /// 背包表
     /// </summary>
