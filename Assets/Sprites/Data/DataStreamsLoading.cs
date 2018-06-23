@@ -20,7 +20,7 @@ public class DataStreamsLoading : MonoBehaviour
         //开启一个协程
         StartCoroutine("CoypFile", paths);
     }
-
+    
     /// <summary>
     /// 拷贝文件
     /// </summary>
@@ -49,9 +49,10 @@ public class DataStreamsLoading : MonoBehaviour
             //拷贝streamPath到persistentPath
             WirteBytes(www.bytes, persistentPath);
         }
-
+        
         //通知sqliteManager拷贝文件完成
         onCopyFinished();
+     
     }
 
     /// <summary>

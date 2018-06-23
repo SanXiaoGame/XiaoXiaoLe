@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 读数据功能类
 /// </summary>
-public class ReadData
+public class ReadData:MonoBehaviour
 {
     //数据库操作对象
     DBOperation dbOperation;
@@ -22,7 +22,15 @@ public class ReadData
 #endif
         dbOperation = new DBOperation(tempPath);
     }
-
+    private void Awake()
+    {
+        //读取拥有的角色数据
+        IsPlayer("Player", DBOperation.Instance.GetAllDataFromSQLTable("Player"));
+        IsEquipmentEctype("Equipment", DBOperation.Instance.GetAllDataFromSQLTable("Equipment"));
+        IsSkill("Skill", DBOperation.Instance.GetAllDataFromSQLTable("Skill"));
+        IsState("State", DBOperation.Instance.GetAllDataFromSQLTable("State"));
+        Debug.Log(SQLiteManager.Instance.equipmentDataSource.Count);
+    }
     /// <summary>
     /// 获取所有数据
     /// </summary>
@@ -217,6 +225,39 @@ public class ReadData
             SQLiteManager.Instance.equipmentDataSource.Add(equipmentData.equipment_Id, equipmentData);
         }
     }
+    private void IsEquipmentEctype(string tbName, SqliteDataReader reader)
+    {
+        while (reader.Read() && tbName == ConstData.Equipment)
+        {
+            //获取读到内容中的字段,来保存对应的值
+            int equipment_Id = reader.GetInt32(reader.GetOrdinal("ID"));
+            string equipmentNmae = reader.GetString(reader.GetOrdinal("equipment_Name"));
+            string equipmentType = reader.GetString(reader.GetOrdinal("equipment_Type"));
+            string equipmentClass = reader.GetString(reader.GetOrdinal("equipment_Class"));
+            int equipment_HP = reader.GetInt32(reader.GetOrdinal("equipment_HP"));
+            int equipment_AD = reader.GetInt32(reader.GetOrdinal("equipment_AD"));
+            int equipment_AP = reader.GetInt32(reader.GetOrdinal("equipment_AP"));
+            int equipment_DEF = reader.GetInt32(reader.GetOrdinal("equipment_DEF"));
+            int equipment_RES = reader.GetInt32(reader.GetOrdinal("equipment_RES"));
+            ulong equipmentPrice = (ulong)reader.GetInt32(reader.GetOrdinal("equipment_Price"));
+            //创建模型
+            EquipmentData equipmentData = new EquipmentData
+            {
+                equipment_Id = equipment_Id,
+                equipmentNmae = equipmentNmae,
+                equipmentType = equipmentType,
+                equipmentClass = equipmentClass,
+                equipment_HP = equipment_HP,
+                equipment_AD = equipment_AD,
+                equipment_AP = equipment_AP,
+                equipment_DEF = equipment_DEF,
+                equipment_RES = equipment_RES,
+                equipmentPrice = equipmentPrice,
+            };
+            //加入到数据库
+            SQLiteManager.Instance.equipmentDataSource.Add(equipmentData.equipment_Id, equipmentData);
+        }
+    }
     /// <summary>
     /// 是否是物品表
     /// </summary>
@@ -288,8 +329,10 @@ public class ReadData
     /// <param 数据阅读器="reader"></param>
     private void IsPlayer(string tbName, SqliteDataReader reader)
     {
+        
         while (reader.Read() && tbName == ConstData.Player)
         {
+            
             //获取读到内容中的字段,来保存对应的值
             int player_Id = reader.GetInt32(reader.GetOrdinal("ID"));
             string player_Name = reader.GetString(reader.GetOrdinal("player_Name"));
@@ -344,6 +387,7 @@ public class ReadData
             //加入到数据库
             SQLiteManager.Instance.playerDataSource.Add(playerData.player_Id, playerData);
         }
+        
     }
     /// <summary>
     /// 是否是技能表

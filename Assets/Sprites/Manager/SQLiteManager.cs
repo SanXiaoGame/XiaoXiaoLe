@@ -28,6 +28,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
     public Dictionary<int, StateData> stateDataSource = new Dictionary<int, StateData>();
     public Dictionary<int, Hero> team = new Dictionary<int, Hero>();        //小队字典--from Duke 
     public List<GameObject> characterLists = new List<GameObject>();
+   
     public List<GameObject> itemLists = new List<GameObject>();
     public Dictionary<string, int> character = new Dictionary<string, int>();
     protected override void Awake()

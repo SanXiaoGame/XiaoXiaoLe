@@ -23,11 +23,12 @@ public class CharacterClassBtn : MonoBehaviour {
         this.transform.Find("Knight0").GetComponent<Toggle>().group = this.GetComponent<ToggleGroup>();
         this.transform.Find("Swordman0").GetComponent<Toggle>().group = this.GetComponent<ToggleGroup>();
         this.transform.Find("All").GetComponent<Toggle>().group = this.GetComponent<ToggleGroup>();
+        //筛选职业是魔法师或者装备的是属于魔法师
         this.transform.Find("Enchanter0").GetComponent<Toggle>().onValueChanged.AddListener((isOn)=> {
             enchcanter.SetActive(isOn);
             for (int i = 0; i < SQLiteManager.Instance.characterLists.Count; i++)
             {
-            if (SQLiteManager.Instance.characterLists[i].GetComponent<Character>().Type == "魔法师")
+            if (SQLiteManager.Instance.characterLists[i].GetComponent<Character>().Type == "Caster")
                 {
                     SQLiteManager.Instance.characterLists[i].SetActive(true);
                 }
@@ -38,7 +39,7 @@ public class CharacterClassBtn : MonoBehaviour {
             }
             for (int i = 0; i < Lists.Count; i++)
             {
-                if (Lists[i].GetComponent<Item>().type == "魔法师")
+                if (Lists[i].GetComponent<Equipments>().type == "Caster")
                 {
                     Lists[i].SetActive(true);
                 }
@@ -48,11 +49,12 @@ public class CharacterClassBtn : MonoBehaviour {
                 }
             }
         });
+        //筛选职业是猎人或者装备的是属于猎人
         this.transform.Find("Hunter0").GetComponent<Toggle>().onValueChanged.AddListener((isOn) => {
             hunter.SetActive(isOn);
             for (int i = 0; i < SQLiteManager.Instance.characterLists.Count; i++)
             {
-                if (SQLiteManager.Instance.characterLists[i].GetComponent<Character>().Type == "猎人")
+                if (SQLiteManager.Instance.characterLists[i].GetComponent<Character>().Type == "Hunter")
                 {
                     SQLiteManager.Instance.characterLists[i].SetActive(true);
                 }
@@ -63,7 +65,7 @@ public class CharacterClassBtn : MonoBehaviour {
             }
             for (int i = 0; i < Lists.Count; i++)
             {
-                if (Lists[i].GetComponent<Item>().type == "猎人")
+                if (Lists[i].GetComponent<Equipments>().type == "Hunter")
                 {
                     Lists[i].SetActive(true);
                 }
@@ -73,11 +75,12 @@ public class CharacterClassBtn : MonoBehaviour {
                 }
             }
         });
+        //筛选职业是狂战士或者装备的是属于狂战士
         this.transform.Find("Berserker0").GetComponent<Toggle>().onValueChanged.AddListener((isOn) => {
             berserker.SetActive(isOn);
             for (int i = 0; i < SQLiteManager.Instance.characterLists.Count; i++)
             {
-                if (SQLiteManager.Instance.characterLists[i].GetComponent<Character>().Type == "狂战士")
+                if (SQLiteManager.Instance.characterLists[i].GetComponent<Character>().Type == "Berserker")
                 {
                     SQLiteManager.Instance.characterLists[i].SetActive(true);
                 }
@@ -88,7 +91,7 @@ public class CharacterClassBtn : MonoBehaviour {
             }
             for (int i = 0; i < Lists.Count; i++)
             {
-                if (Lists[i].GetComponent<Item>().type == "狂战士")
+                if (Lists[i].GetComponent<Equipments>().type == "Berserker")
                 {
                     Lists[i].SetActive(true);
                 }
@@ -98,11 +101,12 @@ public class CharacterClassBtn : MonoBehaviour {
                 }
             }
         });
+        //筛选职业是骑士或者装备的是属于骑士
         this.transform.Find("Knight0").GetComponent<Toggle>().onValueChanged.AddListener((isOn) => {
             knight.SetActive(isOn);
             for (int i = 0; i < SQLiteManager.Instance.characterLists.Count; i++)
             {
-                if (SQLiteManager.Instance.characterLists[i].GetComponent<Character>().Type == "骑士")
+                if (SQLiteManager.Instance.characterLists[i].GetComponent<Character>().Type == "Knight")
                 {
                     SQLiteManager.Instance.characterLists[i].SetActive(true);
                 }
@@ -113,7 +117,7 @@ public class CharacterClassBtn : MonoBehaviour {
             }
             for (int i = 0; i < Lists.Count; i++)
             {
-                if (Lists[i].GetComponent<Item>().type == "骑士")
+                if (Lists[i].GetComponent<Equipments>().type == "Knight")
                 {
                     Lists[i].SetActive(true);
                 }
@@ -123,11 +127,12 @@ public class CharacterClassBtn : MonoBehaviour {
                 }
             }
         });
+        //筛选职业是剑士或者装备的是属于剑士
         this.transform.Find("Swordman0").GetComponent<Toggle>().onValueChanged.AddListener((isOn) => {
             swordman.SetActive(isOn);
             for (int i = 0; i < SQLiteManager.Instance.characterLists.Count; i++)
             {
-                if (SQLiteManager.Instance.characterLists[i].GetComponent<Character>().Type == "剑士")
+                if (SQLiteManager.Instance.characterLists[i].GetComponent<Character>().Type == "Saber")
                 {
                     SQLiteManager.Instance.characterLists[i].SetActive(true);
                 }
@@ -138,7 +143,7 @@ public class CharacterClassBtn : MonoBehaviour {
             }
             for (int i = 0; i < Lists.Count; i++)
             {
-                if (Lists[i].GetComponent<Item>().type == "剑士")
+                if (Lists[i].GetComponent<Equipments>().type == "Saber")
                 {
                     Lists[i].SetActive(true);
                 }
@@ -148,6 +153,7 @@ public class CharacterClassBtn : MonoBehaviour {
                 }
             }
         });
+        //展示所有的职业或者装备
         this.transform.Find("All").GetComponent<Toggle>().onValueChanged.AddListener((isOn) =>
         {
             for (int i = 0; i < SQLiteManager.Instance.characterLists.Count; i++)

@@ -11,6 +11,10 @@ public class Hero
     public PlayerData playerData;
     public StateData stateData;
     public SkillData skillData;
+    public SkillData skill1;
+    public SkillData skill2;
+    public SkillData skill3;
+
 
     public int starHP;
     public int currentHP;

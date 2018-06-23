@@ -2,16 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//角色信息面板
 public class CharacterProprety : MonoBehaviour {
 
-    Text _name;
-    Text _profession;
-    Text _exp;
-    public Text AD { get; set; }
-    public Text AP { get; set; }
-    public Text HP { get; set; }
-    public Text RES { get; set; }
-    public Text DEF { get; set; }
+    Text _name;//角色的名字
+    Text _profession;//角色的职业
+    Text _exp;//角色经验
+    [HideInInspector]
+    public Text AD { get; set; }//角色的AD
+    [HideInInspector]
+    public Text AP { get; set; }//角色的AP
+    [HideInInspector]
+    public Text HP { get; set; }//角色的HP
+    [HideInInspector]
+    public Text RES { get; set; }//角色的RES
+    [HideInInspector]
+    public Text DEF { get; set; }//角色的DEF
   
     private void Awake()
     {
@@ -24,18 +30,23 @@ public class CharacterProprety : MonoBehaviour {
         RES = this.transform.Find("RES").GetComponent<Text>();
         DEF = this.transform.Find("DEF").GetComponent<Text>();
     }
+    /// <summary>
+    /// 角色信息的显示（刷新信息）
+    /// </summary>
+    /// <param name="id">角色ID</param>
     public void RefreshCharacterProprety(int id)
     {
        
-        CharacterListData characterListData = SQLiteManager.Instance.characterDataSource[id];
-        _name.text = characterListData.character_Name;
-        _profession.text = characterListData.character_Class;
-        _exp.text = characterListData.character_EXP.ToString();
-        AD.text = characterListData.character_AD.ToString();
-        AP.text = characterListData.character_AP.ToString();
-        HP.text = characterListData.character_HP.ToString();
-        RES.text = characterListData.character_RES.ToString();
-        DEF.text = characterListData.character_DEF.ToString();
+        Hero hero = SQLiteManager.Instance.team[id];
+        PlayerData playerData = SQLiteManager.Instance.playerDataSource[id];
+        _name.text = playerData.player_Name;
+        _profession.text = playerData.player_Class;
+        _exp.text = playerData.EXP.ToString();
+        AD.text = hero.currentAD.ToString();
+        AP.text = hero.currentAP.ToString();
+        HP.text = hero.currentHP.ToString();
+        RES.text = hero.currentRES.ToString();
+        DEF.text = hero.currentDEF.ToString();
        
     }
 }

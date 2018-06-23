@@ -14,6 +14,7 @@ public class HeadPortrait : MonoBehaviour {
             characterProprety.SetActive(true);
             characterProprety.AddComponent<CharacterProprety>();
             selectBtn.characterName = this.name;
+            selectBtn.DelctID = ID;
             GameObject.FindGameObjectWithTag("TopBtn").GetComponent<TopBtnManager>().ID = ID;
             
             characterProprety.GetComponent<CharacterProprety>().RefreshCharacterProprety(ID);
