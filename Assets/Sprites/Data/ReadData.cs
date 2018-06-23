@@ -281,12 +281,12 @@ public class ReadData
         {
             //获取读到内容中的字段,来保存对应的值
             int level = reader.GetInt32(reader.GetOrdinal("Level"));
-            int level_MaxEXP = reader.GetInt32(reader.GetOrdinal("level_MaxEXP"));
-            int level_HP = reader.GetInt32(reader.GetOrdinal("level_HP"));
-            int level_AD = reader.GetInt32(reader.GetOrdinal("level_AD"));
-            int level_AP = reader.GetInt32(reader.GetOrdinal("level_AP"));
-            int level_DEF = reader.GetInt32(reader.GetOrdinal("level_DEF"));
-            int level_RES = reader.GetInt32(reader.GetOrdinal("level_RES"));
+            int level_MaxEXP = reader.GetInt32(reader.GetOrdinal("MaxEXP"));
+            int level_HP = reader.GetInt32(reader.GetOrdinal("HP"));
+            int level_AD = reader.GetInt32(reader.GetOrdinal("AD"));
+            int level_AP = reader.GetInt32(reader.GetOrdinal("AP"));
+            int level_DEF = reader.GetInt32(reader.GetOrdinal("DEF"));
+            int level_RES = reader.GetInt32(reader.GetOrdinal("RES"));
             //创建模型
             LVData lVData = new LVData
             {
