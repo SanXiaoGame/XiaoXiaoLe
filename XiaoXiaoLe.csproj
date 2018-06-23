@@ -276,7 +276,9 @@
     <Compile Include="Assets\Sprites\Data\EnemyData.cs" />
     <Compile Include="Assets\Sprites\Data\EnumData\GameType.cs" />
     <Compile Include="Assets\Sprites\Data\EnumData\MusicType.cs" />
+    <Compile Include="Assets\Sprites\Data\EnumData\SkillEffectType.cs" />
     <Compile Include="Assets\Sprites\Data\EquipmentData.cs" />
+    <Compile Include="Assets\Sprites\Data\HeroData.cs" />
     <Compile Include="Assets\Sprites\Data\ItemData.cs" />
     <Compile Include="Assets\Sprites\Data\LVData.cs" />
     <Compile Include="Assets\Sprites\Data\PlayerData.cs" />
@@ -284,6 +286,7 @@
     <Compile Include="Assets\Sprites\Data\SkillData.cs" />
     <Compile Include="Assets\Sprites\Data\StateData.cs" />
     <Compile Include="Assets\Sprites\Data\WriteData.cs" />
+    <Compile Include="Assets\Sprites\Enemy\EnemyController.cs" />
     <Compile Include="Assets\Sprites\Game\BlockObject.cs" />
     <Compile Include="Assets\Sprites\Game\BlockObjectTouch.cs" />
     <Compile Include="Assets\Sprites\Game\ColumnScript.cs" />
@@ -302,6 +305,11 @@
     <Compile Include="Assets\Sprites\Manager\UIManager.cs" />
     <Compile Include="Assets\Sprites\Player\PlayerController.cs" />
     <Compile Include="Assets\Sprites\Player\Test.cs" />
+    <Compile Include="Assets\Sprites\Skill\ArrowRainDown.cs" />
+    <Compile Include="Assets\Sprites\Skill\BlackMagicBoom.cs" />
+    <Compile Include="Assets\Sprites\Skill\FallingStoneBoom.cs" />
+    <Compile Include="Assets\Sprites\Skill\Fissure.cs" />
+    <Compile Include="Assets\Sprites\Skill\Gungnir.cs" />
     <Compile Include="Assets\Sprites\Skill\IceCube.cs" />
     <Compile Include="Assets\Sprites\Skill\IceCubeBoom.cs" />
     <Compile Include="Assets\Sprites\ToolClass\StringSplicingTool.cs" />

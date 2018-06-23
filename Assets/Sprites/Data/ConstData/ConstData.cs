@@ -14,12 +14,17 @@ public struct ConstData
     public const string SkillBlockPrefabs = "Prefabs/SkillBlockPrefabs";
     #endregion
 
+    #region 所有游戏英雄技能特效的预制体文件夹
+    //所有英雄技能特效的预制体
+    public const string SkillPrefabs = "Prefabs/SkillPrefabs";
+    #endregion
+
     #region 音乐文件夹
     public const string BGMusic = "Audios/BGMusic";
     #endregion
 
     #region 音效文件夹
-    public const string Sound = "Audios";
+    public const string SoundEffect = "Audios/SoundEffect";
     #endregion
 
     #region 职业进化所需材料
@@ -136,7 +141,7 @@ public struct ConstData
 
     #region 角色或敌人默认速度值
     public const float attackSpeed = 0f;
-    public const float movingSpeed = 0.3f;
+    public const float movingSpeed = 1f;
     #endregion
 
     #region 数据库命令大全

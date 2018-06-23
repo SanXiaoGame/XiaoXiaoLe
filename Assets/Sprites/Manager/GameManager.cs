@@ -32,8 +32,7 @@ public class GameManager : ManagerBase<GameManager>
 
     private void Start()
     {
-        vp_Timer.In(0.5f, new vp_Timer.Callback(AssignNeighbours));
-        AudioManager.Instance.ReplaceBGM(BGM.maincity);
+        Invoke("AssignNeighbours", 0.5f);
     }
 
     /// <summary>
@@ -46,12 +45,12 @@ public class GameManager : ManagerBase<GameManager>
         {
             if (ColumnManager.Instance.gameColumns[i].GetNumberOfItemsToAdd() > 0)
             {
-                ColumnManager.Instance.gameColumns[i].CallAddMissingBlock(delay);
+                ColumnManager.Instance.gameColumns[i].Invoke("AddMissingBlock", delay);
                 delay += 0.05f;
             }
         }
         //指派邻居
-        vp_Timer.In(delay + 0.1f, new vp_Timer.Callback(AssignNeighbours));
+        Invoke("AssignNeighbours", delay + 0.1f);
     }
 
     /// <summary>
@@ -64,7 +63,7 @@ public class GameManager : ManagerBase<GameManager>
             ColumnManager.Instance.gameColumns[i].AssignNeighbours();
         }
         //检查全部块状态
-        vp_Timer.In(objectFallingDuration, new vp_Timer.Callback(CheckBoardState));
+        Invoke("CheckBoardState", Instance.objectFallingDuration);
     }
 
     /// <summary>
@@ -87,6 +86,8 @@ public class GameManager : ManagerBase<GameManager>
 
         if (doesHaveBrustItem)
         {
+            //播放消的声音
+
             RemoveBlock();
             AddMissingBlock();
         }
@@ -97,9 +98,6 @@ public class GameManager : ManagerBase<GameManager>
     /// </summary>
     internal void RemoveBlock()
     {
-        //播放消的声音
-        AudioManager.Instance.PlayEffectMusic(SoundEffect.ClearCube);
-
         for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
         {
             ColumnManager.Instance.gameColumns[i].DeleteBrustedBlock();

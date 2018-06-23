@@ -62,7 +62,9 @@ public class ColumnScript : MonoBehaviour
 
             objectPrefab = GameManager.Instance.playingObjectPrefabs[index] as GameObject;
 
-            GameObject block = ObjectPoolManager.Instance.InstantiateMyGameObject(objectPrefab);
+            //GameObject block = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
+
+            GameObject block = ObjectPoolManager.Instance.InstantiateBlockObject(objectPrefab);
 
             block.name = objectPrefab.name;
             block.transform.parent = transform;
@@ -100,6 +102,46 @@ public class ColumnScript : MonoBehaviour
             //检测是最下边,统一等于null
             //不是就当前行表减一，找下边对应位置的块脚本BlockObject,存在数组3位
             BlockObjectsScriptList[i].adjacentItems[3] = i == ColumnManager.Instance.numberOfRows - 1 ? null : BlockObjectsScriptList[i + 1];
+
+            if (columnIndex == 0)
+            {
+                BlockObjectsScriptList[i].adjacentItems[4] = null;
+                BlockObjectsScriptList[i].adjacentItems[6] = null;
+                if (i < ColumnManager.Instance.numberOfRows - 1)
+                {
+                    BlockObjectsScriptList[i].adjacentItems[7] = ColumnManager.Instance.gameColumns[columnIndex + 1].BlockObjectsScriptList[i + 1];
+                }
+                if (i > 0)
+                {
+                    BlockObjectsScriptList[i].adjacentItems[5] = ColumnManager.Instance.gameColumns[columnIndex + 1].BlockObjectsScriptList[i - 1];
+                }
+            }
+            else if (columnIndex == ColumnManager.Instance.gameColumns.Length - 1)
+            {
+                BlockObjectsScriptList[i].adjacentItems[5] = null;
+                BlockObjectsScriptList[i].adjacentItems[7] = null;
+                if (i < ColumnManager.Instance.numberOfRows - 1)
+                {
+                    BlockObjectsScriptList[i].adjacentItems[6] = ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i + 1];
+                }
+                if (i > 0)
+                {
+                    BlockObjectsScriptList[i].adjacentItems[4] = ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i - 1];
+                }
+            }
+            else
+            {
+                if (i > 0)
+                {
+                    BlockObjectsScriptList[i].adjacentItems[4] = ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i - 1];
+                    BlockObjectsScriptList[i].adjacentItems[5] = ColumnManager.Instance.gameColumns[columnIndex + 1].BlockObjectsScriptList[i - 1];
+                }
+                if (i < ColumnManager.Instance.numberOfRows - 1)
+                {
+                    BlockObjectsScriptList[i].adjacentItems[6] = ColumnManager.Instance.gameColumns[columnIndex - 1].BlockObjectsScriptList[i + 1];
+                    BlockObjectsScriptList[i].adjacentItems[7] = ColumnManager.Instance.gameColumns[columnIndex + 1].BlockObjectsScriptList[i + 1];
+                }
+            }
         }
     }
 
@@ -118,7 +160,7 @@ public class ColumnScript : MonoBehaviour
     /// <param 特殊块的预制体="specialBlock"></param>
     internal void InstantiateSpecialBlock(int index, GameObject specialBlock)
     {
-        GameObject block = ObjectPoolManager.Instance.InstantiateMyGameObject(specialBlock);
+        GameObject block = ObjectPoolManager.Instance.InstantiateBlockObject(specialBlock);
 
         block.name = specialBlock.name;
         block.transform.parent = transform;
@@ -148,6 +190,7 @@ public class ColumnScript : MonoBehaviour
                 if (specialBlock)
                 {
                     InstantiateSpecialBlock(i, specialBlock);
+                    print("特殊块");
                 }
                 else
                 {
@@ -164,14 +207,6 @@ public class ColumnScript : MonoBehaviour
                 i--;
             }
         }
-    }
-
-    /// <summary>
-    /// 用于外部调用AddMissingBlock方法
-    /// </summary>
-    internal void CallAddMissingBlock(float delay)
-    {
-        vp_Timer.In(delay, new vp_Timer.Callback(AddMissingBlock));
     }
 
     /// <summary>
@@ -192,7 +227,10 @@ public class ColumnScript : MonoBehaviour
             int index = UnityEngine.Random.Range(0, GameManager.Instance.normalBlockNumber);
             objectPrefab= GameManager.Instance.playingObjectPrefabs[index] as GameObject;
 
-            GameObject block = ObjectPoolManager.Instance.InstantiateMyGameObject(objectPrefab);
+            //GameObject block = Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
+
+            GameObject block = ObjectPoolManager.Instance.InstantiateBlockObject(objectPrefab);
+
             block.name = objectPrefab.name;
             block.transform.parent = transform;
             block.GetComponent<RectTransform>().localScale = Vector3.one;
@@ -213,21 +251,21 @@ public class ColumnScript : MonoBehaviour
         //旧的块下降
         for (int i = numberOfItemsToAdd; i < BlockObjectsScriptList.Count; i++)
         {
-            BlockObjectsScriptList[i].transform.DOLocalMoveY(-i * 200, 0.1f).SetDelay(0.2f).SetEase(Ease.Linear);
+            BlockObjectsScriptList[i].transform.DOLocalMoveY(-i * 200, 0.1f).SetDelay(0.1f).SetEase(Ease.Linear);
         }
 
         //新的块下降
         for (int i = 0; i < numberOfItemsToAdd; i++)
         {
             //下降的动画
-            BlockObjectsScriptList[i].transform.DOLocalMoveY(-i * 200, 0.1f).SetDelay(0.2f).SetEase(Ease.Linear).OnComplete(delegate ()
+            BlockObjectsScriptList[i].transform.DOLocalMoveY(-i * 200, 0.1f).SetDelay(0.1f).SetEase(Ease.Linear).OnComplete(delegate ()
             {
-                vp_Timer.In(0.5f, new vp_Timer.Callback(DelayDOTween));
+                Invoke("DelayDOTween", 0.5f);
             });
         }
 
-        //播放下降音效(暂时不用)
-        //AudioManager.Instance.PlayEffectMusic(SoundEffect.Attack);
+        //播放下降音效(未实现)
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.Attack);
     }
 
     /// <summary>

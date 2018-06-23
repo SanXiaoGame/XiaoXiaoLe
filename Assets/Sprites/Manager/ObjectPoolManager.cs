@@ -12,32 +12,32 @@ public class ObjectPoolManager : ManagerBase<ObjectPoolManager>
         base.Awake();
     }
     /// <summary>
-    /// 在池库中找需要的游戏物体，没有就生成新的池添加进字典
+    /// 在池库中找需要的块，没有就生成新的池添加进字典
     /// </summary>
-    /// <param 预制体="obj"></param>
+    /// <param 块预制体="obj"></param>
     /// <returns></returns>
-    internal GameObject InstantiateMyGameObject(GameObject obj)
+    internal GameObject InstantiateBlockObject(GameObject block)
     {
-        if (!objectPoolDictionary.ContainsKey(obj.name))
+        if (!objectPoolDictionary.ContainsKey(block.name))
         {
-            ObjectPoolBase newPool = new ObjectPoolBase(obj);
+            ObjectPoolBase newPool = new ObjectPoolBase(block);
             objectPoolDictionary.Add(newPool.Name, newPool);
         }
-        return objectPoolDictionary[obj.name].InstantiateGameObject();
+        return objectPoolDictionary[block.name].InstantiateBlock();
     }
 
     /// <summary>
     /// 回收块到对应的池中
     /// </summary>
-    /// <param 游戏物体="block"></param>
-    internal void RecycleMyGameObject(GameObject obj)
+    /// <param 块="block"></param>
+    internal void RecycleBlockObject(GameObject block)
     {
         foreach (ObjectPoolBase pool in objectPoolDictionary.Values)
         {
-            if (obj.name == pool.Name || obj.name == StringSplicingTool.StringSplicing(pool.Name, "(Clone)"))
+            if (block.name == pool.Name)
             {
-                pool.RecycleGameObject(obj);
-                obj.transform.parent = transform;
+                pool.RecycleBlock(block);
+                block.transform.parent = transform;
                 break;
             }
         }

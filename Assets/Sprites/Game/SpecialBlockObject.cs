@@ -9,7 +9,7 @@ public class SpecialBlockObject : MonoBehaviour
 {
     //定义UI点击事件的基类
     UISceneWidget blockClick;
-    BlockObject _blockObject;
+    BlockObject myPlayingObject;
     #region 消块的临时数量存储
     int Berserker = 0;
     int Caster = 0;
@@ -20,9 +20,9 @@ public class SpecialBlockObject : MonoBehaviour
 
     private void Start()
     {
-        _blockObject = GetComponent<BlockObject>();
+        myPlayingObject = GetComponent<BlockObject>();
         //绑定块的点击事件
-        blockClick = UISceneWidget.Get(gameObject);
+        blockClick = GetComponent<UISceneWidget>();
         if (blockClick != null)
         {
             blockClick.PointerDown += BlockOnPointerDown;
@@ -45,28 +45,17 @@ public class SpecialBlockObject : MonoBehaviour
 
         if (!GameManager.Instance.isBusy)
         {
-            if (eventData.pointerEnter.tag == ConstData.SkillBlock)
+            if (myPlayingObject.tag == ConstData.SkillBlock)
             {
                 //技能块
-                _blockObject.brust = true;
-                for (int i = 0; i < _blockObject.adjacentItems.Length; i++)
+                myPlayingObject.brust = true;
+                for (int i = 0; i < myPlayingObject.adjacentItems.Length; i++)
                 {
-                    if (_blockObject.adjacentItems[i] != null && _blockObject.adjacentItems[i].gameObject.activeSelf)
+                    if (myPlayingObject.adjacentItems[i] != null && myPlayingObject.adjacentItems[i].gameObject.activeSelf)
                     {
-                        _blockObject.adjacentItems[i].brust = true;
-                        if (i == 0 || i == 1)
-                        {
-                            if (_blockObject.adjacentItems[i].adjacentItems[2] != null)
-                            {
-                                _blockObject.adjacentItems[i].adjacentItems[2].brust = true;
-                            }
-                            if (_blockObject.adjacentItems[i].adjacentItems[3] != null)
-                            {
-                                _blockObject.adjacentItems[i].adjacentItems[3].brust = true;
-                            }
-                        }
+                        myPlayingObject.adjacentItems[i].brust = true;
                         //记录消除的块数量
-                        switch (_blockObject.adjacentItems[i].name)
+                        switch (myPlayingObject.adjacentItems[i].name)
                         {
                             case ConstData.Berserker:
                                 Berserker++;
@@ -89,7 +78,7 @@ public class SpecialBlockObject : MonoBehaviour
                 //计分
                 GameManager.Instance.AddScore(ConstData.BlastSkill);
             }
-            else if(eventData.pointerEnter.tag == ConstData.SpecialBlock)
+            else if(myPlayingObject.tag == ConstData.SpecialBlock)
             {
                 //高级技能块
                 for (int i = 0; i < ColumnManager.Instance.numberOfColumns; i++)
@@ -98,7 +87,7 @@ public class SpecialBlockObject : MonoBehaviour
                     {
                         ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList[j].brust = true;
                         //记录消除的块数量
-                        switch (ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList[j].name)
+                        switch (myPlayingObject.adjacentItems[i].name)
                         {
                             case ConstData.Berserker:
                                 Berserker++;

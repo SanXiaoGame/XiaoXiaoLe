@@ -16,33 +16,33 @@ public class ObjectPoolBase
     {
         objectPrefab = obj;
     }
-    //游戏预制体的队列
-    Queue<GameObject> gameObjectPrefab = new Queue<GameObject>();
+    //块预制体的队列
+    Queue<GameObject> blockObjectPrefab = new Queue<GameObject>();
 
     /// <summary>
-    /// 用于实例化，并查找是否有库存
+    /// 用于块的实例化，并查找是否有库存
     /// </summary>
-    internal GameObject InstantiateGameObject()
+    internal GameObject InstantiateBlock()
     {
-        GameObject obj;
-        if (gameObjectPrefab.Count > 0)
+        GameObject block;
+        if (blockObjectPrefab.Count > 0)
         {
-            obj = gameObjectPrefab.Dequeue();
+            block = blockObjectPrefab.Dequeue();
         }
         else
         {
-            obj = Object.Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
+            block = Object.Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
         }
-        obj.SetActive(true);
-        return obj;
+        block.SetActive(true);
+        return block;
     }
     /// <summary>
     /// 回收快进入队列
     /// </summary>
-    /// <param 游戏物体="block"></param>
-    internal void RecycleGameObject(GameObject obj)
+    /// <param 块="block"></param>
+    internal void RecycleBlock(GameObject block)
     {
-        obj.SetActive(false);
-        gameObjectPrefab.Enqueue(obj);
+        block.SetActive(false);
+        blockObjectPrefab.Enqueue(block);
     }
 }
