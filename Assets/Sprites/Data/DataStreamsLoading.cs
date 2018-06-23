@@ -15,46 +15,44 @@ public class DataStreamsLoading : MonoBehaviour
     /// 加载本地路径下数据
     /// </summary>
     /// <param 需要拷贝到沙盒路径的路径数组="paths"></param>
-    public void LoadWitgPath(string paths)
+    public void LoadWitgPath(string[] paths)
     {
         //开启一个协程
         StartCoroutine("CoypFile", paths);
     }
-
+    
     /// <summary>
     /// 拷贝文件
     /// </summary>
     /// <param 需要拷贝到沙盒路径的路径数组="paths"></param>
     /// <returns></returns>
-    IEnumerator CoypFile(string paths)
+    IEnumerator CoypFile(string[] paths)
     {
         //首先获取流路径
         string streamPath;
-        //合并路径
-        streamPath = System.IO.Path.Combine(Application.streamingAssetsPath, paths);
-
-/*#if UNITY_ANDROID
-        streamPath = "jar:file://" + streamPath;
-#else
-        if (!streamPath.Contains("file://"))
+        for (int i = 0; i < paths.Length; i++)
         {
+            //合并路径
+            streamPath = System.IO.Path.Combine(Application.streamingAssetsPath, paths[i]);
+#if UNITY_ANDROID
+            streamPath = "jar:file://" + streamPath;
+#elif UNITY_EDITOR
             streamPath = "file://" + streamPath;
+#endif
+            //下载该路径下的文件（本地的）
+            WWW www = new WWW(streamPath);
+            yield return www;
+            //拼接沙盒路径
+            string persistentPath = System.IO.Path.Combine(Application.persistentDataPath, paths[i]);
+            Debug.Log(persistentPath);
+
+            //拷贝streamPath到persistentPath
+            WirteBytes(www.bytes, persistentPath);
         }
-#endif*/
-
-        //下载该路径下的文件（本地的）
-        WWW www = new WWW(streamPath);
-
-        yield return www;
-
-        //拼接沙盒路径
-        string persistentPath = System.IO.Path.Combine(Application.persistentDataPath, paths);
-
-        //拷贝streamPath到persistentPath
-        WirteBytes(www.bytes, persistentPath);
-
+        
         //通知sqliteManager拷贝文件完成
         onCopyFinished();
+     
     }
 
     /// <summary>
