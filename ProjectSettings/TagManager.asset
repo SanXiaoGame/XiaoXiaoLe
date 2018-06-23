@@ -33,9 +33,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Background
+  - Scene
+  - Player
   - 
   - 
   - 
@@ -60,6 +60,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Enemy_Slime
+    uniqueID: 834181153
+    locked: 0
+  - name: Scene
+    uniqueID: 2051978015
     locked: 0
   - name: Berserker
     uniqueID: 683132381

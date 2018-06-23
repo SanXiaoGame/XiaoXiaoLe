@@ -63,6 +63,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         writeData = new WriteData(dataBasePath);
 
         //取出数据存入字典
+        readData.GetData(ConstData.Bag);
         readData.GetData(ConstData.CharacterList);
         readData.GetData(ConstData.Enemy);
         readData.GetData(ConstData.Item);

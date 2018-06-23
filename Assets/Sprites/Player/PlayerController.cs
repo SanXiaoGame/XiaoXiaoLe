@@ -105,10 +105,19 @@ public class PlayerController : MonoBehaviour
         //每秒查询是否有敌人
         InvokeRepeating("FindEnemy", 0f, 1.5f);
     }
+    int aa = 0;
+
     private void Update()
     {
         //OnStateListion();
         //FindEnemy();
+        aa++;
+
+        if (aa%60==0)
+        {
+            aa = 0;
+
+        }
     }
 
     void Listison()
@@ -421,8 +430,23 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    bool isMove = true;
+    
+    void dfsdfds()
+    {
+        isMove = false;
+    }
+    void FFF()
+    {
+        isMove = true;
+    }
+
     void FindEnemy()
     {
+        if (isMove)
+        {
+            
+        }
         OnStateListion();
         if (!isFindEnemy)
         {
@@ -470,7 +494,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.tag=="Enemy")
         {
-            Debug.Log("有敌人发现,并执行跑动");
+            //Debug.Log("有敌人发现,并执行跑动");
             enemy = collision.gameObject;
             isFindEnemy = true;
             //if (Vector2.Distance(this.transform.position, collision.transform.position) >= distance)
