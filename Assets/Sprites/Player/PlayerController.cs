@@ -109,8 +109,8 @@ public class PlayerController : MonoBehaviour
         //探敌射线的碰撞检测
         //Debug.Log("有敌人探测方法调用");
         //ContactFilter2D contactFilter2D;
-        Vector2 myPos = new Vector2(transform.position.x+0.2f,transform.position.y);
-        RaycastHit2D hit = Physics2D.Raycast(myPos, Vector2.right, 10f,findMask);
+        Vector2 myPos = new Vector2(transform.position.x+0.2f,transform.position.y+0.15f);
+        RaycastHit2D hit = Physics2D.Raycast(myPos, Vector2.right, 20f,findMask);
         Debug.DrawRay(myPos, findRay.direction, Color.green);
 
         if (hit)
@@ -545,9 +545,48 @@ public class PlayerController : MonoBehaviour
     {
        SkillsManager.Instance.ChangeHeroState(hero.playerData.player_Id, HeroState.idle.GetHashCode());
     }
+    /// <summary>
+    /// 剑士一技能突刺的特效预制体加载
+    /// </summary>
+    void SaberOneSkillEffectStart()
+    {
+        //生成技能特效
+        //GameObject iceOne = ResourcesManager.Instance.FindSkillEffect(SkillEffectType.SkillEffect.Skill_Saber01_Sprint);
+        //GameObject tempObj = Instantiate(iceOne) as GameObject;
+        GameObject skillEffect = hero.transform.Find("Bones/Torso/L-arm/L-fist/Weapon/Skill_Saber01_Sprint").gameObject;
+        skillEffect.SetActive(true);
+        InvokeRepeating("SaberWeaponRay", 0f, 0.05f);
+       
+    }
 
-
-
+    void SaberWeaponRay()
+    {
+        //attRay.origin = transform.position;
+        //attRay.direction = Vector2.right;
+        Vector2 myPos = new Vector2(transform.position.x, transform.position.y + 0.1f);
+        RaycastHit2D atthit2 = Physics2D.Raycast(myPos, Vector2.right, 1f * transform.lossyScale.x, findMask);     //长度应该是武器原本长度乘上缩放比例,实际要小一些
+        Debug.DrawRay(myPos, Vector2.right, Color.yellow, 1f * transform.lossyScale.x);
+        if (atthit2)
+        {
+            if (atthit2.transform.tag == "Enemy")     //已经接近敌人了
+            {
+                Debug.Log("突刺到了敌人面前");
+                SaberOneSkillEffectEnd();
+                SkillFinishedChange();
+            }
+        }
+    }
+       
+    /// <summary>
+    /// 剑士一技能突刺,特效的销毁
+    /// </summary>
+    void SaberOneSkillEffectEnd()
+    {
+        //生成技能特效
+        GameObject skillEffect = hero.transform.Find("Bones/Torso/L-arm/L-fist/Weapon/Skill_Saber01_Sprint").gameObject;
+        skillEffect.SetActive(false);
+        CancelInvoke("SaberWeaponRay");
+    }
     void HeroGo()
     {
         //轮询英雄状态
