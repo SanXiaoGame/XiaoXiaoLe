@@ -56,7 +56,7 @@ public class ColumnManager : ManagerBase<ColumnManager>
                 gameColumns[i].BlockObjectsScriptList[j].brust = true;
             }
         }
-        Invoke("MedicinalWaterAddMissingBlock", 0.35f);
+        vp_Timer.In(0.35f, new vp_Timer.Callback(MedicinalWaterAddMissingBlock));
     }
     /// <summary>
     /// 用于补充药水消的块

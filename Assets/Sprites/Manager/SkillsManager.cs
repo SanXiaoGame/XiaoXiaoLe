@@ -24,7 +24,7 @@ public class SkillsManager : ManagerBase<SkillsManager>
 
     protected override void Awake()
     {
-
+        base.Awake();
     }
 
     #region 英雄技能释放的接口方法
