@@ -83,6 +83,7 @@ public class DBOperation
     {
         //建立查询语句
         string query = ConstData.SELECT + ConstData.FROM01 + tableName;
+        //Debug.Log(query);
         return ExcuteSQLQuery(query);
     }
 

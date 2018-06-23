@@ -15,7 +15,7 @@ public struct SkillData
     public int skill_AddStateID2;
 }
 //剑士技能状态列表
-public enum SwordsmanSkillID
+public enum SaberSkillID
 {
     oneSkill = 3001,
     twoSkill = 3002,
@@ -33,7 +33,7 @@ public enum KnightSkillID
 }
 
 //法师技能列表
-public enum MasterSkillID
+public enum CasterSkillID
 {
     oneSkill = 3101,
     twoSkill = 3102,

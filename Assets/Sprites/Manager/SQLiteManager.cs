@@ -26,7 +26,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
     public Dictionary<int, PlayerData> playerDataSource = new Dictionary<int, PlayerData>();
     public Dictionary<int, SkillData> skillDataSource = new Dictionary<int, SkillData>();
     public Dictionary<int, StateData> stateDataSource = new Dictionary<int, StateData>();
-    public Dictionary<int, Hero> team = new Dictionary<int, Hero>();        //小队字典--from Duke 
+    public Dictionary<int, HeroData> team = new Dictionary<int, HeroData>();        //小队字典--from Duke 
     protected override void Awake()
     {
         base.Awake();
@@ -59,6 +59,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         writeData = new WriteData(dataBasePath);
 
         //取出数据存入字典
+        readData.GetData(ConstData.Bag);
         readData.GetData(ConstData.CharacterList);
         readData.GetData(ConstData.Enemy);
         readData.GetData(ConstData.Item);

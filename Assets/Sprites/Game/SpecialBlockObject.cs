@@ -22,7 +22,7 @@ public class SpecialBlockObject : MonoBehaviour
     {
         myPlayingObject = GetComponent<BlockObject>();
         //绑定块的点击事件
-        blockClick = UISceneWidget.Get(gameObject);
+        blockClick = GetComponent<UISceneWidget>();
         if (blockClick != null)
         {
             blockClick.PointerDown += BlockOnPointerDown;
@@ -54,16 +54,6 @@ public class SpecialBlockObject : MonoBehaviour
                     if (myPlayingObject.adjacentItems[i] != null && myPlayingObject.adjacentItems[i].gameObject.activeSelf)
                     {
                         myPlayingObject.adjacentItems[i].brust = true;
-                        if (i == 0)
-                        {
-                            myPlayingObject.adjacentItems[i].adjacentItems[2].brust = true;
-                            myPlayingObject.adjacentItems[i].adjacentItems[3].brust = true;
-                        }
-                        if (i == 1)
-                        {
-                            myPlayingObject.adjacentItems[i].adjacentItems[2].brust = true;
-                            myPlayingObject.adjacentItems[i].adjacentItems[3].brust = true;
-                        }
                         //记录消除的块数量
                         switch (myPlayingObject.adjacentItems[i].name)
                         {

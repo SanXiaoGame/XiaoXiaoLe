@@ -45,7 +45,7 @@ public class DataStreamsLoading : MonoBehaviour
             //拼接沙盒路径
             string persistentPath = System.IO.Path.Combine(Application.persistentDataPath, paths[i]);
             Debug.Log(persistentPath);
-
+            
             //拷贝streamPath到persistentPath
             WirteBytes(www.bytes, persistentPath);
         }

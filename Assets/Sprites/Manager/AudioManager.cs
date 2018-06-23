@@ -46,12 +46,14 @@ public class AudioManager : ManagerBase<AudioManager>
     /// <param 歌名="bgmName"></param>
     public void ReplaceBGM(BGM bgmType)
     {
-        clip = ResourcesManager.Instance.FindAudioClip(bgmType);
-        bgMusic.clip = null;
-        bgMusic.clip = clip;
+        switch (bgmType)
+        {
+            case BGM.MainCity:
+                clip = ResourcesManager.Instance.FindAudioClip(bgmType);
+                break;
+        }
         bgMusic.spatialBlend = 0f;
         bgMusic.loop = true;
-        bgMusic.Play();
     }
 
     /// <summary>
@@ -108,7 +110,7 @@ public class AudioManager : ManagerBase<AudioManager>
     /// <param 是否是2D播发器="is2D"></param>
     public void PlayEffectMusic(SoundEffect musicType, float is2D = 0f)
     {
-        //根据查找路径加载对应的音频剪辑
+        //根据查找路径加载对应的音频剪辑  
         clip = ResourcesManager.Instance.FindAudioClip(musicType);
         if (clip == null)
         {
@@ -123,33 +125,31 @@ public class AudioManager : ManagerBase<AudioManager>
         }
         if (tempAudio != null && !tempAudio.isPlaying)
         {
+            //重启播放器物体
+            tempAudio.gameObject.SetActive(true);
             //换音效
             tempAudio.clip = clip;
             //开始播放
             tempAudio.Play();
-            //启动状态延迟的协程
-            StartCoroutine("EffectMusicState", tempAudio);
         }
         else
         {
             //没有就创建新的
-            tempAudio = new GameObject(musicType.ToString()).AddComponent<AudioSource>();
+            AudioSource effectAudio = new GameObject(musicType.ToString()).AddComponent<AudioSource>();
             //添加声音文件
-            tempAudio.clip = clip;
+            effectAudio.clip = clip;
             //成为AudioManager的子物体
-            tempAudio.transform.parent = transform;
+            effectAudio.transform.parent = transform;
+            //加入队列
+            effectMusic.Enqueue(effectAudio);
             //不使用循环播放
-            tempAudio.loop = false;
-            //关闭开始就播放
-            tempAudio.playOnAwake = false;
+            effectAudio.loop = false;
             //设置2D/3D 默认2D
-            tempAudio.spatialBlend = is2D;
+            effectAudio.spatialBlend = is2D;
             //设置音量 默认1
-            tempAudio.volume = effectVolume;
-            //播放
-            tempAudio.Play();
+            effectAudio.volume = effectVolume;
             //启动状态延迟的协程
-            StartCoroutine("EffectMusicState", tempAudio);
+            StartCoroutine("EffectMusicState", effectAudio);
         }
     }
     /// <summary>
@@ -157,24 +157,14 @@ public class AudioManager : ManagerBase<AudioManager>
     /// </summary>
     /// <param 对应播放器="effectAudio"></param>
     /// <returns></returns>
-    IEnumerator EffectMusicState(AudioSource tempAudio)
+    IEnumerator EffectMusicState(AudioSource effectAudio)
     {
         //等待音效播放完
-        yield return new WaitForSeconds(tempAudio.clip.length);
-        EffectMusicEnqueue(tempAudio);
-    }
-
-    /// <summary>
-    /// 播放器重新入列
-    /// </summary>
-    /// <param 对应播放器="tempAudio"></param>
-    void EffectMusicEnqueue(AudioSource tempAudio)
-    {
+        yield return new WaitForSeconds(effectAudio.clip.length);
         //暂停播放
-        tempAudio.Stop();
-        tempAudio.clip = null;
-        //加入队列
-        effectMusic.Enqueue(tempAudio);
+        effectAudio.Stop();
+        //隐藏播放器物体
+        effectAudio.gameObject.SetActive(false);
         StopCoroutine("EffectMusicState");
     }
 }
