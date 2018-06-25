@@ -33,6 +33,7 @@ public class GameManager : ManagerBase<GameManager>
     private void Start()
     {
         Invoke("AssignNeighbours", 0.5f);
+        AudioManager.Instance.ReplaceBGM(BGM.maincity);
     }
 
     /// <summary>
