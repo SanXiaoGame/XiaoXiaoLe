@@ -28,16 +28,6 @@ public class ReadData
     /// </summary>
     public void GetData(string tbName)
     {
-        //清空数据
-        SQLiteManager.Instance.bagDataSource.Clear();
-        SQLiteManager.Instance.characterDataSource.Clear();
-        SQLiteManager.Instance.enemyDataSource.Clear();
-        SQLiteManager.Instance.itemDataSource.Clear();
-        SQLiteManager.Instance.lVDataSource.Clear();
-        SQLiteManager.Instance.playerDataSource.Clear();
-        SQLiteManager.Instance.skillDataSource.Clear();
-        SQLiteManager.Instance.stateDataSource.Clear();
-
         //执行查询操作
         SqliteDataReader reader = dbOperation.GetAllDataFromSQLTable(tbName);
         //读取对应表
@@ -211,15 +201,15 @@ public class ReadData
         {
             //获取读到内容中的字段,来保存对应的值
             int equipment_Id = reader.GetInt32(reader.GetOrdinal("ID"));
-            string equipmentNmae = reader.GetString(reader.GetOrdinal("item_Name"));
-            string equipmentType = reader.GetString(reader.GetOrdinal("item_Type"));
-            string equipmentClass = reader.GetString(reader.GetOrdinal("item_Description"));
-            int equipment_HP = reader.GetInt32(reader.GetOrdinal("item_Price"));
-            int equipment_AD = reader.GetInt32(reader.GetOrdinal("item_Diamond"));
-            int equipment_AP = reader.GetInt32(reader.GetOrdinal("item_Stockpile"));
-            int equipment_DEF = reader.GetInt32(reader.GetOrdinal("item_Price"));
-            int equipment_RES = reader.GetInt32(reader.GetOrdinal("item_Diamond"));
-            ulong equipmentPrice = (ulong)reader.GetInt32(reader.GetOrdinal("item_Stockpile"));
+            string equipmentNmae = reader.GetString(reader.GetOrdinal("equipment_Name"));
+            string equipmentType = reader.GetString(reader.GetOrdinal("equipment_Type"));
+            string equipmentClass = reader.GetString(reader.GetOrdinal("equipment_Class"));
+            int equipment_HP = reader.GetInt32(reader.GetOrdinal("equipment_HP"));
+            int equipment_AD = reader.GetInt32(reader.GetOrdinal("equipment_AD"));
+            int equipment_AP = reader.GetInt32(reader.GetOrdinal("equipment_AP"));
+            int equipment_DEF = reader.GetInt32(reader.GetOrdinal("equipment_DEF"));
+            int equipment_RES = reader.GetInt32(reader.GetOrdinal("equipment_RES"));
+            ulong equipmentPrice = (ulong)reader.GetInt32(reader.GetOrdinal("equipment_Price"));
             //创建模型
             EquipmentData equipmentData = new EquipmentData
             {

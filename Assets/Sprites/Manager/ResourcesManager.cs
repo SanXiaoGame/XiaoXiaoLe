@@ -21,7 +21,7 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
         base.Awake();
         blockAll = Resources.LoadAll(ConstData.BlockPrefabs);
         skillBlockAll = Resources.LoadAll(ConstData.SkillBlockPrefabs);
-        audioClipAll = Resources.LoadAll<AudioClip>(ConstData.SoundEffect);
+        audioClipAll = Resources.LoadAll<AudioClip>(ConstData.Sound);
         skillEffectAll= Resources.LoadAll(ConstData.SkillPrefabs);          //加载所有技能特效预制体到指定数组
     }
 

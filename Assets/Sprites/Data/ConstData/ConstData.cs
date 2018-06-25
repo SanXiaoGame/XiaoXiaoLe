@@ -24,7 +24,7 @@ public struct ConstData
     #endregion
 
     #region 音效文件夹
-    public const string SoundEffect = "Audios/SoundEffect";
+    public const string Sound = "Audios";
     #endregion
 
     #region 职业进化所需材料

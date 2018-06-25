@@ -58,6 +58,16 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         readData = new ReadData(dataBasePath);
         writeData = new WriteData(dataBasePath);
 
+        //清空数据
+        bagDataSource.Clear();
+        characterDataSource.Clear();
+        enemyDataSource.Clear();
+        itemDataSource.Clear();
+        lVDataSource.Clear();
+        playerDataSource.Clear();
+        skillDataSource.Clear();
+        Instance.stateDataSource.Clear();
+
         //取出数据存入字典
         readData.GetData(ConstData.Bag);
         readData.GetData(ConstData.CharacterList);

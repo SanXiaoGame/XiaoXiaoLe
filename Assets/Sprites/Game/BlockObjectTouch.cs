@@ -8,7 +8,7 @@ using DG.Tweening;
 /// <summary>
 /// 块的点击功能类
 /// </summary>
-public class BlockObjectTouch : UISceneWidget
+public class BlockObjectTouch : MonoBehaviour
 {
     //块的Image组件
     Image blockImage;
@@ -37,15 +37,8 @@ public class BlockObjectTouch : UISceneWidget
     private void Start()
     {
         //绑定块的拖拽事件
-        if (gameObject.GetComponent<UISceneWidget>() == null)
-        {
-            blockClick = gameObject.AddComponent<UISceneWidget>();
-        }
-        else
-        {
-            blockClick = gameObject.GetComponent<UISceneWidget>();
-        }
-        
+        blockClick = UISceneWidget.Get(gameObject);
+
         if (blockClick != null)
         {
             blockClick.PointerDown += BlockOnPointerDown;
@@ -198,8 +191,8 @@ public class BlockObjectTouch : UISceneWidget
     /// </summary>
     void ChangePositionBack(Transform block1, Transform block2)
     {
-        //播放交换的音效
-        AudioManager.Instance.PlayEffectMusic(SoundEffect.Attack);
+        //播放交换的音效(暂时不用)
+        //AudioManager.Instance.PlayEffectMusic(SoundEffect.Attack);
         //交换回来的动画
         Vector3 tempPos = block1.position;
         blockPos1.DOMove(blockPos1.position, 0.2f).SetDelay(0.25f);
