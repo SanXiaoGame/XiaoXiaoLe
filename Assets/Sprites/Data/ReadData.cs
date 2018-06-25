@@ -28,16 +28,6 @@ public class ReadData
     /// </summary>
     public void GetData(string tbName)
     {
-        //清空数据
-        SQLiteManager.Instance.bagDataSource.Clear();
-        SQLiteManager.Instance.characterDataSource.Clear();
-        SQLiteManager.Instance.enemyDataSource.Clear();
-        SQLiteManager.Instance.itemDataSource.Clear();
-        SQLiteManager.Instance.lVDataSource.Clear();
-        SQLiteManager.Instance.playerDataSource.Clear();
-        SQLiteManager.Instance.skillDataSource.Clear();
-        SQLiteManager.Instance.stateDataSource.Clear();
-
         //执行查询操作
         SqliteDataReader reader = dbOperation.GetAllDataFromSQLTable(tbName);
         //读取对应表
