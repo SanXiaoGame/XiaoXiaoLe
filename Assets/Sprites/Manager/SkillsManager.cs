@@ -665,19 +665,19 @@ public class SkillsManager : ManagerBase<SkillsManager>
     {
         switch (ProfessionID)
         {
-            case 1002:
+            case 1301:
                 UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.move.GetHashCode());
                 break;
-            case 1003:
+            case 1302:
                 UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.move.GetHashCode());
                 break;
-            case 1004:
+            case 1304:
                 UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.move.GetHashCode());
                 break;
-            case 1005:
+            case 1303:
                 UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.move.GetHashCode());
                 break;
-            case 1006:
+            case 1305:
                 UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.move.GetHashCode());
                 break;
             default:
@@ -696,19 +696,19 @@ public class SkillsManager : ManagerBase<SkillsManager>
     {
         switch (ProfessionID)
         {
-            case 1002:
+            case 1301:
                 UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.commonAttack.GetHashCode());
                 break;
-            case 1003:
+            case 1302:
                 UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.commonAttack.GetHashCode());
                 break;
-            case 1004:
+            case 1304:
                 UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.commonAttack.GetHashCode());
                 break;
-            case 1005:
+            case 1303:
                 UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.commonAttack.GetHashCode());
                 break;
-            case 1006:
+            case 1305:
                 UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.commonAttack.GetHashCode());
                 break;
             default:
@@ -729,19 +729,19 @@ public class SkillsManager : ManagerBase<SkillsManager>
 
         switch (ProfessionID)
         {
-            case 1002:
+            case 1301:
                 UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.win.GetHashCode());
                 break;
-            case 1003:
+            case 1302:
                 UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.win.GetHashCode());
                 break;
-            case 1004:
+            case 1304:
                 UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.win.GetHashCode());
                 break;
-            case 1005:
+            case 1303:
                 UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.win.GetHashCode());
                 break;
-            case 1006:
+            case 1305:
                 UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.win.GetHashCode());
                 break;
             default:
@@ -761,19 +761,19 @@ public class SkillsManager : ManagerBase<SkillsManager>
     {
         switch (ProfessionID)
         {
-            case 1002:
+            case 1301:
                 UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.diz.GetHashCode());
                 break;
-            case 1003:
+            case 1302:
                 UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.diz.GetHashCode());
                 break;
-            case 1004:
+            case 1304:
                 UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.diz.GetHashCode());
                 break;
-            case 1005:
+            case 1303:
                 UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.diz.GetHashCode());
                 break;
-            case 1006:
+            case 1305:
                 UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.diz.GetHashCode());
                 break;
             default:

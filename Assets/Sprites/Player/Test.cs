@@ -4,11 +4,11 @@ using UnityEngine;
 
 public enum Profession
 {
-    Saber = 1002,
-    Knight=1003,
-    Caster=1004,
-    Berserker=1005,
-    Hunter=1006
+    Saber = 1301,
+    Knight=1302,
+    Caster=1304,
+    Berserker=1303,
+    Hunter=1305
 }
 
 public class Test : MonoBehaviour
@@ -25,9 +25,38 @@ public class Test : MonoBehaviour
     SkillData skillData;
     private void Awake()
     {
-        InitData();
-        Init();
+        //InitData();
+        //Init();
+        //AddTeam();
+        //Debug.Log("team字典的元素个数:" + SQLiteManager.Instance.team.Count);
+
+    }
+    private void Start()
+    {
+        StartCoroutine("Wait");
+    }
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.1f);
+        //foreach (int item in SQLiteManager.Instance.playerDataSource.Keys)
+        //{
+        //    Debug.Log("英雄ID:"+SQLiteManager.Instance.playerDataSource[item].player_Id );
+        //}
+        //foreach (int item in SQLiteManager.Instance.playerDataSource.Keys)
+        //{
+        //    Debug.Log(SQLiteManager.Instance.playerDataSource[item].player_Name +
+        //       "Test类中--技能ID" + SQLiteManager.Instance.playerDataSource[item].skillOneID +
+        //       "状态ID" + SQLiteManager.Instance.playerDataSource[item].stateID);
+        //}
+        ////foreach (int item in SQLiteManager.Instance.skillDataSource.Keys)
+        ////{
+        ////    Debug.Log("技能名字"+SQLiteManager.Instance.skillDataSource[item].skill_Name);
+        ////}
+
+
+        AddTeam();
         Debug.Log("team字典的元素个数:" + SQLiteManager.Instance.team.Count);
+
     }
     private void Update()
     {
@@ -662,6 +691,7 @@ public class Test : MonoBehaviour
         SQLiteManager.Instance.playerDataSource.Add(playerData.player_Id, playerData);
         #endregion
         hero = new HeroData();
+        //PlayerData playerData= SQLiteManager.Instance.playerDataSource[1301];
         hero.playerData = SQLiteManager.Instance.playerDataSource[playerData.player_Id];
         hero.stateData = SQLiteManager.Instance.stateDataSource[playerData.stateID];
         hero.skillData = SQLiteManager.Instance.skillDataSource[playerData.skillOneID];
@@ -817,4 +847,42 @@ public class Test : MonoBehaviour
     }
     #endregion
 
+
+    #region public void AddTeam() 组建小队出战
+    public void AddTeam()
+    {
+        //SetHero(1300);
+        //SQLiteManager.Instance.team.Add(1300, SetHero(1300));        //将英雄添加到字典team
+        SQLiteManager.Instance.team.Add(1301, SetHero(1301));        //将英雄添加到字典team
+        SQLiteManager.Instance.team.Add(1302, SetHero(1302));        //将英雄添加到字典team
+        SQLiteManager.Instance.team.Add(1303, SetHero(1303));        //将英雄添加到字典team
+        SQLiteManager.Instance.team.Add(1304, SetHero(1304));        //将英雄添加到字典team
+        SQLiteManager.Instance.team.Add(1305, SetHero(1305));        //将英雄添加到字典team
+
+    }
+    #endregion
+
+    #region public HeroData SetHero(int  heroID) 构建英雄全装
+    public HeroData SetHero(int  heroID)
+    {
+        HeroData hero = new HeroData();
+        PlayerData playerData = SQLiteManager.Instance.playerDataSource[heroID];
+        hero.playerData = playerData;
+        //Debug.Log("构建的英雄名:" + hero.playerData.player_Name+"stateID:"+playerData.stateID);
+
+        hero.stateData = SQLiteManager.Instance.stateDataSource[playerData.stateID];
+        //Debug.Log("构建的英雄状态名:" + hero.stateData.state_Name);
+
+        hero.skillData = SQLiteManager.Instance.skillDataSource[playerData.skillOneID];
+        //Debug.Log("构建的英雄技能名:" + hero.skillData.skill_Name);
+
+        hero.starHP = hero.playerData.EXHP;
+        hero.currentAD = hero.playerData.EXAD;
+        hero.currentAP = hero.playerData.EXAP;
+        hero.currentDEF = hero.playerData.EXDEF;
+        hero.currentRES = hero.playerData.EXRES;
+        hero.currentStateID = hero.playerData.stateID;
+        return hero;
+    }
+    #endregion
 }

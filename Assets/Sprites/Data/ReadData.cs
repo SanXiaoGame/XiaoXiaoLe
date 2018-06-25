@@ -28,16 +28,6 @@ public class ReadData
     /// </summary>
     public void GetData(string tbName)
     {
-        //清空数据
-        SQLiteManager.Instance.bagDataSource.Clear();
-        SQLiteManager.Instance.characterDataSource.Clear();
-        SQLiteManager.Instance.enemyDataSource.Clear();
-        SQLiteManager.Instance.itemDataSource.Clear();
-        SQLiteManager.Instance.lVDataSource.Clear();
-        SQLiteManager.Instance.playerDataSource.Clear();
-        SQLiteManager.Instance.skillDataSource.Clear();
-        SQLiteManager.Instance.stateDataSource.Clear();
-
         //执行查询操作
         SqliteDataReader reader = dbOperation.GetAllDataFromSQLTable(tbName);
         //读取对应表
@@ -336,6 +326,8 @@ public class ReadData
             ulong GoldCoin = (ulong)reader.GetInt32(reader.GetOrdinal("GoldCoin"));
             int Diamond = reader.GetInt32(reader.GetOrdinal("Diamond"));
             int PrefabsID = reader.GetInt32(reader.GetOrdinal("PrefabsID"));
+            int stateID = reader.GetInt32(reader.GetOrdinal("stateID"));            //from Duek 6.24
+            //Debug.Log(stateID);
             //创建模型
             PlayerData playerData = new PlayerData();
             playerData.player_Id = player_Id;
@@ -362,8 +354,29 @@ public class ReadData
             playerData.GoldCoin = GoldCoin;
             playerData.Diamond = Diamond;
             playerData.PrefabsID = PrefabsID;
+            playerData.stateID = stateID;
             //加入到数据库
             SQLiteManager.Instance.playerDataSource.Add(playerData.player_Id, playerData);
+
+            //Debug.Log(SQLiteManager.Instance.playerDataSource[playerData.player_Id].player_Id+"+stateID:" + SQLiteManager.Instance.playerDataSource[playerData.player_Id].stateID);
+           
+            ////----------------------Duke------------------------- 修改----------------------------------------->>>>>>
+            //Debug.Log(SQLiteManager.Instance.playerDataSource[playerData.player_Id].player_Id);
+            //HeroData hero = new HeroData();
+            //hero.playerData = SQLiteManager.Instance.playerDataSource[playerData.player_Id];
+            //hero.stateData = SQLiteManager.Instance.stateDataSource[playerData.stateID];
+            //hero.skillData = SQLiteManager.Instance.skillDataSource[playerData.skillOneID];
+
+            //hero.starHP = hero.playerData.EXHP;
+            //hero.currentAD = hero.playerData.EXAD;
+            //hero.currentAP = hero.playerData.EXAP;
+            //hero.currentDEF = hero.playerData.EXDEF;
+            //hero.currentRES = hero.playerData.EXRES;
+            //hero.currentStateID = hero.playerData.stateID;
+
+            //SQLiteManager.Instance.team.Add(playerData.player_Id, hero);        //将英雄添加到字典team
+            //Debug.Log(SQLiteManager.Instance.team[playerData.player_Id].playerData.player_Name);
+            ////----------------------Duke------------------------- 修改-----------------------------------------<<<<<<<
         }
     }
     /// <summary>
@@ -396,6 +409,9 @@ public class ReadData
             };
             //加入到数据库
             SQLiteManager.Instance.skillDataSource.Add(skillData.skill_ID, skillData);
+            //Debug.Log("读取数据库放入技能字典"+SQLiteManager.Instance.skillDataSource[skillData.skill_ID].skill_ID +
+            //    SQLiteManager.Instance.skillDataSource[skillData.skill_ID].skill_Name);
+
         }
     }
     /// <summary>
@@ -426,6 +442,7 @@ public class ReadData
             };
             //加入到数据库
             SQLiteManager.Instance.stateDataSource.Add(stateData.StateID, stateData);
+            //Debug.Log("读取数据库到状态字典"+SQLiteManager.Instance.stateDataSource[stateData.StateID].StateID + SQLiteManager.Instance.stateDataSource[stateData.StateID].state_Name);
         }
     }
 
