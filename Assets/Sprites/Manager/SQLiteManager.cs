@@ -23,23 +23,13 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
     public Dictionary<int, EquipmentData> equipmentDataSource = new Dictionary<int, EquipmentData>();
     public Dictionary<int, ItemData> itemDataSource = new Dictionary<int, ItemData>();
     public Dictionary<int, LVData> lVDataSource = new Dictionary<int, LVData>();
-    public Dictionary<int, PlayerData> playerDataSource = new Dictionary<int, PlayerData>();
-    public Dictionary<int, SkillData> skillDataSource = new Dictionary<int, SkillData>();
-    public Dictionary<int, StateData> stateDataSource = new Dictionary<int, StateData>();
-    public Dictionary<int, Hero> team = new Dictionary<int, Hero>();        //小队字典--from Duke 
-    public List<GameObject> characterLists = new List<GameObject>();
-   
-    public List<GameObject> itemLists = new List<GameObject>();
-    public Dictionary<string, int> character = new Dictionary<string, int>();
+    public  Dictionary<int, PlayerData> playerDataSource = new Dictionary<int, PlayerData>();
+    public  Dictionary<int, SkillData> skillDataSource = new Dictionary<int, SkillData>();
+    public  Dictionary<int, StateData> stateDataSource = new Dictionary<int, StateData>();
+    public  Dictionary<int, HeroData> team = new Dictionary<int, HeroData>();        //小队字典--from Duke 
     protected override void Awake()
     {
         base.Awake();
-        //初始化数据源字典
-        /*if (dataSource == null)
-        {
-            dataSource = new Dictionary<int, object>();
-        }*/
-
         //启动流路径(将需要操作的文件从流路径拷贝到沙盒中)
         StreamsLoading = gameObject.AddComponent<DataStreamsLoading>();
 
@@ -62,15 +52,26 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         readData = new ReadData(dataBasePath);
         writeData = new WriteData(dataBasePath);
 
+        //清空数据
+        //读前先清空数据 ----修改于 6-25 日 from Duke 
+        bagDataSource.Clear();
+        characterDataSource.Clear();
+        enemyDataSource.Clear();
+        itemDataSource.Clear();
+        lVDataSource.Clear();
+        playerDataSource.Clear();
+        skillDataSource.Clear();
+        stateDataSource.Clear();
+
         //取出数据存入字典
         readData.GetData(ConstData.Bag);
         readData.GetData(ConstData.CharacterList);
         readData.GetData(ConstData.Enemy);
         readData.GetData(ConstData.Item);
         readData.GetData(ConstData.Level);
-        readData.GetData(ConstData.Player);
         readData.GetData(ConstData.Skill);
         readData.GetData(ConstData.State);
+        readData.GetData(ConstData.Player);
     }
 
     /// <summary>
