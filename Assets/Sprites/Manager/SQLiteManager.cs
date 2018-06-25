@@ -30,12 +30,6 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
     protected override void Awake()
     {
         base.Awake();
-        //初始化数据源字典
-        /*if (dataSource == null)
-        {
-            dataSource = new Dictionary<int, object>();
-        }*/
-
         //启动流路径(将需要操作的文件从流路径拷贝到沙盒中)
         StreamsLoading = gameObject.AddComponent<DataStreamsLoading>();
 
@@ -58,11 +52,8 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         readData = new ReadData(dataBasePath);
         writeData = new WriteData(dataBasePath);
 
-<<<<<<< HEAD
         //清空数据
-=======
         //读前先清空数据 ----修改于 6-25 日 from Duke 
->>>>>>> 支线-任广俊专用
         bagDataSource.Clear();
         characterDataSource.Clear();
         enemyDataSource.Clear();
@@ -70,14 +61,8 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         lVDataSource.Clear();
         playerDataSource.Clear();
         skillDataSource.Clear();
-<<<<<<< HEAD
-        Instance.stateDataSource.Clear();
-
-=======
         stateDataSource.Clear();
 
-        
->>>>>>> 支线-任广俊专用
         //取出数据存入字典
         readData.GetData(ConstData.Bag);
         readData.GetData(ConstData.CharacterList);
@@ -87,17 +72,6 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         readData.GetData(ConstData.Skill);
         readData.GetData(ConstData.State);
         readData.GetData(ConstData.Player);
-        //---Duke 修改了数据的读取顺序--06-23
-
-        //-----------------------------测试 from Duke---------------->>>>>
-        //int playerID = playerDataSource[1301].player_Id;
-        //string player_Name = playerDataSource[1301].player_Name;
-        //Debug.Log("player_Name:" + player_Name);
-        //string Skill_Name = skillDataSource[3001].skill_Name;
-        //Debug.Log("Skill_Name:" + Skill_Name);
-        //string state_Name = stateDataSource[3251].state_Name;
-        //Debug.Log("state_Name:" + state_Name);
-        //-----------------------------测试 from Duke----------------<<<<<<
     }
 
     /// <summary>
