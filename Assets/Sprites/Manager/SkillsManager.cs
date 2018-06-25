@@ -39,21 +39,19 @@ public class SkillsManager : ManagerBase<SkillsManager>
         string heroType = hero.playerData.player_Class;
         switch (heroType)
         {
-            case "剑士":
-            case "圣剑士":
+            case "Saber":
                 SaberSkillBySkillLevel(hero, skillLevel);
                 break;
-            case "骑士":
-            case "圣骑士":
+            case "Knight":
                 KnightFireSkillBySkillLevel(hero, skillLevel);
                 break;
-            case "法师":
+            case "Caster":
                 CasterFireSkillBySkillLevel(hero, skillLevel);
                 break;
-            case "猎人":
+            case "Hunter":
                 HunterFireSkillBySkillLevel(hero, skillLevel);
                 break;
-            case "狂战":
+            case "Berserker":
                 BerserkerFireSkillBySkillLevel(hero, skillLevel);
                 break;
             default:
@@ -240,7 +238,7 @@ public class SkillsManager : ManagerBase<SkillsManager>
 
         Debug.Log(" 突刺:这是" + hero.playerData.player_Name +
                   " 技能ID:" + SQLiteManager.Instance.skillDataSource[SaberSkillID.oneSkill.GetHashCode()].skill_ID +
-                  " 释放的攻击,技能名为:" + hero.skillData.skill_Name + 
+                  " 释放的攻击,技能名为:" + hero.skillData.skill_Name +
                   " 技能等级:" + hero.skillData.skill_DamageLevel);        //播放动画....//播放一技能动画
         //GameObject gameObject = new GameObject();
         //gameObject.AddComponent<BoxCollider2D>();
@@ -589,44 +587,44 @@ public class SkillsManager : ManagerBase<SkillsManager>
     }
     #endregion
 
-    #region private void UpdateHeroState(int heroID, int stateID)  改变玩家英雄状态的接口方法
-    /// <summary>
-    /// 更新玩家英雄们状态的接口方法
-    /// </summary>
-    /// <param name="heroID">英雄的职业ID.</param>
-    /// <param name="stateID">英雄的状态ID.</param>
-    private void UpdateHeroState(int heroID, int stateID)
-    {
-        //在PlayerDataSource字典里,将对应英雄的状态ID更改;
-        SQLiteManager.Instance.playerDataSource[heroID].stateID = stateID;
-        //英雄hero的PlayerDate数据重新从字典里获取PlayerData
-        SQLiteManager.Instance.team[heroID].playerData =
-                         SQLiteManager.Instance.playerDataSource[heroID];
-        //英雄的状态stateData数据,重新根据更改后的stateID获取
-        SQLiteManager.Instance.team[heroID].stateData =
-            SQLiteManager.Instance.stateDataSource[SQLiteManager.Instance.team[heroID].playerData.stateID];
-    }
-    #endregion
-    #region public void ChangeHeroState(int heroID, int stateID)  改变玩家英雄状态的接口方法
-    /// <summary>
-    /// 改变玩家英雄状态的接口方法
-    /// </summary>
-    /// <param name="heroID">英雄的职业ID.</param>
-    /// <param name="stateID">英雄的状态ID.</param>
-    public void ChangeHeroState(int heroID, int stateID)
-    {
-        //在PlayerDataSource字典里,将对应英雄的状态ID更改;
-        SQLiteManager.Instance.playerDataSource[heroID].stateID = stateID;
-        //英雄hero的PlayerDate数据重新从字典里获取PlayerData
-        SQLiteManager.Instance.team[heroID].playerData =
-                         SQLiteManager.Instance.playerDataSource[heroID];
-        //英雄的状态stateData数据,重新根据更改后的stateID获取
-        SQLiteManager.Instance.team[heroID].stateData =
-            SQLiteManager.Instance.stateDataSource[SQLiteManager.Instance.team[heroID].playerData.stateID];
-        //经过状态更新后,以后再监听的状态才会改变
-        ListionChangeState();
-    }
-    #endregion
+    //#region private void UpdateHeroState(int heroID, int stateID)  改变玩家英雄状态的接口方法
+    ///// <summary>
+    ///// 更新玩家英雄们状态的接口方法
+    ///// </summary>
+    ///// <param name="heroID">英雄的职业ID.</param>
+    ///// <param name="stateID">英雄的状态ID.</param>
+    ////private void UpdateHeroState(int heroID, int stateID)
+    ////{
+    ////    //在PlayerDataSource字典里,将对应英雄的状态ID更改;
+    ////    SQLiteManager.Instance.playerDataSource[heroID].stateID = stateID;
+    ////    //英雄hero的PlayerDate数据重新从字典里获取PlayerData
+    ////    SQLiteManager.Instance.team[heroID].playerData =
+    ////                     SQLiteManager.Instance.playerDataSource[heroID];
+    ////    //英雄的状态stateData数据,重新根据更改后的stateID获取
+    ////    SQLiteManager.Instance.team[heroID].stateData =
+    ////        SQLiteManager.Instance.stateDataSource[SQLiteManager.Instance.team[heroID].playerData.stateID];
+    ////}
+    //#endregion
+    //#region public void ChangeHeroState1(int heroID, int stateID)  改变玩家英雄状态的接口方法
+    ///// <summary>
+    ///// 改变玩家英雄状态的接口方法
+    ///// </summary>
+    ///// <param name="heroID">英雄的职业ID.</param>
+    ///// <param name="stateID">英雄的状态ID.</param>
+    //public void ChangeHeroState1(int heroID, int stateID)
+    //{
+    //    //在PlayerDataSource字典里,将对应英雄的状态ID更改;
+    //    SQLiteManager.Instance.playerDataSource[heroID].stateID = stateID;
+    //    //英雄hero的PlayerDate数据重新从字典里获取PlayerData
+    //    SQLiteManager.Instance.team[heroID].playerData =
+    //                     SQLiteManager.Instance.playerDataSource[heroID];
+    //    //英雄的状态stateData数据,重新根据更改后的stateID获取
+    //    SQLiteManager.Instance.team[heroID].stateData =
+    //        SQLiteManager.Instance.stateDataSource[SQLiteManager.Instance.team[heroID].playerData.stateID];
+    //    //经过状态更新后,以后再监听的状态才会改变
+    //    ListionChangeState();
+    //}
+    //#endregion
 
     #region void ChangeHerosIdle() 改变英雄们为Idle状态
     public void ChangeHerosIdle(int ProfessionID)
@@ -634,28 +632,23 @@ public class SkillsManager : ManagerBase<SkillsManager>
         switch (ProfessionID)
         {
             case 1002:
-                UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.idle.GetHashCode());
+                UpdateHeroState(Profession.Saber.GetHashCode(), ActionType.ActionEnum.Idle.ToString());
                 break;
             case 1003:
-                UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.idle.GetHashCode());
+                UpdateHeroState(Profession.Knight.GetHashCode(), ActionType.ActionEnum.Idle.ToString());
                 break;
             case 1004:
-                UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.idle.GetHashCode());
+                UpdateHeroState(Profession.Caster.GetHashCode(), ActionType.ActionEnum.Idle.ToString());
                 break;
             case 1005:
-                UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.idle.GetHashCode());
+                UpdateHeroState(Profession.Berserker.GetHashCode(), ActionType.ActionEnum.Idle.ToString());
                 break;
             case 1006:
-                UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.idle.GetHashCode());
+                UpdateHeroState(Profession.Hunter.GetHashCode(), ActionType.ActionEnum.Idle.ToString());
                 break;
             default:
                 break;
         }
-        //UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.idle.GetHashCode());
-        //UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.idle.GetHashCode());
-        //UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.idle.GetHashCode());
-        //UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.idle.GetHashCode());
-        //UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.idle.GetHashCode());
         ////经过状态更新后,以后再监听的状态才会改变
         ListionChangeState();
     }
@@ -666,19 +659,19 @@ public class SkillsManager : ManagerBase<SkillsManager>
         switch (ProfessionID)
         {
             case 1301:
-                UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.move.GetHashCode());
+                UpdateHeroState(Profession.Saber.GetHashCode(), ActionType.ActionEnum.Move.ToString());
                 break;
             case 1302:
-                UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.move.GetHashCode());
+                UpdateHeroState(Profession.Knight.GetHashCode(), ActionType.ActionEnum.Move.ToString());
                 break;
             case 1304:
-                UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.move.GetHashCode());
+                UpdateHeroState(Profession.Caster.GetHashCode(), ActionType.ActionEnum.Move.ToString());
                 break;
             case 1303:
-                UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.move.GetHashCode());
+                UpdateHeroState(Profession.Berserker.GetHashCode(), ActionType.ActionEnum.Move.ToString());
                 break;
             case 1305:
-                UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.move.GetHashCode());
+                UpdateHeroState(Profession.Hunter.GetHashCode(), ActionType.ActionEnum.Move.ToString());
                 break;
             default:
                 break;
@@ -697,28 +690,23 @@ public class SkillsManager : ManagerBase<SkillsManager>
         switch (ProfessionID)
         {
             case 1301:
-                UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.commonAttack.GetHashCode());
+                UpdateHeroState(Profession.Saber.GetHashCode(), ActionType.ActionEnum.CommonAttack.ToString());
                 break;
             case 1302:
-                UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.commonAttack.GetHashCode());
+                UpdateHeroState(Profession.Knight.GetHashCode(), ActionType.ActionEnum.CommonAttack.ToString());
                 break;
             case 1304:
-                UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.commonAttack.GetHashCode());
+                UpdateHeroState(Profession.Caster.GetHashCode(), ActionType.ActionEnum.CommonAttack.ToString());
                 break;
             case 1303:
-                UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.commonAttack.GetHashCode());
+                UpdateHeroState(Profession.Berserker.GetHashCode(), ActionType.ActionEnum.CommonAttack.ToString());
                 break;
             case 1305:
-                UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.commonAttack.GetHashCode());
+                UpdateHeroState(Profession.Hunter.GetHashCode(), ActionType.ActionEnum.CommonAttack.ToString());
                 break;
             default:
                 break;
         }
-        //UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.commonAttack.GetHashCode());
-        //UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.commonAttack.GetHashCode());
-        //UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.commonAttack.GetHashCode());
-        //UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.commonAttack.GetHashCode());
-        //UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.commonAttack.GetHashCode());
         //经过状态更新后,以后再监听的状态才会改变
         ListionChangeState();
     }
@@ -730,28 +718,23 @@ public class SkillsManager : ManagerBase<SkillsManager>
         switch (ProfessionID)
         {
             case 1301:
-                UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.win.GetHashCode());
+                UpdateHeroState(Profession.Saber.GetHashCode(), ActionType.ActionEnum.Win.ToString());
                 break;
             case 1302:
-                UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.win.GetHashCode());
+                UpdateHeroState(Profession.Knight.GetHashCode(), ActionType.ActionEnum.Win.ToString());
                 break;
             case 1304:
-                UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.win.GetHashCode());
+                UpdateHeroState(Profession.Caster.GetHashCode(), ActionType.ActionEnum.Win.ToString());
                 break;
             case 1303:
-                UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.win.GetHashCode());
+                UpdateHeroState(Profession.Berserker.GetHashCode(), ActionType.ActionEnum.Win.ToString());
                 break;
             case 1305:
-                UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.win.GetHashCode());
+                UpdateHeroState(Profession.Hunter.GetHashCode(), ActionType.ActionEnum.Win.ToString());
                 break;
             default:
                 break;
         }
-        //UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.win.GetHashCode());
-        //UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.win.GetHashCode());
-        //UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.win.GetHashCode());
-        //UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.win.GetHashCode());
-        //UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.win.GetHashCode());
         //经过状态更新后,以后再监听的状态才会改变
         ListionChangeState();
     }
@@ -762,32 +745,57 @@ public class SkillsManager : ManagerBase<SkillsManager>
         switch (ProfessionID)
         {
             case 1301:
-                UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.diz.GetHashCode());
+                UpdateHeroState(Profession.Saber.GetHashCode(), ActionType.ActionEnum.Diz.ToString());
                 break;
             case 1302:
-                UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.diz.GetHashCode());
+                UpdateHeroState(Profession.Knight.GetHashCode(), ActionType.ActionEnum.Diz.ToString());
                 break;
             case 1304:
-                UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.diz.GetHashCode());
+                UpdateHeroState(Profession.Caster.GetHashCode(), ActionType.ActionEnum.Diz.ToString());
                 break;
             case 1303:
-                UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.diz.GetHashCode());
+                UpdateHeroState(Profession.Berserker.GetHashCode(), ActionType.ActionEnum.Diz.ToString());
                 break;
             case 1305:
-                UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.diz.GetHashCode());
+                UpdateHeroState(Profession.Hunter.GetHashCode(), ActionType.ActionEnum.Diz.ToString());
                 break;
             default:
                 break;
         }
-        //UpdateHeroState(Profession.Saber.GetHashCode(), HeroState.diz.GetHashCode());
-        //UpdateHeroState(Profession.Knight.GetHashCode(), HeroState.diz.GetHashCode());
-        //UpdateHeroState(Profession.Caster.GetHashCode(), HeroState.diz.GetHashCode());
-        //UpdateHeroState(Profession.Berserker.GetHashCode(), HeroState.diz.GetHashCode());
-        //UpdateHeroState(Profession.Hunter.GetHashCode(), HeroState.diz.GetHashCode());
         //经过状态更新后,以后再监听的状态才会改变
         ListionChangeState();
     }
     #endregion
+
+
+
+
+    #region private void UpdateHeroState(int heroID, string actionName)  改变玩家英雄状态的接口方法
+    /// <summary>
+    /// 改变玩家英雄状态的接口方法
+    /// </summary>
+    /// <param name="heroID"></param>
+    /// <param name="actionName"></param>
+    private void UpdateHeroState(int heroID, string actionName)
+    {
+        SQLiteManager.Instance.team[heroID].ActionName = actionName;
+    }
+    #endregion
+    #region public void ChangeHeroState(int heroID, string  actionName))  改变玩家英雄状态的接口方法
+    /// <summary>
+    ///  改变玩家英雄状态的接口方法
+    /// </summary>
+    /// <param name="heroID"></param>
+    /// <param name="actionName"></param>
+    public void ChangeHeroState(int heroID, string  actionName)
+    {
+        SQLiteManager.Instance.team[heroID].ActionName = actionName;
+        //经过状态更新后,以后再监听的状态才会改变
+        ListionChangeState();
+        //Debug.Log(SQLiteManager.Instance.team[heroID].ActionName);
+    }
+    #endregion
+
 }
 
 
