@@ -35,23 +35,23 @@ public class PlayerController : MonoBehaviour
         string heroName = transform.name;
         if (heroName.Contains("Saber"))
         {
-            ProfessionID = 1002;
+            ProfessionID = 1301;
         }
         else if (heroName.Contains("Knight"))
         {
-            ProfessionID = 1003;
+            ProfessionID = 1302;
         }
         else if (heroName.Contains("Caster"))
         {
-            ProfessionID = 1004;
+            ProfessionID = 1304;
         }
         else if (heroName.Contains("Berserker"))
         {
-            ProfessionID = 1005;
+            ProfessionID = 1303;
         }
         else if (heroName.Contains("Hunter"))
         {
-            ProfessionID = 1006;
+            ProfessionID = 1305;
         }
        
         Debug.Log("英雄名:" + heroName+ "ProfessionID:" + ProfessionID);
@@ -67,9 +67,14 @@ public class PlayerController : MonoBehaviour
 
         enemyQueue = new Queue<GameObject>();
     }
+
     private void Start()
     {
-       
+        StartCoroutine("Wait");
+    }
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.3f);
         hero = SQLiteManager.Instance.team[ProfessionID];
 
         hero.transform = this.transform;
@@ -85,8 +90,6 @@ public class PlayerController : MonoBehaviour
         weaponRight = transform.Find("Bones/Torso/R-arm/R-fist/Weapon2");
         weapon = weaponLeft.transform.GetChild(0);
         Debug.Log("武器的名字为:" + weapon.name);
-   
-
 
         //监听hero状态
         SkillsManager.Listion += OnStateListion;
@@ -95,7 +98,6 @@ public class PlayerController : MonoBehaviour
         InvokeRepeating("FindEnemyLive", 0f, 0.1f); //每0.1秒查询是否有敌人
         //isFindEnemy = true;
         InvokeRepeating("AttackRange", 0f, 0.1f); //每0.1秒查询在英雄的攻击范围内是否有敌人
-
     }
 
     /// <summary>
@@ -165,7 +167,7 @@ public class PlayerController : MonoBehaviour
             if (isFindEnemy)
             {
                 Debug.Log("有敌人发现,还没进入攻击范围,英雄跑动");
-                //Debug.Log("在攻击圈外当前状态:" + hero.stateData.state_Name+"状态ID:"+hero.stateData.StateID);
+                Debug.Log("在攻击圈外当前状态:" + hero.stateData.state_Name + "状态ID:" + hero.stateData.StateID);
 
                 //if (hero.stateData.state_Name != "Move")
                 //{

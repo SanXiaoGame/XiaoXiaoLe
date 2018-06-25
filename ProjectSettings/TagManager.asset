@@ -9,6 +9,9 @@ TagManager:
   - SpecialBlock
   - SkillBlock
   - Enemy
+  - BerserkerWeapon
+  - SaberWeapon
+  - WinFlag
   layers:
   - Default
   - TransparentFX
@@ -21,7 +24,7 @@ TagManager:
   - Background
   - Scene
   - Player
-  - 
+  - EnemyLayer
   - 
   - 
   - 

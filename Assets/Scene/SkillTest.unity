@@ -1004,8 +1004,9 @@ GameObject:
   - component: {fileID: 715015786}
   - component: {fileID: 715015785}
   - component: {fileID: 715015787}
+  - component: {fileID: 715015788}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Ground
   m_TagString: Plane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1093,6 +1094,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 17.45, y: 1.92}
   m_EdgeRadius: 0
+--- !u!114 &715015788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 715015784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7837b6cce510da4f8689ba2642ae6eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1086779917 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1532468634183274, guid: 3c55fba41f6be98428ba054ca95a76ac,
@@ -1305,6 +1317,10 @@ Prefab:
         type: 2}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470597534033082, guid: 868a76522e07dc246a6b515fe88f23d7, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 120242126177666122, guid: 868a76522e07dc246a6b515fe88f23d7, type: 2}
