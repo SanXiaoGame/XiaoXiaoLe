@@ -69,7 +69,7 @@ public struct ConstData
     #endregion
 
     #region 金币上限
-    public const ulong GoldCoinMax = 999999999;
+    public const int GoldCoinMax = 999999999;
     #endregion
 
     #region 动画的行为
