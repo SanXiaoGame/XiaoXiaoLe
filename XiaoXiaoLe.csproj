@@ -274,6 +274,7 @@
     <Compile Include="Assets\Sprites\Data\ConstData\ConstData.cs" />
     <Compile Include="Assets\Sprites\Data\DataStreamsLoading.cs" />
     <Compile Include="Assets\Sprites\Data\EnemyData.cs" />
+    <Compile Include="Assets\Sprites\Data\EnumData\ActionType.cs" />
     <Compile Include="Assets\Sprites\Data\EnumData\GameType.cs" />
     <Compile Include="Assets\Sprites\Data\EnumData\MusicType.cs" />
     <Compile Include="Assets\Sprites\Data\EnumData\SkillEffectType.cs" />
@@ -300,9 +301,11 @@
     <Compile Include="Assets\Sprites\Manager\ObjectPoolBase.cs" />
     <Compile Include="Assets\Sprites\Manager\ObjectPoolManager.cs" />
     <Compile Include="Assets\Sprites\Manager\ResourcesManager.cs" />
+    <Compile Include="Assets\Sprites\Manager\SceneAss_Manager.cs" />
     <Compile Include="Assets\Sprites\Manager\SkillsManager.cs" />
     <Compile Include="Assets\Sprites\Manager\SQLiteManager.cs" />
     <Compile Include="Assets\Sprites\Manager\UIManager.cs" />
+    <Compile Include="Assets\Sprites\Player\ChangeSceneTest.cs" />
     <Compile Include="Assets\Sprites\Player\PlayerController.cs" />
     <Compile Include="Assets\Sprites\Player\Test.cs" />
     <Compile Include="Assets\Sprites\Skill\ArrowRainDown.cs" />
@@ -312,9 +315,11 @@
     <Compile Include="Assets\Sprites\Skill\Gungnir.cs" />
     <Compile Include="Assets\Sprites\Skill\IceCube.cs" />
     <Compile Include="Assets\Sprites\Skill\IceCubeBoom.cs" />
+    <Compile Include="Assets\Sprites\ToolClass\GameStart.cs" />
     <Compile Include="Assets\Sprites\ToolClass\StringSplicingTool.cs" />
     <Compile Include="Assets\Sprites\ToolClass\vp_Timer.cs" />
     <Compile Include="Assets\Sprites\UI\UIBase.cs" />
+    <Compile Include="Assets\Sprites\UI\UILoading.cs" />
     <Compile Include="Assets\Sprites\UI\UISceneWidget.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -337,7 +342,6 @@
     <None Include="Assets\Demigiant\DemiLib\Core\DemiLib.xml" />
     <None Include="Assets\Demigiant\DemiLib\Core\Editor\DemiEditor.xml" />
     <None Include="Assets\Demigiant\readme_DOTweenPro.txt" />
-    <None Include="Assets\Fonts\临时添加.txt" />
     <None Include="Assets\Materials\临时添加.txt" />
     <None Include="Assets\Models\临时添加.txt" />
     <None Include="Assets\Resources\Prefabs\LevelPrefabs\临时添加.txt" />
@@ -345,7 +349,6 @@
     <None Include="Assets\Resources\Texture\Player\临时添加.txt" />
     <None Include="Assets\Scene\ReadmeForSkillAnimation.txt" />
     <None Include="Assets\Sprites\AI\临时添加.txt" />
-    <None Include="Assets\Sprites\Player\临时添加.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

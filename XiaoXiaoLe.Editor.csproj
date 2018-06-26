@@ -475,7 +475,6 @@
     <None Include="Assets\Demigiant\DemiLib\Core\DemiLib.xml" />
     <None Include="Assets\Demigiant\DemiLib\Core\Editor\DemiEditor.xml" />
     <None Include="Assets\Demigiant\readme_DOTweenPro.txt" />
-    <None Include="Assets\Fonts\临时添加.txt" />
     <None Include="Assets\Materials\临时添加.txt" />
     <None Include="Assets\Models\临时添加.txt" />
     <None Include="Assets\Resources\Prefabs\LevelPrefabs\临时添加.txt" />
@@ -483,7 +482,6 @@
     <None Include="Assets\Resources\Texture\Player\临时添加.txt" />
     <None Include="Assets\Scene\ReadmeForSkillAnimation.txt" />
     <None Include="Assets\Sprites\AI\临时添加.txt" />
-    <None Include="Assets\Sprites\Player\临时添加.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
