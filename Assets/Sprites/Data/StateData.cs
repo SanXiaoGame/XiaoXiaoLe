@@ -39,65 +39,6 @@ public enum HeroState
     hunterTwoSkill=3271,
     hunterThreeSkill=3272,
 }
-////剑士技能状态列表
-//public enum SwordsmanState
-//{
-//    oneSkill = 3204,
-//    twoSkill = 3205,
-//    threeSkill = 3206,
-//    idle = 3201,
-//    move = 3202,
-//    commonAttack = 3203,
-//    await = 3208,
-//    diz = 3209,
-//    win = 3210,
-//    dead = 3211,
-   
-//}
-
-////骑士技能列表
-//public enum KnightState
-//{
-//    oneSkill = 3104,
-//    twoSkill = 3105,
-//    threeSkill = 3106,
-//    idle = 3201,
-//    move = 3202,
-//    commonAttack = 3203
-//}
-
-////法师技能列表
-//public enum MasterState
-//{
-//    oneSkill = 3101,
-//    twoSkill = 3102,
-//    threeSkill = 3103,
-//    idle = 3201,
-//    move = 3202,
-//    commonAttack = 3203
-//}
-
-////猎人技能列表
-//public enum HunterState
-//{
-//    oneSkill = 3007,
-//    twoSkill = 3008,
-//    threeSkill = 3009,
-//    idle = 3201,
-//    move = 3202,
-//    commonAttack = 3203
-//}
-
-////狂战士技能列表
-//public enum BerserkerState
-//{
-//    oneSkill = 3004,
-//    twoSkill = 3005,
-//    threeSkill = 3006,
-//    idle = 3201,
-//    move = 3202,
-//    commonAttack = 3203
-//}
 
 /// <summary>
 /// 状态名称
