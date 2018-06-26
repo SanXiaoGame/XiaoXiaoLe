@@ -41,6 +41,7 @@ public class DataStreamsLoading : MonoBehaviour
 #endif
             //下载该路径下的文件（本地的）
             WWW www = new WWW(streamPath);
+
             yield return www;
             //拼接沙盒路径
             string persistentPath = System.IO.Path.Combine(Application.persistentDataPath, paths[i]);

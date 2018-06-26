@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +17,6 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
     WriteData writeData;
 
     //数据源：用来保存读到的数据模型
-    //public Dictionary<int, object> dataSource;
     public Dictionary<int, BagData> bagDataSource = new Dictionary<int, BagData>();
     public Dictionary<int, CharacterListData> characterDataSource = new Dictionary<int, CharacterListData>();
     public Dictionary<int, EnemyData> enemyDataSource = new Dictionary<int, EnemyData>();
@@ -43,7 +43,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
     /// 当文件从流路径拷贝到沙盒路径完成时执行的回调函数，一旦该函数被成功回调，则意味着拷贝文件已完成，此时可执行存取等数据库操作
     /// </summary>
     string dataBasePath;
-    void OnLoadFinished()
+    internal void OnLoadFinished()
     {
         Debug.Log("路径拷贝完成");
         //数据库存放沙盒的路径
@@ -53,7 +53,6 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         writeData = new WriteData(dataBasePath);
 
         //清空数据
-        //读前先清空数据 ----修改于 6-25 日 from Duke 
         bagDataSource.Clear();
         characterDataSource.Clear();
         enemyDataSource.Clear();
@@ -72,6 +71,8 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         readData.GetData(ConstData.Skill);
         readData.GetData(ConstData.State);
         readData.GetData(ConstData.Player);
+        //执行读取结束委托
+        SceneAss_Manager.Instance.ExecutionOfEvent("TestScene");
     }
 
     /// <summary>

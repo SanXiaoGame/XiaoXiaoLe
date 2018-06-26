@@ -7,6 +7,21 @@ public struct ConstData
     public const string UIPrefabsPath = "Prefabs/UIPrefabs";
     #endregion
 
+    #region 所有UI预制体的画布名
+    public const string CanvasName = "/Canvas";
+    #endregion
+
+    #region 所有场景名
+    public const string LoadingScene = "LoadingScene";
+    #endregion
+
+    #region 所有UI预制体名
+    /// <summary>
+    /// 加载界面预制体
+    /// </summary>
+    public const string LoadingPrefab = "LoadingBG";
+    #endregion
+
     #region 所有游戏预制体文件夹
     //所有初始块的预制体
     public const string BlockPrefabs = "Prefabs/BlockPrefabs";
