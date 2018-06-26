@@ -15,10 +15,15 @@ public class ReadData
     {
         //初始化数据库对象
         string tempPath;
+        //#if UNITY_ANDROID
+        //        tempPath = "URI=file:" + path;
+        //#else
+        //        tempPath = "Data Source=" + path;
+        //#endif
 #if UNITY_ANDROID
         tempPath = "URI=file:" + path;
-#else
-        tempPath = "Data Source=" + path;
+#else 
+        tempPath = "data source=" + path;
 #endif
         dbOperation = new DBOperation(tempPath);
     }
@@ -209,7 +214,7 @@ public class ReadData
             int equipment_AP = reader.GetInt32(reader.GetOrdinal("equipment_AP"));
             int equipment_DEF = reader.GetInt32(reader.GetOrdinal("equipment_DEF"));
             int equipment_RES = reader.GetInt32(reader.GetOrdinal("equipment_RES"));
-            ulong equipmentPrice = (ulong)reader.GetInt32(reader.GetOrdinal("equipment_Price"));
+            int equipmentPrice = reader.GetInt32(reader.GetOrdinal("equipment_Price"));
             //创建模型
             EquipmentData equipmentData = new EquipmentData
             {
@@ -323,11 +328,10 @@ public class ReadData
             int player_Level = reader.GetInt32(reader.GetOrdinal("player_Level"));
             int player_Weapon = reader.GetInt32(reader.GetOrdinal("player_Weapon"));
             int player_Equipment = reader.GetInt32(reader.GetOrdinal("player_Equipment"));
-            ulong GoldCoin = (ulong)reader.GetInt32(reader.GetOrdinal("GoldCoin"));
+            int GoldCoin = reader.GetInt32(reader.GetOrdinal("GoldCoin"));
             int Diamond = reader.GetInt32(reader.GetOrdinal("Diamond"));
             int PrefabsID = reader.GetInt32(reader.GetOrdinal("PrefabsID"));
-            int stateID = reader.GetInt32(reader.GetOrdinal("stateID"));            //from Duek 6.24
-            //Debug.Log(stateID);
+
             //创建模型
             PlayerData playerData = new PlayerData();
             playerData.player_Id = player_Id;
@@ -354,29 +358,8 @@ public class ReadData
             playerData.GoldCoin = GoldCoin;
             playerData.Diamond = Diamond;
             playerData.PrefabsID = PrefabsID;
-            playerData.stateID = stateID;
             //加入到数据库
             SQLiteManager.Instance.playerDataSource.Add(playerData.player_Id, playerData);
-
-            //Debug.Log(SQLiteManager.Instance.playerDataSource[playerData.player_Id].player_Id+"+stateID:" + SQLiteManager.Instance.playerDataSource[playerData.player_Id].stateID);
-           
-            ////----------------------Duke------------------------- 修改----------------------------------------->>>>>>
-            //Debug.Log(SQLiteManager.Instance.playerDataSource[playerData.player_Id].player_Id);
-            //HeroData hero = new HeroData();
-            //hero.playerData = SQLiteManager.Instance.playerDataSource[playerData.player_Id];
-            //hero.stateData = SQLiteManager.Instance.stateDataSource[playerData.stateID];
-            //hero.skillData = SQLiteManager.Instance.skillDataSource[playerData.skillOneID];
-
-            //hero.starHP = hero.playerData.EXHP;
-            //hero.currentAD = hero.playerData.EXAD;
-            //hero.currentAP = hero.playerData.EXAP;
-            //hero.currentDEF = hero.playerData.EXDEF;
-            //hero.currentRES = hero.playerData.EXRES;
-            //hero.currentStateID = hero.playerData.stateID;
-
-            //SQLiteManager.Instance.team.Add(playerData.player_Id, hero);        //将英雄添加到字典team
-            //Debug.Log(SQLiteManager.Instance.team[playerData.player_Id].playerData.player_Name);
-            ////----------------------Duke------------------------- 修改-----------------------------------------<<<<<<<
         }
     }
     /// <summary>
@@ -409,9 +392,6 @@ public class ReadData
             };
             //加入到数据库
             SQLiteManager.Instance.skillDataSource.Add(skillData.skill_ID, skillData);
-            //Debug.Log("读取数据库放入技能字典"+SQLiteManager.Instance.skillDataSource[skillData.skill_ID].skill_ID +
-            //    SQLiteManager.Instance.skillDataSource[skillData.skill_ID].skill_Name);
-
         }
     }
     /// <summary>
@@ -442,7 +422,6 @@ public class ReadData
             };
             //加入到数据库
             SQLiteManager.Instance.stateDataSource.Add(stateData.StateID, stateData);
-            //Debug.Log("读取数据库到状态字典"+SQLiteManager.Instance.stateDataSource[stateData.StateID].StateID + SQLiteManager.Instance.stateDataSource[stateData.StateID].state_Name);
         }
     }
 

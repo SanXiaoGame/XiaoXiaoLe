@@ -12,5 +12,5 @@ public struct EquipmentData
     public int equipment_AP;
     public int equipment_DEF;
     public int equipment_RES;
-    public ulong equipmentPrice;
+    public int equipmentPrice;
 }
