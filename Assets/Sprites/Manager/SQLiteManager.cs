@@ -27,7 +27,6 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
     public  Dictionary<int, SkillData> skillDataSource = new Dictionary<int, SkillData>();
     public  Dictionary<int, StateData> stateDataSource = new Dictionary<int, StateData>();
     public  Dictionary<int, HeroData> team = new Dictionary<int, HeroData>();        //小队字典--from Duke 
-    public List<GameObject> characterLits = new List<GameObject>();
     protected override void Awake()
     {
         base.Awake();
@@ -37,7 +36,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         //是否拷贝完成
         StreamsLoading.onCopyFinished += OnLoadFinished;
         //开始拷贝（输入对应的表名）
-        StreamsLoading.LoadWitgPath(ConstData.SQLITE_NAME);
+        StreamsLoading.LoadWitgPath(new string[] { ConstData.SQLITE_NAME});
     }
 
     /// <summary>
@@ -48,8 +47,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
     {
         Debug.Log("路径拷贝完成");
         //数据库存放沙盒的路径
-        //dataBasePath = System.IO.Path.Combine(Application.persistentDataPath, ConstData.SQLITE_NAME);
-        dataBasePath = StringSplicingTool.StringSplicing(new string[] { Application.persistentDataPath,"/", ConstData.SQLITE_NAME });
+        dataBasePath = System.IO.Path.Combine(Application.persistentDataPath, ConstData.SQLITE_NAME);
         //初始化读和写的功能
         readData = new ReadData(dataBasePath);
         writeData = new WriteData(dataBasePath);
@@ -73,11 +71,8 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         readData.GetData(ConstData.Skill);
         readData.GetData(ConstData.State);
         readData.GetData(ConstData.Player);
-        print("获取完数据");
         //执行读取结束委托
-
-
-        SceneAss_Manager.Instance.ExecutionOfEvent("SkillTest");
+        SceneAss_Manager.Instance.ExecutionOfEvent("TestScene");
     }
 
     /// <summary>

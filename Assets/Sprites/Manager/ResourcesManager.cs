@@ -13,9 +13,11 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
     Object[] skillBlockAll;
     //所有初始块的预制体
     Object[] blockAll;
-
+    //所有UI预制体
+    Object[] UIPrefabAll;
     //所有英雄特效的预制体
     Object[] skillEffectAll;
+
     protected override void Awake()
     {
         base.Awake();
@@ -23,6 +25,7 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
         skillBlockAll = Resources.LoadAll(ConstData.SkillBlockPrefabs);
         audioClipAll = Resources.LoadAll<AudioClip>(ConstData.Sound);
         skillEffectAll= Resources.LoadAll(ConstData.SkillPrefabs);          //加载所有技能特效预制体到指定数组
+        UIPrefabAll = Resources.LoadAll(ConstData.UIPrefabsPath);
     }
 
     /// <summary>
@@ -78,6 +81,23 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
             if (skillEffectAll[i].name == skillEffect.ToString())
             {
                 return skillEffectAll[i]as GameObject;
+            }
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// 根据名字查找指定的UI预制体
+    /// </summary>
+    /// <param UI预制体名="name"></param>
+    /// <returns></returns>
+    public GameObject FindUIPrefab(string name)
+    {
+        for (int i = 0; i < UIPrefabAll.Length; i++)
+        {
+            if (UIPrefabAll[i].name == name)
+            {
+                return UIPrefabAll[i] as GameObject;
             }
         }
         return null;
