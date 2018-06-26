@@ -11,12 +11,6 @@ public class DataStreamsLoading : MonoBehaviour
     public delegate void OnCopyFinished();
     public event OnCopyFinished onCopyFinished;
 
-    internal WWW www;
-    //下载进度
-    internal float completeProgress = 0;
-    //是否下载完
-    internal bool isDownloaded = false;
-
     /// <summary>
     /// 加载本地路径下数据
     /// </summary>
@@ -46,13 +40,7 @@ public class DataStreamsLoading : MonoBehaviour
             streamPath = "file://" + streamPath;
 #endif
             //下载该路径下的文件（本地的）
-            www = new WWW(streamPath);
-
-            while (www.progress < 1f)
-            {
-                completeProgress = www.progress;
-                yield return new WaitForEndOfFrame();
-            }
+            WWW www = new WWW(streamPath);
 
             yield return www;
             //拼接沙盒路径
