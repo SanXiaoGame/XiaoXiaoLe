@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.tag=="SaberWeapon")
         {
-            Debug.Log("敌人被剑士所伤");
+            //Debug.Log("敌人被剑士所伤");
             hp -= 10;
            
         }

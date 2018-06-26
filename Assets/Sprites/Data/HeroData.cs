@@ -19,7 +19,9 @@ public class HeroData
     public int currentDEF;
     public int currentRES;
     public int currentStateID;
+    public int currentActionID;
 
+    public string ActionName ="Idle";
     public Transform transform;
     //public int heroID;
 }
