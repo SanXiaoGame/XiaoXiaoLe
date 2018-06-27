@@ -15,15 +15,10 @@ public class ReadData
     {
         //初始化数据库对象
         string tempPath;
-        //#if UNITY_ANDROID
-        //        tempPath = "URI=file:" + path;
-        //#else
-        //        tempPath = "Data Source=" + path;
-        //#endif
 #if UNITY_ANDROID
         tempPath = "URI=file:" + path;
-#else 
-        tempPath = "data source=" + path;
+#else
+                tempPath = "Data Source=" + path;
 #endif
         dbOperation = new DBOperation(tempPath);
     }
@@ -33,6 +28,7 @@ public class ReadData
     /// </summary>
     public void GetData(string tbName)
     {
+        
         //执行查询操作
         SqliteDataReader reader = dbOperation.GetAllDataFromSQLTable(tbName);
         //读取对应表

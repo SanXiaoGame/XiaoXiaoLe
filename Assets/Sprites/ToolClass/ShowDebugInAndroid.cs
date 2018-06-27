@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Text;
-using UnityEngine.SceneManagement;
 
 public class logdata
 {
     public string output = "";
     public string stack = "";
+    
     public static logdata Init(string o, string s)
     {
         logdata log = new logdata();
@@ -18,6 +18,8 @@ public class logdata
     }
     public void Show()
     {
+        GUI.skin.button.fontSize = 25;
+        GUI.skin.label.fontSize = 35;
         GUILayout.Label(output);
         GUILayout.Label(stack);
     }
@@ -67,6 +69,7 @@ public class ShowDebugInAndroid : MonoBehaviour
         //当对象超出范围，删除回调。  
         Application.RegisterLogCallback(null);
     }
+
     void HangleLog(string logString, string stackTrace, LogType type)
     {
         switch (type)

@@ -18,7 +18,7 @@ public struct StringSplicingTool
         {
             SplicingString = string.Format("{0}{1}", SplicingString, stringN[i]);
         }
-        Debug.Log(SplicingString);
+        //Debug.Log(SplicingString);
         return SplicingString;
     }
     /// <summary>
