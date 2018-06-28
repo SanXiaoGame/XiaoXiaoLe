@@ -56,7 +56,6 @@ public class BlockObject : MonoBehaviour
     /// </summary>
     private void AssignLRUD()
     {
-
         left1 = "left1";
         left2 = "left2";
         left3 = "left3";
@@ -133,6 +132,23 @@ public class BlockObject : MonoBehaviour
                     down3 = adjacentItems[3].adjacentItems[3].adjacentItems[3].name;
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// 不拖动时，也检测特殊块的形成
+    /// </summary>
+    internal void ExternalTestingpecialBlock(BlockObject blockObject)
+    {
+        //赋值正确块的blockObject
+        parentCallingScript = blockObject;
+        //重新找比对用邻居
+        AssignLRUD();
+        
+        if ((blockObject.name == left1 && blockObject.name == left2) || (blockObject.name == left1 && blockObject.name == right1) || (blockObject.name == right1 && blockObject.name == right2) || (blockObject.name == up1 && blockObject.name == up2) || (blockObject.name == up1 && blockObject.name == down1) || (blockObject.name == down1 && blockObject.name == down2))
+        {
+            // 特殊块形成的方法
+            CheckForSpecialBlockFormation(blockObject.name);
         }
     }
 

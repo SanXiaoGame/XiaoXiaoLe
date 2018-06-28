@@ -22,6 +22,12 @@ public class GameManager : ManagerBase<GameManager>
     internal int totalScore = 0;
     //游戏暂停开关
     bool isGamePause = false;
+    //交换块开关
+    internal bool props_CubeChangeSwitch = false;
+    //破坏块开关
+    internal bool props_CubeBreakSwitch = false;
+    //技能块生成开关
+    internal bool props_SkillCubeSwitch = false;
 
     protected override void Awake()
     {
