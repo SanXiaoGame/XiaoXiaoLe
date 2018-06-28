@@ -278,7 +278,7 @@ public class PlayerController : MonoBehaviour
     //IEnumerator   OnStateListion()
     private void OnStateListion()
     {
-        Debug.Log("此时的状态为:" + hero.ActionName);
+        //Debug.Log("此时的状态为:" + hero.ActionName);
         switch (hero.ActionName)
         {
             #region case "CommonAttack":所有英雄的普通攻击
@@ -334,14 +334,20 @@ public class PlayerController : MonoBehaviour
 
             #region case "KnightOneSkill": 骑士三种技能监听
             case "KnightOneSkill":
+                myRigidbody.velocity = Vector2.zero;
+                heroAnimator.SetBool("isRun", false);        //所有英雄移动
                 heroAnimator.SetTrigger("KnightSkill");
                 SkillsManager.Instance.FireSkill(hero, 1);
                 break;
             case "KnightTwoSkill":
+                myRigidbody.velocity = Vector2.zero;
+                heroAnimator.SetBool("isRun", false);        //所有英雄移动
                 heroAnimator.SetTrigger("KnightSkill");
                 SkillsManager.Instance.FireSkill(hero, 2);
                 break;
             case "KnightThreeSkill":
+                myRigidbody.velocity = Vector2.zero;
+                heroAnimator.SetBool("isRun", false);        //所有英雄移动
                 heroAnimator.SetTrigger("KnightSkill");
                 SkillsManager.Instance.FireSkill(hero, 3);
                 break;
@@ -349,14 +355,20 @@ public class PlayerController : MonoBehaviour
 
             #region case "CasterOneSkill": 法师三种技能监听
             case "CasterOneSkill":
+                myRigidbody.velocity = Vector2.zero;
+                heroAnimator.SetBool("isRun", false);        //所有英雄移动
                 heroAnimator.SetTrigger("CasterSkill");
                 SkillsManager.Instance.FireSkill(hero, 1);
                 break;
             case "CasterTwoSkill":
+                myRigidbody.velocity = Vector2.zero;
+                heroAnimator.SetBool("isRun", false);        //所有英雄移动
                 heroAnimator.SetTrigger("CasterSkill");
                 SkillsManager.Instance.FireSkill(hero, 2);
                 break;
             case "CasterThreeSkill":
+                myRigidbody.velocity = Vector2.zero;
+                heroAnimator.SetBool("isRun", false);        //所有英雄移动
                 heroAnimator.SetTrigger("CasterSkill");
                 SkillsManager.Instance.FireSkill(hero, 3);
                 break;
@@ -364,16 +376,22 @@ public class PlayerController : MonoBehaviour
 
             #region case "BerserkerOneSkill": 狂战三种技能监听
             case "BerserkerOneSkill":
+                myRigidbody.velocity = Vector2.zero;
+                heroAnimator.SetBool("isRun", false);        //所有英雄移动
                 heroAnimator.SetTrigger("BerserkerOneSkill");
                 SkillsManager.Instance.FireSkill(hero, 1);
 
                 break;
             case "BerserkerTwoSkill":
-                //狂战英雄二技能攻击,没有动画播放
+                //狂战英雄二技能攻击,没有动画播放    
+                myRigidbody.velocity = Vector2.zero;
+                heroAnimator.SetBool("isRun", false);        //所有英雄移动
                 SkillsManager.Instance.FireSkill(hero, 2);
 
                 break;
             case "BerserkerThreeSkill":
+                myRigidbody.velocity = Vector2.zero;
+                heroAnimator.SetBool("isRun", false);        //所有英雄移动
                 heroAnimator.SetTrigger("BerserkerThreeSkill");
                 SkillsManager.Instance.FireSkill(hero, 3);
 
@@ -382,14 +400,20 @@ public class PlayerController : MonoBehaviour
 
             #region case "HunterOneSkill": 猎人三种技能监听
             case "HunterOneSkill":
+                myRigidbody.velocity = Vector2.zero;
+                heroAnimator.SetBool("isRun", false);        //所有英雄移动
                 SkillsManager.Instance.FireSkill(hero, 1);
                 heroAnimator.SetTrigger("HunterSkill");
                 break;
             case "HunterTwoSkill":
+                myRigidbody.velocity = Vector2.zero;
+                heroAnimator.SetBool("isRun", false);        //所有英雄移动
                 SkillsManager.Instance.FireSkill(hero, 2);
                 heroAnimator.SetTrigger("HunterSkill");
                 break;
             case "HunterThreeSkill":
+                myRigidbody.velocity = Vector2.zero;
+                heroAnimator.SetBool("isRun", false);        //所有英雄移动
                 SkillsManager.Instance.FireSkill(hero, 3);
                 heroAnimator.SetTrigger("HunterSkill");
 
@@ -398,7 +422,7 @@ public class PlayerController : MonoBehaviour
             //case StateName.Idle:
             case "Idle":
                 //heroAnimator.SetTrigger("Idle");    //暂时用不上
-                weapon.GetComponent<PolygonCollider2D>().enabled = false;        //武器,剑士的剑关闭触发器
+                //weapon.GetComponent<PolygonCollider2D>().enabled = false;        //武器,剑士的剑关闭触发器
                 myRigidbody.velocity = Vector2.zero;
                 break;
             case "Await":
@@ -482,11 +506,13 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region void AttackRange()英雄的攻击范围内是否有怪并执行相应的动作
+    int tempCount;  //普通攻击即时
     /// <summary>
     /// 英雄的攻击范围内是否有怪并执行相应的动作
     /// </summary>
     void AttackRange()
     {
+        tempCount++;
         attRay.origin = transform.position;
         attRay.direction = Vector2.right;
         Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
@@ -498,8 +524,9 @@ public class PlayerController : MonoBehaviour
                 isAttackEnemy = true;
                 Debug.DrawRay(myPos, attRay.direction, Color.red, 1f * transform.lossyScale.x);
                 //Debug.Log("当前状态:" + hero.ActionName);
-                if (hero.ActionName == "Move" || hero.ActionName == "Idle")
+                if (hero.ActionName == "Move" || hero.ActionName == "Idle"&& tempCount>=10)
                 {
+                    tempCount = 0;
                     //攻击范围内发现有敌人,如果此时英雄处于移动或者发呆状态应立即转为普通攻击状态,其他状态(如技能)不切换
                     SkillsManager.Instance.ChangeHerosCommonAttack(ProfessionID);
                     OnStateListion();       //切换完成立即轮询执行
@@ -512,7 +539,7 @@ public class PlayerController : MonoBehaviour
             //攻击范围内没有敌人,如果检测到还有敌人的话,则跑动
             if (isFindEnemy)
             {
-                //Debug.Log("有敌人发现,还没进入攻击范围,英雄跑动");
+                Debug.Log("有敌人发现,还没进入攻击范围,英雄跑动");
                 //Debug.Log("在攻击圈外当前状态:" + hero.stateData.state_Name + "状态ID:" + hero.stateData.StateID);
 
                 //if (hero.stateData.state_Name != "Move")
@@ -563,7 +590,7 @@ public class PlayerController : MonoBehaviour
         //myRigidbody.position += Vector2.right;
         myRigidbody.velocity = Vector2.right * 1f;
         Debug.Log("Move--->");
-        SkillsManager.Instance.ChangeHeroState(hero.playerData.player_Id, ActionType.ActionEnum.Idle.ToString());
+        SkillsManager.Instance.ChangeHeroState(hero.playerData.player_Id, ActionEnum.Idle.ToString());
 
         //播放移动音效
         //AudioManager.Instance.PlayEffectBase(ResourcesManager.Instance.Load<AudioClip>(ResourcesEnum.SoundEffect.HellephantDeath));
@@ -706,29 +733,225 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void SkillFinishedChange()
     {
-        SkillsManager.Instance.ChangeHeroState(hero.playerData.player_Id, ActionType.ActionEnum.Idle.ToString());
+        SkillsManager.Instance.ChangeHeroState(hero.playerData.player_Id, ActionEnum.Idle.ToString());
     }
+    #region 剑士动画事件
     /// <summary>
     /// 剑士一技能突刺的特效预制体加载
     /// </summary>
     void SaberOneSkillEffectStart()
     {
         //生成技能特效
-        //GameObject iceOne = ResourcesManager.Instance.FindSkillEffect(SkillEffectType.SkillEffect.Skill_Saber01_Sprint);
-        //GameObject tempObj = Instantiate(iceOne) as GameObject;
-        GameObject skillEffect = hero.transform.Find("Bones/Torso/L-arm/L-fist/Weapon/Skill_Saber01_Sprint").gameObject;
-        skillEffect.SetActive(true);
+        GameObject Skill_Saber01_Sprint = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Saber01_Sprint);
+        GameObject weapon = hero.transform.Find("Bones/Torso/L-arm/L-fist/Weapon").gameObject;
+        WeaponEffect = Instantiate(Skill_Saber01_Sprint, weapon.transform) as GameObject;
+
+
+        //GameObject skillEffect = hero.transform.Find("Bones/Torso/L-arm/L-fist/Weapon/Skill_Saber01_Sprint").gameObject;
+        //skillEffect.SetActive(true);
         InvokeRepeating("SaberWeaponRay", 0f, 0.05f);
     }
     void SaberTwoSkillEffectStart()
     {
         //生成技能特效
-        //GameObject iceOne = ResourcesManager.Instance.FindSkillEffect(SkillEffectType.SkillEffect.Skill_Saber01_Sprint);
-        //GameObject tempObj = Instantiate(iceOne) as GameObject;
-        GameObject skillEffect = hero.transform.Find("Bones/Torso/L-arm/L-fist/Weapon/Skill_Saber01_Sprint").gameObject;
-        skillEffect.SetActive(true);
-        InvokeRepeating("SaberWeaponRay", 0f, 0.05f);
+        GameObject Skill_Saber02_ExplodingSword = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Saber02_ExplodingSword);
+        GameObject weapon = hero.transform.Find("Bones/Torso/L-arm/L-fist/Weapon").gameObject;
+        Vector3 pos = new Vector3(hero.transform.position.x + 1f, hero.transform.position.y - 0.2f);
+        Skill_Saber02_ExplodingSword.transform.position = pos;
+        WeaponEffect = Instantiate(Skill_Saber02_ExplodingSword) as GameObject;
+        Rigidbody2D tempRigibody2D = WeaponEffect.AddComponent<Rigidbody2D>();
+        tempRigibody2D.gravityScale = 0;
+        tempRigibody2D.velocity = Vector3.right * 5f;
+        //weapon.GetComponent<PolygonCollider2D>().enabled = true;
+        //InvokeRepeating("SaberWeaponRay", 0f, 0.05f);
+
     }
+    void SaberThreeSkill_1()
+    {
+        //生成技能特效
+        GameObject Skill_Saber03_SixSonicSlash01 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Saber03_SixSonicSlash01);
+        //Skill_Saber03_SixSonicSlash01.transform.position = Vector3.zero;
+        //Vector3 pos = new Vector3(hero.transform.position.x, hero.transform.position.y + 1.112f);
+        Vector3 pos = new Vector3(0,1.112f,0);
+        Skill_Saber03_SixSonicSlash01.transform.position = pos+this.transform.position;
+        WeaponEffect = Instantiate(Skill_Saber03_SixSonicSlash01) as GameObject;
+        Destroy(WeaponEffect, 0.5f);
+    }
+    void SaberThreeSkill_2()
+    {
+        //生成技能特效
+        GameObject Skill_Saber03_SixSonicSlash02 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Saber03_SixSonicSlash02);
+        //Skill_Saber03_SixSonicSlash02.transform.position = Vector3.zero;
+        //Vector3 pos = new Vector3(hero.transform.position.x + 0.74f, hero.transform.position.y - 0.139f);
+        Vector3 pos = new Vector3(2.31f, -0.1f, 0);
+        Skill_Saber03_SixSonicSlash02.transform.position = pos + this.transform.position;
+        WeaponEffect = Instantiate(Skill_Saber03_SixSonicSlash02) as GameObject;
+
+    }
+    void SaberThreeSkill_3()
+    {
+        //生成技能特效
+        GameObject Skill_Saber03_SixSonicSlash03 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Saber03_SixSonicSlash03);
+        //Skill_Saber03_SixSonicSlash03.transform.position = Vector3.zero;
+        //Vector3 pos = new Vector3(hero.transform.position.x - 0.566f, hero.transform.position.y - 0.068f);
+        Vector3 pos = new Vector3(-0.566f, -0.068f, 0);
+        Skill_Saber03_SixSonicSlash03.transform.position = pos + this.transform.position;
+        WeaponEffect = Instantiate(Skill_Saber03_SixSonicSlash03) as GameObject;
+        Destroy(WeaponEffect, 0.5f);
+
+    }
+    void SaberThreeSkill_4()
+    {
+        //生成技能特效
+        GameObject Skill_Saber03_SixSonicSlash04 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Saber03_SixSonicSlash04);
+        //Skill_Saber03_SixSonicSlash04.transform.position = Vector3.zero;
+        //Vector3 pos = new Vector3(hero.transform.position.x + 2.084f, hero.transform.position.y - 0.139f);
+        Vector3 pos = new Vector3(2.084f, -0.139f, 0);
+        Skill_Saber03_SixSonicSlash04.transform.position = pos + this.transform.position;
+        WeaponEffect = Instantiate(Skill_Saber03_SixSonicSlash04) as GameObject;
+
+    }
+    void SaberThreeSkill_5()
+    {
+        //生成技能特效
+        GameObject Skill_Saber03_SixSonicSlash05 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Saber03_SixSonicSlash05);
+        //Skill_Saber03_SixSonicSlash05.transform.position = Vector3.zero;
+        //Vector3 pos = new Vector3(hero.transform.position.x + 0.989f, hero.transform.position.y + 0.377f);
+        Vector3 pos = new Vector3(0.989f, 0.377f, 0);
+        Skill_Saber03_SixSonicSlash05.transform.position = pos + this.transform.position;
+        WeaponEffect = Instantiate(Skill_Saber03_SixSonicSlash05) as GameObject;
+
+    }
+    #endregion
+
+    #region 战士动画事件
+
+    void BerserkerOneSkillEffectStart()
+    {
+        GameObject Skill_Berserker01_LeapAttack = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Berserker01_LeapAttack);
+        GameObject weapon = hero.transform.Find("Bones/Torso/L-arm/L-fist/Weapon").gameObject;
+        Vector3 pos = new Vector3(hero.transform.position.x + 1f, hero.transform.position.y - 0.2f);
+        Skill_Berserker01_LeapAttack.transform.position = pos;
+        WeaponEffect = Instantiate(Skill_Berserker01_LeapAttack) as GameObject;
+
+        Destroy(WeaponEffect, 0.5f);
+    }
+
+    void BerserkerTwoSkillEffectStart()
+    {
+        GameObject Skill_Berserker02_Blood_01 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Berserker02_Blood_01);
+        Vector3 pos = new Vector3(hero.transform.position.x + 1f, hero.transform.position.y - 0.2f);
+        Skill_Berserker02_Blood_01.transform.position = pos;
+        WeaponEffect = Instantiate(Skill_Berserker02_Blood_01) as GameObject;
+        Destroy(WeaponEffect, 3f);
+    }
+    IEnumerator BerserkerThreeSkillEffectStart()
+    {
+        GameObject Skill_Berserker03_Fissure01 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Berserker03_Fissure01);
+        GameObject Skill_Berserker03_Fissure02 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Berserker03_Fissure02);
+        GameObject Skill_Berserker03_Fissure03 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Berserker03_Fissure03);
+        GameObject weapon = hero.transform.Find("Bones/Torso/L-arm/L-fist/Weapon").gameObject;
+
+
+        Vector3 pos1 = new Vector3(hero.transform.position.x + 1f , hero.transform.position.y - 0.2f );
+        Skill_Berserker03_Fissure01.transform.position = pos1;
+        Vector3 pos2 = new Vector3(hero.transform.position.x + 3f, hero.transform.position.y - 0.2f);
+        Skill_Berserker03_Fissure02.transform.position = pos2;
+        Vector3 pos3 = new Vector3(hero.transform.position.x + 2f, hero.transform.position.y - 0.2f);
+        Skill_Berserker03_Fissure03.transform.position = pos3;
+
+        GameObject WeaponEffect1 = Instantiate(Skill_Berserker03_Fissure01) as GameObject;
+        yield return new WaitForSeconds(0.5f);
+        GameObject WeaponEffect3 = Instantiate(Skill_Berserker03_Fissure03) as GameObject;
+        yield return new WaitForSeconds(0.5f);
+        GameObject WeaponEffect2 = Instantiate(Skill_Berserker03_Fissure02) as GameObject;
+        //估计三秒后动画播放玩,切换状态
+        vp_Timer.In(3f, new vp_Timer.Callback(delegate () { SkillFinishedChange(); }));
+
+    }
+
+    #endregion
+
+    #region 猎人动画事件 
+    void HunterAttackEffectStart()
+    {
+        //Debug.Log("猎人的普通攻击开始");
+        //生成技能特效
+        GameObject Effect_arrow = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_arrow);
+        GameObject weapon = hero.transform.Find("Bones/Torso/R-arm/R-fist/Weapon2").gameObject;
+        Vector3 pos = new Vector3(weapon.transform.position.x , weapon.transform.position.y - 0.2f);
+        Effect_arrow.transform.position = pos;
+        //tempRigibody2D.gravityScale = 0;
+        WeaponEffect = Instantiate(Effect_arrow) as GameObject;
+        Rigidbody2D tempRigibody2D = WeaponEffect.GetComponent<Rigidbody2D>();
+        tempRigibody2D.velocity = Vector3.right * 5f;
+
+    }
+    IEnumerator HunterOneSkillEffectStart()
+    {
+        GameObject weaponEffect;
+        if (hero.ActionName == "HunterOneSkill")
+        {
+            Debug.Log("猎人的1技能攻击开始");
+            weaponEffect = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Hunter01_ExplosionArrow); GameObject weapon = hero.transform.Find("Bones/Torso/R-arm/R-fist/Weapon2").gameObject;
+            Vector3 pos = new Vector3(weapon.transform.position.x, weapon.transform.position.y - 0.2f);
+            weaponEffect.transform.position = pos;
+            WeaponEffect = Instantiate(weaponEffect) as GameObject;
+            Rigidbody2D tempRigibody2D = WeaponEffect.GetComponent<Rigidbody2D>();
+            tempRigibody2D.velocity = Vector3.right * 5f;
+        }
+        else if (hero.ActionName == "HunterTwoSkill")
+        {
+            Debug.Log("猎人的2技能攻击开始");
+            weaponEffect = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Hunter02_VrilleArrow);
+            GameObject weapon = hero.transform.Find("Bones/Torso/R-arm/R-fist/Weapon2").gameObject;
+            Vector3 pos = new Vector3(weapon.transform.position.x, weapon.transform.position.y - 0.2f);
+            weaponEffect.transform.position = pos;
+            WeaponEffect = Instantiate(weaponEffect) as GameObject;
+
+            GameObject effect = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_arrowWind);
+            Vector3 pos2 = new Vector3(weapon.transform.position.x-1f, weapon.transform.position.y - 0.2f);
+            effect.transform.position = pos2;
+            effect = Instantiate(effect) as GameObject;
+
+            Rigidbody2D tempRigibody2D = WeaponEffect.GetComponent<Rigidbody2D>();
+            tempRigibody2D.velocity = Vector3.right * 5f;
+            Rigidbody2D tempRigibody2D2 = effect.GetComponent<Rigidbody2D>();
+            tempRigibody2D2.velocity = Vector3.right * 5f;
+
+            Destroy(effect, 3f);
+            Destroy(WeaponEffect, 3f);
+        }
+        else if (hero.ActionName == "HunterThreeSkill")
+        {
+            Debug.Log("猎人的3技能攻击开始");
+            weaponEffect = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Hunter03_ArrowRainShoot);
+            GameObject weapon = hero.transform.Find("Bones/Torso/R-arm/R-fist/Weapon2").gameObject;
+            Vector3 pos = new Vector3(weapon.transform.position.x, weapon.transform.position.y - 0.2f);
+            weaponEffect.transform.position = pos;
+            WeaponEffect = Instantiate(weaponEffect) as GameObject;
+            Rigidbody2D tempRigibody2D = WeaponEffect.GetComponent<Rigidbody2D>();
+            tempRigibody2D.velocity =  new Vector3(2f,1,0) * 5f;
+
+
+            yield return new WaitForSeconds(0.5f);
+            Destroy(WeaponEffect);
+            GameObject weaponEffect2 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Hunter03_ArrowRainDown);
+            Vector3 pos1 = new Vector3(WeaponEffect.transform.position.x-1f, WeaponEffect.transform.position.y - 1f);
+            Vector3 pos2 = new Vector3(WeaponEffect.transform.position.x, WeaponEffect.transform.position.y - 1f);
+            Vector3 pos3 = new Vector3(WeaponEffect.transform.position.x+1f, WeaponEffect.transform.position.y - 1f);
+            GameObject WeaponEffect1 = Instantiate(weaponEffect2, pos1,Quaternion.identity) as GameObject;
+            GameObject WeaponEffect2 = Instantiate(weaponEffect2, pos2, Quaternion.identity) as GameObject;
+            GameObject WeaponEffect3 = Instantiate(weaponEffect2, pos3, Quaternion.identity) as GameObject;
+
+            Destroy(WeaponEffect1, 2f);
+            Destroy(WeaponEffect2, 2f);
+            Destroy(WeaponEffect3, 2f);
+
+        }
+
+    }
+    #endregion
     void SaberWeaponRay()
     {
         //attRay.origin = transform.position;
@@ -741,32 +964,38 @@ public class PlayerController : MonoBehaviour
             if (atthit2.transform.tag == "Enemy")     //已经接近敌人了
             {
                 Debug.Log("突刺到了敌人面前");
-                //延时0.3秒关闭特效
-                vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { SaberOneSkillEffectEnd(); }));
+                if (WeaponEffect != null)
+                {
+                    //延时0.3秒关闭特效
+                    vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { SaberOneSkillEffectEnd(); }));
+                }
                 //SaberOneSkillEffectEnd();
                 SkillFinishedChange();
             }
         }
     }
+    GameObject WeaponEffect;
     /// <summary>
     /// 剑士一技能突刺,特效的销毁
     /// </summary>
     void SaberOneSkillEffectEnd()
     {
         //生成技能特效
-        GameObject skillEffect = hero.transform.Find("Bones/Torso/L-arm/L-fist/Weapon/Skill_Saber01_Sprint").gameObject;
-        skillEffect.SetActive(false);
+        //WeaponEffect = hero.transform.Find("Bones/Torso/L-arm/L-fist/Weapon/Skill_Saber01_Sprint(Clone)").gameObject;
+        Destroy(WeaponEffect);
+        //skillEffect.SetActive(false);
         CancelInvoke("SaberWeaponRay");
     }
     #endregion
 
+    #region 碰撞器触发事件
     //进入攻击范围
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag=="Enemy")
+        if (collision.tag == "Enemy")
         {
             //isAttackEnemy = true;
-            weapon.GetComponent<PolygonCollider2D>().enabled = false;
+            //weapon.GetComponent<PolygonCollider2D>().enabled = false;
             //myRigidbody.velocity = Vector2.zero;
         }
         else if (collision.tag == "WinFlag")
@@ -776,3 +1005,5 @@ public class PlayerController : MonoBehaviour
         }
     }
 }
+
+#endregion
