@@ -16,6 +16,8 @@ public class ColumnManager : ManagerBase<ColumnManager>
     internal int numberOfRows = 6;
     //记录当前的列（最开始左边的列数等于-1）
     internal int ColumnNumber = -1;
+    //记录吃了交换药后选中的两个块
+    internal List<BlockObject> exchangeBlock = new List<BlockObject>();
 
     protected override void Awake()
     {
