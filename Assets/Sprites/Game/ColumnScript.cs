@@ -144,7 +144,6 @@ public class ColumnScript : MonoBehaviour
 
                 //特殊块的预制体
                 GameObject specialBlock = BlockObjectsScriptList[i].specialObjectToForm;
-
                 if (specialBlock)
                 {
                     InstantiateSpecialBlock(i, specialBlock);
@@ -181,7 +180,7 @@ public class ColumnScript : MonoBehaviour
     {
         //需要添加块数 = 总行（默认6） - 剩余子物体（BlockObjectsScript脚本）
         numberOfItemsToAdd = LevelManager.Instance.numberOfRows - BlockObjectsScriptList.Count;
-        //print(numberOfItemsToAdd);
+
         if (numberOfItemsToAdd == 0)
         {
             return;
@@ -213,6 +212,7 @@ public class ColumnScript : MonoBehaviour
         //旧的块下降
         for (int i = numberOfItemsToAdd; i < BlockObjectsScriptList.Count; i++)
         {
+            //下降的动画
             BlockObjectsScriptList[i].transform.DOLocalMoveY(-i * 200, 0.1f).SetDelay(0.2f).SetEase(Ease.Linear);
         }
 

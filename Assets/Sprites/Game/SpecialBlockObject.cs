@@ -36,6 +36,11 @@ public class SpecialBlockObject : MonoBehaviour
     /// <param name="eventData"></param>
     private void BlockOnPointerDown(PointerEventData eventData)
     {
+        if (GameManager.Instance.props_CubeBreakSwitch || GameManager.Instance.props_CubeChangeSwitch || GameManager.Instance.props_SkillCubeSwitch)
+        {
+            return;
+        }
+
         //清零临时记录
         Berserker = 0;
         Caster = 0;
