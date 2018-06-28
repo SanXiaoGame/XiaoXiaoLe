@@ -16,15 +16,17 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
     //所有UI预制体
     Object[] UIPrefabAll;
     //所有英雄特效的预制体
-    Object[] skillEffectAll;
-
+    Object[] skillPrefabsAll;
+    //所有英雄特效的预制体
+    Object[] effectPrefabsAll;
     protected override void Awake()
     {
         base.Awake();
         blockAll = Resources.LoadAll(ConstData.BlockPrefabs);
         skillBlockAll = Resources.LoadAll(ConstData.SkillBlockPrefabs);
         audioClipAll = Resources.LoadAll<AudioClip>(ConstData.Sound);
-        skillEffectAll= Resources.LoadAll(ConstData.SkillPrefabs);          //加载所有技能特效预制体到指定数组
+        skillPrefabsAll = Resources.LoadAll(ConstData.SkillPrefabs);          //加载所有技能特效预制体到指定数组
+        effectPrefabsAll = Resources.LoadAll(ConstData.EffectPrefabs);          //加载所有特效预制体到指定数组
         UIPrefabAll = Resources.LoadAll(ConstData.UIPrefabsPath);
     }
 
@@ -74,18 +76,34 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
     /// </summary>
     /// <param name="skillEffect"></param>
     /// <returns></returns>
-    public GameObject FindSkillEffect(SkillEffectType.SkillEffect  skillEffect)
+    public GameObject FindPrefab(SkillPrefabs skillEffect)
     {
-        for (int i = 0; i < skillEffectAll.Length; i++)
+        for (int i = 0; i < skillPrefabsAll.Length; i++)
         {
-            if (skillEffectAll[i].name == skillEffect.ToString())
+            if (skillPrefabsAll[i].name == skillEffect.ToString())
             {
-                return skillEffectAll[i]as GameObject;
+                return skillPrefabsAll[i]as GameObject;
             }
         }
         return null;
     }
 
+    /// <summary>
+    /// 根据名字查找攻击特效预制体
+    /// </summary>
+    /// <param name="skillEffect"></param>
+    /// <returns></returns>
+    public GameObject FindPrefab(EffectPrefabs effect)
+    {
+        for (int i = 0; i < effectPrefabsAll.Length; i++)
+        {
+            if (effectPrefabsAll[i].name == effect.ToString())
+            {
+                return effectPrefabsAll[i] as GameObject;
+            }
+        }
+        return null;
+    }
     /// <summary>
     /// 根据名字查找指定的UI预制体
     /// </summary>

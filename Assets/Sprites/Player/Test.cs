@@ -850,14 +850,14 @@ public class Test : MonoBehaviour
     #endregion
 
     #region public HeroData SetHero(int  heroID) 构建英雄全装
-    public HeroData SetHero(int  heroID)
+    public HeroData SetHero(int heroID)
     {
         HeroData hero = new HeroData();
         PlayerData playerData = SQLiteManager.Instance.playerDataSource[heroID];
         hero.playerData = playerData;
         //Debug.Log("构建的英雄名:" + hero.playerData.player_Name+"stateID:"+playerData.stateID);
 
-        hero.stateData = SQLiteManager.Instance.stateDataSource[playerData.stateID];
+        hero.stateData = SQLiteManager.Instance.stateDataSource[3200];
         //Debug.Log("构建的英雄状态名:" + hero.stateData.state_Name);
 
         hero.skillData = SQLiteManager.Instance.skillDataSource[playerData.skillOneID];
