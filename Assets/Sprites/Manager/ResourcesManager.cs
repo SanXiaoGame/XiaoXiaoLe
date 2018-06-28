@@ -14,8 +14,10 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
     //所有初始块的预制体
     Object[] blockAll;
 
-    //所有英雄特效的预制体
+    //所有英雄技能特效的预制体
     Object[] skillEffectAll;
+    //所有英雄攻击特效的预制体
+    Object[] effectPrefabAll;
     protected override void Awake()
     {
         base.Awake();
@@ -23,6 +25,7 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
         skillBlockAll = Resources.LoadAll(ConstData.SkillBlockPrefabs);
         audioClipAll = Resources.LoadAll<AudioClip>(ConstData.Sound);
         skillEffectAll= Resources.LoadAll(ConstData.SkillPrefabs);          //加载所有技能特效预制体到指定数组
+        effectPrefabAll = Resources.LoadAll(ConstData.EffectPrefabs);          //加载所有技能特效预制体到指定数组
     }
 
     /// <summary>
@@ -71,13 +74,30 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
     /// </summary>
     /// <param name="skillEffect"></param>
     /// <returns></returns>
-    public GameObject FindSkillEffect(SkillEffectType.SkillEffect  skillEffect)
+    public GameObject FindPrefab(SkillPrefabs skillEffect)
     {
         for (int i = 0; i < skillEffectAll.Length; i++)
         {
             if (skillEffectAll[i].name == skillEffect.ToString())
             {
                 return skillEffectAll[i]as GameObject;
+            }
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// 根据名字查找攻击特效预制体
+    /// </summary>
+    /// <param name="skillEffect"></param>
+    /// <returns></returns>
+    public GameObject FindPrefab(EffectPrefabs effect)
+    {
+        for (int i = 0; i < effectPrefabAll.Length; i++)
+        {
+            if (effectPrefabAll[i].name == effect.ToString())
+            {
+                return effectPrefabAll[i] as GameObject;
             }
         }
         return null;

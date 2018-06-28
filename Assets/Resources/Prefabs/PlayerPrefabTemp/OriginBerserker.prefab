@@ -315,8 +315,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4742377988985634}
   - component: {fileID: 95497016890171248}
-  - component: {fileID: 50190238717797724}
   - component: {fileID: 114660074315083736}
+  - component: {fileID: 50190238717797724}
   - component: {fileID: 70445486549204642}
   m_Layer: 0
   m_Name: OriginBerserker
@@ -324,7 +324,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1795255793085288
 GameObject:
   m_ObjectHideFlags: 1
@@ -747,8 +747,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1793583794602340}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5209999, y: 1.218, z: 0.2172852}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalPosition: {x: -7.79, y: 1.1, z: 0.2172852}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4476874156275856}
   - {fileID: 4639993635946420}
@@ -1069,7 +1069,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Length: 0.079999976
+  m_Length: 0.08000006
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4480205810358944}
   m_AttachedIK: {fileID: 0}
@@ -1217,7 +1217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Length: 0.12000024
+  m_Length: 0.12000008
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4501487879890440}
   m_AttachedIK: {fileID: 0}
@@ -1280,7 +1280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Length: 0.08940995
+  m_Length: 0.089409836
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4045997437536194}
   m_AttachedIK: {fileID: 0}
@@ -1296,7 +1296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Length: 0.120000154
+  m_Length: 0.12000013
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4205182087491138}
   m_AttachedIK: {fileID: 0}
@@ -1348,7 +1348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Length: 0.15000102
+  m_Length: 0.15000118
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4523117416841092}
   m_AttachedIK: {fileID: 0}

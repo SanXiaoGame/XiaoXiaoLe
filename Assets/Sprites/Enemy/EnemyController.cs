@@ -9,15 +9,30 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.tag=="SaberWeapon")
         {
-            //Debug.Log("敌人被剑士所伤");
+            Debug.Log("敌人被剑士所伤");
             hp -= 10;
-           
         }
         else if (collision.tag == "BerserkerWeapon")
         {
             Debug.Log("敌人被狂战所伤");
             hp -= 10;
         }
+        else if (collision.tag == "HunterWeapon")
+        {
+            Debug.Log("敌人被猎人所伤");
+            hp -= 10;
+        }
+        else if (collision.tag == "CasterWeapon")
+        {
+            Debug.Log("敌人被法师所伤");
+            hp -= 10;
+        }
+        else if (collision.tag == "KnightWeapon")
+        {
+            Debug.Log("敌人被剑士所伤");
+            hp -= 10;
+        }
+
         if (hp <= 0)
         {
             hp = 0;
