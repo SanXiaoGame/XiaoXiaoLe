@@ -587,44 +587,7 @@ public class SkillsManager : ManagerBase<SkillsManager>
     }
     #endregion
 
-    //#region private void UpdateHeroState(int heroID, int stateID)  改变玩家英雄状态的接口方法
-    ///// <summary>
-    ///// 更新玩家英雄们状态的接口方法
-    ///// </summary>
-    ///// <param name="heroID">英雄的职业ID.</param>
-    ///// <param name="stateID">英雄的状态ID.</param>
-    ////private void UpdateHeroState(int heroID, int stateID)
-    ////{
-    ////    //在PlayerDataSource字典里,将对应英雄的状态ID更改;
-    ////    SQLiteManager.Instance.playerDataSource[heroID].stateID = stateID;
-    ////    //英雄hero的PlayerDate数据重新从字典里获取PlayerData
-    ////    SQLiteManager.Instance.team[heroID].playerData =
-    ////                     SQLiteManager.Instance.playerDataSource[heroID];
-    ////    //英雄的状态stateData数据,重新根据更改后的stateID获取
-    ////    SQLiteManager.Instance.team[heroID].stateData =
-    ////        SQLiteManager.Instance.stateDataSource[SQLiteManager.Instance.team[heroID].playerData.stateID];
-    ////}
-    //#endregion
-    //#region public void ChangeHeroState1(int heroID, int stateID)  改变玩家英雄状态的接口方法
-    ///// <summary>
-    ///// 改变玩家英雄状态的接口方法
-    ///// </summary>
-    ///// <param name="heroID">英雄的职业ID.</param>
-    ///// <param name="stateID">英雄的状态ID.</param>
-    //public void ChangeHeroState1(int heroID, int stateID)
-    //{
-    //    //在PlayerDataSource字典里,将对应英雄的状态ID更改;
-    //    SQLiteManager.Instance.playerDataSource[heroID].stateID = stateID;
-    //    //英雄hero的PlayerDate数据重新从字典里获取PlayerData
-    //    SQLiteManager.Instance.team[heroID].playerData =
-    //                     SQLiteManager.Instance.playerDataSource[heroID];
-    //    //英雄的状态stateData数据,重新根据更改后的stateID获取
-    //    SQLiteManager.Instance.team[heroID].stateData =
-    //        SQLiteManager.Instance.stateDataSource[SQLiteManager.Instance.team[heroID].playerData.stateID];
-    //    //经过状态更新后,以后再监听的状态才会改变
-    //    ListionChangeState();
-    //}
-    //#endregion
+  
 
     #region void ChangeHerosIdle() 改变英雄们为Idle状态
     public void ChangeHerosIdle(int ProfessionID)
