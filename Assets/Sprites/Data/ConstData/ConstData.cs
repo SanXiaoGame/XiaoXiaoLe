@@ -7,6 +7,25 @@ public struct ConstData
     public const string UIPrefabsPath = "Prefabs/UIPrefabs";
     #endregion
 
+    #region 所有英雄角色预制体文件夹
+    public const string PlayerPrefabs = "Prefabs/PlayerPrefabs";
+    #endregion
+
+    #region 所有UI预制体的画布名
+    public const string CanvasName = "/Canvas";
+    #endregion
+
+    #region 所有场景名
+    public const string LoadingScene = "LoadingScene";
+    #endregion
+
+    #region 所有UI预制体名
+    /// <summary>
+    /// 加载界面预制体
+    /// </summary>
+    public const string LoadingPrefab = "LoadingBG";
+    #endregion
+
     #region 所有游戏预制体文件夹
     //所有初始块的预制体
     public const string BlockPrefabs = "Prefabs/BlockPrefabs";
@@ -17,6 +36,11 @@ public struct ConstData
     #region 所有游戏英雄技能特效的预制体文件夹
     //所有英雄技能特效的预制体
     public const string SkillPrefabs = "Prefabs/SkillPrefabs";
+    #endregion
+
+    #region 所有游戏英雄攻击特效的预制体文件夹
+    //所有英雄技能特效的预制体
+    public const string EffectPrefabs = "Prefabs/EffectPrefabs";
     #endregion
 
     #region 音乐文件夹
@@ -54,7 +78,7 @@ public struct ConstData
     #endregion
 
     #region 金币上限
-    public const ulong GoldCoinMax = 999999999;
+    public const int GoldCoinMax = 999999999;
     #endregion
 
     #region 动画的行为
@@ -262,5 +286,96 @@ public struct ConstData
     /// 剑士块名
     /// </summary>
     public const string Saber = "Saber";
+    #endregion
+
+    #region 道具ID
+    /// <summary>
+    /// 恢复胶囊
+    /// </summary>
+    public const string CureCapsule = "2201";
+    /// <summary>
+    /// 兴奋剂
+    /// </summary>
+    public const string Stimulant = "2202";
+    /// <summary>
+    /// 复活十字架
+    /// </summary>
+    public const string ReviveCross = "2203";
+    /// <summary>
+    /// 方块粉碎剂
+    /// </summary>
+    public const string CubeBreak = "2204";
+    /// <summary>
+    /// 骸骨招魂幡
+    /// </summary>
+    public const string SkeletonSpiritism = "2205";
+    /// <summary>
+    /// 生命注射器
+    /// </summary>
+    public const string HealthSyringe = "2206";
+    /// <summary>
+    /// 肾上腺素注射器
+    /// </summary>
+    public const string ParanephrineSyringe = "2207";
+    /// <summary>
+    /// 神圣十字架
+    /// </summary>
+    public const string HolyCross = "2208";
+    /// <summary>
+    /// 方块传送剂
+    /// </summary>
+    public const string CubeTransfer = "2209";
+    /// <summary>
+    /// 幸运猫气球
+    /// </summary>
+    public const string LuckyCatBalloon = "2210";
+    /// <summary>
+    /// 恶灵招魂幡
+    /// </summary>
+    public const string GhostSpiritism = "2211";
+    /// <summary>
+    /// 剑士进阶石
+    /// </summary>
+    public const string SaberStone = "2301";
+    /// <summary>
+    /// 骑士进阶石
+    /// </summary>
+    public const string KnightStone = "2302";
+    /// <summary>
+    /// 猎人进阶石
+    /// </summary>
+    public const string HunterStone = "2303";
+    /// <summary>
+    /// 法师进阶石
+    /// </summary>
+    public const string CasterStone = "2304";
+    /// <summary>
+    /// 狂战士进阶石
+    /// </summary>
+    public const string BerserkerStone = "2305";
+    /// <summary>
+    /// 通关证明
+    /// </summary>
+    public const string GameClearProve = "2306";
+
+    #endregion
+
+    #region 角色管理
+    /// <summary>
+    /// 加载装备预制体路径
+    /// </summary>
+    public const string ItemPrefab = "Prefabs/ItemPrefabs/Item";
+    /// <summary>
+    /// 加载角色头像路径
+    /// </summary>
+    public const string CharacterHeadNamePrefab = "Prefabs/PlayerPrefabs/HeadPictrue";
+    /// <summary>
+    /// 加载角色路径
+    /// </summary>
+    public const string CharacterNamePrefab = "Prefabs/PlayerPrefabs/Character";
+    /// <summary>
+    /// 加载角色管理背包装备预制体
+    /// </summary>
+    public const string EquipmentPrefab = "Prefabs/ItemPrefabs/Equipment";
     #endregion
 }
