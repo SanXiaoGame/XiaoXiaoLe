@@ -19,6 +19,8 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
     Object[] skillPrefabsAll;
     //所有英雄特效的预制体
     Object[] effectPrefabsAll;
+    //所有英雄的预制体
+    Object[] HeroAll;
     protected override void Awake()
     {
         base.Awake();
@@ -116,6 +118,22 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
             if (UIPrefabAll[i].name == name)
             {
                 return UIPrefabAll[i] as GameObject;
+            }
+        }
+        return null;
+    }
+    /// <summary>
+    /// 根据名字查找指定的角色预制体
+    /// </summary>
+    /// <param 角色预制体名="name"></param>
+    /// <returns></returns>
+    public GameObject FindPlayerPrefab(string name)
+    {
+        for (int i = 0; i < HeroAll.Length; i++)
+        {
+            if (HeroAll[i].name == name)
+            {
+                return HeroAll[i] as GameObject;
             }
         }
         return null;
