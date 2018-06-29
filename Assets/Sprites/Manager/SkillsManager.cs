@@ -215,7 +215,7 @@ public class SkillsManager : ManagerBase<SkillsManager>
     /// </summary>
     public void HunterCommonAttack(HeroData hero)
     {
-        Debug.Log("释放猎人普通攻击");
+        //Debug.Log("释放猎人普通攻击");
 
     }
     /// <summary>
@@ -632,19 +632,19 @@ public class SkillsManager : ManagerBase<SkillsManager>
         switch (ProfessionID)
         {
             case 1002:
-                UpdateHeroState(Profession.Saber.GetHashCode(), ActionType.ActionEnum.Idle.ToString());
+                UpdateHeroState(Profession.Saber.GetHashCode(), ActionEnum.Idle.ToString());
                 break;
             case 1003:
-                UpdateHeroState(Profession.Knight.GetHashCode(), ActionType.ActionEnum.Idle.ToString());
+                UpdateHeroState(Profession.Knight.GetHashCode(), ActionEnum.Idle.ToString());
                 break;
             case 1004:
-                UpdateHeroState(Profession.Caster.GetHashCode(), ActionType.ActionEnum.Idle.ToString());
+                UpdateHeroState(Profession.Caster.GetHashCode(), ActionEnum.Idle.ToString());
                 break;
             case 1005:
-                UpdateHeroState(Profession.Berserker.GetHashCode(), ActionType.ActionEnum.Idle.ToString());
+                UpdateHeroState(Profession.Berserker.GetHashCode(), ActionEnum.Idle.ToString());
                 break;
             case 1006:
-                UpdateHeroState(Profession.Hunter.GetHashCode(), ActionType.ActionEnum.Idle.ToString());
+                UpdateHeroState(Profession.Hunter.GetHashCode(), ActionEnum.Idle.ToString());
                 break;
             default:
                 break;
@@ -659,19 +659,19 @@ public class SkillsManager : ManagerBase<SkillsManager>
         switch (ProfessionID)
         {
             case 1301:
-                UpdateHeroState(Profession.Saber.GetHashCode(), ActionType.ActionEnum.Move.ToString());
+                UpdateHeroState(Profession.Saber.GetHashCode(), ActionEnum.Move.ToString());
                 break;
             case 1302:
-                UpdateHeroState(Profession.Knight.GetHashCode(), ActionType.ActionEnum.Move.ToString());
+                UpdateHeroState(Profession.Knight.GetHashCode(), ActionEnum.Move.ToString());
                 break;
             case 1304:
-                UpdateHeroState(Profession.Caster.GetHashCode(), ActionType.ActionEnum.Move.ToString());
+                UpdateHeroState(Profession.Caster.GetHashCode(), ActionEnum.Move.ToString());
                 break;
             case 1303:
-                UpdateHeroState(Profession.Berserker.GetHashCode(), ActionType.ActionEnum.Move.ToString());
+                UpdateHeroState(Profession.Berserker.GetHashCode(), ActionEnum.Move.ToString());
                 break;
             case 1305:
-                UpdateHeroState(Profession.Hunter.GetHashCode(), ActionType.ActionEnum.Move.ToString());
+                UpdateHeroState(Profession.Hunter.GetHashCode(), ActionEnum.Move.ToString());
                 break;
             default:
                 break;
@@ -690,19 +690,19 @@ public class SkillsManager : ManagerBase<SkillsManager>
         switch (ProfessionID)
         {
             case 1301:
-                UpdateHeroState(Profession.Saber.GetHashCode(), ActionType.ActionEnum.CommonAttack.ToString());
+                UpdateHeroState(Profession.Saber.GetHashCode(), ActionEnum.CommonAttack.ToString());
                 break;
             case 1302:
-                UpdateHeroState(Profession.Knight.GetHashCode(), ActionType.ActionEnum.CommonAttack.ToString());
+                UpdateHeroState(Profession.Knight.GetHashCode(), ActionEnum.CommonAttack.ToString());
                 break;
             case 1304:
-                UpdateHeroState(Profession.Caster.GetHashCode(), ActionType.ActionEnum.CommonAttack.ToString());
+                UpdateHeroState(Profession.Caster.GetHashCode(), ActionEnum.CommonAttack.ToString());
                 break;
             case 1303:
-                UpdateHeroState(Profession.Berserker.GetHashCode(), ActionType.ActionEnum.CommonAttack.ToString());
+                UpdateHeroState(Profession.Berserker.GetHashCode(), ActionEnum.CommonAttack.ToString());
                 break;
             case 1305:
-                UpdateHeroState(Profession.Hunter.GetHashCode(), ActionType.ActionEnum.CommonAttack.ToString());
+                UpdateHeroState(Profession.Hunter.GetHashCode(), ActionEnum.CommonAttack.ToString());
                 break;
             default:
                 break;
@@ -718,19 +718,19 @@ public class SkillsManager : ManagerBase<SkillsManager>
         switch (ProfessionID)
         {
             case 1301:
-                UpdateHeroState(Profession.Saber.GetHashCode(), ActionType.ActionEnum.Win.ToString());
+                UpdateHeroState(Profession.Saber.GetHashCode(), ActionEnum.Win.ToString());
                 break;
             case 1302:
-                UpdateHeroState(Profession.Knight.GetHashCode(), ActionType.ActionEnum.Win.ToString());
+                UpdateHeroState(Profession.Knight.GetHashCode(), ActionEnum.Win.ToString());
                 break;
             case 1304:
-                UpdateHeroState(Profession.Caster.GetHashCode(), ActionType.ActionEnum.Win.ToString());
+                UpdateHeroState(Profession.Caster.GetHashCode(), ActionEnum.Win.ToString());
                 break;
             case 1303:
-                UpdateHeroState(Profession.Berserker.GetHashCode(), ActionType.ActionEnum.Win.ToString());
+                UpdateHeroState(Profession.Berserker.GetHashCode(), ActionEnum.Win.ToString());
                 break;
             case 1305:
-                UpdateHeroState(Profession.Hunter.GetHashCode(), ActionType.ActionEnum.Win.ToString());
+                UpdateHeroState(Profession.Hunter.GetHashCode(), ActionEnum.Win.ToString());
                 break;
             default:
                 break;
@@ -745,19 +745,19 @@ public class SkillsManager : ManagerBase<SkillsManager>
         switch (ProfessionID)
         {
             case 1301:
-                UpdateHeroState(Profession.Saber.GetHashCode(), ActionType.ActionEnum.Diz.ToString());
+                UpdateHeroState(Profession.Saber.GetHashCode(), ActionEnum.Diz.ToString());
                 break;
             case 1302:
-                UpdateHeroState(Profession.Knight.GetHashCode(), ActionType.ActionEnum.Diz.ToString());
+                UpdateHeroState(Profession.Knight.GetHashCode(), ActionEnum.Diz.ToString());
                 break;
             case 1304:
-                UpdateHeroState(Profession.Caster.GetHashCode(), ActionType.ActionEnum.Diz.ToString());
+                UpdateHeroState(Profession.Caster.GetHashCode(), ActionEnum.Diz.ToString());
                 break;
             case 1303:
-                UpdateHeroState(Profession.Berserker.GetHashCode(), ActionType.ActionEnum.Diz.ToString());
+                UpdateHeroState(Profession.Berserker.GetHashCode(), ActionEnum.Diz.ToString());
                 break;
             case 1305:
-                UpdateHeroState(Profession.Hunter.GetHashCode(), ActionType.ActionEnum.Diz.ToString());
+                UpdateHeroState(Profession.Hunter.GetHashCode(), ActionEnum.Diz.ToString());
                 break;
             default:
                 break;

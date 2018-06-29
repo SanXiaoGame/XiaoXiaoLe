@@ -98,11 +98,11 @@ public class Test : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             //改变玩家英雄的状态
-            SkillsManager.Instance.ChangeHeroState(Profession.Saber.GetHashCode(), ActionType.ActionEnum.Dead.ToString());
-            SkillsManager.Instance.ChangeHeroState(Profession.Knight.GetHashCode(), ActionType.ActionEnum.Dead.ToString());
-            SkillsManager.Instance.ChangeHeroState(Profession.Caster.GetHashCode(), ActionType.ActionEnum.Dead.ToString());
-            SkillsManager.Instance.ChangeHeroState(Profession.Berserker.GetHashCode(), ActionType.ActionEnum.Dead.ToString());
-            SkillsManager.Instance.ChangeHeroState(Profession.Hunter.GetHashCode(), ActionType.ActionEnum.Dead.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Saber.GetHashCode(), ActionEnum.Dead.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Knight.GetHashCode(), ActionEnum.Dead.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Caster.GetHashCode(), ActionEnum.Dead.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Berserker.GetHashCode(), ActionEnum.Dead.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Hunter.GetHashCode(), ActionEnum.Dead.ToString());
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -121,84 +121,85 @@ public class Test : MonoBehaviour
             //改变玩家英雄的状态
             //SkillsManager.Instance.ChangeHeroState(Profession.Saber.GetHashCode(), HeroState.saberOneSkill.GetHashCode());
 
-            SkillsManager.Instance.ChangeHeroState(Profession.Saber.GetHashCode(), ActionType.ActionEnum.SaberOneSkill.ToString());
-            //Debug.Log("剑士一技能名:" + ActionType.ActionEnum.SaberOneSkill);
+            SkillsManager.Instance.ChangeHeroState(Profession.Saber.GetHashCode(), ActionEnum.SaberOneSkill.ToString());
+            //Debug.Log("剑士一技能名:" + ActionEnum.SaberOneSkill);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             //改变玩家英雄的状态
             //SkillsManager.Instance.ChangeHeroState(Profession.Saber.GetHashCode(), HeroState.saberTwoSkill.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Saber.GetHashCode(), ActionType.ActionEnum.SaberTwoSkill.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Saber.GetHashCode(), ActionEnum.SaberTwoSkill.ToString());
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             //改变玩家英雄的状态
             //SkillsManager.Instance.ChangeHeroState(Profession.Saber.GetHashCode(), HeroState.saberThreeSkill.GetHashCode());
-            SkillsManager.Instance.ChangeHeroState(Profession.Saber.GetHashCode(), ActionType.ActionEnum.SaberThreeSkill.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Saber.GetHashCode(), ActionEnum.SaberThreeSkill.ToString());
         }
         //-----------------------------骑士
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             //改变玩家英雄的状态
-            SkillsManager.Instance.ChangeHeroState(Profession.Knight.GetHashCode(), ActionType.ActionEnum.KnightOneSkill.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Knight.GetHashCode(), ActionEnum.KnightOneSkill.ToString());
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             //改变玩家英雄的状态
-            SkillsManager.Instance.ChangeHeroState(Profession.Knight.GetHashCode(), ActionType.ActionEnum.KnightTwoSkill.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Knight.GetHashCode(), ActionEnum.KnightTwoSkill.ToString());
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
             //改变玩家英雄的状态
-            SkillsManager.Instance.ChangeHeroState(Profession.Knight.GetHashCode(), ActionType.ActionEnum.KnightThreeSkill.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Knight.GetHashCode(), ActionEnum.KnightThreeSkill.ToString());
         }
         //-----------------------------法师
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
             //改变玩家英雄的状态
-            SkillsManager.Instance.ChangeHeroState(Profession.Caster.GetHashCode(), ActionType.ActionEnum.CasterOneSkill.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Caster.GetHashCode(), ActionEnum.CasterOneSkill.ToString());
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
             //改变玩家英雄的状态
-            SkillsManager.Instance.ChangeHeroState(Profession.Caster.GetHashCode(), ActionType.ActionEnum.CasterTwoSkill.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Caster.GetHashCode(), ActionEnum.CasterTwoSkill.ToString());
         }
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
             //改变玩家英雄的状态
-            SkillsManager.Instance.ChangeHeroState(Profession.Caster.GetHashCode(), ActionType.ActionEnum.CasterThreeSkill.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Caster.GetHashCode(), ActionEnum.CasterThreeSkill.ToString());
         }
         //-----------------------------狂战士
         if (Input.GetKeyDown(KeyCode.Z))
         {
             //改变玩家英雄的状态
-            SkillsManager.Instance.ChangeHeroState(Profession.Berserker.GetHashCode(), ActionType.ActionEnum.BerserkerOneSkill.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Berserker.GetHashCode(), ActionEnum.BerserkerOneSkill.ToString());
+
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
             //改变玩家英雄的状态
-            SkillsManager.Instance.ChangeHeroState(Profession.Berserker.GetHashCode(), ActionType.ActionEnum.BerserkerTwoSkill.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Berserker.GetHashCode(), ActionEnum.BerserkerTwoSkill.ToString());
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
             //改变玩家英雄的状态
-            SkillsManager.Instance.ChangeHeroState(Profession.Berserker.GetHashCode(), ActionType.ActionEnum.BerserkerThreeSkill.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Berserker.GetHashCode(), ActionEnum.BerserkerThreeSkill.ToString());
         }
         //---------------------------------猎人
         if (Input.GetKeyDown(KeyCode.V))
         {
             //改变玩家英雄的状态
-            SkillsManager.Instance.ChangeHeroState(Profession.Hunter.GetHashCode(), ActionType.ActionEnum.HunterOneSkill.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Hunter.GetHashCode(), ActionEnum.HunterOneSkill.ToString());
         }
         if (Input.GetKeyDown(KeyCode.B))
         {
             //改变玩家英雄的状态
-            SkillsManager.Instance.ChangeHeroState(Profession.Hunter.GetHashCode(), ActionType.ActionEnum.HunterTwoSkill.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Hunter.GetHashCode(), ActionEnum.HunterTwoSkill.ToString());
         }
         if (Input.GetKeyDown(KeyCode.N))
         {
             //改变玩家英雄的状态
-            SkillsManager.Instance.ChangeHeroState(Profession.Hunter.GetHashCode(), ActionType.ActionEnum.HunterThreeSkill.ToString());
+            SkillsManager.Instance.ChangeHeroState(Profession.Hunter.GetHashCode(), ActionEnum.HunterThreeSkill.ToString());
         }
    
     }
@@ -849,14 +850,14 @@ public class Test : MonoBehaviour
     #endregion
 
     #region public HeroData SetHero(int  heroID) 构建英雄全装
-    public HeroData SetHero(int  heroID)
+    public HeroData SetHero(int heroID)
     {
         HeroData hero = new HeroData();
         PlayerData playerData = SQLiteManager.Instance.playerDataSource[heroID];
         hero.playerData = playerData;
         //Debug.Log("构建的英雄名:" + hero.playerData.player_Name+"stateID:"+playerData.stateID);
 
-        hero.stateData = SQLiteManager.Instance.stateDataSource[playerData.stateID];
+        hero.stateData = SQLiteManager.Instance.stateDataSource[3200];
         //Debug.Log("构建的英雄状态名:" + hero.stateData.state_Name);
 
         hero.skillData = SQLiteManager.Instance.skillDataSource[playerData.skillOneID];

@@ -12,6 +12,9 @@ TagManager:
   - BerserkerWeapon
   - SaberWeapon
   - WinFlag
+  - HunterWeapon
+  - CasterWeapon
+  - KnightWeapon
   layers:
   - Default
   - TransparentFX
