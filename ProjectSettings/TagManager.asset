@@ -9,12 +9,21 @@ TagManager:
   - SpecialBlock
   - SkillBlock
   - Enemy
-  - BerserkerWeapon
-  - SaberWeapon
-  - WinFlag
-  - HunterWeapon
-  - CasterWeapon
-  - KnightWeapon
+  - TopBtn
+  - Bag
+  - EquiptHole
+  - SkillHole
+  - PlayerCreate
+  - characterproprety
+  - PlayerShow0
+  - SelectBtn
+  - PlayerShow
+  - Charater1
+  - equiptHole
+  - item
+  - CreateEquipt
+  - ItemMessage
+  - ClassBtn
   layers:
   - Default
   - TransparentFX
@@ -27,7 +36,7 @@ TagManager:
   - Background
   - Scene
   - Player
-  - EnemyLayer
+  - 
   - 
   - 
   - 
@@ -72,10 +81,4 @@ TagManager:
     locked: 0
   - name: Saber
     uniqueID: 1724628997
-    locked: 0
-  - name: State
-    uniqueID: 3975882857
-    locked: 0
-  - name: Effect
-    uniqueID: 3758324469
     locked: 0

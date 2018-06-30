@@ -8,8 +8,9 @@ using System;
 /// 该类用来处理数据库操作命令
 /// 数据库核心类:该类负责数据库连接，操作数据库，更新数据库，关闭数据库等所有和数据库相关的操作
 /// </summary>
-public class DBOperation
+public class DBOperation : ManagerBase<DBOperation>
 {
+    
     //数据库连接对象
     SqliteConnection dbconnect;
     //数据库命令对象
@@ -20,9 +21,10 @@ public class DBOperation
     public DBOperation(string path)
     {
         //建立连接
+
         OpenDB(path);
     }
-
+   
     /// <summary>
     /// 建立数据库连接
     /// </summary>
@@ -33,6 +35,7 @@ public class DBOperation
         {
             dbconnect = new SqliteConnection(dbpath);
             dbconnect.Open();
+          
             Debug.Log("连接数据库成功");
         }
         catch (Exception exp)
@@ -52,7 +55,7 @@ public class DBOperation
             dbconnect = null;
         }
     }
-
+    
     /// <summary>
     /// 操作数据库
     /// </summary>
@@ -60,12 +63,14 @@ public class DBOperation
     /// <returns></returns>
     public SqliteDataReader ExcuteSQLQuery(string query)
     {
+      
         try
         {
             //创建查询命令
             dbcommand = dbconnect.CreateCommand();
             dbcommand.CommandText = query;
             dbReader = dbcommand.ExecuteReader();
+            
         }
         catch (Exception exp)
         {
@@ -81,9 +86,10 @@ public class DBOperation
     /// <returns></returns>
     public SqliteDataReader GetAllDataFromSQLTable(string tableName)
     {
+      
         //建立查询语句
         string query = ConstData.SELECT + ConstData.FROM01 + tableName;
-        //Debug.Log(query);
+        OpenDB("Data Source =" + Application.streamingAssetsPath + "/SQLite/NereisQuest.sqlite");
         return ExcuteSQLQuery(query);
     }
 
