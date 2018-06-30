@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 读数据功能类
 /// </summary>
-public class ReadData:MonoBehaviour
+public class ReadData
 {
     //数据库操作对象
     DBOperation dbOperation;
@@ -18,43 +18,47 @@ public class ReadData:MonoBehaviour
 #if UNITY_ANDROID
         tempPath = "URI=file:" + path;
 #else
-        tempPath = "Data Source=" + path;
+                tempPath = "Data Source=" + path;
 #endif
         dbOperation = new DBOperation(tempPath);
     }
-    private void Awake()
-    {
-        //读取拥有的角色数据
-        IsPlayer("Player", DBOperation.Instance.GetAllDataFromSQLTable("Player"));
-        IsEquipmentEctype("Equipment", DBOperation.Instance.GetAllDataFromSQLTable("Equipment"));
-        IsSkill("Skill", DBOperation.Instance.GetAllDataFromSQLTable("Skill"));
-        IsState("State", DBOperation.Instance.GetAllDataFromSQLTable("State"));
-        Debug.Log(SQLiteManager.Instance.equipmentDataSource.Count);
-    }
+
     /// <summary>
     /// 获取所有数据
     /// </summary>
     public void GetData(string tbName)
     {
-        //清空数据
-        //SQLiteManager.Instance.dataSource.Clear();
-        SQLiteManager.Instance.characterDataSource.Clear();
-        SQLiteManager.Instance.enemyDataSource.Clear();
-        SQLiteManager.Instance.itemDataSource.Clear();
-        SQLiteManager.Instance.lVDataSource.Clear();
-        SQLiteManager.Instance.playerDataSource.Clear();
-        SQLiteManager.Instance.skillDataSource.Clear();
-        SQLiteManager.Instance.stateDataSource.Clear();
+        
         //执行查询操作
         SqliteDataReader reader = dbOperation.GetAllDataFromSQLTable(tbName);
-        //读取所有表
-        IsCharacterList(tbName, reader);
-        IsEnemy(tbName, reader);
-        IsItem(tbName, reader);
-        IsLevel(tbName, reader);
-        IsPlayer(tbName, reader);
-        IsSkill(tbName, reader);
-        IsState(tbName, reader);
+        //读取对应表
+        switch (tbName)
+        {
+            case ConstData.Bag:
+                IsBag(reader);
+                break;
+            case ConstData.CharacterList:
+                IsCharacterList(reader);
+                break;
+            case ConstData.Enemy:
+                IsEnemy(reader);
+                break;
+            case ConstData.Item:
+                IsItem(reader);
+                break;
+            case ConstData.Level:
+                IsLevel(reader);
+                break;
+            case ConstData.Player:
+                IsPlayer(reader);
+                break;
+            case ConstData.Skill:
+                IsSkill(reader);
+                break;
+            case ConstData.State:
+                IsState(reader);
+                break;
+        } 
     }
 
     /// <summary>
@@ -62,9 +66,9 @@ public class ReadData:MonoBehaviour
     /// </summary>
     /// <param 表名="tbName"></param>
     /// <param 数据阅读器="reader"></param>
-    private void IsBag(string tbName, SqliteDataReader reader)
+    private void IsBag(SqliteDataReader reader)
     {
-        while (reader.Read() && tbName == ConstData.Bag)
+        while (reader.Read())
         {
             //获取读到内容中的字段,来保存对应的值
             int Bag_Grid = reader.GetInt32(reader.GetOrdinal("Bag_Grid"));
@@ -91,9 +95,9 @@ public class ReadData:MonoBehaviour
     /// </summary>
     /// <param 表名="tbName"></param>
     /// <param 数据阅读器="reader"></param>
-    private void IsCharacterList(string tbName, SqliteDataReader reader)
+    private void IsCharacterList(SqliteDataReader reader)
     {
-        while (reader.Read() && tbName == ConstData.CharacterList)
+        while (reader.Read())
         {
             //获取读到内容中的字段,来保存对应的值
             int character_Id = reader.GetInt32(reader.GetOrdinal("ID"));
@@ -150,9 +154,9 @@ public class ReadData:MonoBehaviour
     /// </summary>
     /// <param 表名="tbName"></param>
     /// <param 数据阅读器="reader"></param>
-    private void IsEnemy(string tbName, SqliteDataReader reader)
+    private void IsEnemy(SqliteDataReader reader)
     {
-        while (reader.Read() && tbName == ConstData.Enemy)
+        while (reader.Read())
         {
             //获取读到内容中的字段,来保存对应的值
             int enemy_Id = reader.GetInt32(reader.GetOrdinal("ID"));
@@ -192,42 +196,9 @@ public class ReadData:MonoBehaviour
     /// </summary>
     /// <param 表名="tbName"></param>
     /// <param 数据阅读器="reader"></param>
-    private void IsEquipment(string tbName, SqliteDataReader reader)
+    private void IsEquipment(SqliteDataReader reader)
     {
-        while (reader.Read() && tbName == ConstData.Equipment)
-        {
-            //获取读到内容中的字段,来保存对应的值
-            int equipment_Id = reader.GetInt32(reader.GetOrdinal("ID"));
-            string equipmentNmae = reader.GetString(reader.GetOrdinal("item_Name"));
-            string equipmentType = reader.GetString(reader.GetOrdinal("item_Type"));
-            string equipmentClass = reader.GetString(reader.GetOrdinal("item_Description"));
-            int equipment_HP = reader.GetInt32(reader.GetOrdinal("item_Price"));
-            int equipment_AD = reader.GetInt32(reader.GetOrdinal("item_Diamond"));
-            int equipment_AP = reader.GetInt32(reader.GetOrdinal("item_Stockpile"));
-            int equipment_DEF = reader.GetInt32(reader.GetOrdinal("item_Price"));
-            int equipment_RES = reader.GetInt32(reader.GetOrdinal("item_Diamond"));
-            ulong equipmentPrice = (ulong)reader.GetInt32(reader.GetOrdinal("item_Stockpile"));
-            //创建模型
-            EquipmentData equipmentData = new EquipmentData
-            {
-                equipment_Id = equipment_Id,
-                equipmentNmae = equipmentNmae,
-                equipmentType = equipmentType,
-                equipmentClass = equipmentClass,
-                equipment_HP = equipment_HP,
-                equipment_AD = equipment_AD,
-                equipment_AP = equipment_AP,
-                equipment_DEF = equipment_DEF,
-                equipment_RES = equipment_RES,
-                equipmentPrice = equipmentPrice,
-            };
-            //加入到数据库
-            SQLiteManager.Instance.equipmentDataSource.Add(equipmentData.equipment_Id, equipmentData);
-        }
-    }
-    private void IsEquipmentEctype(string tbName, SqliteDataReader reader)
-    {
-        while (reader.Read() && tbName == ConstData.Equipment)
+        while (reader.Read())
         {
             //获取读到内容中的字段,来保存对应的值
             int equipment_Id = reader.GetInt32(reader.GetOrdinal("ID"));
@@ -239,7 +210,7 @@ public class ReadData:MonoBehaviour
             int equipment_AP = reader.GetInt32(reader.GetOrdinal("equipment_AP"));
             int equipment_DEF = reader.GetInt32(reader.GetOrdinal("equipment_DEF"));
             int equipment_RES = reader.GetInt32(reader.GetOrdinal("equipment_RES"));
-            ulong equipmentPrice = (ulong)reader.GetInt32(reader.GetOrdinal("equipment_Price"));
+            int equipmentPrice = reader.GetInt32(reader.GetOrdinal("equipment_Price"));
             //创建模型
             EquipmentData equipmentData = new EquipmentData
             {
@@ -263,9 +234,9 @@ public class ReadData:MonoBehaviour
     /// </summary>
     /// <param 表名="tbName"></param>
     /// <param 数据阅读器="reader"></param>
-    private void IsItem(string tbName, SqliteDataReader reader)
+    private void IsItem(SqliteDataReader reader)
     {
-        while (reader.Read() && tbName == ConstData.Item)
+        while (reader.Read())
         {
             //获取读到内容中的字段,来保存对应的值
             int item_Id = reader.GetInt32(reader.GetOrdinal("ID"));
@@ -295,9 +266,9 @@ public class ReadData:MonoBehaviour
     /// </summary>
     /// <param 表名="tbName"></param>
     /// <param 数据阅读器="reader"></param>
-    private void IsLevel(string tbName, SqliteDataReader reader)
+    private void IsLevel(SqliteDataReader reader)
     {
-        while (reader.Read() && tbName == ConstData.Level)
+        while (reader.Read())
         {
             //获取读到内容中的字段,来保存对应的值
             int level = reader.GetInt32(reader.GetOrdinal("Level"));
@@ -327,12 +298,10 @@ public class ReadData:MonoBehaviour
     /// </summary>
     /// <param 表名="tbName"></param>
     /// <param 数据阅读器="reader"></param>
-    private void IsPlayer(string tbName, SqliteDataReader reader)
+    private void IsPlayer(SqliteDataReader reader)
     {
-        
-        while (reader.Read() && tbName == ConstData.Player)
+        while (reader.Read())
         {
-            
             //获取读到内容中的字段,来保存对应的值
             int player_Id = reader.GetInt32(reader.GetOrdinal("ID"));
             string player_Name = reader.GetString(reader.GetOrdinal("player_Name"));
@@ -355,9 +324,10 @@ public class ReadData:MonoBehaviour
             int player_Level = reader.GetInt32(reader.GetOrdinal("player_Level"));
             int player_Weapon = reader.GetInt32(reader.GetOrdinal("player_Weapon"));
             int player_Equipment = reader.GetInt32(reader.GetOrdinal("player_Equipment"));
-            ulong GoldCoin = (ulong)reader.GetInt32(reader.GetOrdinal("GoldCoin"));
+            int GoldCoin = reader.GetInt32(reader.GetOrdinal("GoldCoin"));
             int Diamond = reader.GetInt32(reader.GetOrdinal("Diamond"));
             int PrefabsID = reader.GetInt32(reader.GetOrdinal("PrefabsID"));
+
             //创建模型
             PlayerData playerData = new PlayerData();
             playerData.player_Id = player_Id;
@@ -387,16 +357,15 @@ public class ReadData:MonoBehaviour
             //加入到数据库
             SQLiteManager.Instance.playerDataSource.Add(playerData.player_Id, playerData);
         }
-        
     }
     /// <summary>
     /// 是否是技能表
     /// </summary>
     /// <param 表名="tbName"></param>
     /// <param 数据阅读器="reader"></param>
-    private void IsSkill(string tbName, SqliteDataReader reader)
+    private void IsSkill(SqliteDataReader reader)
     {
-        while (reader.Read() && tbName == ConstData.Skill)
+        while (reader.Read())
         {
             //获取读到内容中的字段,来保存对应的值
             int skill_ID = reader.GetInt32(reader.GetOrdinal("ID"));
@@ -426,9 +395,9 @@ public class ReadData:MonoBehaviour
     /// </summary>
     /// <param 表名="tbName"></param>
     /// <param 数据阅读器="reader"></param>
-    private void IsState(string tbName, SqliteDataReader reader)
+    private void IsState(SqliteDataReader reader)
     {
-        while (reader.Read() && tbName == ConstData.State)
+        while (reader.Read())
         {
             //获取读到内容中的字段,来保存对应的值
             int state_ID = reader.GetInt32(reader.GetOrdinal("ID"));
