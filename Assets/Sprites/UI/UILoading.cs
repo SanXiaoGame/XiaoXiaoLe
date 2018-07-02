@@ -16,14 +16,19 @@ public class UILoading : MonoBehaviour, IUIBase
         SceneAss_Manager.Instance.readDataEnd += isLpad;
     }
 
-    void isLpad(string sceneName)
+    void isLpad(int sceneID)
     {
-        StartCoroutine("loadScene", sceneName);
+        StartCoroutine("loadScene", sceneID);
     }
 
-    IEnumerator loadScene(string sceneName)
+    /// <summary>
+    /// 异步加载场景
+    /// </summary>
+    /// <param 场景ID="sceneID"></param>
+    /// <returns></returns>
+    IEnumerator loadScene(int sceneID)
     {
-        AsyncOperation async = SceneManager.LoadSceneAsync(sceneName);
+        AsyncOperation async = SceneManager.LoadSceneAsync(sceneID);
         async.allowSceneActivation = false;
         while (async != null && !async.isDone)
         {
