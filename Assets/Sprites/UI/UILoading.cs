@@ -5,17 +5,46 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UILoading : MonoBehaviour, IUIBase
+/// <summary>
+/// 加载场景
+/// </summary>
+public class UILoading : MonoBehaviour,IUIBase
 {
     //加载条
     Slider loadingSlider;
 
-    private void Awake()
+    /// <summary>
+    /// 进入界面
+    /// </summary>
+    public void OnEntering()
     {
+        gameObject.SetActive(true);
         loadingSlider = transform.GetChild(0).GetComponent<Slider>();
         SceneAss_Manager.Instance.readDataEnd += isLpad;
     }
+    /// <summary>
+    /// 界面暂停
+    /// </summary>
+    public void OnPausing()
+    {
+        gameObject.SetActive(false);
+    }
+    /// <summary>
+    /// 界面唤醒
+    /// </summary>
+    public void OnResuming()
+    {
+        gameObject.SetActive(true);
+    }
+    /// <summary>
+    /// 界面退出
+    /// </summary>
+    public void OnExiting()
+    {
+        gameObject.SetActive(false);
+    }
 
+    //用于承接事件
     void isLpad(int sceneID)
     {
         StartCoroutine("loadScene", sceneID);
@@ -50,37 +79,9 @@ public class UILoading : MonoBehaviour, IUIBase
                 else if (loadingSlider.value == loadingSlider.maxValue)
                 {
                     async.allowSceneActivation = true;
+                    UIManager.Instance.PopUIStack();
                 }
             }
         }
-    }
-
-    /// <summary>
-    /// 进入界面
-    /// </summary>
-    public void OnEntering()
-    {
-
-    }
-    /// <summary>
-    /// //界面暂停
-    /// </summary>
-    public void OnExiting()
-    {
-
-    }
-    /// <summary>
-    /// 界面唤醒
-    /// </summary>
-    public void OnPausing()
-    {
-
-    }
-    /// <summary>
-    /// 界面退出
-    /// </summary>
-    public void OnResuming()
-    {
-
     }
 }

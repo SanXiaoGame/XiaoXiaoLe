@@ -53,36 +53,40 @@ public class UIManager : ManagerBase<UIManager>
     /// <param name="name"></param>
     public void PushUIStack(string uiname)
     {
-        //UIStack栈没有元素
         if (UIStack.Count > 0)
         {
             //返回栈顶的界面，且不移除
             IUIBase old_Pop = UIStack.Peek();
-            old_Pop.OnEntering();
+            //保留之前的界面
+            old_Pop.OnPausing();
         }
         //创建界面
         IUIBase new_Pop = GetCurrentUI(uiname);
+        //界面进栈顶部
+        UIStack.Push(new_Pop);
         //进入当前界面
         new_Pop.OnEntering();
-        //界面进栈
-        UIStack.Push(new_Pop);
     }
 
+    /// <summary>
+    /// 界面出栈
+    /// </summary>
     public void PopUIStack()
     {
+        //没有界面元素
         if (UIStack.Count == 0)
         {
             return;
         }
-
-        if (UIStack.Count > 0)
-        {
-            //展示新界面
-            IUIBase newPop = UIStack.Peek();
-            newPop.OnEntering();
-        }
         //出栈,并移除界面
         IUIBase old_pop = UIStack.Pop();
         old_pop.OnExiting();
+        //有界面元素
+        if (UIStack.Count > 0)
+        {
+            //推出旧的界面,重新显示栈顶界面
+            IUIBase newPop = UIStack.Peek();
+            newPop.OnResuming();
+        }
     }
 }
