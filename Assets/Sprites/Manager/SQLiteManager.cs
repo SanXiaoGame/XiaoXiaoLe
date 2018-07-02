@@ -74,9 +74,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         readData.GetData(ConstData.Player);
         print("获取完数据");
         //执行读取结束委托
-
-
-        SceneAss_Manager.Instance.ExecutionOfEvent("SkillTest");
+        SceneAss_Manager.Instance.ExecutionOfEvent(1);
     }
 
     /// <summary>
