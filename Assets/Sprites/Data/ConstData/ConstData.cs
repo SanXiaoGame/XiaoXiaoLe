@@ -28,6 +28,14 @@ public struct ConstData
     /// 退出游戏界面预制体
     /// </summary>
     public const string ExitPrefab = "ExitPrefab";
+    /// <summary>
+    /// 人物管理界面预制体
+    /// </summary>
+    public const string UICharacterManagePrefab = "UICharacterManagePrefab";
+    /// <summary>
+    /// 主城界面预制体
+    /// </summary>
+    public const string UIMainCityPrefab = "UIMainCityPrefab";
     #endregion
 
     #region 所有游戏预制体文件夹
