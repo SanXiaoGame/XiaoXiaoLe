@@ -11,6 +11,10 @@ public struct ConstData
     public const string PlayerPrefabs = "Prefabs/PlayerPrefabs";
     #endregion
 
+    #region 所有敌人角色预制体文件夹
+    public const string EnemyPrefabs = "Prefabs/EnemyPrefabs";
+    #endregion
+
     #region 所有UI预制体的画布名
     public const string CanvasName = "/Canvas";
     #endregion
