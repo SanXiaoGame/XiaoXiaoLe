@@ -76,7 +76,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         //执行读取结束委托
 
 
-        SceneAss_Manager.Instance.ExecutionOfEvent("AnimationTest");
+        SceneAss_Manager.Instance.ExecutionOfEvent(1);
     }
 
     /// <summary>

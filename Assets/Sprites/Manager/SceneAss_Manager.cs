@@ -9,13 +9,13 @@ using UnityEngine;
 public class SceneAss_Manager : ManagerBase<SceneAss_Manager>
 {
     //启用对应场景的事件
-    internal event Action<string> readDataEnd;
+    internal event Action<int> readDataEnd;
 
     /// <summary>
     /// 启用协程
     /// </summary>
     /// <param 场景名="name"></param>
-    internal void ExecutionOfEvent(string name)
+    internal void ExecutionOfEvent(int name)
     {
         readDataEnd(name);
     }

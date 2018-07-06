@@ -217,6 +217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4611713081268904}
   - component: {fileID: 95180110714111536}
+  - component: {fileID: 58538580948743546}
   m_Layer: 0
   m_Name: 1011
   m_TagString: Player
@@ -741,6 +742,21 @@ Transform:
   m_Father: {fileID: 4611713081268904}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &58538580948743546
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1583275236544778}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.27}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!95 &95180110714111536
 Animator:
   serializedVersion: 3
