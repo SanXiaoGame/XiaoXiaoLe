@@ -5,28 +5,22 @@ using UnityEngine;
 public class BlackMagicBoom : MonoBehaviour
 {
     GameObject boomEffect;
-    GameObject o1;
 
     private void Awake()
     {
-        boomEffect = Resources.Load("Prefabs/EffectPrefabs/Effect_blackMagic") as GameObject;
+        boomEffect = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_blackMagic);
     }
 
-    int tim = 0;
-    bool boomSwitch = false;
-    private void Update()
+    private void OnEnable()
     {
-        if (tim > 150 && boomSwitch == false)
-        {
-            o1 = Instantiate(boomEffect);
-            o1.transform.position = gameObject.transform.position;
-            Destroy(gameObject);
-            Destroy(o1, 2f);
-            boomSwitch = true;
-        }
-        if (tim < 160)
-        {
-            tim++;
-        }
+        vp_Timer.In(3.0f, new vp_Timer.Callback(delegate () { MagicBurst(); }));
+    }
+
+    void MagicBurst()
+    {
+        GameObject blk = ObjectPoolManager.Instance.InstantiateMyGameObject(boomEffect);
+        blk.transform.position = transform.position;
+        ObjectPoolManager.Instance.RecycleMyGameObject(gameObject);
+        vp_Timer.In(2.0f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(blk); }));
     }
 }

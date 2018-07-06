@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 public class PropsFunction : MonoBehaviour
 {
     UISceneWidget propsClick;
+    GameObject flagman;
 
     private void Awake()
     {
@@ -15,6 +17,7 @@ public class PropsFunction : MonoBehaviour
         {
             propsClick.PointerDown += PropsOnClick;
         }
+        flagman = transform.Find("/1001").gameObject;
     }
 
     private void PropsOnClick(PointerEventData eventData)
@@ -106,17 +109,24 @@ public class PropsFunction : MonoBehaviour
     /// <param name="Percent"></param>
     void CureTeamHealth(float Percent)
     {
-        foreach (HeroData item in SQLiteManager.Instance.team.Values)
+        GameObject[] allPlayer = GameObject.FindGameObjectsWithTag("Player");
+        for(int i = 0; i < allPlayer.Length; i++)
         {
-            if (item.currentHP > 0)
+            if (allPlayer[i].GetComponent<HeroController>().isAlive == true)
             {
-                item.currentHP += (int)(item.starHP * Percent);
-                if (item.currentHP > item.starHP)
+                allPlayer[i].GetComponent<HeroStates>().currentHP += (int)(allPlayer[i].GetComponent<HeroStates>().maxHP * Percent);
+                if (allPlayer[i].GetComponent<HeroStates>().currentHP > allPlayer[i].GetComponent<HeroStates>().maxHP)
                 {
-                    item.currentHP = item.starHP;
+                    allPlayer[i].GetComponent<HeroStates>().currentHP = allPlayer[i].GetComponent<HeroStates>().maxHP;
                 }
             }
         }
+        flagman.GetComponent<HeroStates>().currentHP += (int)(flagman.GetComponent<HeroStates>().maxHP * Percent);
+        if (flagman.GetComponent<HeroStates>().currentHP > flagman.GetComponent<HeroStates>().maxHP)
+        {
+            flagman.GetComponent<HeroStates>().currentHP = flagman.GetComponent<HeroStates>().maxHP;
+        }
+        Array.Clear(allPlayer, 0, allPlayer.Length);
     }
     /// <summary>
     /// 全队获得[?]状态x秒
@@ -139,12 +149,12 @@ public class PropsFunction : MonoBehaviour
     void ReviveCross(float HPpercent)
     {
         //待写：获取最近阵亡角色ID
-        int deadID = 0;
         string deadIDstr = " ";
         GameObject a1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPlayerPrefab(deadIDstr));
         a1.transform.GetComponent<Animator>().SetTrigger("Reset");
-        SQLiteManager.Instance.team[deadID].currentHP = (int)(SQLiteManager.Instance.team[deadID].starHP * 0.2f);
-        //待写：改变复活角色的位置
+        a1.GetComponent<HeroStates>().currentHP = (int)(a1.GetComponent<HeroStates>().maxHP * 0.2f);
+        a1.transform.position = flagman.transform.position;
+        //改变各种开关
     }
     /// <summary>
     /// 全屏块消除，同时判断是否视为使用了一次高级旗手块，0为否，1为是

@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 95141796255876720}
   m_Layer: 0
   m_Name: Effect_cure
-  m_TagString: Untagged
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,9 +89,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -319084439
-  m_SortingLayer: 8
-  m_SortingOrder: 10
+  m_SortingLayerID: -536642827
+  m_SortingLayer: 9
+  m_SortingOrder: 7
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

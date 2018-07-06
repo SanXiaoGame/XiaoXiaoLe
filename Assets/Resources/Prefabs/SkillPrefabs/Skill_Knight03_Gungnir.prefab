@@ -22,10 +22,10 @@ GameObject:
   - component: {fileID: 212965666375741022}
   - component: {fileID: 95234855907363392}
   - component: {fileID: 114288731300305258}
-  - component: {fileID: 61418900923480882}
+  - component: {fileID: 61194867308283072}
   m_Layer: 0
   m_Name: Skill_Knight03_Gungnir
-  m_TagString: KnightWeapon
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61418900923480882
+--- !u!61 &61194867308283072
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

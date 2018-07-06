@@ -11,6 +11,10 @@ public struct ConstData
     public const string PlayerPrefabs = "Prefabs/PlayerPrefabs";
     #endregion
 
+    #region 所有敌人角色预制体文件夹
+    public const string EnemyPrefabs = "Prefabs/EnemyPrefabs";
+    #endregion
+
     #region 所有UI预制体的画布名
     public const string CanvasName = "/Canvas";
     #endregion
@@ -24,6 +28,18 @@ public struct ConstData
     /// 加载界面预制体
     /// </summary>
     public const string LoadingPrefab = "LoadingBG";
+    /// <summary>
+    /// 退出游戏界面预制体
+    /// </summary>
+    public const string ExitPrefab = "ExitPrefab";
+    /// <summary>
+    /// 人物管理界面预制体
+    /// </summary>
+    public const string UICharacterManagePrefab = "UICharacterManagePrefab";
+    /// <summary>
+    /// 主城界面预制体
+    /// </summary>
+    public const string UIMainCityPrefab = "UIMainCityPrefab";
     #endregion
 
     #region 所有游戏预制体文件夹
