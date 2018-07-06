@@ -382,9 +382,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4790423354724434}
   - component: {fileID: 95653514992752128}
+  - component: {fileID: 58193275775561262}
   m_Layer: 0
   m_Name: 1032
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -710,6 +711,21 @@ Transform:
   m_Father: {fileID: 4943829223407622}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 194.689}
+--- !u!58 &58193275775561262
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1969428730422042}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.27}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!95 &95653514992752128
 Animator:
   serializedVersion: 3

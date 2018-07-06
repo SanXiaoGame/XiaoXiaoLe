@@ -318,9 +318,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4006873978749296}
   - component: {fileID: 95448622914886262}
+  - component: {fileID: 58596901888940862}
   m_Layer: 0
   m_Name: 1061
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1093,6 +1094,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1275279708110522}
   m_Mesh: {fileID: 43088245255789450, guid: a22854c0fd6e90443be8e0e97bc3c25c, type: 2}
+--- !u!58 &58596901888940862
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1387825074384956}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.27}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!95 &95448622914886262
 Animator:
   serializedVersion: 3
