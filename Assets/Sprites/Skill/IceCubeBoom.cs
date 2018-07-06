@@ -4,81 +4,115 @@ using UnityEngine;
 
 public class IceCubeBoom : MonoBehaviour
 {
-    Rigidbody2D ic1;
-    Rigidbody2D ic2;
-    Rigidbody2D ic3;
-    Rigidbody2D ic4;
-    Rigidbody2D ic5;
-    Rigidbody2D ic6;
-    Rigidbody2D ic7;
-    Rigidbody2D ic8;
-    Rigidbody2D ic9;
-    Rigidbody2D ic10;
-    PolygonCollider2D ci1;
-    PolygonCollider2D ci2;
-    PolygonCollider2D ci3;
-    PolygonCollider2D ci4;
-    PolygonCollider2D ci5;
-    PolygonCollider2D ci6;
-    PolygonCollider2D ci7;
-    PolygonCollider2D ci8;
-    PolygonCollider2D ci9;
-    PolygonCollider2D ci10;
+    //子物体数组
+    GameObject[] cubes;
+    //触发器
+    BoxCollider2D cld;
+    //使用者
+    GameObject user;
+    //最终伤害
+    int totalDamage;
+    //找到旗手
+    GameObject flagM;
+    //被击中的目标列表
+    List<GameObject> enemyList;
 
     private void Awake()
     {
-        ic1 = transform.GetChild(0).GetComponent<Rigidbody2D>();
-        ic2 = transform.GetChild(1).GetComponent<Rigidbody2D>();
-        ic3 = transform.GetChild(2).GetComponent<Rigidbody2D>();
-        ic4 = transform.GetChild(3).GetComponent<Rigidbody2D>();
-        ic5 = transform.GetChild(4).GetComponent<Rigidbody2D>();
-        ic6 = transform.GetChild(5).GetComponent<Rigidbody2D>();
-        ic7 = transform.GetChild(6).GetComponent<Rigidbody2D>();
-        ic8 = transform.GetChild(7).GetComponent<Rigidbody2D>();
-        ic9 = transform.GetChild(8).GetComponent<Rigidbody2D>();
-        ic10 = transform.GetChild(9).GetComponent<Rigidbody2D>();
-        ci1 = transform.GetChild(0).GetComponent<PolygonCollider2D>();
-        ci2 = transform.GetChild(1).GetComponent<PolygonCollider2D>();
-        ci3 = transform.GetChild(2).GetComponent<PolygonCollider2D>();
-        ci4 = transform.GetChild(3).GetComponent<PolygonCollider2D>();
-        ci5 = transform.GetChild(4).GetComponent<PolygonCollider2D>();
-        ci6 = transform.GetChild(5).GetComponent<PolygonCollider2D>();
-        ci7 = transform.GetChild(6).GetComponent<PolygonCollider2D>();
-        ci8 = transform.GetChild(7).GetComponent<PolygonCollider2D>();
-        ci9 = transform.GetChild(8).GetComponent<PolygonCollider2D>();
-        ci10 = transform.GetChild(9).GetComponent<PolygonCollider2D>();
+        cubes = new GameObject[transform.childCount];
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            cubes[i] = transform.GetChild(i).gameObject;
+        }
+        cld = transform.GetComponent<BoxCollider2D>();
+        user = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Caster].playerData.PrefabsID).gameObject;
+        flagM = transform.Find("/1001").gameObject;
+        enemyList = new List<GameObject>();
     }
 
-    int tim = 0;
-    bool NONONO = false;
-    private void Update()
+    private void OnEnable()
     {
-        if (tim > 100 && NONONO == false)
+        switch (transform.name)
         {
-            ci1.enabled = true;
-            ci2.enabled = true;
-            ci3.enabled = true;
-            ci4.enabled = true;
-            ci5.enabled = true;
-            ci6.enabled = true;
-            ci7.enabled = true;
-            ci8.enabled = true;
-            ci9.enabled = true;
-            ci10.enabled = true;
-            ic1.gravityScale = 1;
-            ic2.gravityScale = 1;
-            ic3.gravityScale = 1;
-            ic4.gravityScale = 1;
-            ic5.gravityScale = 1;
-            ic6.gravityScale = 1;
-            ic7.gravityScale = 1;
-            ic8.gravityScale = 1;
-            ic9.gravityScale = 1;
-            ic10.gravityScale = 1;
-            NONONO = true;
-            Destroy(gameObject, 1f);
+            case "Skill_Caster01_IceCubeOne":
+                for (int i = 0; i < cubes.Length; i++)
+                {
+                    cubes[i].GetComponent<PolygonCollider2D>().enabled = false;
+                    cubes[i].GetComponent<Rigidbody2D>().gravityScale = 0;
+                    cubes[i].GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                    cubes[i].transform.localPosition =
+                        ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeOne).transform.GetChild(i).localPosition;
+                    cubes[i].transform.localRotation =
+                        ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeOne).transform.GetChild(i).localRotation;
+                    cubes[i].SetActive(true);
+                }
+                break;
+            case "Skill_Caster01_IceCubeTwo":
+                for (int i = 0; i < cubes.Length; i++)
+                {
+                    cubes[i].GetComponent<PolygonCollider2D>().enabled = false;
+                    cubes[i].GetComponent<Rigidbody2D>().gravityScale = 0;
+                    cubes[i].GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                    cubes[i].transform.localPosition =
+                        ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeTwo).transform.GetChild(i).localPosition;
+                    cubes[i].transform.localRotation =
+                        ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeTwo).transform.GetChild(i).localRotation;
+                    cubes[i].SetActive(true);
+                }
+                break;
         }
-        tim++;
+        totalDamage = 0;
+        if (cld.enabled == false)
+        {
+            cld.enabled = true;
+        }
+        enemyList.Clear();
+        //1秒后破裂
+        vp_Timer.In(1.0f, new vp_Timer.Callback(delegate () { IceBoom(); }));
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Enemy")
+        {
+            if (enemyList.Contains(collision.gameObject) == false)
+            {
+                enemyList.Add(collision.gameObject);
+                //生成击打特效
+                GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_hit));
+                hit1.transform.position = collision.transform.position;
+                //回收击打特效
+                vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(hit1); }));
+                //计算伤害
+                if (collision.GetComponent<EnemyStates>().god == false)
+                {
+                    totalDamage = (int)
+                        (
+                        (
+                        user.GetComponent<HeroStates>().currentAP * 1f -
+                        (user.GetComponent<HeroStates>().currentAP * 1f) *
+                        (collision.GetComponent<EnemyStates>().currentRES * 0.01f)
+                        ) * 0.5f
+                        );
+                    collision.GetComponent<EnemyStates>().currentHP -= totalDamage;
+                    //敌人进入眩晕
+                    collision.transform.GetComponent<EnemyStates>().GetState(3201, 1.0f);
+                }
+                //清空所有锁定目标
+                vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { flagM.GetComponent<FlagManController>().ClearAllTarget(); }));
+            }
+        }
+    }
+
+
+    void IceBoom()
+    {
+        for (int i = 0; i < cubes.Length; i++)
+        {
+            cubes[i].GetComponent<PolygonCollider2D>().enabled = true;
+            cubes[i].GetComponent<Rigidbody2D>().gravityScale = 1;
+        }
+        vp_Timer.In(1.0f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(gameObject); }));
     }
 
 

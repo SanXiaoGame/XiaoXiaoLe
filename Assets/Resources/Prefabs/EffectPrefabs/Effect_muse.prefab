@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4737795052797846}
   - component: {fileID: 212200256385077140}
+  - component: {fileID: 95677004859774804}
   m_Layer: 0
   m_Name: Effect_muse
   m_TagString: Untagged
@@ -40,6 +41,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95677004859774804
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1661316918969706}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8676455e74069a24b9b00164f81c6a4a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!212 &212200256385077140
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -71,9 +89,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -319084439
+  m_SortingLayer: 8
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 030e9db34d913c24d98ea58bcb9dd217, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
