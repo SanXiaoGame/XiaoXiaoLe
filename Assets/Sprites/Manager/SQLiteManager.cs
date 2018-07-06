@@ -26,7 +26,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
     public  Dictionary<int, PlayerData> playerDataSource = new Dictionary<int, PlayerData>();
     public  Dictionary<int, SkillData> skillDataSource = new Dictionary<int, SkillData>();
     public  Dictionary<int, StateData> stateDataSource = new Dictionary<int, StateData>();
-    public  Dictionary<int, HeroData> team = new Dictionary<int, HeroData>();        //小队字典--from Duke 
+    public  Dictionary<string, HeroData> team = new Dictionary<string, HeroData>();        //小队字典--from Duke 
     protected override void Awake()
     {
         base.Awake();
@@ -74,7 +74,9 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         readData.GetData(ConstData.Player);
         print("获取完数据");
         //执行读取结束委托
-        SceneAss_Manager.Instance.ExecutionOfEvent(1);
+
+
+        SceneAss_Manager.Instance.ExecutionOfEvent("AnimationTest");
     }
 
     /// <summary>

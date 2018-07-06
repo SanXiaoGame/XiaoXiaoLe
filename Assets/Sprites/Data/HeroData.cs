@@ -4,24 +4,11 @@ using UnityEngine;
 
 public class HeroData
 {
-    public GameObject enemy;
-    public Rigidbody2D myRigidbody;
-    public Animator animator;
-
-    public PlayerData playerData;
-    public StateData stateData;
-    public SkillData skillData;
-
-    public int starHP;
-    public int currentHP;
-    public int currentAD;
-    public int currentAP;
-    public int currentDEF;
-    public int currentRES;
-    public int currentStateID;
-    public int currentActionID;
-
-    public string ActionName ="Idle";
-    public Transform transform;
-    //public int heroID;
+    internal PlayerData playerData;
+    
+    internal int totalHP;
+    internal int totalAD;
+    internal int totalAP;
+    internal int totalDEF;
+    internal int totalRES;
 }

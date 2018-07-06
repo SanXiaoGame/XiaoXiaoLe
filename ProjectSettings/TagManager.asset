@@ -15,6 +15,9 @@ TagManager:
   - HunterWeapon
   - CasterWeapon
   - KnightWeapon
+  - MonsterPoint
+  - FlagMan
+  - Effect
   layers:
   - Default
   - TransparentFX
