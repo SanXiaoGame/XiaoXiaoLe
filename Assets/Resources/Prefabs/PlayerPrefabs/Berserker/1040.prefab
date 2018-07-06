@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4527306296651610}
   - component: {fileID: 114982665201879792}
   - component: {fileID: 137218299293514016}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: R-fist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4048048355066922}
   - component: {fileID: 114157251877786780}
   - component: {fileID: 137746525100159814}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: R-arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4295713077138636}
   - component: {fileID: 114471867332563918}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: R-fist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4749993608139316}
   - component: {fileID: 114733121941919022}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: R-leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 4124036966712472}
   - component: {fileID: 114869257571301670}
   - component: {fileID: 137214366416410998}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: L-fist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4746920994554532}
   - component: {fileID: 114461050884311614}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4861562597748216}
   - component: {fileID: 114608581365555220}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: L-leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4769758704147222}
   - component: {fileID: 114800617683273164}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: R-arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4282303060145790}
   - component: {fileID: 114350843131693668}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 4438035912745738}
   - component: {fileID: 114576254897054258}
   - component: {fileID: 137609481130026276}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: L-foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4835237755184862}
   - component: {fileID: 114866084568810368}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hair2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4587244795210440}
   - component: {fileID: 114331257481064452}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hair1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 4008146065597638}
   - component: {fileID: 114176323949997396}
   - component: {fileID: 137772940172276316}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: noo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4547705569481222}
   - component: {fileID: 114036040841094918}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 4924510406350336}
   - component: {fileID: 114253664671408872}
   - component: {fileID: 137737617296101986}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: win
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4813675382358050}
   - component: {fileID: 114856849096233406}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: L-fist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 4509109419116822}
   - component: {fileID: 114122899211115814}
   - component: {fileID: 137623800741206518}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,7 +300,7 @@ GameObject:
   - component: {fileID: 4278160468471330}
   - component: {fileID: 114780538493367984}
   - component: {fileID: 137552487194011668}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: L-arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 4730164647527208}
   - component: {fileID: 114860951044192746}
   - component: {fileID: 137414353185365688}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: R-foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4748713920838350}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +348,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4551697773837790}
   - component: {fileID: 114998485905899110}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: L-arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 4333460959467632}
   - component: {fileID: 114084999062716528}
   - component: {fileID: 137915758569330130}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 4568234566286814}
   - component: {fileID: 95784619584565188}
   - component: {fileID: 58390994806350940}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: 1040
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -398,7 +398,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4340566060943788}
   - component: {fileID: 114815033752377820}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Weapon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 4273244495500822}
   - component: {fileID: 114029707634622630}
   - component: {fileID: 137971970229511116}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: hair2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   - component: {fileID: 4510280263673704}
   - component: {fileID: 114199079287966676}
   - component: {fileID: 137019884021383880}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: equipt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -449,7 +449,7 @@ GameObject:
   - component: {fileID: 4131792805272670}
   - component: {fileID: 114137614684932264}
   - component: {fileID: 137370936308825896}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: hair1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
