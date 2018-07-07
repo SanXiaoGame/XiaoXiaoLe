@@ -132,9 +132,9 @@ public class MonsterPointManager : MonoBehaviour
                 slm1.transform.position = point.transform.position;
                 slm2.transform.position = point.transform.position + new Vector3(0.5f, 0, 0);
                 slm3.transform.position = point.transform.position - new Vector3(0.5f, 0, 0);
-                slm1.GetComponent<EnemyStates>().currentHP += 500;
-                slm2.GetComponent<EnemyStates>().currentHP += 600;
-                slm3.GetComponent<EnemyStates>().currentHP += 700;
+                slm1.GetComponent<EnemyStates>().currentHP += 600;
+                slm2.GetComponent<EnemyStates>().currentHP += 700;
+                slm3.GetComponent<EnemyStates>().currentHP += 900;
                 enemyList.Add(slm1);
                 enemyList.Add(slm2);
                 enemyList.Add(slm3);

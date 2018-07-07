@@ -43,6 +43,18 @@ public class GameManager : ManagerBase<GameManager>
     }
 
     /// <summary>
+    /// 检测退出按钮的点击
+    /// </summary>
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            //显示退出界面
+            UIManager.Instance.PushUIStack(ConstData.ExitPrefab);
+        }
+    }
+
+    /// <summary>
     /// 添加缺失块
     /// </summary>
     internal void AddMissingBlock()
