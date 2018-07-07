@@ -6,15 +6,21 @@ using UnityEngine.EventSystems;
 
 public class UICharacterManagerController : MonoBehaviour, IUIBase
 {
+    GameObject hero;
     Text heroName;
     Text LV;
-    Text EXP;
+    Slider EXP;
     Text HP;
     Text AD;
     Text AP;
     Text DEF;
     Text RES;
+    Text GoldCoin;
 
+    private void Awake()
+    {
+        OnEntering();
+    }
 
     //进入界面
     public void OnEntering()
@@ -29,6 +35,8 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         UISceneWidget teamButtonClick = UISceneWidget.Get(teamIcon);
         UISceneWidget equipmentButtonClick = UISceneWidget.Get(equipmentIcon);
         UISceneWidget mainCityButtonClick = UISceneWidget.Get(mainCityIcon);
+        characterButtonClick.PointerClick += characterSwitch;
+
         #endregion
         #region 筛选区点击
         GameObject saberStone = transform.Find(ConstData.Filter_StoneSaberTag).gameObject;
@@ -60,11 +68,19 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         UISceneWidget weaponHoleClick = UISceneWidget.Get(weaponHole);
         UISceneWidget equipmentHoleClick = UISceneWidget.Get(equipmentHole);
         #endregion
-        #region 操作区域附属
-        //GameObject skill01 = transform.Find(ConstData.ControllerExArea_SkillMode).transform.GetChild(0).gameObject;
-        //UISceneWidget skill01Click = UISceneWidget.Get(skill01);
-        
+        #region UI组件获取
+        heroName = transform.Find(ConstData.GameArea_MessageFrame_Name).GetComponent<Text>();
+        LV = transform.Find(ConstData.GameArea_MessageFrame_LV).GetComponent<Text>();
+        EXP = transform.Find(ConstData.GameArea_MessageFrame_EXPSlider).GetComponent<Slider>();
+        HP = transform.Find(ConstData.GameArea_MessageFrame_HP).GetComponent<Text>();
+        AD = transform.Find(ConstData.GameArea_MessageFrame_AD).GetComponent<Text>();
+        AP = transform.Find(ConstData.GameArea_MessageFrame_AP).GetComponent<Text>();
+        DEF = transform.Find(ConstData.GameArea_MessageFrame_DEF).GetComponent<Text>();
+        RES = transform.Find(ConstData.GameArea_MessageFrame_RES).GetComponent<Text>();
+        GoldCoin = transform.Find(ConstData.GameArea_GoldCoin).GetComponent<Text>();
         #endregion
+        //金币显示
+        GoldCoin.text = CurrencyManager.Instance.GoldCoinDisplay();
     }
     //退出界面
     public void OnExiting()
@@ -80,5 +96,20 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
     public void OnResuming()
     {
         throw new System.NotImplementedException();
+    }
+
+    void characterSwitch(PointerEventData eventData)
+    {
+        if (eventData.pointerEnter.GetComponent<Toggle>().isOn == false)
+        {
+
+        }
+    }
+    void teamSwitch(PointerEventData eventData)
+    {
+        if (eventData.pointerEnter.GetComponent<Toggle>().isOn == false)
+        {
+
+        }
     }
 }

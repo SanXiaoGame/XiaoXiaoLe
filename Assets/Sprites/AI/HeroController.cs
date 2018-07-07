@@ -81,8 +81,8 @@ public class HeroController : MonoBehaviour
         //获取英雄职业
         myClass = SQLiteManager.Instance.characterDataSource[int.Parse(gameObject.name)].character_Class;
         //获取英雄两手位置
-        mainFist = transform.Find("Bones/Torso/L-arm/L-fist/Weapon").gameObject;
-        minorFist = transform.Find("Bones/Torso/R-arm/R-fist/Weapon2").gameObject;
+        mainFist = transform.Find(ConstData.MainFist).gameObject;
+        minorFist = transform.Find(ConstData.MinorFist).gameObject;
         //获取所有技能特效预制体
         saber01 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Saber01_Sprint);
         saber02 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Saber02_ExplodingSword);
@@ -400,18 +400,23 @@ public class HeroController : MonoBehaviour
             {
                 case ConstData.Saber:
                     Skill_A_Saber();
+                    Debug.Log("SaberA");
                     break;
                 case ConstData.Knight:
                     Skill_A_Knight();
+                    Debug.Log("KnightA");
                     break;
                 case ConstData.Berserker:
                     Skill_A_Berserker();
+                    Debug.Log("BerserkerA");
                     break;
                 case ConstData.Caster:
                     Skill_A_Caster();
+                    Debug.Log("CasterA");
                     break;
                 case ConstData.Hunter:
                     Skill_A_Hunter();
+                    Debug.Log("HunterA");
                     break;
             }
         }
@@ -430,18 +435,23 @@ public class HeroController : MonoBehaviour
             {
                 case ConstData.Saber:
                     Skill_B_Saber();
+                    Debug.Log("SaberB");
                     break;
                 case ConstData.Knight:
                     Skill_B_Knight();
+                    Debug.Log("KnightB");
                     break;
                 case ConstData.Berserker:
                     Skill_B_Berserker();
+                    Debug.Log("BerserkerB");
                     break;
                 case ConstData.Caster:
                     Skill_B_Caster();
+                    Debug.Log("CasterB");
                     break;
                 case ConstData.Hunter:
                     Skill_B_Hunter();
+                    Debug.Log("HunterB");
                     break;
             }
         }
@@ -460,18 +470,23 @@ public class HeroController : MonoBehaviour
             {
                 case ConstData.Saber:
                     Skill_C_Saber();
+                    Debug.Log("SaberC");
                     break;
                 case ConstData.Knight:
                     Skill_C_Knight();
+                    Debug.Log("KnightC");
                     break;
                 case ConstData.Berserker:
                     Skill_C_Berserker();
+                    Debug.Log("BerserkerC");
                     break;
                 case ConstData.Caster:
                     Skill_C_Caster();
+                    Debug.Log("CasterC");
                     break;
                 case ConstData.Hunter:
                     Skill_C_Hunter();
+                    Debug.Log("HunterC");
                     break;
             }
         }
@@ -530,7 +545,7 @@ public class HeroController : MonoBehaviour
     {
         GameObject temp02 = ObjectPoolManager.Instance.InstantiateMyGameObject(saber02);
         temp02.transform.position = transform.position + new Vector3(0.8f, -0.126f, 0);
-        vp_Timer.In(0.5f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
+        vp_Timer.In(0.8f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
     }
     /// <summary>
     /// 剑士三技能：六光连斩
@@ -603,7 +618,7 @@ public class HeroController : MonoBehaviour
         st.transform.position = transform.position;
         vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(st); }));
         transform.GetComponent<HeroStates>().GetState(3210, 5.0f);
-        vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
+        vp_Timer.In(0.2f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
     }
     /// <summary>
     /// 骑士二阶技能：圣盾
@@ -622,7 +637,7 @@ public class HeroController : MonoBehaviour
     internal void Skill_B_Knight_Aegis()
     {
         transform.GetComponent<HeroStates>().GetState(3211, 3.0f);
-        vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
+        vp_Timer.In(0.5f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
     }
     /// <summary>
     /// 骑士三阶技能：圣矛投掷
@@ -691,7 +706,7 @@ public class HeroController : MonoBehaviour
         vp_Timer.In(5.0f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(st); }));
         transform.GetComponent<HeroStates>().GetState(3207, 5.0f);
         transform.GetComponent<HeroStates>().GetState(3209, 5.0f);
-        vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
+        vp_Timer.In(0.8f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
     }
     /// <summary>
     /// 狂战士三阶技能：地裂
@@ -758,13 +773,13 @@ public class HeroController : MonoBehaviour
     internal void Skill_A_Caster_IceCube()
     {
         GameObject icecube1 = ObjectPoolManager.Instance.InstantiateMyGameObject(caster01_1);
-        icecube1.transform.position = transform.position + new Vector3(0.5f, 0.05f, 0);
+        icecube1.transform.position = transform.position + new Vector3(1.2f, 0.05f, 0);
         icecube1.transform.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeOne).name;
         GameObject icecube2 = ObjectPoolManager.Instance.InstantiateMyGameObject(caster01_2);
-        icecube2.transform.position = transform.position + new Vector3(1.3f, -0.02f, 0);
+        icecube2.transform.position = transform.position + new Vector3(2.0f, -0.02f, 0);
         icecube2.transform.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeTwo).name;
         GameObject icecube3 = ObjectPoolManager.Instance.InstantiateMyGameObject(caster01_1);
-        icecube3.transform.position = transform.position + new Vector3(2.1f, 0.05f, 0);
+        icecube3.transform.position = transform.position + new Vector3(2.8f, 0.05f, 0);
         icecube3.transform.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeOne).name;
         vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
     }
@@ -786,7 +801,7 @@ public class HeroController : MonoBehaviour
         vp_Timer.In(1.2f, new vp_Timer.Callback(delegate () { stoneSummon(); }));
         vp_Timer.In(1.8f, new vp_Timer.Callback(delegate () { stoneSummon(); }));
         vp_Timer.In(2.3f, new vp_Timer.Callback(delegate () { stoneSummon(); }));
-        vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
+        vp_Timer.In(0.8f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
     }
     internal void stoneSummon()
     {
@@ -807,7 +822,7 @@ public class HeroController : MonoBehaviour
             isRun = false;
         }
         vp_Timer.In(0.5f, new vp_Timer.Callback(delegate () { blkMagic(); }));
-        vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
+        vp_Timer.In(0.8f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
     }
     internal void blkMagic()
     {
@@ -1003,7 +1018,18 @@ public class HeroController : MonoBehaviour
         }));
     }
 
-
+    internal void RecWeapon()
+    {
+        if (myClass != ConstData.Hunter)
+        {
+            ObjectPoolManager.Instance.RecycleMyGameObject(minorFist.transform.GetChild(0).gameObject);
+            ObjectPoolManager.Instance.RecycleMyGameObject(mainFist.transform.GetChild(0).gameObject);
+        }
+        else if (myClass == ConstData.Hunter)
+        {
+            ObjectPoolManager.Instance.RecycleMyGameObject(minorFist.transform.GetChild(0).gameObject);
+        }
+    }
 
     /// <summary>
     /// 注销正在重复调用的方法

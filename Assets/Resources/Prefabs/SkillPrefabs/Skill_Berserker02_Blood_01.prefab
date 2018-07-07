@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4259607771692134}
   - component: {fileID: 212545778123884002}
   - component: {fileID: 95347880687951626}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Effect_Blood-02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4216629342684564}
   - component: {fileID: 212697023423467424}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Skill_Berserker02_Blood_01
   m_TagString: Effect
   m_Icon: {fileID: 0}

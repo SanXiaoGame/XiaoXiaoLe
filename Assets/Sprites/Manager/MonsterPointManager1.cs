@@ -4,68 +4,80 @@ using UnityEngine;
 
 public class MonsterPointManager1 : MonoBehaviour
 {
-    internal List<GameObject> enemyList2;
-    bool pointStandby2;
-
-    GameObject slm12;
-    GameObject slm22;
-
-    GameObject point2;
-    BoxCollider2D colid2;
+    List<GameObject> playerList;
+    GameObject flagMan;
 
     private void Awake()
     {
-        pointStandby2 = false;
-        point2 = transform.Find("/monster (1)").gameObject;
-        colid2 = GetComponent<BoxCollider2D>();
-        enemyList2 = new List<GameObject>();
+        playerList = new List<GameObject>();
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        if (pointStandby2 == true && enemyList2.Count == 0)
-        {
-            FlagManController.battleSwitch = false;
-            FlagManController.flagMove = true;
-            Debug.Log("clear");
-            Destroy(gameObject);
-        }
-        if (pointStandby2 == true && slm12.GetComponent<EnemyControllers>().isAlive == false)
-        {
-            enemyList2.Remove(slm12);
-        }
-        if (pointStandby2 == true && slm22.GetComponent<EnemyControllers>().isAlive == false)
-        {
-            enemyList2.Remove(slm22);
-        }
+        playerList.Clear();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "FlagMan")
+        if (gameObject.tag == "WinFlag" && collision.tag == "Player")
         {
-            colid2.enabled = false;
-            slm12 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindEnemyPrefab("1101"));
-            slm22 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindEnemyPrefab("1102"));
-            slm12.name = ResourcesManager.Instance.FindEnemyPrefab("1101").name;
-            slm22.name = ResourcesManager.Instance.FindEnemyPrefab("1102").name;
-            if (slm12.GetComponent<EnemyControllers>() == null && slm12.GetComponent<EnemyStates>() == null)
+            if (flagMan == null)
             {
-                slm12.AddComponent<EnemyControllers>();
-                slm12.AddComponent<EnemyStates>();
+                flagMan = transform.Find("/1001").gameObject;
+                playerList.Add(flagMan);
             }
-            if (slm22.GetComponent<EnemyControllers>() == null && slm22.GetComponent<EnemyStates>() == null)
+            playerList.Add(collision.gameObject);
+            FlagManController.battleSwitch = false;
+            FlagManController.flagMove = false;
+            vp_Timer.In(2.8f, new vp_Timer.Callback(delegate ()
             {
-                slm22.AddComponent<EnemyControllers>();
-                slm22.AddComponent<EnemyStates>();
+                for (int i = 0; i < playerList.Count; i++)
+                {
+                    if (playerList[i].tag != "FlagMan")
+                    {
+                        if (playerList[i].GetComponent<HeroController>().myClass != ConstData.Hunter)
+                        {
+                            GameObject wpTemp = ObjectPoolManager.Instance.InstantiateMyGameObject
+                            (
+                                ResourcesManager.Instance.FindWeaponPrefab
+                                (
+                                    (collision.transform.GetComponent<HeroStates>().mydata.playerData.Weapon).ToString()
+                                    )
+                            );
+                            wpTemp.transform.parent = collision.transform.Find("Bones/Torso/R-arm/R-fist/Weapon2").transform;
+                            wpTemp.transform.localPosition = Vector3.zero;
+                            wpTemp.transform.localRotation = ResourcesManager.Instance.FindWeaponPrefab
+                            ((collision.transform.GetComponent<HeroStates>().mydata.playerData.Weapon).ToString()).transform.rotation;
+                            collision.transform.Find("Bones/Torso/L-arm/L-fist/Weapon").transform.GetChild(transform.childCount - 1).
+                            gameObject.SetActive(false);
+                        }
+                    }
+                    collision.transform.GetComponent<Animator>().SetTrigger("Win");
+                }
+            }));
+            switch (collision.transform.GetComponent<HeroController>().myClass)
+            {
+                case ConstData.Saber:
+                    vp_Timer.In(0.2f, new vp_Timer.Callback
+                        (delegate () { collision.transform.GetComponent<HeroController>().moveSwitch = false; }));
+                    break;
+                case ConstData.Knight:
+                    vp_Timer.In(0.8f, new vp_Timer.Callback
+                        (delegate () { collision.transform.GetComponent<HeroController>().moveSwitch = false; }));
+                    break;
+                case ConstData.Berserker:
+                    vp_Timer.In(1.4f, new vp_Timer.Callback
+                        (delegate () { collision.transform.GetComponent<HeroController>().moveSwitch = false; }));
+                    break;
+                case ConstData.Caster:
+                    vp_Timer.In(2.0f, new vp_Timer.Callback
+                        (delegate () { collision.transform.GetComponent<HeroController>().moveSwitch = false; }));
+                    break;
+                case ConstData.Hunter:
+                    vp_Timer.In(2.6f, new vp_Timer.Callback
+                        (delegate () { collision.transform.GetComponent<HeroController>().moveSwitch = false; }));
+                    break;
             }
-            slm12.transform.position = point2.transform.position;
-            slm22.transform.position = point2.transform.position + new Vector3(0.5f, 0, 0);
-            enemyList2.Add(slm12);
-            enemyList2.Add(slm22);
-            slm12.transform.parent = null;
-            slm22.transform.parent = null;
-            pointStandby2 = true;
         }
     }
 

@@ -23,6 +23,8 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
     Object[] HeroAll;
     //所有敌人的预制体
     Object[] EnemyAll;
+    //所有武器的预制体
+    Object[] WeaponAll;
     protected override void Awake()
     {
         base.Awake();
@@ -34,6 +36,7 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
         UIPrefabAll = Resources.LoadAll(ConstData.UIPrefabsPath);
         HeroAll = Resources.LoadAll(ConstData.PlayerPrefabs);
         EnemyAll = Resources.LoadAll(ConstData.EnemyPrefabs);
+        WeaponAll = Resources.LoadAll(ConstData.WeaponPrefabs);
     }
 
     /// <summary>
@@ -154,6 +157,22 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
             if (EnemyAll[i].name == name)
             {
                 return EnemyAll[i] as GameObject;
+            }
+        }
+        return null;
+    }
+    /// <summary>
+    /// 根据名字查找指定的武器预制体
+    /// </summary>
+    /// <param 武器预制体名="name"></param>
+    /// <returns></returns>
+    public GameObject FindWeaponPrefab(string name)
+    {
+        for (int i = 0; i < WeaponAll.Length; i++)
+        {
+            if (WeaponAll[i].name == name)
+            {
+                return WeaponAll[i] as GameObject;
             }
         }
         return null;

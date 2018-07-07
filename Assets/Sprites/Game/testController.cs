@@ -71,7 +71,7 @@ public class testController : MonoBehaviour
         berserker = ResourcesManager.Instance.FindPlayerPrefab("1004");
         caster = ResourcesManager.Instance.FindPlayerPrefab("1005");
         hunter = ResourcesManager.Instance.FindPlayerPrefab("1006");
-        setPoint = transform.Find("/setPoint").gameObject;
+        setPoint = transform.Find("/startPoint").gameObject;
     }
 
     private void Update()
@@ -150,56 +150,7 @@ public class testController : MonoBehaviour
         //全局控制
         if (Input.GetKeyDown(KeyCode.O))
         {
-            GameObject p1 = ObjectPoolManager.Instance.InstantiateMyGameObject(flagM);
-            GameObject p2 = ObjectPoolManager.Instance.InstantiateMyGameObject(saber);
-            GameObject p3 = ObjectPoolManager.Instance.InstantiateMyGameObject(knight);
-            GameObject p4 = ObjectPoolManager.Instance.InstantiateMyGameObject(berserker);
-            GameObject p5 = ObjectPoolManager.Instance.InstantiateMyGameObject(caster);
-            GameObject p6 = ObjectPoolManager.Instance.InstantiateMyGameObject(hunter);
-            p1.name = flagM.name;
-            p2.name = saber.name;
-            p3.name = knight.name;
-            p4.name = berserker.name;
-            p5.name = caster.name;
-            p6.name = hunter.name;
-            p1.transform.position = setPoint.transform.position;
-            p2.transform.position = setPoint.transform.position + new Vector3(1, 0, 0);
-            p3.transform.position = setPoint.transform.position + new Vector3(1.8f, 0, 0);
-            p4.transform.position = setPoint.transform.position + new Vector3(2.6f, 0, 0);
-            p5.transform.position = setPoint.transform.position + new Vector3(3.4f, 0, 0);
-            p6.transform.position = setPoint.transform.position + new Vector3(4.2f, 0, 0);
-            p1.AddComponent<FlagManController>();
-            p2.AddComponent<HeroController>();
-            p2.AddComponent<HeroStates>();
-            p3.AddComponent<HeroController>();
-            p3.AddComponent<HeroStates>();
-            p4.AddComponent<HeroController>();
-            p4.AddComponent<HeroStates>();
-            p5.AddComponent<HeroController>();
-            p5.AddComponent<HeroStates>();
-            p6.AddComponent<HeroController>();
-            p6.AddComponent<HeroStates>();
-            transform.Find("/Main Camera").transform.parent = p1.transform;
-            GameObject wp = Instantiate(Resources.Load("Prefabs/WeaponPrefabs/2005")as GameObject);
-            wp.transform.parent = p2.transform.Find("Bones/Torso/L-arm/L-fist/Weapon");
-            wp.transform.localPosition = new Vector3(0,0,0);
-            wp.transform.localRotation = (Resources.Load("Prefabs/WeaponPrefabs/2005") as GameObject).transform.rotation;
-            GameObject wp2 = Instantiate(Resources.Load("Prefabs/WeaponPrefabs/2023") as GameObject);
-            wp2.transform.parent = p3.transform.Find("Bones/Torso/L-arm/L-fist/Weapon");
-            wp2.transform.localPosition = new Vector3(0, 0, 0);
-            wp2.transform.localRotation = (Resources.Load("Prefabs/WeaponPrefabs/2023") as GameObject).transform.rotation;
-            GameObject wp3 = Instantiate(Resources.Load("Prefabs/WeaponPrefabs/2029") as GameObject);
-            wp3.transform.parent = p4.transform.Find("Bones/Torso/L-arm/L-fist/Weapon");
-            wp3.transform.localPosition = new Vector3(0, 0, 0);
-            wp3.transform.localRotation = (Resources.Load("Prefabs/WeaponPrefabs/2029") as GameObject).transform.rotation;
-            GameObject wp4 = Instantiate(Resources.Load("Prefabs/WeaponPrefabs/2042") as GameObject);
-            wp4.transform.parent = p5.transform.Find("Bones/Torso/L-arm/L-fist/Weapon");
-            wp4.transform.localPosition = new Vector3(0, 0, 0);
-            wp4.transform.localRotation = (Resources.Load("Prefabs/WeaponPrefabs/2042") as GameObject).transform.rotation;
-            GameObject wp5 = Instantiate(Resources.Load("Prefabs/WeaponPrefabs/2054") as GameObject);
-            wp5.transform.parent = p6.transform.Find("Bones/Torso/R-arm/R-fist/Weapon2");
-            wp5.transform.localPosition = new Vector3(0, 0, 0);
-            wp5.transform.localRotation = (Resources.Load("Prefabs/WeaponPrefabs/2054") as GameObject).transform.rotation;
+            StartGame();
 
         } //刷角色
         if (Input.GetKeyDown(KeyCode.P)) 
@@ -224,5 +175,68 @@ public class testController : MonoBehaviour
         {
             transform.Find("/1102").GetComponent<EnemyStates>().GetState(3211, 12f);
         }
+    }
+
+    public void StartGame()
+    {
+        GameObject p1 = ObjectPoolManager.Instance.InstantiateMyGameObject(flagM);
+        GameObject p2 = ObjectPoolManager.Instance.InstantiateMyGameObject(saber);
+        GameObject p3 = ObjectPoolManager.Instance.InstantiateMyGameObject(knight);
+        GameObject p4 = ObjectPoolManager.Instance.InstantiateMyGameObject(berserker);
+        GameObject p5 = ObjectPoolManager.Instance.InstantiateMyGameObject(caster);
+        GameObject p6 = ObjectPoolManager.Instance.InstantiateMyGameObject(hunter);
+        p1.name = flagM.name;
+        p2.name = saber.name;
+        p3.name = knight.name;
+        p4.name = berserker.name;
+        p5.name = caster.name;
+        p6.name = hunter.name;
+        p1.transform.position = setPoint.transform.position;
+        p2.transform.position = setPoint.transform.position + new Vector3(1, 0, 0);
+        p3.transform.position = setPoint.transform.position + new Vector3(1.8f, 0, 0);
+        p4.transform.position = setPoint.transform.position + new Vector3(2.6f, 0, 0);
+        p5.transform.position = setPoint.transform.position + new Vector3(3.4f, 0, 0);
+        p6.transform.position = setPoint.transform.position + new Vector3(4.2f, 0, 0);
+        p1.AddComponent<FlagManController>();
+        p2.AddComponent<HeroController>();
+        p2.AddComponent<HeroStates>();
+        p3.AddComponent<HeroController>();
+        p3.AddComponent<HeroStates>();
+        p4.AddComponent<HeroController>();
+        p4.AddComponent<HeroStates>();
+        p5.AddComponent<HeroController>();
+        p5.AddComponent<HeroStates>();
+        p6.AddComponent<HeroController>();
+        p6.AddComponent<HeroStates>();
+        transform.Find("/GameCamera").transform.parent = p1.transform;
+        p1.transform.Find("GameCamera").position -= new Vector3(0, 0, 10);
+        GameObject wp = Instantiate(Resources.Load("Prefabs/WeaponPrefabs/2005") as GameObject);
+        wp.name = "2005";
+        wp.transform.parent = p2.transform.Find("Bones/Torso/L-arm/L-fist/Weapon");
+        wp.transform.localPosition = new Vector3(0, 0, 0);
+        wp.transform.localRotation = (Resources.Load("Prefabs/WeaponPrefabs/2005") as GameObject).transform.rotation;
+        GameObject wp2 = Instantiate(Resources.Load("Prefabs/WeaponPrefabs/2023") as GameObject);
+        wp2.name = "2023";
+        wp2.transform.parent = p3.transform.Find("Bones/Torso/L-arm/L-fist/Weapon");
+        wp2.transform.localPosition = new Vector3(0, 0, 0);
+        wp2.transform.localRotation = (Resources.Load("Prefabs/WeaponPrefabs/2023") as GameObject).transform.rotation;
+        GameObject wp3 = Instantiate(Resources.Load("Prefabs/WeaponPrefabs/2029") as GameObject);
+        wp3.name = "2029";
+        wp3.transform.parent = p4.transform.Find("Bones/Torso/L-arm/L-fist/Weapon");
+        wp3.transform.localPosition = new Vector3(0, 0, 0);
+        wp3.transform.localRotation = (Resources.Load("Prefabs/WeaponPrefabs/2029") as GameObject).transform.rotation;
+        GameObject wp4 = Instantiate(Resources.Load("Prefabs/WeaponPrefabs/2042") as GameObject);
+        wp4.name = "2042";
+        wp4.transform.parent = p5.transform.Find("Bones/Torso/L-arm/L-fist/Weapon");
+        wp4.transform.localPosition = new Vector3(0, 0, 0);
+        wp4.transform.localRotation = (Resources.Load("Prefabs/WeaponPrefabs/2042") as GameObject).transform.rotation;
+        GameObject wp5 = Instantiate(Resources.Load("Prefabs/WeaponPrefabs/2054") as GameObject);
+        wp5.name = "2054";
+        wp5.transform.parent = p6.transform.Find("Bones/Torso/R-arm/R-fist/Weapon2");
+        wp5.transform.localPosition = new Vector3(0, 0, 0);
+        wp5.transform.localRotation = (Resources.Load("Prefabs/WeaponPrefabs/2054") as GameObject).transform.rotation;
+
+
+        FlagManController.flagMove = true;
     }
 }

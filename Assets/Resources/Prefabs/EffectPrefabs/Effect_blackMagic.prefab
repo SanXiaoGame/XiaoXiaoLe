@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4249386736616056}
   - component: {fileID: 212702498773054654}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: 02-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4595526964290342}
   - component: {fileID: 212198183224866644}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: 02-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4644156581710678}
   - component: {fileID: 212610134572411002}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 95514105814154098}
   - component: {fileID: 61110682664661724}
   - component: {fileID: 114010623552125972}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Effect_blackMagic
   m_TagString: Effect
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4061951284862860}
   - component: {fileID: 212190172715900982}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: kuro
   m_TagString: Untagged
   m_Icon: {fileID: 0}

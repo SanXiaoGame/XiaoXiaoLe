@@ -43,6 +43,9 @@ public class ReadData
             case ConstData.Enemy:
                 IsEnemy(reader);
                 break;
+            case ConstData.Equipment:
+                IsEquipment(reader);
+                break;
             case ConstData.Item:
                 IsItem(reader);
                 break;

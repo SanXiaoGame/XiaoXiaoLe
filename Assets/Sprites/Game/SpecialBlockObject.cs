@@ -16,6 +16,12 @@ public class SpecialBlockObject : MonoBehaviour
     int Hunter = 0;
     int Knight = 0;
     int Saber = 0;
+
+    int Berserker2 = 0;
+    int Caster2 = 0;
+    int Hunter2 = 0;
+    int Knight2 = 0;
+    int Saber2 = 0;
     #endregion
 
     private void Start()
@@ -47,6 +53,11 @@ public class SpecialBlockObject : MonoBehaviour
         Hunter = 0;
         Knight = 0;
         Saber = 0;
+        Berserker2 = 0;
+        Caster2 = 0;
+        Hunter2 = 0;
+        Knight2 = 0;
+        Saber2 = 0;
 
         if (!GameManager.Instance.isBusy)
         {
@@ -93,6 +104,27 @@ public class SpecialBlockObject : MonoBehaviour
                 }
                 //计分
                 GameManager.Instance.AddScore(ConstData.BlastSkill);
+                //调用技能
+                if (Saber > 0)
+                {
+                    SkillManager.Instance.A_ClassSkill(ConstData.Saber);
+                }
+                if (Knight > 0)
+                {
+                    SkillManager.Instance.A_ClassSkill(ConstData.Knight);
+                }
+                if (Berserker > 0)
+                {
+                    SkillManager.Instance.A_ClassSkill(ConstData.Berserker);
+                }
+                if (Caster > 0)
+                {
+                    SkillManager.Instance.A_ClassSkill(ConstData.Caster);
+                }
+                if (Hunter > 0)
+                {
+                    SkillManager.Instance.A_ClassSkill(ConstData.Hunter);
+                }
             }
             else if(eventData.pointerEnter.tag == ConstData.SpecialBlock)
             {
@@ -125,68 +157,127 @@ public class SpecialBlockObject : MonoBehaviour
                 }
 
                 #region 全屏块的最终技能
-                if (Berserker >= 3)
+                if (Berserker >= 1)
                 {
-                    Berserker = 3;
+                    Berserker2 = 1;
                     if (Berserker >= 4)
                     {
-                        Berserker = 4;
-                        if (Berserker >= 5)
+                        Berserker2 = 4;
+                        if (Berserker >= 6)
                         {
-                            Berserker = 5;
+                            Berserker2 = 6;
                         }
                     }
                 }
-                if (Caster >= 3)
+                if (Caster >= 1)
                 {
-                    Caster = 3;
+                    Caster2 = 1;
                     if (Caster >= 4)
                     {
-                        Caster = 4;
-                        if (Caster >= 5)
+                        Caster2 = 4;
+                        if (Caster >= 6)
                         {
-                            Caster = 5;
+                            Caster2 = 6;
                         }
                     }
                 }
-                if (Hunter >= 3)
+                if (Hunter >= 1)
                 {
-                    Hunter = 3;
+                    Hunter2 = 1;
                     if (Hunter >= 4)
                     {
-                        Hunter = 4;
-                        if (Hunter >= 5)
+                        Hunter2 = 4;
+                        if (Hunter >= 6)
                         {
-                            Hunter = 5;
+                            Hunter2 = 6;
                         }
                     }
                 }
-                if (Knight >= 3)
+                if (Knight >= 1)
                 {
-                    Knight = 3;
+                    Knight2 = 1;
                     if (Knight >= 4)
                     {
-                        Knight = 4;
-                        if (Knight >= 5)
+                        Knight2 = 4;
+                        if (Knight >= 6)
                         {
-                            Knight = 5;
+                            Knight2 = 6;
                         }
                     }
                 }
-                if (Saber >= 3)
+                if (Saber >= 1)
                 {
-                    Saber = 3;
+                    Saber2 = 1;
                     if (Saber >= 4)
                     {
-                        Saber = 4;
-                        if (Saber >= 5)
+                        Saber2 = 4;
+                        if (Saber >= 6)
                         {
-                            Saber = 5;
+                            Saber2 = 6;
                         }
                     }
                 }
                 #endregion
-
+                if (Saber2 == 1)
+                {
+                    SkillManager.Instance.A_ClassSkill(ConstData.Saber);
+                }
+                else if (Saber2 == 4)
+                {
+                    SkillManager.Instance.B_ClassSkill(ConstData.Saber);
+                }
+                else if (Saber2 == 6)
+                {
+                    SkillManager.Instance.C_ClassSkill(ConstData.Saber);
+                }
+                if (Knight2 == 1)
+                {
+                    SkillManager.Instance.A_ClassSkill(ConstData.Knight);
+                }
+                else if (Knight2 == 4)
+                {
+                    SkillManager.Instance.B_ClassSkill(ConstData.Knight);
+                }
+                else if (Knight2 == 6)
+                {
+                    SkillManager.Instance.C_ClassSkill(ConstData.Knight);
+                }
+                if (Berserker2 == 1)
+                {
+                    SkillManager.Instance.A_ClassSkill(ConstData.Berserker);
+                }
+                else if (Berserker2 == 4)
+                {
+                    SkillManager.Instance.B_ClassSkill(ConstData.Berserker);
+                }
+                else if (Berserker2 == 6)
+                {
+                    SkillManager.Instance.C_ClassSkill(ConstData.Berserker);
+                }
+                if (Caster2 == 1)
+                {
+                    SkillManager.Instance.A_ClassSkill(ConstData.Caster);
+                }
+                else if (Caster2 == 4)
+                {
+                    SkillManager.Instance.B_ClassSkill(ConstData.Caster);
+                }
+                else if (Caster2 == 6)
+                {
+                    SkillManager.Instance.C_ClassSkill(ConstData.Caster);
+                }
+                if (Hunter2 == 1)
+                {
+                    SkillManager.Instance.A_ClassSkill(ConstData.Hunter);
+                }
+                else if (Hunter2 == 4)
+                {
+                    SkillManager.Instance.B_ClassSkill(ConstData.Hunter);
+                }
+                else if (Hunter2 == 6)
+                {
+                    SkillManager.Instance.C_ClassSkill(ConstData.Hunter);
+                }
             }
             //计分
             GameManager.Instance.AddScore(ConstData.SpecialSkill);
