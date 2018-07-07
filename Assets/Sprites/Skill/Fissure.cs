@@ -31,7 +31,7 @@ public class Fissure : MonoBehaviour
 
     private void Update()
     {
-        if (r.a <= 1)
+        if (r.a < 1)
         {
             r.a += 0.01f;
             red.color = r;

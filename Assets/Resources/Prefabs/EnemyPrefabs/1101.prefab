@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4049462450760462}
   - component: {fileID: 114040147393820108}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4728651320881812}
   - component: {fileID: 114415047202771470}
   - component: {fileID: 137441623600498330}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: debris3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 4154505100526782}
   - component: {fileID: 114133296118273120}
   - component: {fileID: 137165177662211122}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 4535428934986846}
   - component: {fileID: 114499575673312764}
   - component: {fileID: 137334757044219936}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4666707616519394}
   - component: {fileID: 114491537974096810}
   - component: {fileID: 137645719306237166}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4885389315917334}
   - component: {fileID: 114885847255090898}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: debris1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4518678458707742}
   - component: {fileID: 114416456145474434}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: debris2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 4096811799969096}
   - component: {fileID: 114950758681183464}
   - component: {fileID: 137995662322788484}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: debris1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 95143901612463638}
   - component: {fileID: 50289256576723694}
   - component: {fileID: 61428586525411956}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: 1101
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 4467845794021802}
   - component: {fileID: 114416589715211780}
   - component: {fileID: 137164606443788812}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: debris2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4483503944937976}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4735061742942830}
   - component: {fileID: 114851633622448948}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: debris3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4738965564927204}
   - component: {fileID: 114921914932697984}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4372801064904050}
   - component: {fileID: 114008567604151986}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -163,24 +163,28 @@ public class BlockObject : MonoBehaviour
         {
             parentCallingScript.specialObjectToForm = highSkillBlock;
             GameManager.Instance.AddScore(ConstData.SkillThree);
+            SkillManager.Instance.C_ClassSkill(objName);
         }
         //垂直5连方块
         else if (objName == up2 && objName == up1 && objName == down1 && objName == down2)
         {
             parentCallingScript.specialObjectToForm = highSkillBlock;
             GameManager.Instance.AddScore(ConstData.SkillThree);
+            SkillManager.Instance.C_ClassSkill(objName);
         }
         //水平4连方块
         else if ((objName == left2 && objName == left1 && objName == right1) || (objName == left1 && objName == right1 && objName == right2))
         {
             parentCallingScript.specialObjectToForm = skillBlock;
             GameManager.Instance.AddScore(ConstData.SkillTwo);
+            vp_Timer.In(0.1f, new vp_Timer.Callback(delegate () { SkillManager.Instance.B_ClassSkill(objName); }));
         }
         //垂直4连方块
         else if ((objName == up2 && objName == up1 && objName == down1) || (objName == up1 && objName == down1 && objName == down2))
         {
             parentCallingScript.specialObjectToForm = skillBlock;
             GameManager.Instance.AddScore(ConstData.SkillTwo);
+            vp_Timer.In(0.1f, new vp_Timer.Callback(delegate () { SkillManager.Instance.B_ClassSkill(objName); }));
         }
     }
 
@@ -254,6 +258,7 @@ public class BlockObject : MonoBehaviour
             GameManager.Instance.doesHaveBrustItem = true;
             GameManager.Instance.AddScore(ConstData.SkillOne);
             brust = true;
+            vp_Timer.In(0.12f, new vp_Timer.Callback(delegate () { SkillManager.Instance.A_ClassSkill(name); }));
         }
     }
 

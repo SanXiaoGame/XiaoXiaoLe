@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4786715471128422}
   - component: {fileID: 212662279768545734}
   - component: {fileID: 95970043916133378}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Effect_Silence-02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4002965098685772}
   - component: {fileID: 212020809577217998}
   - component: {fileID: 95088301504726550}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Effect_silence
   m_TagString: Effect
   m_Icon: {fileID: 0}

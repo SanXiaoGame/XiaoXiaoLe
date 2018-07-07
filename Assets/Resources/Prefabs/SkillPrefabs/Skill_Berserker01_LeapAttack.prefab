@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4944469176248350}
   - component: {fileID: 212973457335410638}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LeapAttack_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 50932519446163330}
   - component: {fileID: 61424090594140944}
   - component: {fileID: 114477513656076682}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Skill_Berserker01_LeapAttack
   m_TagString: Effect
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4019692819014588}
   - component: {fileID: 212693110011193146}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LeapAttack_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

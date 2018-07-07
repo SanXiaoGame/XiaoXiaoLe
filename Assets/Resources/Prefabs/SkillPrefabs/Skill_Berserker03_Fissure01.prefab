@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4656528633471734}
   - component: {fileID: 212716345779458930}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Skill_Berserker03_Fissure01-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 114492002421356328}
   - component: {fileID: 61132422369015106}
   - component: {fileID: 50739034668637260}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Skill_Berserker03_Fissure01
   m_TagString: Effect
   m_Icon: {fileID: 0}

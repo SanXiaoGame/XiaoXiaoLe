@@ -57,6 +57,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         bagDataSource.Clear();
         characterDataSource.Clear();
         enemyDataSource.Clear();
+        equipmentDataSource.Clear();
         itemDataSource.Clear();
         lVDataSource.Clear();
         playerDataSource.Clear();
@@ -67,6 +68,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         readData.GetData(ConstData.Bag);
         readData.GetData(ConstData.CharacterList);
         readData.GetData(ConstData.Enemy);
+        readData.GetData(ConstData.Equipment);
         readData.GetData(ConstData.Item);
         readData.GetData(ConstData.Level);
         readData.GetData(ConstData.Skill);

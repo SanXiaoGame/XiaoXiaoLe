@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4898235406738960}
   - component: {fileID: 212957576460353076}
   - component: {fileID: 95636472431011962}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Effect_bleed
   m_TagString: Effect
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4167261274915256}
   - component: {fileID: 212525690763182784}
   - component: {fileID: 95244554745120894}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Effect_Bleed-02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
