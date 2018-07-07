@@ -43,6 +43,7 @@ public class MagicAttack : MonoBehaviour
         {
             if (isOver == false)
             {
+                AudioManager.Instance.PlayEffectMusic(SoundEffect.Hit);
                 //生成击打特效
                 GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_hit));
                 hit1.transform.position = collision.transform.position;

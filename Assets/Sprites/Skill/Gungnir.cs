@@ -62,6 +62,7 @@ public class Gungnir : MonoBehaviour
         {
             if (enemyList.Contains(collision.gameObject) == false)
             {
+                AudioManager.Instance.PlayEffectMusic(SoundEffect.Gungnir_Hit);
                 enemyList.Add(collision.gameObject);
                 //生成击打特效
                 GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_hit));

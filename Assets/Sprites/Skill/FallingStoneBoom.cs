@@ -46,9 +46,10 @@ public class FallingStoneBoom : MonoBehaviour
     {
         if (collision.tag == "Plane")
         {
+            AudioManager.Instance.PlayEffectMusic(SoundEffect.FallingStone_Hit);
             GameObject o1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ballBoom);
             o1.transform.position = gameObject.transform.position;
-            vp_Timer.In(0.1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(gameObject); }));
+            ObjectPoolManager.Instance.RecycleMyGameObject(gameObject);
             vp_Timer.In(1.0f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(o1); }));
         }
         if (collision.tag == "Enemy")
