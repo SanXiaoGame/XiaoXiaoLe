@@ -4,14 +4,36 @@ using UnityEngine;
 
 public class FallingStoneBoom : MonoBehaviour
 {
+    //触发器
     CircleCollider2D ballCollider;
+    //爆炸特效
     GameObject ballBoom;
-    GameObject o1;
+    //使用者
+    GameObject user;
+    //最终伤害
+    int totalDamage;
+    //找到旗手
+    GameObject flagM;
+    //被击中的目标列表
+    List<GameObject> enemyList;
 
     private void Awake()
     {
         ballCollider = transform.GetComponent<CircleCollider2D>();
-        ballBoom = Resources.Load("Prefabs/EffectPrefabs/Effect_fallingStoneBoom") as GameObject;
+        user = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Caster].playerData.PrefabsID).gameObject;
+        flagM = transform.Find("/1001").gameObject;
+        enemyList = new List<GameObject>();
+        ballBoom = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_fallingStoneBoom);
+    }
+
+    private void OnEnable()
+    {
+        totalDamage = 0;
+        if (ballCollider.enabled == false)
+        {
+            ballCollider.enabled = true;
+        }
+        enemyList.Clear();
     }
 
     private void Update()
@@ -22,20 +44,41 @@ public class FallingStoneBoom : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Plane")
+        if (collision.tag == "Plane")
         {
-            o1 = Instantiate(ballBoom);
-            //o1 = ObjectPoolManager.Instance.InstantiateBlockObject(ballBoom);
+            GameObject o1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ballBoom);
             o1.transform.position = gameObject.transform.position;
-            Destroy(gameObject, 0.1f);
-            Destroy(o1, 1.5f);
-            //Invoke("DestroyGameObject", 0.1f);
-            //Invoke("DestroyO1", 1.5f);
+            vp_Timer.In(0.1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(gameObject); }));
+            vp_Timer.In(1.0f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(o1); }));
+        }
+        if (collision.tag == "Enemy")
+        {
+            if (enemyList.Contains(collision.gameObject) == false)
+            {
+                enemyList.Add(collision.gameObject);
+                //生成击打特效
+                GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_hit));
+                hit1.transform.position = collision.transform.position;
+                //回收击打特效
+                vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(hit1); }));
+                //计算伤害
+                if (collision.GetComponent<EnemyStates>().god == false)
+                {
+                    totalDamage = (int)
+                        (
+                        (
+                        user.GetComponent<HeroStates>().currentAP * 1.5f -
+                        (user.GetComponent<HeroStates>().currentAP * 1.5f) *
+                        (collision.GetComponent<EnemyStates>().currentRES * 0.01f)
+                        ) * 0.5f
+                        );
+                    collision.GetComponent<EnemyStates>().currentHP -= totalDamage;
+                    //敌人虚弱
+                    collision.transform.GetComponent<EnemyStates>().GetState(3212, 3.0f);
+                }
+                //清空所有锁定目标
+                vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { flagM.GetComponent<FlagManController>().ClearAllTarget(); }));
+            }
         }
     }
-
-    //void DestroyO1()
-    //{
-    //    ObjectPoolManager.Instance.RecycleBlockObject(o1);
-    //}
 }

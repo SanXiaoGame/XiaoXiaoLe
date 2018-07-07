@@ -38,9 +38,10 @@ GameObject:
   - component: {fileID: 212953946898492210}
   - component: {fileID: 50932519446163330}
   - component: {fileID: 61424090594140944}
+  - component: {fileID: 114477513656076682}
   m_Layer: 0
   m_Name: Skill_Berserker01_LeapAttack
-  m_TagString: Untagged
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,7 +132,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.0087881535, y: 0.2519281}
@@ -147,6 +148,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.46, y: 0.52}
   m_EdgeRadius: 0
+--- !u!114 &114477513656076682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1301289295499230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a862a76244aaa264db2d3f5a63d97b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212693110011193146
 SpriteRenderer:
   m_ObjectHideFlags: 1

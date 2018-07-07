@@ -2708,15 +2708,8 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_Events:
-  - time: 0.73333335
-    functionName: BerserkerOneSkillEffectStart
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.9166667
-    functionName: SkillFinishedChange
+  - time: 0.76666665
+    functionName: Skill_A_Berserker_LeapAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

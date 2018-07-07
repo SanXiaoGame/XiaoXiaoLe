@@ -21,6 +21,8 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
     Object[] effectPrefabsAll;
     //所有英雄的预制体
     Object[] HeroAll;
+    //所有敌人的预制体
+    Object[] EnemyAll;
     protected override void Awake()
     {
         base.Awake();
@@ -30,6 +32,8 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
         skillPrefabsAll = Resources.LoadAll(ConstData.SkillPrefabs);          //加载所有技能特效预制体到指定数组
         effectPrefabsAll = Resources.LoadAll(ConstData.EffectPrefabs);          //加载所有特效预制体到指定数组
         UIPrefabAll = Resources.LoadAll(ConstData.UIPrefabsPath);
+        HeroAll = Resources.LoadAll(ConstData.PlayerPrefabs);
+        EnemyAll = Resources.LoadAll(ConstData.EnemyPrefabs);
     }
 
     /// <summary>
@@ -134,6 +138,22 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
             if (HeroAll[i].name == name)
             {
                 return HeroAll[i] as GameObject;
+            }
+        }
+        return null;
+    }
+    /// <summary>
+    /// 根据名字查找指定的敌人预制体
+    /// </summary>
+    /// <param 敌人预制体名="name"></param>
+    /// <returns></returns>
+    public GameObject FindEnemyPrefab(string name)
+    {
+        for (int i = 0; i < EnemyAll.Length; i++)
+        {
+            if (EnemyAll[i].name == name)
+            {
+                return EnemyAll[i] as GameObject;
             }
         }
         return null;

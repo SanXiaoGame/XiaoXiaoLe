@@ -20,11 +20,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4561926519655616}
   - component: {fileID: 212452912431662278}
-  - component: {fileID: 114313538574001124}
   - component: {fileID: 61652749540773822}
+  - component: {fileID: 114870813101803248}
   m_Layer: 0
   m_Name: Skill_Saber02_ExplodingSword
-  m_TagString: SaberWeapon
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,7 +54,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.2885456, y: 0.213846}
+  m_Offset: {x: -0.36, y: 0.213846}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.98906034, y: 0.0026836887}
@@ -67,7 +67,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5899999, y: 0.43}
   m_EdgeRadius: 0
---- !u!114 &114313538574001124
+--- !u!114 &114870813101803248
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1164958325556704}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ace0979daa92bc64192fbce9585019ea, type: 3}
+  m_Script: {fileID: 11500000, guid: e0a8a40ef88e2f24ab0a8e02156238d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212452912431662278
@@ -111,7 +111,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -536642827
   m_SortingLayer: 9
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300002, guid: 1ecdb6d4576bfb9408ad4efcd26ed872, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

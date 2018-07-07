@@ -9,12 +9,12 @@ TagManager:
   - SpecialBlock
   - SkillBlock
   - Enemy
-  - BerserkerWeapon
-  - SaberWeapon
   - WinFlag
-  - HunterWeapon
-  - CasterWeapon
-  - KnightWeapon
+  - MonsterPoint
+  - FlagMan
+  - Effect
+  - Weapon
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -28,7 +28,7 @@ TagManager:
   - Scene
   - Player
   - EnemyLayer
-  - 
+  - PlayerUpFram
   - 
   - 
   - 

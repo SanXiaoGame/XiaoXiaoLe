@@ -22,12 +22,10 @@ GameObject:
   - component: {fileID: 212554075949238052}
   - component: {fileID: 95636313123241908}
   - component: {fileID: 61880509998323508}
-  - component: {fileID: 114801972397562790}
-  - component: {fileID: 114142333399177110}
-  - component: {fileID: 50137734650823526}
+  - component: {fileID: 114630115245635944}
   m_Layer: 0
   m_Name: Skill_Saber03_SixSonicSlash02
-  m_TagString: SaberWeapon
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,26 +43,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50137734650823526
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1018633358726828}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &61880509998323508
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -74,7 +52,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -1, y: 1}
@@ -107,7 +85,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114142333399177110
+--- !u!114 &114630115245635944
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -115,18 +93,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1018633358726828}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32444bcfce4f599438a21f2b0b53c310, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114801972397562790
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1018633358726828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c17160446ef4d34d8eacaaab7290047, type: 3}
+  m_Script: {fileID: 11500000, guid: 909802a1bd4115a48babe9fd0e69bfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212554075949238052

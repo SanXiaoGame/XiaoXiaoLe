@@ -14,9 +14,9 @@ public class SceneAss_Manager : ManagerBase<SceneAss_Manager>
     /// <summary>
     /// 启用协程
     /// </summary>
-    /// <param 场景ID="name"></param>
-    internal void ExecutionOfEvent(int sceneID)
+    /// <param 场景名="name"></param>
+    internal void ExecutionOfEvent(int name)
     {
-        readDataEnd(sceneID);
+        readDataEnd(name);
     }
 }

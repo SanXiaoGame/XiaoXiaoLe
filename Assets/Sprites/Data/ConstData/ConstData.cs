@@ -11,6 +11,10 @@ public struct ConstData
     public const string PlayerPrefabs = "Prefabs/PlayerPrefabs";
     #endregion
 
+    #region 所有敌人角色预制体文件夹
+    public const string EnemyPrefabs = "Prefabs/EnemyPrefabs";
+    #endregion
+
     #region 所有UI预制体的画布名
     public const string CanvasName = "/Canvas";
     #endregion
@@ -36,6 +40,63 @@ public struct ConstData
     /// 主城界面预制体
     /// </summary>
     public const string UIMainCityPrefab = "UIMainCityPrefab";
+    #endregion
+
+    #region UI区域名
+    /// <summary>
+    /// 系统操作区
+    /// </summary>
+    public const string SystemArea = "SystemArea/";
+    public const string SystemArea_CharacterIcon = "SystemArea/CharacterIcon";
+    public const string SystemArea_TeamIcon = "SystemArea/TeamIcon";
+    public const string SystemArea_EquipmentIcon = "SystemArea/EquipmentIcon";
+    public const string SystemArea_MainCityIcon = "SystemArea/MainCityIcon";
+    /// <summary>
+    /// 控制区
+    /// </summary>
+    public const string ControllerArea = "ControllerArea/";
+    public const string ControllerArea_ItemListBG = "ControllerArea/ItemListBG";
+    public const string ControllerArea_CharacterListBG = "ControllerArea/CharacterListBG";
+    /// <summary>
+    /// 控制区附属
+    /// </summary>
+    public const string ControllerExArea = "ControllerExArea/";
+    public const string ControllerExArea_SkillMode = "ControllerExArea/SkillMode";
+    public const string ControllerExArea_TeamMode = "ControllerExArea/TeamMode";
+    public const string ControllerExArea_TeamModeUP = "ControllerExArea/TeamMode/TeamEditUp";
+    public const string ControllerExArea_TeamModeDOWN = "ControllerExArea/TeamMode/TeamEditDown";
+    public const string ControllerExArea_TeamModeCONFIRM = "ControllerExArea/TeamMode/TeamEditOK";
+    public const string ControllerExArea_EquipmentMode = "ControllerExArea/EquipmentMode";
+    /// <summary>
+    /// 筛选
+    /// </summary>
+    public const string Filter = "Filter/";
+    public const string Filter_StoneSaberTag = "Filter/StoneSaberTag";
+    public const string Filter_StoneKnightTag = "Filter/StoneKnightTag";
+    public const string Filter_StoneBerserkerTag = "Filter/StoneBerserkerTag";
+    public const string Filter_StoneHunterTag = "Filter/StoneHunterTag";
+    public const string Filter_StoneCasterTag = "Filter/StoneCasterTag";
+    /// <summary>
+    /// 游戏画面区
+    /// </summary>
+    public const string GameArea = "GameArea/";
+    public const string GameArea_MessageFrame = "GameArea/MessageFrame";
+    public const string GameArea_MessageFrame_Name = "GameArea/MessageFrame/Name";
+    public const string GameArea_MessageFrame_LV = "GameArea/MessageFrame/LV";
+    public const string GameArea_MessageFrame_EXPSlider = "GameArea/MessageFrame/EXPSlider";
+    public const string GameArea_MessageFrame_HP = "GameArea/MessageFrame/HP";
+    public const string GameArea_MessageFrame_AD = "GameArea/MessageFrame/AD";
+    public const string GameArea_MessageFrame_AP = "GameArea/MessageFrame/AP";
+    public const string GameArea_MessageFrame_DEF = "GameArea/MessageFrame/DEF";
+    public const string GameArea_MessageFrame_RES = "GameArea/MessageFrame/RES";
+    public const string GameArea_Step = "GameArea/Step";
+    public const string GameArea_GoldCoin = "GameArea/GoldFrame/GoldCoin";
+    /// <summary>
+    /// 技能介绍栏
+    /// </summary>
+    public const string SkillIntroduction = "SkillIntroduction";
+    public const string SkillIntroduction_SkillContent = "SkillIntroduction/ContentBG/SkillContent";
+    public const string SkillIntroduction_CloseButton = "SkillIntroduction/CloseButton";
     #endregion
 
     #region 所有游戏预制体文件夹

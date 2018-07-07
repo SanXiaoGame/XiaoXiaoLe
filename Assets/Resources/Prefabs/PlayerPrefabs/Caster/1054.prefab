@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4830743282998730}
   - component: {fileID: 114883247970606268}
   - component: {fileID: 137662819490061396}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: R-arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4357229647627316}
   - component: {fileID: 114905703649487914}
   - component: {fileID: 137008622933331408}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: noo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,9 +54,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4457143121634528}
   - component: {fileID: 95472158978539876}
-  m_Layer: 0
+  - component: {fileID: 58639847030262236}
+  m_Layer: 10
   m_Name: 1054
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +72,7 @@ GameObject:
   - component: {fileID: 4493179760393848}
   - component: {fileID: 114958221782653396}
   - component: {fileID: 137527370939062328}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4129852916736830}
   - component: {fileID: 114714313991588710}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +105,7 @@ GameObject:
   - component: {fileID: 4365998301822408}
   - component: {fileID: 114127300287677336}
   - component: {fileID: 137843082179062456}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: win
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +122,7 @@ GameObject:
   - component: {fileID: 4016174353184260}
   - component: {fileID: 114356814973716966}
   - component: {fileID: 137506586349455200}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: R-fist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4406072016427516}
   - component: {fileID: 114737578613815134}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: L-fist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +155,7 @@ GameObject:
   - component: {fileID: 4658319397598398}
   - component: {fileID: 114661200232454852}
   - component: {fileID: 137971961425870906}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: L-arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +172,7 @@ GameObject:
   - component: {fileID: 4441323160259266}
   - component: {fileID: 114033561102023532}
   - component: {fileID: 137837303294904904}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: L-foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4632936928877640}
   - component: {fileID: 114254858158026678}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: R-arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +205,7 @@ GameObject:
   - component: {fileID: 4921170777221690}
   - component: {fileID: 114266274777490198}
   - component: {fileID: 137149039985511174}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: L-fist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4946961536856846}
   - component: {fileID: 114842914394807494}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +238,7 @@ GameObject:
   - component: {fileID: 4208240582041318}
   - component: {fileID: 114945270093737138}
   - component: {fileID: 137830591923129016}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: equipt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +255,7 @@ GameObject:
   - component: {fileID: 4758185231414602}
   - component: {fileID: 114590657055593600}
   - component: {fileID: 137221312044070706}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: R-foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4701342300285468}
   - component: {fileID: 114309311045512912}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: R-fist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4971729393301918}
   - component: {fileID: 114746151418415948}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: R-leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4658489939267196}
   - component: {fileID: 114012791182231820}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Weapon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +320,7 @@ GameObject:
   - component: {fileID: 4436400364778606}
   - component: {fileID: 114872832878019190}
   - component: {fileID: 137471644462663626}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +336,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4019885583682302}
   - component: {fileID: 114100159815421438}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: L-leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +351,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4072281131579006}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,7 +367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4474301967665698}
   - component: {fileID: 114249723880934768}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,7 +383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4901669390906482}
   - component: {fileID: 114934091842970412}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: L-arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -710,6 +711,21 @@ Transform:
   m_Father: {fileID: 4946961536856846}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 179.31902}
+--- !u!58 &58639847030262236
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1050288954016526}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.27}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!95 &95472158978539876
 Animator:
   serializedVersion: 3
