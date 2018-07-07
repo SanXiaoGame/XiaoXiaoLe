@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4335672836969858}
   - component: {fileID: 212624542147654506}
   - component: {fileID: 95523988330611710}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Effect_fear-02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4837010744938950}
   - component: {fileID: 212917112516523300}
   - component: {fileID: 95590618264098746}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Effect_fear
   m_TagString: Effect
   m_Icon: {fileID: 0}

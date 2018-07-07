@@ -15,6 +15,13 @@ public struct ConstData
     public const string EnemyPrefabs = "Prefabs/EnemyPrefabs";
     #endregion
 
+    #region 所有战斗武器预制体文件夹
+    /// <summary>
+    /// 武器预制体文件夹
+    /// </summary>
+    public const string WeaponPrefabs = "Prefabs/WeaponPrefabs";
+    #endregion
+
     #region 所有UI预制体的画布名
     public const string CanvasName = "/Canvas";
     #endregion
@@ -300,7 +307,7 @@ public struct ConstData
     public const string DescendingOrder02 = " DESC";
     #endregion
 
-    #region 块的tag标签
+    #region tag标签
     /// <summary>
     /// 初始块
     /// </summary>
@@ -313,6 +320,26 @@ public struct ConstData
     /// 高级块
     /// </summary>
     public const string SpecialBlock = "SpecialBlock";
+    /// <summary>
+    /// 玩家标签
+    /// </summary>
+    public const string PlayerTag = "Player";
+    /// <summary>
+    /// 敌人标签
+    /// </summary>
+    public const string EnemyTag = "Enemy";
+    /// <summary>
+    /// 旗手标签
+    /// </summary>
+    public const string FlagManTag = "FlagMan";
+    /// <summary>
+    /// 胜利点
+    /// </summary>
+    public const string WinFlagTag = "WinFlag";
+    /// <summary>
+    /// 战斗刷怪点
+    /// </summary>
+    public const string MonsterPoint = "MonsterPoint";
     #endregion
 
     #region 消块分数
@@ -338,7 +365,11 @@ public struct ConstData
     public const int SpecialSkill = 148;
     #endregion
 
-    #region 块的名字
+    #region 块和职业的名字
+    /// <summary>
+    /// 旗手职业名
+    /// </summary>
+    public const string FlagMan = "FlagMan";
     /// <summary>
     /// 战士块名
     /// </summary>
@@ -432,4 +463,9 @@ public struct ConstData
     public const string GameClearProve = "2306";
 
     #endregion
+
+    //主手位置路径
+    public const string MainFist = "Bones/Torso/L-arm/L-fist/Weapon";
+    //副手位置路径
+    public const string MinorFist = "Bones/Torso/R-arm/R-fist/Weapon2";
 }
