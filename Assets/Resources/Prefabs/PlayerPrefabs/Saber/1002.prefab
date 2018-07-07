@@ -218,7 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4352594594223524}
   - component: {fileID: 95833470752000852}
-  - component: {fileID: 58530166787205440}
+  - component: {fileID: 58625684309147842}
   m_Layer: 10
   m_Name: 1002
   m_TagString: Player
@@ -680,7 +680,7 @@ Transform:
   m_Father: {fileID: 4880403218906052}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -13.857}
---- !u!58 &58530166787205440
+--- !u!58 &58625684309147842
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

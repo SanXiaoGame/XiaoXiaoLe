@@ -42,6 +42,7 @@ public class SixSonicSlash : MonoBehaviour
         {
             if (targetList.Contains(collision.gameObject) == false && collision.GetComponent<EnemyControllers>().isAlive == true)
             {
+                AudioManager.Instance.PlayEffectMusic(SoundEffect.Gungnir_Hit);
                 targetList.Add(collision.gameObject);
                 //生成击打特效
                 GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_hit));

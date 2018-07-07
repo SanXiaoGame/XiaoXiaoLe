@@ -107,6 +107,7 @@ public class IceCubeBoom : MonoBehaviour
 
     void IceBoom()
     {
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.Freeze_Broken);
         for (int i = 0; i < cubes.Length; i++)
         {
             cubes[i].GetComponent<PolygonCollider2D>().enabled = true;
