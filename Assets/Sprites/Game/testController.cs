@@ -210,6 +210,8 @@ public class testController : MonoBehaviour
         p6.AddComponent<HeroStates>();
         transform.Find("/GameCamera").transform.parent = p1.transform;
         p1.transform.Find("GameCamera").position -= new Vector3(0, 0, 10);
+        transform.Find("/Main Camera").transform.parent = p1.transform;
+        p1.transform.Find("Main Camera").position -= new Vector3(0, 0, 3);
         GameObject wp = Instantiate(Resources.Load("Prefabs/WeaponPrefabs/2005") as GameObject);
         wp.name = "2005";
         wp.transform.parent = p2.transform.Find("Bones/Torso/L-arm/L-fist/Weapon");
