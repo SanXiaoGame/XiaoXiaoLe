@@ -23,6 +23,7 @@ public class WriteData
         tempPath = "data source=" + path;
 #elif UNITY_ANDROID
         tempPath = "uri=file:" + path;
+        Debug.Log("写:" + tempPath);
 #endif
         dbOperation = new DBOperation(tempPath);
     }

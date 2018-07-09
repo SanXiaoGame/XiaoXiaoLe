@@ -22,6 +22,12 @@ public class GameManager : ManagerBase<GameManager>
     internal int totalScore = 0;
     //游戏暂停开关
     bool isGamePause = false;
+    //交换块开关
+    internal bool props_CubeChangeSwitch = false;
+    //破坏块开关
+    internal bool props_CubeBreakSwitch = false;
+    //技能块生成开关
+    internal bool props_SkillCubeSwitch = false;
 
     protected override void Awake()
     {
@@ -32,7 +38,20 @@ public class GameManager : ManagerBase<GameManager>
 
     private void Start()
     {
-        Invoke("AssignNeighbours", 0.5f);
+        AssignNeighbours(0.5f);
+        AudioManager.Instance.ReplaceBGM(BGM.maincity);
+    }
+
+    /// <summary>
+    /// 检测退出按钮的点击
+    /// </summary>
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            //显示退出界面
+            UIManager.Instance.PushUIStack(ConstData.ExitPrefab);
+        }
     }
 
     /// <summary>
@@ -45,25 +64,29 @@ public class GameManager : ManagerBase<GameManager>
         {
             if (ColumnManager.Instance.gameColumns[i].GetNumberOfItemsToAdd() > 0)
             {
-                ColumnManager.Instance.gameColumns[i].Invoke("AddMissingBlock", delay);
+                ColumnManager.Instance.gameColumns[i].CallAddMissingBlock(delay);
                 delay += 0.05f;
             }
         }
         //指派邻居
-        Invoke("AssignNeighbours", delay + 0.1f);
+        AssignNeighbours(delay + 0.1f);
     }
 
     /// <summary>
     /// 指派(赋值)相连块
     /// </summary>
-    internal void AssignNeighbours()
+    /// <param 延迟调用的时间="delay"></param>
+    internal void AssignNeighbours(float delay)
     {
-        for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
+        vp_Timer.In(delay, new vp_Timer.Callback(delegate() 
         {
-            ColumnManager.Instance.gameColumns[i].AssignNeighbours();
-        }
-        //检查全部块状态
-        Invoke("CheckBoardState", Instance.objectFallingDuration);
+            for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
+            {
+                ColumnManager.Instance.gameColumns[i].AssignNeighbours();
+            }
+            //检查全部块状态
+            CheckBoardState();
+        }));
     }
 
     /// <summary>
@@ -72,25 +95,26 @@ public class GameManager : ManagerBase<GameManager>
     internal void CheckBoardState()
     {
         //print("检查全部块状态");
-        doesHaveBrustItem = false;
-        for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
+        vp_Timer.In(objectFallingDuration, new vp_Timer.Callback(delegate() 
         {
-            for (int j = 0; j < ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList.Count; j++)
+            doesHaveBrustItem = false;
+            for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
             {
-                if (ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList[j] != null)
+                for (int j = 0; j < ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList.Count; j++)
                 {
-                    ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList[j].CheckIfCanBrust();
+                    if (ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList[j] != null)
+                    {
+                        ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList[j].CheckIfCanBrust();
+                    }
                 }
             }
-        }
 
-        if (doesHaveBrustItem)
-        {
-            //播放消的声音
-
-            RemoveBlock();
-            AddMissingBlock();
-        }
+            if (doesHaveBrustItem)
+            {
+                RemoveBlock();
+                AddMissingBlock();
+            }
+        }));
     }
 
     /// <summary>
@@ -98,6 +122,10 @@ public class GameManager : ManagerBase<GameManager>
     /// </summary>
     internal void RemoveBlock()
     {
+        //播放消的声音
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.ClearCube);
+        print("播放消的声音");
+
         for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
         {
             ColumnManager.Instance.gameColumns[i].DeleteBrustedBlock();

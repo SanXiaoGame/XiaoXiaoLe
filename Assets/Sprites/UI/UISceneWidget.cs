@@ -25,6 +25,21 @@ public class UISceneWidget : EventTrigger
     public event Action<BaseEventData> UpdateSelected;
 
     /// <summary>
+    /// 获取指定UGUI游戏物体的事件监听器
+    /// </summary>
+    /// <param 指定物体="obj"></param>
+    /// <returns></returns>
+    public static UISceneWidget Get(GameObject obj)
+    {
+        UISceneWidget widget = obj.GetComponent<UISceneWidget>();
+        if (!widget)
+        {
+            widget = obj.AddComponent<UISceneWidget>();
+        }
+        return widget;
+    }
+
+    /// <summary>
     /// 开始拖动
     /// </summary>
     /// <param name="eventData"></param>

@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4344301029378934}
   - component: {fileID: 212399349279775882}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: 2044
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1808701587
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: ca72551136bcac64fb5695afb4c530eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

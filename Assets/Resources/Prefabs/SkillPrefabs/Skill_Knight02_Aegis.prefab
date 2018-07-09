@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4819663798498868}
   - component: {fileID: 212628861479063902}
   - component: {fileID: 95009149982693598}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Skill_Knight02_Aegis
-  m_TagString: Untagged
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,7 +91,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -536642827
   m_SortingLayer: 9
-  m_SortingOrder: 0
+  m_SortingOrder: 9
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

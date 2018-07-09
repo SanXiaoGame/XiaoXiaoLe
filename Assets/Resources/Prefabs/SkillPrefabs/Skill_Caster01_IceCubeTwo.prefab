@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 60873618274963280}
   - component: {fileID: 50276454179140186}
   - component: {fileID: 114345767041216192}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: IceCubeTwo_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 60331139114184566}
   - component: {fileID: 50295839816329962}
   - component: {fileID: 114218041416836314}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: IceCubeTwo_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 60237307588216204}
   - component: {fileID: 50883744749757378}
   - component: {fileID: 114138537254564406}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: IceCubeTwo_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,9 +78,10 @@ GameObject:
   - component: {fileID: 4065303307388518}
   - component: {fileID: 212146960545817124}
   - component: {fileID: 114685403273941290}
-  m_Layer: 0
+  - component: {fileID: 61507336662246518}
+  m_Layer: 10
   m_Name: Skill_Caster01_IceCubeTwo
-  m_TagString: Untagged
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,7 +98,7 @@ GameObject:
   - component: {fileID: 60371170814099174}
   - component: {fileID: 50350446949077402}
   - component: {fileID: 114119696709116240}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: IceCubeTwo_14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +117,7 @@ GameObject:
   - component: {fileID: 60366262512723882}
   - component: {fileID: 50049069041430896}
   - component: {fileID: 114404839600299588}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: IceCubeTwo_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +136,7 @@ GameObject:
   - component: {fileID: 60171977848121352}
   - component: {fileID: 50752251248449220}
   - component: {fileID: 114318458612242082}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: IceCubeTwo_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +155,7 @@ GameObject:
   - component: {fileID: 60258221628823222}
   - component: {fileID: 50042837853432486}
   - component: {fileID: 114182188380366984}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: IceCubeTwo_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +174,7 @@ GameObject:
   - component: {fileID: 60611204667261370}
   - component: {fileID: 50647298702535522}
   - component: {fileID: 114347711718396296}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: IceCubeTwo_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +193,7 @@ GameObject:
   - component: {fileID: 60805728457765762}
   - component: {fileID: 50319338025487922}
   - component: {fileID: 114648142241480956}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: IceCubeTwo_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +212,7 @@ GameObject:
   - component: {fileID: 60705166412806520}
   - component: {fileID: 50926328106771670}
   - component: {fileID: 114256098279923486}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: IceCubeTwo_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +231,7 @@ GameObject:
   - component: {fileID: 60244689105789856}
   - component: {fileID: 50122029129150428}
   - component: {fileID: 114354697999502794}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: IceCubeTwo_13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +250,7 @@ GameObject:
   - component: {fileID: 60137956646097678}
   - component: {fileID: 50692238546822264}
   - component: {fileID: 114019240349393986}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: IceCubeTwo_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +269,7 @@ GameObject:
   - component: {fileID: 60038319231500162}
   - component: {fileID: 50265969423542792}
   - component: {fileID: 114461290319485624}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: IceCubeTwo_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +296,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1362497882424568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.853, y: 0.13, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4636405078926106}
@@ -1139,6 +1140,31 @@ PolygonCollider2D:
       - {x: 0.089999996, y: -0.06}
       - {x: 0.089999996, y: 0.12}
       - {x: 0.02, y: 0.17999999}
+--- !u!61 &61507336662246518
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1362497882424568}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.42}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.87, y: 0.25}
+    newSize: {x: 0.87, y: 0.25}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.87, y: 1.12}
+  m_EdgeRadius: 0
 --- !u!114 &114019240349393986
 MonoBehaviour:
   m_ObjectHideFlags: 1

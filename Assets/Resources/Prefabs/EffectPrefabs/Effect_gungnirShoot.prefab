@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4297843117625696}
   - component: {fileID: 212233226729211926}
   - component: {fileID: 95855586241861282}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Effect_gungnirShoot
-  m_TagString: Untagged
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

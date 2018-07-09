@@ -14,31 +14,31 @@ public class BlockObject : MonoBehaviour
     //清屏块预制体
     GameObject highSkillBlock;
     //特殊块的形成
-    public GameObject specialObjectToForm = null;
+    internal GameObject specialObjectToForm = null;
     //邻近的块身上的“块基类”
-    public BlockObject[] adjacentItems;
+    internal BlockObject[] adjacentItems;
     //用于实例化时赋值ColumnScript类
     internal ColumnScript myColumnScript;
     //可否摧毁
-    public bool brust = false;
+    internal bool brust = false;
     //是否被消
     bool isDestroyed = false;
     //块所在的列编号
     internal int ColumnNumber;
 
     #region 相邻块的名字
-    string left1 = "left1";
-    string left2 = "left2";
-    string left3 = "left3";
-    string right1 = "right1";
-    string right2 = "right2";
-    string right3 = "right3";
-    string up1 = "up1";
-    string up2 = "up2";
-    string up3 = "up3";
-    string down1 = "down1";
-    string down2 = "down2";
-    string down3 = "down3";
+    string left1;
+    string left2;
+    string left3;
+    string right1;
+    string right2;
+    string right3;
+    string up1;
+    string up2;
+    string up3;
+    string down1;
+    string down2;
+    string down3;
     #endregion
 
     static BlockObject parentCallingScript;
@@ -47,8 +47,8 @@ public class BlockObject : MonoBehaviour
     {
         skillBlock = ResourcesManager.Instance.FindBlock(BlockObjectType.SkillType);
         highSkillBlock = ResourcesManager.Instance.FindBlock(BlockObjectType.HighSkillType);
-        //默认邻近的块为8个
-        adjacentItems = new BlockObject[8];
+        //默认邻近的块为4个
+        adjacentItems = new BlockObject[4];
     }
 
     /// <summary>
@@ -56,7 +56,20 @@ public class BlockObject : MonoBehaviour
     /// </summary>
     private void AssignLRUD()
     {
-        if (tag == ConstData.SpecialBlock)
+        left1 = "left1";
+        left2 = "left2";
+        left3 = "left3";
+        right1 = "right1";
+        right2 = "right2";
+        right3 = "right3";
+        up1 = "up1";
+        up2 = "up2";
+        up3 = "up3";
+        down1 = "down1";
+        down2 = "down2";
+        down3 = "down3";
+
+        if (tag == ConstData.SpecialBlock || tag == ConstData.SkillBlock)
         {
             return;
         }
@@ -123,6 +136,23 @@ public class BlockObject : MonoBehaviour
     }
 
     /// <summary>
+    /// 不拖动时，也检测特殊块的形成
+    /// </summary>
+    internal void ExternalTestingpecialBlock(BlockObject blockObject)
+    {
+        //赋值正确块的blockObject
+        parentCallingScript = blockObject;
+        //重新找比对用邻居
+        AssignLRUD();
+        
+        if ((blockObject.name == left1 && blockObject.name == left2) || (blockObject.name == left1 && blockObject.name == right1) || (blockObject.name == right1 && blockObject.name == right2) || (blockObject.name == up1 && blockObject.name == up2) || (blockObject.name == up1 && blockObject.name == down1) || (blockObject.name == down1 && blockObject.name == down2))
+        {
+            // 特殊块形成的方法
+            CheckForSpecialBlockFormation(blockObject.name);
+        }
+    }
+
+    /// <summary>
     /// 特殊块形成的方法
     /// </summary>
     /// <param 换位成功的块名="objName"></param>
@@ -133,24 +163,28 @@ public class BlockObject : MonoBehaviour
         {
             parentCallingScript.specialObjectToForm = highSkillBlock;
             GameManager.Instance.AddScore(ConstData.SkillThree);
+            SkillManager.Instance.C_ClassSkill(objName);
         }
         //垂直5连方块
         else if (objName == up2 && objName == up1 && objName == down1 && objName == down2)
         {
             parentCallingScript.specialObjectToForm = highSkillBlock;
             GameManager.Instance.AddScore(ConstData.SkillThree);
+            SkillManager.Instance.C_ClassSkill(objName);
         }
         //水平4连方块
         else if ((objName == left2 && objName == left1 && objName == right1) || (objName == left1 && objName == right1 && objName == right2))
         {
             parentCallingScript.specialObjectToForm = skillBlock;
             GameManager.Instance.AddScore(ConstData.SkillTwo);
+            DelayCallSkill(0.1f, objName);
         }
         //垂直4连方块
         else if ((objName == up2 && objName == up1 && objName == down1) || (objName == up1 && objName == down1 && objName == down2))
         {
             parentCallingScript.specialObjectToForm = skillBlock;
             GameManager.Instance.AddScore(ConstData.SkillTwo);
+            DelayCallSkill(0.1f, objName);
         }
     }
 
@@ -214,14 +248,28 @@ public class BlockObject : MonoBehaviour
             return;
         }
 
+        // 为上下左右的块赋值名字
         AssignLRUD();
 
-        if ((name == left1 && name == left2) || (name == left1 && name == right1) || (name == right1 && name == right2) || (name == up1 && name == up2) || (name == up1 && name == down1) || (name == down1 && name == down2))
+        if ((gameObject.name == left1 && gameObject.name == left2) || (gameObject.name == left1 && gameObject.name == right1) 
+            || (gameObject.name == right1 && gameObject.name == right2) || (gameObject.name == up1 && gameObject.name == up2) 
+            || (gameObject.name == up1 && gameObject.name == down1) || (gameObject.name == down1 && gameObject.name == down2))
         {
-            brust = true;
             GameManager.Instance.doesHaveBrustItem = true;
             GameManager.Instance.AddScore(ConstData.SkillOne);
+            brust = true;
+            DelayCallSkill(0.12f, name);
         }
+    }
+
+    /// <summary>
+    /// 延迟调用技能
+    /// </summary>
+    /// <param 延迟时间="delay"></param>
+    /// <param 块名="objName"></param>
+    void DelayCallSkill(float delay, string objName)
+    {
+        vp_Timer.In(delay, new vp_Timer.Callback(delegate () { SkillManager.Instance.B_ClassSkill(objName); }));
     }
 
     /// <summary>
@@ -254,21 +302,7 @@ public class BlockObject : MonoBehaviour
         myColumnScript = null;
         ColumnNumber = -1;
         Array.Clear(adjacentItems, 0, adjacentItems.Length);
-        
-        //重置块的邻近组合
-        left1 = "left1";
-        left2 = "left2";
-        left3 = "left3";
-        right1 = "right1";
-        right2 = "right2";
-        right3 = "right3";
-        up1 = "up1";
-        up2 = "up2";
-        up3 = "up3";
-        down1 = "down1";
-        down2 = "down2";
-        down3 = "down3";
 
-        ObjectPoolManager.Instance.RecycleBlockObject(gameObject);
+        ObjectPoolManager.Instance.RecycleMyGameObject(gameObject);
     }
 }

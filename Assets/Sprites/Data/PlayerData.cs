@@ -22,7 +22,7 @@ public class PlayerData
     public int skillThreeID;
     public int Weapon;
     public int Equipment;
-    public ulong GoldCoin;
+    public int GoldCoin;
     public int Diamond;
     public int PrefabsID;
     //进化后对应数值

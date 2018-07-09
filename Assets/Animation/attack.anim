@@ -2549,22 +2549,8 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_Events:
-  - time: 0.18333334
-    functionName: AttackBegin
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.6
-    functionName: AttackAfter
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.8333333
-    functionName: AttackFinished
+  - time: 0.41666666
+    functionName: Attack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

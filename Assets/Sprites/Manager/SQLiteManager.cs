@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,57 +17,68 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
     WriteData writeData;
 
     //数据源：用来保存读到的数据模型
-    //public Dictionary<int, object> dataSource;
     public Dictionary<int, BagData> bagDataSource = new Dictionary<int, BagData>();
     public Dictionary<int, CharacterListData> characterDataSource = new Dictionary<int, CharacterListData>();
     public Dictionary<int, EnemyData> enemyDataSource = new Dictionary<int, EnemyData>();
     public Dictionary<int, EquipmentData> equipmentDataSource = new Dictionary<int, EquipmentData>();
     public Dictionary<int, ItemData> itemDataSource = new Dictionary<int, ItemData>();
     public Dictionary<int, LVData> lVDataSource = new Dictionary<int, LVData>();
-    public Dictionary<int, PlayerData> playerDataSource = new Dictionary<int, PlayerData>();
-    public Dictionary<int, SkillData> skillDataSource = new Dictionary<int, SkillData>();
-    public Dictionary<int, StateData> stateDataSource = new Dictionary<int, StateData>();
-    public Dictionary<int, HeroData> team = new Dictionary<int, HeroData>();        //小队字典--from Duke 
+    public  Dictionary<int, PlayerData> playerDataSource = new Dictionary<int, PlayerData>();
+    public  Dictionary<int, SkillData> skillDataSource = new Dictionary<int, SkillData>();
+    public  Dictionary<int, StateData> stateDataSource = new Dictionary<int, StateData>();
+    public  Dictionary<string, HeroData> team = new Dictionary<string, HeroData>();        //小队字典--from Duke 
     protected override void Awake()
     {
         base.Awake();
-        //初始化数据源字典
-        /*if (dataSource == null)
-        {
-            dataSource = new Dictionary<int, object>();
-        }*/
-
         //启动流路径(将需要操作的文件从流路径拷贝到沙盒中)
         StreamsLoading = gameObject.AddComponent<DataStreamsLoading>();
 
         //是否拷贝完成
         StreamsLoading.onCopyFinished += OnLoadFinished;
         //开始拷贝（输入对应的表名）
-        StreamsLoading.LoadWitgPath(new string[] { ConstData.SQLITE_NAME});
+        StreamsLoading.LoadWitgPath(ConstData.SQLITE_NAME);
     }
 
     /// <summary>
     /// 当文件从流路径拷贝到沙盒路径完成时执行的回调函数，一旦该函数被成功回调，则意味着拷贝文件已完成，此时可执行存取等数据库操作
     /// </summary>
     string dataBasePath;
-    void OnLoadFinished()
+    internal void OnLoadFinished()
     {
         Debug.Log("路径拷贝完成");
         //数据库存放沙盒的路径
-        dataBasePath = System.IO.Path.Combine(Application.persistentDataPath, ConstData.SQLITE_NAME);
+        //dataBasePath = System.IO.Path.Combine(Application.persistentDataPath, ConstData.SQLITE_NAME);
+        dataBasePath = StringSplicingTool.StringSplicing(new string[] { Application.persistentDataPath,"/", ConstData.SQLITE_NAME });
         //初始化读和写的功能
         readData = new ReadData(dataBasePath);
         writeData = new WriteData(dataBasePath);
+
+        //清空数据
+        bagDataSource.Clear();
+        characterDataSource.Clear();
+        enemyDataSource.Clear();
+        equipmentDataSource.Clear();
+        itemDataSource.Clear();
+        lVDataSource.Clear();
+        playerDataSource.Clear();
+        skillDataSource.Clear();
+        stateDataSource.Clear();
 
         //取出数据存入字典
         readData.GetData(ConstData.Bag);
         readData.GetData(ConstData.CharacterList);
         readData.GetData(ConstData.Enemy);
+        readData.GetData(ConstData.Equipment);
         readData.GetData(ConstData.Item);
         readData.GetData(ConstData.Level);
-        readData.GetData(ConstData.Player);
         readData.GetData(ConstData.Skill);
         readData.GetData(ConstData.State);
+        readData.GetData(ConstData.Player);
+        print("获取完数据");
+        //执行读取结束委托
+
+
+        SceneAss_Manager.Instance.ExecutionOfEvent(1);
     }
 
     /// <summary>

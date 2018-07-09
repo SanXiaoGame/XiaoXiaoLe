@@ -8,7 +8,7 @@ using DG.Tweening;
 /// <summary>
 /// 块的点击功能类
 /// </summary>
-public class BlockObjectTouch : UISceneWidget
+public class BlockObjectTouch : MonoBehaviour
 {
     //块的Image组件
     Image blockImage;
@@ -37,15 +37,8 @@ public class BlockObjectTouch : UISceneWidget
     private void Start()
     {
         //绑定块的拖拽事件
-        if (gameObject.GetComponent<UISceneWidget>() == null)
-        {
-            blockClick = gameObject.AddComponent<UISceneWidget>();
-        }
-        else
-        {
-            blockClick = gameObject.GetComponent<UISceneWidget>();
-        }
-        
+        blockClick = UISceneWidget.Get(gameObject);
+
         if (blockClick != null)
         {
             blockClick.PointerDown += BlockOnPointerDown;
@@ -58,6 +51,41 @@ public class BlockObjectTouch : UISceneWidget
     //点击块的方法
     private void BlockOnPointerDown(PointerEventData eventData)
     {
+        //检测是否是吃了交换药
+        if (GameManager.Instance.props_CubeChangeSwitch)
+        {
+            ColumnManager.Instance.exchangeBlock.Add(eventData.pointerEnter.GetComponent<BlockObject>());
+
+            blockImage.color = Color.black;
+            if (ColumnManager.Instance.exchangeBlock.Count > 1)
+            {
+                if (eventData.pointerEnter.GetComponent<BlockObject>() == ColumnManager.Instance.exchangeBlock[0])
+                {
+                    ColumnManager.Instance.exchangeBlock.RemoveAt(ColumnManager.Instance.exchangeBlock.Count - 1);
+                    return;
+                }
+
+                for (int i = 0; i < ColumnManager.Instance.exchangeBlock.Count; i++)
+                {
+                    ColumnManager.Instance.exchangeBlock[i].GetComponent<Image>().color = new Color(1, 1, 1, 1);
+                }
+
+                //交换的动画
+                ColumnManager.Instance.exchangeBlock[0].transform.DOMove(ColumnManager.Instance.exchangeBlock[1].transform.position, 0.2f);
+                ColumnManager.Instance.exchangeBlock[1].transform.DOMove(ColumnManager.Instance.exchangeBlock[0].transform.position, 0.2f).OnComplete(delegate ()
+                {
+                    GameManager.Instance.props_CubeChangeSwitch = false;
+                });
+
+                ColumnManager.Instance.exchangeBlock[0].ExternalTestingpecialBlock(ColumnManager.Instance.exchangeBlock[1]);
+                ColumnManager.Instance.exchangeBlock[1].ExternalTestingpecialBlock(ColumnManager.Instance.exchangeBlock[0]);
+                SwapTwoBlock(ColumnManager.Instance.exchangeBlock[0], ColumnManager.Instance.exchangeBlock[1]);
+
+                ColumnManager.Instance.exchangeBlock.Clear();
+            }
+            return;
+        }
+
         try
         {
             if (eventData.pointerEnter.tag == "Block")
@@ -65,6 +93,28 @@ public class BlockObjectTouch : UISceneWidget
                 //播放点击音效
 
                 blockPos1 = eventData.pointerEnter.transform;
+                //检测是否是吃了删除药
+                if (GameManager.Instance.props_CubeBreakSwitch)
+                {
+                    GameManager.Instance.props_CubeBreakSwitch = false;
+                    blockPos1.GetComponent<BlockObject>().brust = true;
+                    blockPos1 = null;
+                    GameManager.Instance.RemoveBlock();
+                    GameManager.Instance.AddMissingBlock();
+                    return;
+                }
+                //检测是否是吃了变块药
+                if (GameManager.Instance.props_SkillCubeSwitch)
+                {
+                    GameManager.Instance.props_SkillCubeSwitch = false;
+                    blockPos1.GetComponent<BlockObject>().brust = true;
+                    blockPos1.GetComponent<BlockObject>().specialObjectToForm = ResourcesManager.Instance.FindBlock(BlockObjectType.SkillType);
+                    GameManager.Instance.RemoveBlock();
+                    GameManager.Instance.AddMissingBlock();
+                    blockPos1 = null;
+                    return;
+                }
+
                 blockImage.color = Color.red;
 
                 fingerBeginX = Input.mousePosition.x;
@@ -76,7 +126,6 @@ public class BlockObjectTouch : UISceneWidget
             blockPos1 = transform;
             Debug.Log(StringSplicingTool.StringSplicing("点击了屏幕外，选中块为空", ex.ToString()));
         }
-        
     }
 
     //块完成点击的方法(只适用于编辑器)
@@ -87,7 +136,7 @@ public class BlockObjectTouch : UISceneWidget
     //拖拽中
     private void BlockOnDrag(PointerEventData eventData)
     {
-        if (eventData.pointerEnter.tag == "Block" && !GameManager.Instance.isBusy)
+        if (eventData.pointerEnter.tag == "Block" && !GameManager.Instance.isBusy && !GameManager.Instance.props_CubeChangeSwitch && !GameManager.Instance.props_CubeBreakSwitch && !GameManager.Instance.props_SkillCubeSwitch)
         {
             GameManager.Instance.isBusy = true;
             fingerCurrentX = Input.mousePosition.x;
@@ -102,7 +151,8 @@ public class BlockObjectTouch : UISceneWidget
             blockPos1.DOMove(blockPos2.position, 0.2f);
             blockPos2.DOMove(blockPos1.position, 0.2f);
 
-            if (!blockPos1.GetComponent<BlockObject>().isMovePossibleInDirection(GetDirectionOfSecondObject(blockPos1, blockPos2)) && !blockPos2.GetComponent<BlockObject>().isMovePossibleInDirection(GetDirectionOfSecondObject(blockPos2, blockPos1)))
+            if ((!blockPos2.GetComponent<BlockObject>().isMovePossibleInDirection(GetDirectionOfSecondObject(blockPos2, blockPos1)) && !blockPos1.GetComponent<BlockObject>().isMovePossibleInDirection(GetDirectionOfSecondObject(blockPos1, blockPos2)))
+                || (!blockPos1.GetComponent<BlockObject>().isMovePossibleInDirection(GetDirectionOfSecondObject(blockPos1, blockPos2)) && !blockPos2.GetComponent<BlockObject>().isMovePossibleInDirection(GetDirectionOfSecondObject(blockPos2, blockPos1))))
             {
                 ChangePositionBack(blockPos1, blockPos2);
             }
@@ -141,12 +191,10 @@ public class BlockObjectTouch : UISceneWidget
                 if (fingerSegmentY > 0)
                 {
                     blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[2].transform;
-                    //Debug.Log("up:" + blockPos2);
                 }
                 else
                 {
                     blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[3].transform;
-                    //Debug.Log("down:" + blockPos2);
                 }
             }
             else if (fingerSegmentY == 0)
@@ -154,12 +202,10 @@ public class BlockObjectTouch : UISceneWidget
                 if (fingerSegmentX > 0)
                 {
                     blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[1].transform;
-                    //Debug.Log("right:" + blockPos2);
                 }
                 else
                 {
                     blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[0].transform;
-                    //Debug.Log("left:" + blockPos2);
                 }
             }
         }
@@ -198,8 +244,8 @@ public class BlockObjectTouch : UISceneWidget
     /// </summary>
     void ChangePositionBack(Transform block1, Transform block2)
     {
-        //播放交换的音效
-        AudioManager.Instance.PlayEffectMusic(SoundEffect.Attack);
+        //播放交换的音效(暂时不用)
+        //AudioManager.Instance.PlayEffectMusic(SoundEffect.Attack);
         //交换回来的动画
         Vector3 tempPos = block1.position;
         blockPos1.DOMove(blockPos1.position, 0.2f).SetDelay(0.25f);
@@ -237,6 +283,6 @@ public class BlockObjectTouch : UISceneWidget
         block1.ColumnNumber = block2.ColumnNumber;
         block2.ColumnNumber = tempIndex;
         //交换完就重新分配邻居
-        GameManager.Instance.AssignNeighbours();
+        GameManager.Instance.AssignNeighbours(0f);
     }
 }

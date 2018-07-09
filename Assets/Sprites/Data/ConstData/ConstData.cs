@@ -7,6 +7,105 @@ public struct ConstData
     public const string UIPrefabsPath = "Prefabs/UIPrefabs";
     #endregion
 
+    #region 所有英雄角色预制体文件夹
+    public const string PlayerPrefabs = "Prefabs/PlayerPrefabs";
+    #endregion
+
+    #region 所有敌人角色预制体文件夹
+    public const string EnemyPrefabs = "Prefabs/EnemyPrefabs";
+    #endregion
+
+    #region 所有战斗武器预制体文件夹
+    /// <summary>
+    /// 武器预制体文件夹
+    /// </summary>
+    public const string WeaponPrefabs = "Prefabs/WeaponPrefabs";
+    #endregion
+
+    #region 所有UI预制体的画布名
+    public const string CanvasName = "/Canvas";
+    #endregion
+
+    #region 所有场景名
+    public const string LoadingScene = "LoadingScene";
+    #endregion
+
+    #region 所有UI预制体名
+    /// <summary>
+    /// 加载界面预制体
+    /// </summary>
+    public const string LoadingPrefab = "LoadingBG";
+    /// <summary>
+    /// 退出游戏界面预制体
+    /// </summary>
+    public const string ExitPrefab = "ExitPrefab";
+    /// <summary>
+    /// 人物管理界面预制体
+    /// </summary>
+    public const string UICharacterManagePrefab = "UICharacterManagePrefab";
+    /// <summary>
+    /// 主城界面预制体
+    /// </summary>
+    public const string UIMainCityPrefab = "UIMainCityPrefab";
+    #endregion
+
+    #region UI区域名
+    /// <summary>
+    /// 系统操作区
+    /// </summary>
+    public const string SystemArea = "SystemArea/";
+    public const string SystemArea_CharacterIcon = "SystemArea/CharacterIcon";
+    public const string SystemArea_TeamIcon = "SystemArea/TeamIcon";
+    public const string SystemArea_EquipmentIcon = "SystemArea/EquipmentIcon";
+    public const string SystemArea_MainCityIcon = "SystemArea/MainCityIcon";
+    /// <summary>
+    /// 控制区
+    /// </summary>
+    public const string ControllerArea = "ControllerArea/";
+    public const string ControllerArea_ItemListBG = "ControllerArea/ItemListBG";
+    public const string ControllerArea_CharacterListBG = "ControllerArea/CharacterListBG";
+    /// <summary>
+    /// 控制区附属
+    /// </summary>
+    public const string ControllerExArea = "ControllerExArea/";
+    public const string ControllerExArea_SkillMode = "ControllerExArea/SkillMode";
+    public const string ControllerExArea_TeamMode = "ControllerExArea/TeamMode";
+    public const string ControllerExArea_TeamModeUP = "ControllerExArea/TeamMode/TeamEditUp";
+    public const string ControllerExArea_TeamModeDOWN = "ControllerExArea/TeamMode/TeamEditDown";
+    public const string ControllerExArea_TeamModeCONFIRM = "ControllerExArea/TeamMode/TeamEditOK";
+    public const string ControllerExArea_EquipmentMode = "ControllerExArea/EquipmentMode";
+    /// <summary>
+    /// 筛选
+    /// </summary>
+    public const string Filter = "Filter/";
+    public const string Filter_StoneSaberTag = "Filter/StoneSaberTag";
+    public const string Filter_StoneKnightTag = "Filter/StoneKnightTag";
+    public const string Filter_StoneBerserkerTag = "Filter/StoneBerserkerTag";
+    public const string Filter_StoneHunterTag = "Filter/StoneHunterTag";
+    public const string Filter_StoneCasterTag = "Filter/StoneCasterTag";
+    /// <summary>
+    /// 游戏画面区
+    /// </summary>
+    public const string GameArea = "GameArea/";
+    public const string GameArea_MessageFrame = "GameArea/MessageFrame";
+    public const string GameArea_MessageFrame_Name = "GameArea/MessageFrame/Name";
+    public const string GameArea_MessageFrame_LV = "GameArea/MessageFrame/LV";
+    public const string GameArea_MessageFrame_EXPSlider = "GameArea/MessageFrame/EXPSlider";
+    public const string GameArea_MessageFrame_HP = "GameArea/MessageFrame/HP";
+    public const string GameArea_MessageFrame_AD = "GameArea/MessageFrame/AD";
+    public const string GameArea_MessageFrame_AP = "GameArea/MessageFrame/AP";
+    public const string GameArea_MessageFrame_DEF = "GameArea/MessageFrame/DEF";
+    public const string GameArea_MessageFrame_RES = "GameArea/MessageFrame/RES";
+    public const string GameArea_Step = "GameArea/Step";
+    public const string GameArea_GoldCoin = "GameArea/GoldFrame/GoldCoin";
+    /// <summary>
+    /// 技能介绍栏
+    /// </summary>
+    public const string SkillIntroduction = "SkillIntroduction";
+    public const string SkillIntroduction_SkillContent = "SkillIntroduction/ContentBG/SkillContent";
+    public const string SkillIntroduction_CloseButton = "SkillIntroduction/CloseButton";
+    #endregion
+
     #region 所有游戏预制体文件夹
     //所有初始块的预制体
     public const string BlockPrefabs = "Prefabs/BlockPrefabs";
@@ -19,12 +118,17 @@ public struct ConstData
     public const string SkillPrefabs = "Prefabs/SkillPrefabs";
     #endregion
 
+    #region 所有游戏英雄攻击特效的预制体文件夹
+    //所有英雄技能特效的预制体
+    public const string EffectPrefabs = "Prefabs/EffectPrefabs";
+    #endregion
+
     #region 音乐文件夹
     public const string BGMusic = "Audios/BGMusic";
     #endregion
 
     #region 音效文件夹
-    public const string SoundEffect = "Audios/SoundEffect";
+    public const string Sound = "Audios";
     #endregion
 
     #region 职业进化所需材料
@@ -54,7 +158,7 @@ public struct ConstData
     #endregion
 
     #region 金币上限
-    public const ulong GoldCoinMax = 999999999;
+    public const int GoldCoinMax = 999999999;
     #endregion
 
     #region 动画的行为
@@ -203,7 +307,7 @@ public struct ConstData
     public const string DescendingOrder02 = " DESC";
     #endregion
 
-    #region 块的tag标签
+    #region tag标签
     /// <summary>
     /// 初始块
     /// </summary>
@@ -216,6 +320,26 @@ public struct ConstData
     /// 高级块
     /// </summary>
     public const string SpecialBlock = "SpecialBlock";
+    /// <summary>
+    /// 玩家标签
+    /// </summary>
+    public const string PlayerTag = "Player";
+    /// <summary>
+    /// 敌人标签
+    /// </summary>
+    public const string EnemyTag = "Enemy";
+    /// <summary>
+    /// 旗手标签
+    /// </summary>
+    public const string FlagManTag = "FlagMan";
+    /// <summary>
+    /// 胜利点
+    /// </summary>
+    public const string WinFlagTag = "WinFlag";
+    /// <summary>
+    /// 战斗刷怪点
+    /// </summary>
+    public const string MonsterPoint = "MonsterPoint";
     #endregion
 
     #region 消块分数
@@ -241,7 +365,11 @@ public struct ConstData
     public const int SpecialSkill = 148;
     #endregion
 
-    #region 块的名字
+    #region 块和职业的名字
+    /// <summary>
+    /// 旗手职业名
+    /// </summary>
+    public const string FlagMan = "FlagMan";
     /// <summary>
     /// 战士块名
     /// </summary>
@@ -263,4 +391,81 @@ public struct ConstData
     /// </summary>
     public const string Saber = "Saber";
     #endregion
+
+    #region 道具ID
+    /// <summary>
+    /// 恢复胶囊
+    /// </summary>
+    public const string CureCapsule = "2201";
+    /// <summary>
+    /// 兴奋剂
+    /// </summary>
+    public const string Stimulant = "2202";
+    /// <summary>
+    /// 复活十字架
+    /// </summary>
+    public const string ReviveCross = "2203";
+    /// <summary>
+    /// 方块粉碎剂
+    /// </summary>
+    public const string CubeBreak = "2204";
+    /// <summary>
+    /// 骸骨招魂幡
+    /// </summary>
+    public const string SkeletonSpiritism = "2205";
+    /// <summary>
+    /// 生命注射器
+    /// </summary>
+    public const string HealthSyringe = "2206";
+    /// <summary>
+    /// 肾上腺素注射器
+    /// </summary>
+    public const string ParanephrineSyringe = "2207";
+    /// <summary>
+    /// 神圣十字架
+    /// </summary>
+    public const string HolyCross = "2208";
+    /// <summary>
+    /// 方块传送剂
+    /// </summary>
+    public const string CubeTransfer = "2209";
+    /// <summary>
+    /// 幸运猫气球
+    /// </summary>
+    public const string LuckyCatBalloon = "2210";
+    /// <summary>
+    /// 恶灵招魂幡
+    /// </summary>
+    public const string GhostSpiritism = "2211";
+    /// <summary>
+    /// 剑士进阶石
+    /// </summary>
+    public const string SaberStone = "2301";
+    /// <summary>
+    /// 骑士进阶石
+    /// </summary>
+    public const string KnightStone = "2302";
+    /// <summary>
+    /// 猎人进阶石
+    /// </summary>
+    public const string HunterStone = "2303";
+    /// <summary>
+    /// 法师进阶石
+    /// </summary>
+    public const string CasterStone = "2304";
+    /// <summary>
+    /// 狂战士进阶石
+    /// </summary>
+    public const string BerserkerStone = "2305";
+    /// <summary>
+    /// 通关证明
+    /// </summary>
+    public const string GameClearProve = "2306";
+
+    #endregion
+
+    //主手位置路径
+    public const string MainFist = "Bones/Torso/L-arm/L-fist/Weapon";
+    //副手位置路径
+    public const string MinorFist = "Bones/Torso/R-arm/R-fist/Weapon2";
 }

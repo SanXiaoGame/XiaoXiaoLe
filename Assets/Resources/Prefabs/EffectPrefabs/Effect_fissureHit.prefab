@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4732406422309000}
   - component: {fileID: 212166350436303908}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Effect_fissureHit
-  m_TagString: Untagged
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

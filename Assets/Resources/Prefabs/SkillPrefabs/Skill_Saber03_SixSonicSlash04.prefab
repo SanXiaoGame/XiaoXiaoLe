@@ -21,9 +21,11 @@ GameObject:
   - component: {fileID: 4006992234144398}
   - component: {fileID: 212851929071933992}
   - component: {fileID: 95395245363307694}
-  m_Layer: 0
+  - component: {fileID: 61060455429456622}
+  - component: {fileID: 114595358411853476}
+  m_Layer: 10
   m_Name: Skill_Saber03_SixSonicSlash04
-  m_TagString: Untagged
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,12 +37,37 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1603487778312922}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.671, y: 1.248, z: 0}
+  m_LocalPosition: {x: 2.3499966, y: 0.961, z: 0.2172852}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &61060455429456622
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1603487778312922}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.09965417, y: 0.25896966}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.3188106, y: 0.020426573}
+    oldSize: {x: 0.55, y: 0.54}
+    newSize: {x: 0.55, y: 0.54}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.55, y: 0.53999996}
+  m_EdgeRadius: 0
 --- !u!95 &95395245363307694
 Animator:
   serializedVersion: 3
@@ -58,6 +85,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114595358411853476
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1603487778312922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 909802a1bd4115a48babe9fd0e69bfbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212851929071933992
 SpriteRenderer:
   m_ObjectHideFlags: 1

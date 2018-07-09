@@ -9,6 +9,12 @@ TagManager:
   - SpecialBlock
   - SkillBlock
   - Enemy
+  - WinFlag
+  - MonsterPoint
+  - FlagMan
+  - Effect
+  - Weapon
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -21,8 +27,8 @@ TagManager:
   - Background
   - Scene
   - Player
-  - 
-  - 
+  - EnemyLayer
+  - PlayerUpFram
   - 
   - 
   - 

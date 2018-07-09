@@ -16,6 +16,8 @@ public class ColumnManager : ManagerBase<ColumnManager>
     internal int numberOfRows = 6;
     //记录当前的列（最开始左边的列数等于-1）
     internal int ColumnNumber = -1;
+    //记录吃了交换药后选中的两个块
+    internal List<BlockObject> exchangeBlock = new List<BlockObject>();
 
     protected override void Awake()
     {
@@ -56,15 +58,20 @@ public class ColumnManager : ManagerBase<ColumnManager>
                 gameColumns[i].BlockObjectsScriptList[j].brust = true;
             }
         }
-        Invoke("MedicinalWaterAddMissingBlock", 0.35f);
+        //用于补充药水消的块
+        MedicinalWaterAddMissingBlock();
     }
+
     /// <summary>
     /// 用于补充药水消的块
     /// </summary>
     void MedicinalWaterAddMissingBlock()
     {
-        GameManager.Instance.RemoveBlock();
-        GameManager.Instance.AddMissingBlock();
+        vp_Timer.In(0.35f, new vp_Timer.Callback(delegate() 
+        {
+            GameManager.Instance.RemoveBlock();
+            GameManager.Instance.AddMissingBlock();
+        }));
     }
 
     /// <summary>
