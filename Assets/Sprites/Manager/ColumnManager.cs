@@ -58,15 +58,20 @@ public class ColumnManager : ManagerBase<ColumnManager>
                 gameColumns[i].BlockObjectsScriptList[j].brust = true;
             }
         }
-        vp_Timer.In(0.35f, new vp_Timer.Callback(MedicinalWaterAddMissingBlock));
+        //用于补充药水消的块
+        MedicinalWaterAddMissingBlock();
     }
+
     /// <summary>
     /// 用于补充药水消的块
     /// </summary>
     void MedicinalWaterAddMissingBlock()
     {
-        GameManager.Instance.RemoveBlock();
-        GameManager.Instance.AddMissingBlock();
+        vp_Timer.In(0.35f, new vp_Timer.Callback(delegate() 
+        {
+            GameManager.Instance.RemoveBlock();
+            GameManager.Instance.AddMissingBlock();
+        }));
     }
 
     /// <summary>

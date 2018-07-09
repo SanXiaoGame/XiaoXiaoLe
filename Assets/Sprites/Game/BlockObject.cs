@@ -177,14 +177,14 @@ public class BlockObject : MonoBehaviour
         {
             parentCallingScript.specialObjectToForm = skillBlock;
             GameManager.Instance.AddScore(ConstData.SkillTwo);
-            vp_Timer.In(0.1f, new vp_Timer.Callback(delegate () { SkillManager.Instance.B_ClassSkill(objName); }));
+            DelayCallSkill(0.1f, objName);
         }
         //垂直4连方块
         else if ((objName == up2 && objName == up1 && objName == down1) || (objName == up1 && objName == down1 && objName == down2))
         {
             parentCallingScript.specialObjectToForm = skillBlock;
             GameManager.Instance.AddScore(ConstData.SkillTwo);
-            vp_Timer.In(0.1f, new vp_Timer.Callback(delegate () { SkillManager.Instance.B_ClassSkill(objName); }));
+            DelayCallSkill(0.1f, objName);
         }
     }
 
@@ -258,8 +258,18 @@ public class BlockObject : MonoBehaviour
             GameManager.Instance.doesHaveBrustItem = true;
             GameManager.Instance.AddScore(ConstData.SkillOne);
             brust = true;
-            vp_Timer.In(0.12f, new vp_Timer.Callback(delegate () { SkillManager.Instance.A_ClassSkill(name); }));
+            DelayCallSkill(0.12f, name);
         }
+    }
+
+    /// <summary>
+    /// 延迟调用技能
+    /// </summary>
+    /// <param 延迟时间="delay"></param>
+    /// <param 块名="objName"></param>
+    void DelayCallSkill(float delay, string objName)
+    {
+        vp_Timer.In(delay, new vp_Timer.Callback(delegate () { SkillManager.Instance.B_ClassSkill(objName); }));
     }
 
     /// <summary>

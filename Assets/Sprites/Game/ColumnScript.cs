@@ -222,7 +222,7 @@ public class ColumnScript : MonoBehaviour
             //下降的动画
             BlockObjectsScriptList[i].transform.DOLocalMoveY(-i * 200, 0.1f).SetDelay(0.2f).SetEase(Ease.Linear).OnComplete(delegate ()
             {
-                vp_Timer.In(0.5f, new vp_Timer.Callback(DelayDOTween));
+                DelayDOTween();
             });
         }
 
@@ -235,9 +235,12 @@ public class ColumnScript : MonoBehaviour
     /// </summary>
     void DelayDOTween()
     {
-        if (!GameManager.Instance.doesHaveBrustItem)
+        vp_Timer.In(0.5f, new vp_Timer.Callback(delegate() 
         {
-            GameManager.Instance.isBusy = false;
-        }
+            if (!GameManager.Instance.doesHaveBrustItem)
+            {
+                GameManager.Instance.isBusy = false;
+            }
+        }));
     }
 }
