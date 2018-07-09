@@ -38,7 +38,7 @@ public class GameManager : ManagerBase<GameManager>
 
     private void Start()
     {
-        vp_Timer.In(0.5f, new vp_Timer.Callback(AssignNeighbours));
+        AssignNeighbours(0.5f);
         AudioManager.Instance.ReplaceBGM(BGM.maincity);
     }
 
@@ -69,20 +69,24 @@ public class GameManager : ManagerBase<GameManager>
             }
         }
         //指派邻居
-        vp_Timer.In(delay + 0.1f, new vp_Timer.Callback(AssignNeighbours));
+        AssignNeighbours(delay + 0.1f);
     }
 
     /// <summary>
     /// 指派(赋值)相连块
     /// </summary>
-    internal void AssignNeighbours()
+    /// <param 延迟调用的时间="delay"></param>
+    internal void AssignNeighbours(float delay)
     {
-        for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
+        vp_Timer.In(delay, new vp_Timer.Callback(delegate() 
         {
-            ColumnManager.Instance.gameColumns[i].AssignNeighbours();
-        }
-        //检查全部块状态
-        vp_Timer.In(objectFallingDuration, new vp_Timer.Callback(CheckBoardState));
+            for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
+            {
+                ColumnManager.Instance.gameColumns[i].AssignNeighbours();
+            }
+            //检查全部块状态
+            CheckBoardState();
+        }));
     }
 
     /// <summary>
@@ -91,23 +95,26 @@ public class GameManager : ManagerBase<GameManager>
     internal void CheckBoardState()
     {
         //print("检查全部块状态");
-        doesHaveBrustItem = false;
-        for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
+        vp_Timer.In(objectFallingDuration, new vp_Timer.Callback(delegate() 
         {
-            for (int j = 0; j < ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList.Count; j++)
+            doesHaveBrustItem = false;
+            for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
             {
-                if (ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList[j] != null)
+                for (int j = 0; j < ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList.Count; j++)
                 {
-                    ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList[j].CheckIfCanBrust();
+                    if (ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList[j] != null)
+                    {
+                        ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList[j].CheckIfCanBrust();
+                    }
                 }
             }
-        }
 
-        if (doesHaveBrustItem)
-        {
-            RemoveBlock();
-            AddMissingBlock();
-        }
+            if (doesHaveBrustItem)
+            {
+                RemoveBlock();
+                AddMissingBlock();
+            }
+        }));
     }
 
     /// <summary>
@@ -117,6 +124,7 @@ public class GameManager : ManagerBase<GameManager>
     {
         //播放消的声音
         AudioManager.Instance.PlayEffectMusic(SoundEffect.ClearCube);
+        print("播放消的声音");
 
         for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
         {
