@@ -381,7 +381,7 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
     }
     void MainCitySwitch(PointerEventData eventData)
     {
-        //team字典算最终数值
+        //team字典算最终数值(total)
         //各种数据库变更
         //切换主城页面
     }
@@ -693,7 +693,7 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                 {
                 "选中武器：",
                 SQLiteManager.Instance.equipmentDataSource[equipmentID].equipmentNmae,
-                "装备职业：",
+                "\n装备职业：",
                 SQLiteManager.Instance.equipmentDataSource[equipmentID].equipmentClass,
                 "\nHP: ",
                 (SQLiteManager.Instance.equipmentDataSource[equipmentID].equipment_HP).ToString(),
@@ -716,7 +716,7 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                 {
                 "选中防具：",
                 SQLiteManager.Instance.equipmentDataSource[equipmentID].equipmentNmae,
-                "装备职业：",
+                "\n装备职业：",
                 SQLiteManager.Instance.equipmentDataSource[equipmentID].equipmentClass,
                 "\nHP: ",
                 (SQLiteManager.Instance.equipmentDataSource[equipmentID].equipment_HP).ToString(),
@@ -748,9 +748,12 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                 selecteHero.Weapon = equipmentID;
                 //新武器字典变更
                 SQLiteManager.Instance.playerDataSource[selecteHero.player_Id].Weapon = equipmentID;
-                if (SQLiteManager.Instance.team[selecteHero.player_Class].playerData.player_Id == selecteHero.player_Id)
+                if (SQLiteManager.Instance.team[selecteHero.player_Class] != null)
                 {
-                    SQLiteManager.Instance.team[selecteHero.player_Class].playerData.Weapon = equipmentID;
+                    if (SQLiteManager.Instance.team[selecteHero.player_Class].playerData.player_Id == selecteHero.player_Id)
+                    {
+                        SQLiteManager.Instance.team[selecteHero.player_Class].playerData.Weapon = equipmentID;
+                    }
                 }
                 //背包字典变更
                 SQLiteManager.Instance.bagDataSource[equipmentG.GetComponent<BagItem>().myGrid].Bag_Weapon = outWeapon;
@@ -791,9 +794,12 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                 selecteHero.Equipment = equipmentID;
                 //新防具字典变更
                 SQLiteManager.Instance.playerDataSource[selecteHero.player_Id].Equipment = equipmentID;
-                if (SQLiteManager.Instance.team[selecteHero.player_Class].playerData.player_Id == selecteHero.player_Id)
+                if (SQLiteManager.Instance.team[selecteHero.player_Class] != null)
                 {
-                    SQLiteManager.Instance.team[selecteHero.player_Class].playerData.Equipment = equipmentID;
+                    if (SQLiteManager.Instance.team[selecteHero.player_Class].playerData.player_Id == selecteHero.player_Id)
+                    {
+                        SQLiteManager.Instance.team[selecteHero.player_Class].playerData.Equipment = equipmentID;
+                    }
                 }
                 //背包字典变更
                 SQLiteManager.Instance.bagDataSource[equipmentG.GetComponent<BagItem>().myGrid].Bag_Equipment = outEquipt;
