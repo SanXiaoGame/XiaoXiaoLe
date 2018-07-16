@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// 资源管理类
@@ -25,6 +26,10 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
     Object[] EnemyAll;
     //所有武器的预制体
     Object[] WeaponAll;
+
+    //所有职业Logo、技能图标、背包物品图片
+    Sprite[] SpriteAll;
+
     protected override void Awake()
     {
         base.Awake();
@@ -37,6 +42,7 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
         HeroAll = Resources.LoadAll(ConstData.PlayerPrefabs);
         EnemyAll = Resources.LoadAll(ConstData.EnemyPrefabs);
         WeaponAll = Resources.LoadAll(ConstData.WeaponPrefabs);
+        SpriteAll = Resources.LoadAll<Sprite>(ConstData.textureTemp);
     }
 
     /// <summary>
@@ -173,6 +179,22 @@ public class ResourcesManager : ManagerBase<ResourcesManager>
             if (WeaponAll[i].name == name)
             {
                 return WeaponAll[i] as GameObject;
+            }
+        }
+        return null;
+    }
+    /// <summary>
+    /// 根据名字查找指定的图片
+    /// </summary>
+    /// <param 图片名="name"></param>
+    /// <returns></returns>
+    public Sprite FindSprite(string name)
+    {
+        for (int i = 0; i < SpriteAll.Length; i++)
+        {
+            if (SpriteAll[i].name == name)
+            {
+                return SpriteAll[i];
             }
         }
         return null;

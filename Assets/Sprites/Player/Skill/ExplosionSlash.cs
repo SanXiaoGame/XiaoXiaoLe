@@ -56,6 +56,7 @@ public class ExplosionSlash : MonoBehaviour
                 {
                     cld.enabled = false;
                 }
+                AudioManager.Instance.PlayEffectMusic(SoundEffect.FireHit);
                 //获得目标
                 hitTarget = collision.gameObject;
                 //生成击打特效

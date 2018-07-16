@@ -33,14 +33,14 @@ public class Fissure : MonoBehaviour
     {
         if (r.a < 1)
         {
-            r.a += 0.01f;
+            r.a += 0.02f;
             red.color = r;
         }
         else
         {
             if (boomSwitch == false)
             {
-                vp_Timer.In(0.2f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(gameObject); }));
+                vp_Timer.In(0.1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(gameObject); }));
                 FissureBoom();
             }
         }
@@ -50,6 +50,7 @@ public class Fissure : MonoBehaviour
     {
         if (boomSwitch == false)
         {
+            AudioManager.Instance.PlayEffectMusic(SoundEffect.AllFireOpen);
             GameObject efctBoom = ObjectPoolManager.Instance.InstantiateMyGameObject(boom);
             efctBoom.transform.position = transform.position;
             vp_Timer.In(1.0f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(efctBoom); }));
