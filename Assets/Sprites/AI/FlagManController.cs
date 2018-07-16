@@ -87,7 +87,7 @@ public class FlagManController : MonoBehaviour
         {
             if (isWall == false)
             {
-                wallPoint = transform.Find("Main Camera/WallPoint").transform;
+                wallPoint = transform.Find("GameCamera/WallPoint").transform;
                 wall = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPlayerPrefab("Wall"));
                 wall.transform.position = wallPoint.position;
                 isWall = true;

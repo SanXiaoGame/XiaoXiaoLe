@@ -30,6 +30,7 @@ public class AudioManager : ManagerBase<AudioManager>
     protected override void Awake()
     {
         base.Awake();
+        PlayerPrefs.SetFloat("effectVolum", 1);
         //添加背景播放器
         bgMusic = gameObject.AddComponent<AudioSource>();
         //获取是否静音
@@ -128,7 +129,7 @@ public class AudioManager : ManagerBase<AudioManager>
             //开始播放
             tempAudio.Play();
             //启动状态延迟
-            vp_Timer.In(tempAudio.clip.length, new vp_Timer.Callback(delegate () { EffectMusicEnqueue(tempAudio); }));
+            EffectMusicEnqueue(tempAudio);
         }
         else
         {
@@ -145,11 +146,11 @@ public class AudioManager : ManagerBase<AudioManager>
             //设置2D/3D 默认2D
             tempAudio.spatialBlend = is2D;
             //设置音量 默认1
-            tempAudio.volume = effectVolume;
+            tempAudio.volume = 1;
             //播放
             tempAudio.Play();
             //启动状态延迟
-            vp_Timer.In(tempAudio.clip.length, new vp_Timer.Callback(delegate () { EffectMusicEnqueue(tempAudio); }));
+            EffectMusicEnqueue(tempAudio);
         }
     }
 
@@ -159,10 +160,14 @@ public class AudioManager : ManagerBase<AudioManager>
     /// <param 对应播放器="tempAudio"></param>
     void EffectMusicEnqueue(AudioSource tempAudio)
     {
-        //暂停播放
-        tempAudio.Stop();
-        tempAudio.clip = null;
-        //加入队列
-        effectMusic.Enqueue(tempAudio);
+        vp_Timer.In(tempAudio.clip.length, new vp_Timer.Callback(delegate ()
+        {
+            //暂停播放
+            tempAudio.Stop();
+            tempAudio.clip = null;
+            //加入队列
+            effectMusic.Enqueue(tempAudio);
+        }));
+        Debug.Log("回收");
     }
 }

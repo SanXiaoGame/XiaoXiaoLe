@@ -37,7 +37,6 @@ public struct StringSplicingTool
                 GoldCoinNumber = string.Format("{0}{1}", ",", GoldCoinNumber);
             }
         }
-        Debug.Log(GoldCoinNumber);
         return GoldCoinNumber;
     }
 }

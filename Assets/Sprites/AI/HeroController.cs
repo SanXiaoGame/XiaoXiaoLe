@@ -81,8 +81,8 @@ public class HeroController : MonoBehaviour
         //获取英雄职业
         myClass = SQLiteManager.Instance.characterDataSource[int.Parse(gameObject.name)].character_Class;
         //获取英雄两手位置
-        mainFist = transform.Find("Bones/Torso/L-arm/L-fist/Weapon").gameObject;
-        minorFist = transform.Find("Bones/Torso/R-arm/R-fist/Weapon2").gameObject;
+        mainFist = transform.Find(ConstData.MainFist).gameObject;
+        minorFist = transform.Find(ConstData.MinorFist).gameObject;
         //获取所有技能特效预制体
         saber01 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Saber01_Sprint);
         saber02 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Saber02_ExplodingSword);
@@ -352,6 +352,7 @@ public class HeroController : MonoBehaviour
                 case ConstData.Berserker:
                     if (targetEnemy != null)
                     {
+                        AudioManager.Instance.PlayEffectMusic(SoundEffect.Hit);
                         //生成击打特效
                         GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_hit));
                         hit1.transform.position = targetEnemy.transform.position;
@@ -400,18 +401,23 @@ public class HeroController : MonoBehaviour
             {
                 case ConstData.Saber:
                     Skill_A_Saber();
+                    Debug.Log("SaberA");
                     break;
                 case ConstData.Knight:
                     Skill_A_Knight();
+                    Debug.Log("KnightA");
                     break;
                 case ConstData.Berserker:
                     Skill_A_Berserker();
+                    Debug.Log("BerserkerA");
                     break;
                 case ConstData.Caster:
                     Skill_A_Caster();
+                    Debug.Log("CasterA");
                     break;
                 case ConstData.Hunter:
                     Skill_A_Hunter();
+                    Debug.Log("HunterA");
                     break;
             }
         }
@@ -430,18 +436,23 @@ public class HeroController : MonoBehaviour
             {
                 case ConstData.Saber:
                     Skill_B_Saber();
+                    Debug.Log("SaberB");
                     break;
                 case ConstData.Knight:
                     Skill_B_Knight();
+                    Debug.Log("KnightB");
                     break;
                 case ConstData.Berserker:
                     Skill_B_Berserker();
+                    Debug.Log("BerserkerB");
                     break;
                 case ConstData.Caster:
                     Skill_B_Caster();
+                    Debug.Log("CasterB");
                     break;
                 case ConstData.Hunter:
                     Skill_B_Hunter();
+                    Debug.Log("HunterB");
                     break;
             }
         }
@@ -460,18 +471,23 @@ public class HeroController : MonoBehaviour
             {
                 case ConstData.Saber:
                     Skill_C_Saber();
+                    Debug.Log("SaberC");
                     break;
                 case ConstData.Knight:
                     Skill_C_Knight();
+                    Debug.Log("KnightC");
                     break;
                 case ConstData.Berserker:
                     Skill_C_Berserker();
+                    Debug.Log("BerserkerC");
                     break;
                 case ConstData.Caster:
                     Skill_C_Caster();
+                    Debug.Log("CasterC");
                     break;
                 case ConstData.Hunter:
                     Skill_C_Hunter();
+                    Debug.Log("HunterC");
                     break;
             }
         }
@@ -500,6 +516,7 @@ public class HeroController : MonoBehaviour
         InvokeRepeating("Skill_A_Saber_Sprint", 0f, 0.02f);
         temp01.GetComponent<SprintDash>().isOver = false;
         temp01.transform.position = mainFist.transform.position;
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.Sprint);
     }
     void Skill_A_Saber_Sprint()
     {
@@ -528,9 +545,10 @@ public class HeroController : MonoBehaviour
     }
     internal void Skill_B_Saber_ExplosionSlash()
     {
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.ExplodingSword);
         GameObject temp02 = ObjectPoolManager.Instance.InstantiateMyGameObject(saber02);
         temp02.transform.position = transform.position + new Vector3(0.8f, -0.126f, 0);
-        vp_Timer.In(0.5f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
+        vp_Timer.In(0.8f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
     }
     /// <summary>
     /// 剑士三技能：六光连斩
@@ -551,22 +569,27 @@ public class HeroController : MonoBehaviour
         switch (num)
         {
             case 1:
+                AudioManager.Instance.PlayEffectMusic(SoundEffect.SixSonicSlash2);
                 GameObject slash1 = ObjectPoolManager.Instance.InstantiateMyGameObject(saber03_1);
                 slash1.transform.position = transform.position + new Vector3(0, 1.1f, 0);
                 break;
             case 2:
+                AudioManager.Instance.PlayEffectMusic(SoundEffect.SixSonicSlash1);
                 GameObject slash2 = ObjectPoolManager.Instance.InstantiateMyGameObject(saber03_2);
                 slash2.transform.position = transform.position + new Vector3(2.257f, -0.126f, 0);
                 break;
             case 3:
+                AudioManager.Instance.PlayEffectMusic(SoundEffect.SixSonicSlash1);
                 GameObject slash3 = ObjectPoolManager.Instance.InstantiateMyGameObject(saber03_3);
                 slash3.transform.position = transform.position + new Vector3(-0.595f, -0.368f, 0);
                 break;
             case 4:
+                AudioManager.Instance.PlayEffectMusic(SoundEffect.SixSonicSlash2);
                 GameObject slash4 = ObjectPoolManager.Instance.InstantiateMyGameObject(saber03_4);
                 slash4.transform.position = transform.position + new Vector3(0.857f, -0.126f, 0);
                 break;
             case 5:
+                AudioManager.Instance.PlayEffectMusic(SoundEffect.SixSonicSlash1);
                 GameObject slash5 = ObjectPoolManager.Instance.InstantiateMyGameObject(saber03_5);
                 slash5.transform.position = transform.position + new Vector3(0.757f, 0.5f, 0);
                 //vp_Timer.In(0.15f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
@@ -599,11 +622,12 @@ public class HeroController : MonoBehaviour
     }
     internal void Skill_A_Knight_Belief()
     {
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.Belief);
         GameObject st = ObjectPoolManager.Instance.InstantiateMyGameObject(knight01);
         st.transform.position = transform.position;
         vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(st); }));
         transform.GetComponent<HeroStates>().GetState(3210, 5.0f);
-        vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
+        vp_Timer.In(0.2f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
     }
     /// <summary>
     /// 骑士二阶技能：圣盾
@@ -621,8 +645,9 @@ public class HeroController : MonoBehaviour
     }
     internal void Skill_B_Knight_Aegis()
     {
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.Aegis);
         transform.GetComponent<HeroStates>().GetState(3211, 3.0f);
-        vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
+        vp_Timer.In(0.5f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
     }
     /// <summary>
     /// 骑士三阶技能：圣矛投掷
@@ -639,8 +664,10 @@ public class HeroController : MonoBehaviour
     }
     internal void Skill_C_Knight_Gungnir()
     {
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.Belief);
         GameObject temp03 = ObjectPoolManager.Instance.InstantiateMyGameObject(knight03);
         temp03.transform.position = transform.position - new Vector3(0.4f, -0.2f, 0);
+        vp_Timer.In(0.8f, new vp_Timer.Callback(delegate () { AudioManager.Instance.PlayEffectMusic(SoundEffect.Gungnir_Throw); }));
         vp_Timer.In(0.5f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
     }
 
@@ -665,6 +692,7 @@ public class HeroController : MonoBehaviour
     }
     internal void Skill_A_Berserker_LeapAttack()
     {
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.LeapAttack);
         GameObject temp04 = ObjectPoolManager.Instance.InstantiateMyGameObject(berserker01);
         temp04.transform.position = transform.position + new Vector3(1f, -0.126f, 0);
         vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
@@ -684,6 +712,7 @@ public class HeroController : MonoBehaviour
     }
     internal void Skill_B_Berserker_Bleed()
     {
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.Blood);
         GameObject st = ObjectPoolManager.Instance.InstantiateMyGameObject
             (ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Berserker02_Blood_01));
         st.transform.position = transform.position + new Vector3(0, 1, 0);
@@ -691,7 +720,7 @@ public class HeroController : MonoBehaviour
         vp_Timer.In(5.0f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(st); }));
         transform.GetComponent<HeroStates>().GetState(3207, 5.0f);
         transform.GetComponent<HeroStates>().GetState(3209, 5.0f);
-        vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
+        vp_Timer.In(0.8f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
     }
     /// <summary>
     /// 狂战士三阶技能：地裂
@@ -711,6 +740,7 @@ public class HeroController : MonoBehaviour
         switch (num)
         {
             case 1:
+                AudioManager.Instance.PlayEffectMusic(SoundEffect.BoatAnchorHit);
                 GameObject efct = ObjectPoolManager.Instance.InstantiateMyGameObject(berserker03_hit);
                 efct.transform.position = transform.position + new Vector3(1f, -0.15f, 0);
                 vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(efct); }));
@@ -757,14 +787,15 @@ public class HeroController : MonoBehaviour
     }
     internal void Skill_A_Caster_IceCube()
     {
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.Freeze_Awake);
         GameObject icecube1 = ObjectPoolManager.Instance.InstantiateMyGameObject(caster01_1);
-        icecube1.transform.position = transform.position + new Vector3(0.5f, 0.05f, 0);
+        icecube1.transform.position = transform.position + new Vector3(1.2f, 0.05f, 0);
         icecube1.transform.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeOne).name;
         GameObject icecube2 = ObjectPoolManager.Instance.InstantiateMyGameObject(caster01_2);
-        icecube2.transform.position = transform.position + new Vector3(1.3f, -0.02f, 0);
+        icecube2.transform.position = transform.position + new Vector3(2.2f, -0.02f, 0);
         icecube2.transform.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeTwo).name;
         GameObject icecube3 = ObjectPoolManager.Instance.InstantiateMyGameObject(caster01_1);
-        icecube3.transform.position = transform.position + new Vector3(2.1f, 0.05f, 0);
+        icecube3.transform.position = transform.position + new Vector3(3.2f, 0.05f, 0);
         icecube3.transform.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeOne).name;
         vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
     }
@@ -780,13 +811,14 @@ public class HeroController : MonoBehaviour
             animHero.SetBool("isRun", false);
             isRun = false;
         }
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.FallingStone_Spellcaster);
         vp_Timer.In(0.6f, new vp_Timer.Callback(delegate () { stoneSummon(); }));
         vp_Timer.In(0.9f, new vp_Timer.Callback(delegate () { stoneSummon(); }));
         vp_Timer.In(1f, new vp_Timer.Callback(delegate () { stoneSummon(); }));
         vp_Timer.In(1.2f, new vp_Timer.Callback(delegate () { stoneSummon(); }));
         vp_Timer.In(1.8f, new vp_Timer.Callback(delegate () { stoneSummon(); }));
         vp_Timer.In(2.3f, new vp_Timer.Callback(delegate () { stoneSummon(); }));
-        vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
+        vp_Timer.In(0.8f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
     }
     internal void stoneSummon()
     {
@@ -807,10 +839,11 @@ public class HeroController : MonoBehaviour
             isRun = false;
         }
         vp_Timer.In(0.5f, new vp_Timer.Callback(delegate () { blkMagic(); }));
-        vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
+        vp_Timer.In(0.8f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
     }
     internal void blkMagic()
     {
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.BlackMagic_Shoot);
         GameObject blk = ObjectPoolManager.Instance.InstantiateMyGameObject(caster03);
         blk.transform.position = transform.position + new Vector3(2.2f, -0.126f, 0);
 
@@ -844,6 +877,7 @@ public class HeroController : MonoBehaviour
     }
     internal void ExplosionArrowShoot()
     {
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.ExplodeArrow_Shoot);
         GameObject expArw = ObjectPoolManager.Instance.InstantiateMyGameObject(hunter01);
         expArw.transform.position = transform.position + new Vector3(0.2f,0.2f,0);
         expArw.transform.rotation = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Hunter01_ExplosionArrow).transform.rotation;
@@ -868,6 +902,7 @@ public class HeroController : MonoBehaviour
     }
     internal void VrilleArrowShoot()
     {
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.VrilleArrow);
         GameObject VllArw = ObjectPoolManager.Instance.InstantiateMyGameObject(hunter02);
         VllArw.transform.position = transform.position;
         GameObject shootEffect = ObjectPoolManager.Instance.InstantiateMyGameObject
@@ -896,13 +931,14 @@ public class HeroController : MonoBehaviour
     }
     internal void ArrowRainShoot()
     {
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.FireArrowRain_Shoot);
         //第一根
         GameObject upArw = ObjectPoolManager.Instance.InstantiateMyGameObject(hunter03_1);
         upArw.transform.position = transform.position;
         upArw.transform.rotation = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Hunter03_ArrowRainShoot).transform.rotation;
         vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(upArw); }));
         //第二根
-        vp_Timer.In(0.2f, new vp_Timer.Callback(delegate ()
+        vp_Timer.In(0.1f, new vp_Timer.Callback(delegate ()
         {
             GameObject upArw2 = ObjectPoolManager.Instance.InstantiateMyGameObject(hunter03_1);
             upArw2.transform.position = transform.position;
@@ -910,7 +946,7 @@ public class HeroController : MonoBehaviour
             vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(upArw2); }));
         }));
         //第三根
-        vp_Timer.In(0.4f, new vp_Timer.Callback(delegate ()
+        vp_Timer.In(0.2f, new vp_Timer.Callback(delegate ()
         {
             GameObject upArw3 = ObjectPoolManager.Instance.InstantiateMyGameObject(hunter03_1);
             upArw3.transform.position = transform.position;
@@ -918,7 +954,7 @@ public class HeroController : MonoBehaviour
             vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(upArw3); }));
         }));
         //第四根
-        vp_Timer.In(0.6f, new vp_Timer.Callback(delegate ()
+        vp_Timer.In(0.3f, new vp_Timer.Callback(delegate ()
         {
             GameObject upArw4 = ObjectPoolManager.Instance.InstantiateMyGameObject(hunter03_1);
             upArw4.transform.position = transform.position;
@@ -926,7 +962,7 @@ public class HeroController : MonoBehaviour
             vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(upArw4); }));
         }));
         //第五根
-        vp_Timer.In(0.8f, new vp_Timer.Callback(delegate ()
+        vp_Timer.In(0.4f, new vp_Timer.Callback(delegate ()
         {
             GameObject upArw5 = ObjectPoolManager.Instance.InstantiateMyGameObject(hunter03_1);
             upArw5.transform.position = transform.position;
@@ -941,6 +977,7 @@ public class HeroController : MonoBehaviour
     }
     internal void ArrowRainDown()
     {
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.FireArrowRain_Hit);
         //第一根
         GameObject downArw = ObjectPoolManager.Instance.InstantiateMyGameObject(hunter03_2);
         downArw.transform.position = transform.Find("/1001").transform.position + new Vector3(Random.Range(1.658f,5f), 4.132f, 0);
@@ -1003,7 +1040,18 @@ public class HeroController : MonoBehaviour
         }));
     }
 
-
+    internal void RecWeapon()
+    {
+        if (myClass != ConstData.Hunter)
+        {
+            ObjectPoolManager.Instance.RecycleMyGameObject(minorFist.transform.GetChild(0).gameObject);
+            ObjectPoolManager.Instance.RecycleMyGameObject(mainFist.transform.GetChild(0).gameObject);
+        }
+        else if (myClass == ConstData.Hunter)
+        {
+            ObjectPoolManager.Instance.RecycleMyGameObject(minorFist.transform.GetChild(0).gameObject);
+        }
+    }
 
     /// <summary>
     /// 注销正在重复调用的方法

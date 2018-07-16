@@ -283,6 +283,6 @@ public class BlockObjectTouch : MonoBehaviour
         block1.ColumnNumber = block2.ColumnNumber;
         block2.ColumnNumber = tempIndex;
         //交换完就重新分配邻居
-        GameManager.Instance.AssignNeighbours();
+        GameManager.Instance.AssignNeighbours(0f);
     }
 }

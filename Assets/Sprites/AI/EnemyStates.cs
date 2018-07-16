@@ -475,7 +475,7 @@ public class EnemyStates : MonoBehaviour
     }
 
     //清空敌人身上无敌以外所有状态
-    void StatesClearEnemy()
+    internal void StatesClearEnemy()
     {
         transform.GetComponent<EnemyControllers>().isDiz = false;
         transform.GetComponent<EnemyControllers>().isSilence = false;

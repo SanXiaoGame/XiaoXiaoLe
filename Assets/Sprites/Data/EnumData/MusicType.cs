@@ -26,6 +26,7 @@ public enum SoundEffect
     Die,
     ArrowShoot,
     BattleStart,
+    BlackMaigBoom,
     Revive,
     FoodCure,
     ClearCube,

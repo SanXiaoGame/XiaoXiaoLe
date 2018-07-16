@@ -5,11 +5,11 @@ using UnityEngine;
 public class HeroStates : MonoBehaviour
 {
     //英雄状态机
-    Animator myanim;
+    internal Animator myanim;
     //英雄原始数据
-    HeroData mydata;
+    internal HeroData mydata;
     //英雄触发器
-    CircleCollider2D mycld;
+    internal CircleCollider2D mycld;
 
     #region 基本属性和流属性
     //英雄HP上限

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4906499702643318}
   - component: {fileID: 212475255261399074}
   - component: {fileID: 95838250076073756}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Effect_weakness
   m_TagString: Effect
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4087634916286774}
   - component: {fileID: 212217608526373060}
   - component: {fileID: 95504736035269516}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Effect_weakness-02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -57,6 +57,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         bagDataSource.Clear();
         characterDataSource.Clear();
         enemyDataSource.Clear();
+        equipmentDataSource.Clear();
         itemDataSource.Clear();
         lVDataSource.Clear();
         playerDataSource.Clear();
@@ -67,15 +68,22 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         readData.GetData(ConstData.Bag);
         readData.GetData(ConstData.CharacterList);
         readData.GetData(ConstData.Enemy);
+        readData.GetData(ConstData.Equipment);
         readData.GetData(ConstData.Item);
         readData.GetData(ConstData.Level);
         readData.GetData(ConstData.Skill);
         readData.GetData(ConstData.State);
         readData.GetData(ConstData.Player);
         print("获取完数据");
+        //队伍字典初始化键
+        team.Add(ConstData.FlagMan, null);
+        team.Add(ConstData.Saber, null);
+        team.Add(ConstData.Knight, null);
+        team.Add(ConstData.Berserker, null);
+        team.Add(ConstData.Caster, null);
+        team.Add(ConstData.Hunter, null);
+
         //执行读取结束委托
-
-
         SceneAss_Manager.Instance.ExecutionOfEvent(1);
     }
 
