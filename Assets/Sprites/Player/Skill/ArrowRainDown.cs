@@ -44,6 +44,7 @@ public class ArrowRainDown : MonoBehaviour
     {
         if (collision.transform.tag == "Plane")
         {
+            AudioManager.Instance.PlayEffectMusic(SoundEffect.Fire);
             GameObject o1 = ObjectPoolManager.Instance.InstantiateMyGameObject(fireEffect);
             o1.transform.position = gameObject.transform.position;
             ObjectPoolManager.Instance.RecycleMyGameObject(gameObject);

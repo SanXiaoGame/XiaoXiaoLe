@@ -75,9 +75,15 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         readData.GetData(ConstData.State);
         readData.GetData(ConstData.Player);
         print("获取完数据");
+        //队伍字典初始化键
+        team.Add(ConstData.FlagMan, null);
+        team.Add(ConstData.Saber, null);
+        team.Add(ConstData.Knight, null);
+        team.Add(ConstData.Berserker, null);
+        team.Add(ConstData.Caster, null);
+        team.Add(ConstData.Hunter, null);
+
         //执行读取结束委托
-
-
         SceneAss_Manager.Instance.ExecutionOfEvent(1);
     }
 

@@ -75,7 +75,9 @@ public class MonsterPointManager : MonoBehaviour
                 slm1.transform.position = point.transform.position;
                 slm2.transform.position = point.transform.position + new Vector3(0.5f, 0, 0);
                 slm1.GetComponent<EnemyStates>().currentHP += 200;
+                slm1.GetComponent<EnemyStates>().StatesClearEnemy();
                 slm2.GetComponent<EnemyStates>().currentHP += 200;
+                slm2.GetComponent<EnemyStates>().StatesClearEnemy();
                 enemyList.Add(slm1);
                 enemyList.Add(slm2);
                 pointStandby = true;
@@ -100,7 +102,9 @@ public class MonsterPointManager : MonoBehaviour
                 slm1.transform.position = point.transform.position;
                 slm2.transform.position = point.transform.position + new Vector3(0.5f, 0, 0);
                 slm1.GetComponent<EnemyStates>().currentHP += 400;
+                slm1.GetComponent<EnemyStates>().StatesClearEnemy();
                 slm2.GetComponent<EnemyStates>().currentHP += 400;
+                slm2.GetComponent<EnemyStates>().StatesClearEnemy();
                 enemyList.Add(slm1);
                 enemyList.Add(slm2);
                 pointStandby = true;
@@ -133,8 +137,11 @@ public class MonsterPointManager : MonoBehaviour
                 slm2.transform.position = point.transform.position + new Vector3(0.5f, 0, 0);
                 slm3.transform.position = point.transform.position - new Vector3(0.5f, 0, 0);
                 slm1.GetComponent<EnemyStates>().currentHP += 600;
+                slm1.GetComponent<EnemyStates>().StatesClearEnemy();
                 slm2.GetComponent<EnemyStates>().currentHP += 700;
+                slm2.GetComponent<EnemyStates>().StatesClearEnemy();
                 slm3.GetComponent<EnemyStates>().currentHP += 900;
+                slm3.GetComponent<EnemyStates>().StatesClearEnemy();
                 enemyList.Add(slm1);
                 enemyList.Add(slm2);
                 enemyList.Add(slm3);

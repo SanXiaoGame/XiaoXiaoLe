@@ -61,6 +61,7 @@ public class SprintDash : MonoBehaviour
                 {
                     if (collision.GetComponent<EnemyControllers>().isAlive == true && targetList.Contains(collision.gameObject) == false)
                     {
+                        AudioManager.Instance.PlayEffectMusic(SoundEffect.Hit);
                         targetList.Add(collision.gameObject);
                         //保存击中目标物体
                         hitTarget = collision.gameObject;
@@ -116,6 +117,7 @@ public class SprintDash : MonoBehaviour
                 {
                     if (targetList.Contains(collision.gameObject) == false)
                     {
+                        AudioManager.Instance.PlayEffectMusic(SoundEffect.Hit);
                         targetList.Add(collision.gameObject);
                         //取消冲刺位移
                         transform.GetComponent<EnemyControllers>().CancelInvoke("EnemyDash");

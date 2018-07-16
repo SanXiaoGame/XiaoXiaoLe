@@ -25,6 +25,7 @@ public class BlackMagicDamage : MonoBehaviour
 
     private void OnEnable()
     {
+        vp_Timer.In(0.2f, new vp_Timer.Callback(delegate () { AudioManager.Instance.PlayEffectMusic(SoundEffect.BlackMaigBoom); }));
         if (cld.enabled == false)
         {
             cld.enabled = true;
