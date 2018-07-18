@@ -82,18 +82,32 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
 
     private void Awake()
     {
-        CurrencyManager.Instance.LoadCurrencyDataFromSQLite();
-        OnEntering();
+        
     }
 
     //进入界面
     public void OnEntering()
     {
-        //召唤画面区域UI预制体
-        GameObject GameAreaUIPrefabs = ObjectPoolManager.Instance.InstantiateMyGameObject
-            (ResourcesManager.Instance.FindUIPrefab("UICharacterManage_GameArea"));
-        GameAreaUIPrefabs.transform.position = ResourcesManager.Instance.FindUIPrefab("UICharacterManage_GameArea").transform.position;
-        //初始化设置
+        gameObject.SetActive(true);
+        #region 召唤画面区域UI预制体并且获得游戏画面区域控制权
+        GameArea = ObjectPoolManager.Instance.InstantiateMyGameObject
+            (ResourcesManager.Instance.FindUIPrefab(ConstData.UICharacterManage_GameArea));
+        GameArea.transform.position = ResourcesManager.Instance.FindUIPrefab(ConstData.UICharacterManage_GameArea).transform.position;
+        stepList = new List<GameObject>();
+        stepList.Clear();
+        step01 = GameArea.transform.GetChild(1).gameObject;
+        step02 = GameArea.transform.GetChild(2).gameObject;
+        step03 = GameArea.transform.GetChild(3).gameObject;
+        step04 = GameArea.transform.GetChild(4).gameObject;
+        step05 = GameArea.transform.GetChild(5).gameObject;
+        stepList.Add(step01);
+        stepList.Add(step02);
+        stepList.Add(step03);
+        stepList.Add(step04);
+        stepList.Add(step05);
+        #endregion
+
+        //初始化设置//
         isTeam = false;
         isEquipt = false;
         gameObject.SetActive(true);
@@ -102,10 +116,13 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         selectBarNum = 0;
         deleteNum = 0;
         playerList = new List<GameObject>();
-        stepList = new List<GameObject>();
+        playerList.Clear();
         itemList = new List<GameObject>();
+        itemList.Clear();
         null_itemList = new List<GameObject>();
+        null_itemList.Clear();
         filterList = new List<GameObject>();
+        filterList.Clear();
         tempTeamDic = new Dictionary<string, PlayerData>();
         tempTeamDic.Clear();
         tempTeamDic.Add(ConstData.FlagMan, SQLiteManager.Instance.playerDataSource[1300]);
@@ -117,79 +134,6 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         characterBar = ResourcesManager.Instance.FindUIPrefab(ConstData.CharacterBar);
         itemGrid = ResourcesManager.Instance.FindUIPrefab(ConstData.Grid);
         itemBar = ResourcesManager.Instance.FindUIPrefab(ConstData.GridEx);
-
-        #region 系统区点击（角色页面、编队页面、装备页面、主城页面）
-        GameObject characterIcon = transform.Find(ConstData.SystemArea_CharacterIcon).gameObject;
-        GameObject teamIcon = transform.Find(ConstData.SystemArea_TeamIcon).gameObject;
-        GameObject equipmentIcon = transform.Find(ConstData.SystemArea_EquipmentIcon).gameObject;
-        GameObject mainCityIcon = transform.Find(ConstData.SystemArea_MainCityIcon).gameObject;
-        UISceneWidget characterButtonClick = UISceneWidget.Get(characterIcon);
-        UISceneWidget teamButtonClick = UISceneWidget.Get(teamIcon);
-        UISceneWidget equipmentButtonClick = UISceneWidget.Get(equipmentIcon);
-        UISceneWidget mainCityButtonClick = UISceneWidget.Get(mainCityIcon);
-        characterButtonClick.PointerClick += CharacterSwitch;
-        teamButtonClick.PointerClick += TeamSwitch;
-        equipmentButtonClick.PointerClick += EquipmentSwitch;
-        mainCityButtonClick.PointerClick += MainCitySwitch;
-        #endregion
-
-        #region 筛选区点击（根据职业筛选出对应信息）
-        GameObject saberStone = transform.Find(ConstData.Filter_StoneSaberTag).gameObject;
-        GameObject knightStone = transform.Find(ConstData.Filter_StoneKnightTag).gameObject;
-        GameObject berserkerStone = transform.Find(ConstData.Filter_StoneBerserkerTag).gameObject;
-        GameObject casterStone = transform.Find(ConstData.Filter_StoneCasterTag).gameObject;
-        GameObject hunterStone = transform.Find(ConstData.Filter_StoneHunterTag).gameObject;
-        UISceneWidget saberStoneClick = UISceneWidget.Get(saberStone);
-        UISceneWidget knightStoneClick = UISceneWidget.Get(knightStone);
-        UISceneWidget berserkerStoneClick = UISceneWidget.Get(berserkerStone);
-        UISceneWidget casterStoneClick = UISceneWidget.Get(casterStone);
-        UISceneWidget hunterStoneClick = UISceneWidget.Get(hunterStone);
-        saberStoneClick.PointerClick += SaberFilter;
-        knightStoneClick.PointerClick += KnightFilter;
-        berserkerStoneClick.PointerClick += BerserkerFilter;
-        casterStoneClick.PointerClick += CasterFilter;
-        hunterStoneClick.PointerClick += HunterFilter;
-        filterList.Add(saberStone);
-        filterList.Add(knightStone);
-        filterList.Add(berserkerStone);
-        filterList.Add(casterStone);
-        filterList.Add(hunterStone);
-        #endregion
-
-        #region 操作区
-        CharacterBarCreate(ConstData.All);
-        ItemBarCreate(ConstData.All);
-        #endregion
-
-        #region 操作区域附属（角色页面的技能栏、编队页面的编队按钮、装备页面的装备槽、主城页面的背包种类筛选）
-        GameObject skill01 = transform.Find(ConstData.ControllerExArea_SkillMode).transform.GetChild(0).gameObject;
-        GameObject skill02 = transform.Find(ConstData.ControllerExArea_SkillMode).transform.GetChild(1).gameObject;
-        GameObject skill03 = transform.Find(ConstData.ControllerExArea_SkillMode).transform.GetChild(2).gameObject;
-        UISceneWidget skill01Click = UISceneWidget.Get(skill01);
-        UISceneWidget skill02Click = UISceneWidget.Get(skill02);
-        UISceneWidget skill03Click = UISceneWidget.Get(skill03);
-        GameObject teamEditUP = transform.Find(ConstData.ControllerExArea_TeamModeUP).gameObject;
-        GameObject teamEditDOWN = transform.Find(ConstData.ControllerExArea_TeamModeDOWN).gameObject;
-        GameObject teamEditOK = transform.Find(ConstData.ControllerExArea_TeamModeCONFIRM).gameObject;
-        UISceneWidget teamEditUPClick = UISceneWidget.Get(teamEditUP);
-        UISceneWidget teamEditDOWNClick = UISceneWidget.Get(teamEditDOWN);
-        UISceneWidget teamEditOKClick = UISceneWidget.Get(teamEditOK);
-        GameObject weaponHole = transform.Find(ConstData.ControllerExArea_EquipmentMode).transform.GetChild(0).gameObject;
-        GameObject equipmentHole = transform.Find(ConstData.ControllerExArea_EquipmentMode).transform.GetChild(1).gameObject;
-        UISceneWidget weaponHoleClick = UISceneWidget.Get(weaponHole);
-        UISceneWidget equipmentHoleClick = UISceneWidget.Get(equipmentHole);
-        GameObject skillClose = transform.Find(ConstData.Introduction_CloseButton).gameObject;
-        UISceneWidget skillCloseClick = UISceneWidget.Get(skillClose);
-        skill01Click.PointerClick += SkillFrame_A;
-        skill02Click.PointerClick += SkillFrame_B;
-        skill03Click.PointerClick += SkillFrame_C;
-        teamEditUPClick.PointerClick += AddTeamMember;
-        teamEditDOWNClick.PointerClick += DeleteTeamMember;
-        teamEditOKClick.PointerClick += TeamMemberConfirm;
-        weaponHoleClick.PointerClick += WeaponHoleMessage;
-        equipmentHoleClick.PointerClick += EquipmentHoleMessage;
-        skillCloseClick.PointerClick += CloseWindow_Introduction;
-        #endregion
 
         #region UI组件获取（动态显示选中物品和英雄对象信息）
         heroName = transform.Find(ConstData.GameArea_MessageFrame_Name).GetComponent<Text>();
@@ -209,6 +153,119 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         skillImage_C = transform.Find(ConstData.ControllerExArea_SkillMode).GetChild(2).GetChild(0).GetComponent<Image>();
         #endregion
 
+        #region 系统区点击（角色页面、编队页面、装备页面、主城页面）
+        GameObject characterIcon = transform.Find(ConstData.SystemArea_CharacterIcon).gameObject;
+        GameObject teamIcon = transform.Find(ConstData.SystemArea_TeamIcon).gameObject;
+        GameObject equipmentIcon = transform.Find(ConstData.SystemArea_EquipmentIcon).gameObject;
+        GameObject mainCityIcon = transform.Find(ConstData.SystemArea_MainCityIcon).gameObject;
+        if (characterIcon.GetComponent<UISceneWidget>() == null)
+        {
+            UISceneWidget characterButtonClick = UISceneWidget.Get(characterIcon);
+            characterButtonClick.PointerClick += CharacterSwitch;
+        }
+        if (teamIcon.GetComponent<UISceneWidget>() == null)
+        {
+            UISceneWidget teamButtonClick = UISceneWidget.Get(teamIcon);
+            teamButtonClick.PointerClick += TeamSwitch;
+        }
+        if (equipmentIcon.GetComponent<UISceneWidget>() == null)
+        {
+            UISceneWidget equipmentButtonClick = UISceneWidget.Get(equipmentIcon);
+            equipmentButtonClick.PointerClick += EquipmentSwitch;
+        }
+        if (mainCityIcon.GetComponent<UISceneWidget>() == null)
+        {
+            UISceneWidget mainCityButtonClick = UISceneWidget.Get(mainCityIcon);
+            mainCityButtonClick.PointerClick += MainCitySwitch;
+        }
+        characterIcon.GetComponent<Toggle>().isOn = true;
+        teamIcon.GetComponent<Toggle>().isOn = false;
+        equipmentIcon.GetComponent<Toggle>().isOn = false;
+        mainCityIcon.GetComponent<Toggle>().isOn = false;
+        #endregion
+
+        #region 筛选区点击（根据职业筛选出对应信息）
+        GameObject saberStone = transform.Find(ConstData.Filter_StoneSaberTag).gameObject;
+        GameObject knightStone = transform.Find(ConstData.Filter_StoneKnightTag).gameObject;
+        GameObject berserkerStone = transform.Find(ConstData.Filter_StoneBerserkerTag).gameObject;
+        GameObject casterStone = transform.Find(ConstData.Filter_StoneCasterTag).gameObject;
+        GameObject hunterStone = transform.Find(ConstData.Filter_StoneHunterTag).gameObject;
+        if (saberStone.GetComponent<UISceneWidget>() == null && knightStone.GetComponent<UISceneWidget>() == null && berserkerStone.
+            GetComponent<UISceneWidget>() == null && casterStone.GetComponent<UISceneWidget>() == null && hunterStone.GetComponent
+            <UISceneWidget>() == null)
+        {
+            UISceneWidget saberStoneClick = UISceneWidget.Get(saberStone);
+            UISceneWidget knightStoneClick = UISceneWidget.Get(knightStone);
+            UISceneWidget berserkerStoneClick = UISceneWidget.Get(berserkerStone);
+            UISceneWidget casterStoneClick = UISceneWidget.Get(casterStone);
+            UISceneWidget hunterStoneClick = UISceneWidget.Get(hunterStone);
+            saberStoneClick.PointerClick += SaberFilter;
+            knightStoneClick.PointerClick += KnightFilter;
+            berserkerStoneClick.PointerClick += BerserkerFilter;
+            casterStoneClick.PointerClick += CasterFilter;
+            hunterStoneClick.PointerClick += HunterFilter;
+        }
+        filterList.Add(saberStone);
+        filterList.Add(knightStone);
+        filterList.Add(berserkerStone);
+        filterList.Add(casterStone);
+        filterList.Add(hunterStone);
+        saberStone.GetComponent<Toggle>().isOn = false;
+        knightStone.GetComponent<Toggle>().isOn = false;
+        berserkerStone.GetComponent<Toggle>().isOn = false;
+        casterStone.GetComponent<Toggle>().isOn = false;
+        hunterStone.GetComponent<Toggle>().isOn = false;
+        #endregion
+
+        #region 操作区域附属（角色页面的技能栏、编队页面的编队按钮、装备页面的装备槽、主城页面的背包种类筛选）
+        GameObject skill01 = transform.Find(ConstData.ControllerExArea_SkillMode).transform.GetChild(0).gameObject;
+        GameObject skill02 = transform.Find(ConstData.ControllerExArea_SkillMode).transform.GetChild(1).gameObject;
+        GameObject skill03 = transform.Find(ConstData.ControllerExArea_SkillMode).transform.GetChild(2).gameObject;
+        if (skill01.GetComponent<UISceneWidget>() == null && skill02.GetComponent<UISceneWidget>() == null &&
+            skill03.GetComponent<UISceneWidget>() == null)
+        {
+            UISceneWidget skill01Click = UISceneWidget.Get(skill01);
+            UISceneWidget skill02Click = UISceneWidget.Get(skill02);
+            UISceneWidget skill03Click = UISceneWidget.Get(skill03);
+            skill01Click.PointerClick += SkillFrame_A;
+            skill02Click.PointerClick += SkillFrame_B;
+            skill03Click.PointerClick += SkillFrame_C;
+        }
+        GameObject teamEditUP = transform.Find(ConstData.ControllerExArea_TeamModeUP).gameObject;
+        GameObject teamEditDOWN = transform.Find(ConstData.ControllerExArea_TeamModeDOWN).gameObject;
+        GameObject teamEditOK = transform.Find(ConstData.ControllerExArea_TeamModeCONFIRM).gameObject;
+        if (teamEditUP.GetComponent<UISceneWidget>() == null && teamEditDOWN.GetComponent<UISceneWidget>() == null &&
+            teamEditOK.GetComponent<UISceneWidget>() == null)
+        {
+            UISceneWidget teamEditUPClick = UISceneWidget.Get(teamEditUP);
+            UISceneWidget teamEditDOWNClick = UISceneWidget.Get(teamEditDOWN);
+            UISceneWidget teamEditOKClick = UISceneWidget.Get(teamEditOK);
+            teamEditUPClick.PointerClick += AddTeamMember;
+            teamEditDOWNClick.PointerClick += DeleteTeamMember;
+            teamEditOKClick.PointerClick += TeamMemberConfirm;
+        }
+        GameObject weaponHole = transform.Find(ConstData.ControllerExArea_EquipmentMode).transform.GetChild(0).gameObject;
+        GameObject equipmentHole = transform.Find(ConstData.ControllerExArea_EquipmentMode).transform.GetChild(1).gameObject;
+        if (weaponHole.GetComponent<UISceneWidget>() == null && equipmentHole.GetComponent<UISceneWidget>() == null)
+        {
+            UISceneWidget weaponHoleClick = UISceneWidget.Get(weaponHole);
+            UISceneWidget equipmentHoleClick = UISceneWidget.Get(equipmentHole);
+            weaponHoleClick.PointerClick += WeaponHoleMessage;
+            equipmentHoleClick.PointerClick += EquipmentHoleMessage;
+        }
+        GameObject skillClose = transform.Find(ConstData.Introduction_CloseButton).gameObject;
+        if (skillClose.GetComponent<UISceneWidget>() == null)
+        {
+            UISceneWidget skillCloseClick = UISceneWidget.Get(skillClose);
+            skillCloseClick.PointerClick += CloseWindow_Introduction;
+        }
+        #endregion
+
+        #region 操作区
+        CharacterBarCreate(ConstData.All);
+        ItemBarCreate(ConstData.All);
+        #endregion
+
         #region 窗口显示和对象获取
         //金币显示
         GoldCoin.text = CurrencyManager.Instance.GoldCoinDisplay();
@@ -218,18 +275,24 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         confirmFrame = transform.Find(ConstData.ConfirmFrame).gameObject;
         GameObject confirm_OK = transform.Find(ConstData.ConfirmFrame_ConfirmButton).gameObject;
         GameObject cancel_NO = transform.Find(ConstData.ConfirmFrame_CancelButton).gameObject;
-        UISceneWidget confirmClick = UISceneWidget.Get(confirm_OK);
-        UISceneWidget cancelClick = UISceneWidget.Get(cancel_NO);
-        confirmClick.PointerClick += ConfirmOK;
-        cancelClick.PointerClick += CancelNO;
+        if (confirm_OK.GetComponent<UISceneWidget>() == null && cancel_NO.GetComponent<UISceneWidget>() == null)
+        {
+            UISceneWidget confirmClick = UISceneWidget.Get(confirm_OK);
+            UISceneWidget cancelClick = UISceneWidget.Get(cancel_NO);
+            confirmClick.PointerClick += ConfirmOK;
+            cancelClick.PointerClick += CancelNO;
+        }
         //装备替换窗口
         confirmFrame_EQ = transform.Find(ConstData.ConfirmFrame_EQ).gameObject;
         GameObject confirm_OK_EQ = transform.Find(ConstData.ConfirmFrame_EQ_ConfirmButton).gameObject;
         GameObject cancel_NO_EQ = transform.Find(ConstData.ConfirmFrame_EQ_CancelButton).gameObject;
-        UISceneWidget confirm2Click = UISceneWidget.Get(confirm_OK_EQ);
-        UISceneWidget cancel2Click = UISceneWidget.Get(cancel_NO_EQ);
-        confirm2Click.PointerClick += ConfirmOK_EQ;
-        cancel2Click.PointerClick += CancelNO_EQ;
+        if (confirm_OK_EQ.GetComponent<UISceneWidget>() == null && cancel_NO_EQ.GetComponent<UISceneWidget>() == null)
+        {
+            UISceneWidget confirm2Click = UISceneWidget.Get(confirm_OK_EQ);
+            UISceneWidget cancel2Click = UISceneWidget.Get(cancel_NO_EQ);
+            confirm2Click.PointerClick += ConfirmOK_EQ;
+            cancel2Click.PointerClick += CancelNO_EQ;
+        }
         //对象获取
         G_GoldCoinFrame = transform.Find(ConstData.GameArea_GoldCoin).transform.parent.gameObject;
         G_ItemListBG = transform.Find(ConstData.ControllerArea_ItemListBG).gameObject;
@@ -241,34 +304,40 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         G_IntroductionFrame = transform.Find(ConstData.Introduction).gameObject;
         G_ConfirmFrame = transform.Find(ConstData.ConfirmFrame).gameObject;
         #endregion
-
-        #region 获得游戏画面区域控制权
-        GameArea = GameAreaUIPrefabs;
-        step01 = GameArea.transform.GetChild(1).gameObject;
-        step02 = GameArea.transform.GetChild(2).gameObject;
-        step03 = GameArea.transform.GetChild(3).gameObject;
-        step04 = GameArea.transform.GetChild(4).gameObject;
-        step05 = GameArea.transform.GetChild(5).gameObject;
-        stepList.Add(step01);
-        stepList.Add(step02);
-        stepList.Add(step03);
-        stepList.Add(step04);
-        stepList.Add(step05);
-        #endregion
-
+        //装备区拖拽获取
         itemList_Drag = transform.Find(ConstData.ControllerArea_ItemListBG).gameObject;
+        //信息初始化
+        HeroDataDisplay();
     }
     //退出界面
     public void OnExiting()
     {
-        throw new System.NotImplementedException();
+        //清空画面区域
+        GameAreaClear("Team", "");
+        CharacterBarClear();
+        ObjectPoolManager.Instance.RecycleMyGameObject(GameArea);
+        //清空装备区域
+        EquipmentClear();
+        gameObject.SetActive(false);
+        ItemBarClear();
+        //控制区域激活和关闭
+        G_ItemListBG.gameObject.SetActive(false);
+        G_CharacterListBG.gameObject.SetActive(true);
+        //控制区域附属区激活和关闭
+        G_SkillMode.gameObject.SetActive(true);
+        G_TeamMode.gameObject.SetActive(false);
+        G_EquipmentMode.gameObject.SetActive(false);
+        //信息框隐藏
+        G_IntroductionFrame.gameObject.SetActive(false);
+        //确认框隐藏
+        G_ConfirmFrame.gameObject.SetActive(false);
     }
-    //暂停界面
+    //暂停界面（无方法）
     public void OnPausing()
     {
         gameObject.SetActive(false);
     }
-    //唤醒界面
+    //唤醒界面（无方法）
     public void OnResuming()
     {
         gameObject.SetActive(true);
@@ -381,9 +450,97 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
     }
     void MainCitySwitch(PointerEventData eventData)
     {
-        //team字典算最终数值(total)
+        #region team字典算最终数值(total)
+        if (SQLiteManager.Instance.team[ConstData.FlagMan] != null && SQLiteManager.Instance.team[ConstData.Saber] != null &&
+            SQLiteManager.Instance.team[ConstData.Knight] != null && SQLiteManager.Instance.team[ConstData.Berserker] != null &&
+            SQLiteManager.Instance.team[ConstData.Caster] != null && SQLiteManager.Instance.team[ConstData.Hunter] != null)
+        {
+            //旗手
+            SQLiteManager.Instance.team[ConstData.FlagMan].totalHP = SQLiteManager.Instance.team[ConstData.FlagMan].playerData.HP;
+            SQLiteManager.Instance.team[ConstData.FlagMan].totalAD = 0;
+            SQLiteManager.Instance.team[ConstData.FlagMan].totalAP = 0;
+            SQLiteManager.Instance.team[ConstData.FlagMan].totalDEF = SQLiteManager.Instance.team[ConstData.FlagMan].playerData.DEF;
+            SQLiteManager.Instance.team[ConstData.FlagMan].totalRES = SQLiteManager.Instance.team[ConstData.FlagMan].playerData.RES;
+            //剑士
+            SQLiteManager.Instance.team[ConstData.Saber].totalHP = SQLiteManager.Instance.team[ConstData.Saber].playerData.HP +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Saber].playerData.Weapon].equipment_HP +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Saber].playerData.Equipment].equipment_HP;
+            SQLiteManager.Instance.team[ConstData.Saber].totalAD = SQLiteManager.Instance.team[ConstData.Saber].playerData.AD +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Saber].playerData.Weapon].equipment_AD +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Saber].playerData.Equipment].equipment_AD;
+            SQLiteManager.Instance.team[ConstData.Saber].totalAP = 0;
+            SQLiteManager.Instance.team[ConstData.Saber].totalDEF = SQLiteManager.Instance.team[ConstData.Saber].playerData.DEF +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Saber].playerData.Weapon].equipment_DEF +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Saber].playerData.Equipment].equipment_DEF;
+            SQLiteManager.Instance.team[ConstData.Saber].totalRES = SQLiteManager.Instance.team[ConstData.Saber].playerData.RES +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Saber].playerData.Weapon].equipment_RES +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Saber].playerData.Equipment].equipment_RES;
+            //骑士
+            SQLiteManager.Instance.team[ConstData.Knight].totalHP = SQLiteManager.Instance.team[ConstData.Knight].playerData.HP +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Knight].playerData.Weapon].equipment_HP +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Knight].playerData.Equipment].equipment_HP;
+            SQLiteManager.Instance.team[ConstData.Knight].totalAD = SQLiteManager.Instance.team[ConstData.Knight].playerData.AD +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Knight].playerData.Weapon].equipment_AD +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Knight].playerData.Equipment].equipment_AD;
+            SQLiteManager.Instance.team[ConstData.Knight].totalAP = SQLiteManager.Instance.team[ConstData.Knight].playerData.AP +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Knight].playerData.Weapon].equipment_AP +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Knight].playerData.Equipment].equipment_AP;
+            SQLiteManager.Instance.team[ConstData.Knight].totalDEF = SQLiteManager.Instance.team[ConstData.Knight].playerData.DEF +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Knight].playerData.Weapon].equipment_DEF +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Knight].playerData.Equipment].equipment_DEF;
+            SQLiteManager.Instance.team[ConstData.Knight].totalRES = SQLiteManager.Instance.team[ConstData.Knight].playerData.RES +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Knight].playerData.Weapon].equipment_RES +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Knight].playerData.Equipment].equipment_RES;
+            //狂战士
+            SQLiteManager.Instance.team[ConstData.Berserker].totalHP = SQLiteManager.Instance.team[ConstData.Berserker].playerData.HP +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Berserker].playerData.Weapon].equipment_HP +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Berserker].playerData.Equipment].equipment_HP;
+            SQLiteManager.Instance.team[ConstData.Berserker].totalAD = SQLiteManager.Instance.team[ConstData.Berserker].playerData.AD +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Berserker].playerData.Weapon].equipment_AD +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Berserker].playerData.Equipment].equipment_AD;
+            SQLiteManager.Instance.team[ConstData.Berserker].totalAP = 0;
+            SQLiteManager.Instance.team[ConstData.Berserker].totalDEF = SQLiteManager.Instance.team[ConstData.Berserker].playerData.DEF +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Berserker].playerData.Weapon].equipment_DEF +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Berserker].playerData.Equipment].equipment_DEF;
+            SQLiteManager.Instance.team[ConstData.Berserker].totalRES = SQLiteManager.Instance.team[ConstData.Berserker].playerData.RES +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Berserker].playerData.Weapon].equipment_RES +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Berserker].playerData.Equipment].equipment_RES;
+            //魔法师
+            SQLiteManager.Instance.team[ConstData.Caster].totalHP = SQLiteManager.Instance.team[ConstData.Caster].playerData.HP +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Caster].playerData.Weapon].equipment_HP +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Caster].playerData.Equipment].equipment_HP;
+            SQLiteManager.Instance.team[ConstData.Caster].totalAD = 0;
+            SQLiteManager.Instance.team[ConstData.Caster].totalAP = SQLiteManager.Instance.team[ConstData.Caster].playerData.AP +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Caster].playerData.Weapon].equipment_AP +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Caster].playerData.Equipment].equipment_AP;
+            SQLiteManager.Instance.team[ConstData.Caster].totalDEF = 0;
+            SQLiteManager.Instance.team[ConstData.Caster].totalRES = SQLiteManager.Instance.team[ConstData.Caster].playerData.RES +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Caster].playerData.Weapon].equipment_RES +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Caster].playerData.Equipment].equipment_RES;
+            //猎人
+            SQLiteManager.Instance.team[ConstData.Hunter].totalHP = SQLiteManager.Instance.team[ConstData.Hunter].playerData.HP +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Hunter].playerData.Weapon].equipment_HP +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Hunter].playerData.Equipment].equipment_HP;
+            SQLiteManager.Instance.team[ConstData.Hunter].totalAD = SQLiteManager.Instance.team[ConstData.Hunter].playerData.AD +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Hunter].playerData.Weapon].equipment_AD +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Hunter].playerData.Equipment].equipment_AD;
+            SQLiteManager.Instance.team[ConstData.Hunter].totalAP = 0;
+            SQLiteManager.Instance.team[ConstData.Hunter].totalDEF = SQLiteManager.Instance.team[ConstData.Hunter].playerData.DEF +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Hunter].playerData.Weapon].equipment_DEF +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Hunter].playerData.Equipment].equipment_DEF;
+            SQLiteManager.Instance.team[ConstData.Hunter].totalRES = SQLiteManager.Instance.team[ConstData.Hunter].playerData.RES +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Hunter].playerData.Weapon].equipment_RES +
+                SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Hunter].playerData.Equipment].equipment_RES;
+        }
+        #endregion
+
         //各种数据库变更
-        //切换主城页面
+        //player表角色删除
+        //player表装备变更
+        //bag背包变更
+
+        //切换回主城页面
+        UIManager.Instance.PopUIStack();
     }
     //点击技能栏查看技能详情和关闭详情窗口
     void CloseWindow_Introduction(PointerEventData eventData)
@@ -598,6 +755,8 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         {
             equipmentG = eventData.pointerEnter;
             equipmentID = eventData.pointerEnter.transform.GetComponent<BagItem>().mydata_equipt.equipment_Id;
+            //Debug.Log(equipmentID);
+            //Debug.Log(equipmentG.GetComponent<BagItem>().myGrid);
             confirmFrame_EQ.gameObject.SetActive(true);
             switch (eventData.pointerEnter.transform.GetComponent<BagItem>().mydata_equipt.equipmentType)
             {
@@ -1936,14 +2095,14 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                         if (wp.transform.GetChild(0).GetComponent<BagItem>() == null)
                         {
                             wp.transform.GetChild(0).gameObject.AddComponent<BagItem>();
+                            UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
+                            ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                            ChangeEquipmentClick.Drag += OnDrag;
                         }
                         //获得数据
                         wp.transform.GetChild(0).GetComponent<BagItem>().GetData();
                         wp.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
                         itemList.Add(wp);
-                        UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
-                        ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                        ChangeEquipmentClick.Drag += OnDrag;
                     }
                 }
                 //生成防具类
@@ -1965,14 +2124,14 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                         if (eq.transform.GetChild(0).GetComponent<BagItem>() == null)
                         {
                             eq.transform.GetChild(0).gameObject.AddComponent<BagItem>();
+                            UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
+                            ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                            ChangeEquipmentClick.Drag += OnDrag;
                         }
                         //获得数据
                         eq.transform.GetChild(0).GetComponent<BagItem>().GetData();
                         eq.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
                         itemList.Add(eq);
-                        UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
-                        ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                        ChangeEquipmentClick.Drag += OnDrag;
                     }
                 }
                 //生成空格子
@@ -2013,14 +2172,14 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (wp.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 wp.transform.GetChild(0).gameObject.AddComponent<BagItem>();
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             wp.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             wp.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
                             itemList.Add(wp);
-                            UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
-                            ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                            ChangeEquipmentClick.Drag += OnDrag;
                         }
                     }
                 }
@@ -2046,14 +2205,14 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (eq.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 eq.transform.GetChild(0).gameObject.AddComponent<BagItem>();
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             eq.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             eq.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
                             itemList.Add(eq);
-                            UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
-                            ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                            ChangeEquipmentClick.Drag += OnDrag;
                         }
                     }
                 }
@@ -2095,14 +2254,14 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (wp.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 wp.transform.GetChild(0).gameObject.AddComponent<BagItem>();
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             wp.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             wp.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
                             itemList.Add(wp);
-                            UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
-                            ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                            ChangeEquipmentClick.Drag += OnDrag;
                         }
                     }
                 }
@@ -2128,14 +2287,14 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (eq.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 eq.transform.GetChild(0).gameObject.AddComponent<BagItem>();
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             eq.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             eq.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
                             itemList.Add(eq);
-                            UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
-                            ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                            ChangeEquipmentClick.Drag += OnDrag;
                         }
                     }
                 }
@@ -2177,14 +2336,14 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (wp.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 wp.transform.GetChild(0).gameObject.AddComponent<BagItem>();
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             wp.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             wp.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
                             itemList.Add(wp);
-                            UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
-                            ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                            ChangeEquipmentClick.Drag += OnDrag;
                         }
                     }
                 }
@@ -2210,14 +2369,14 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (eq.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 eq.transform.GetChild(0).gameObject.AddComponent<BagItem>();
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             eq.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             eq.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
                             itemList.Add(eq);
-                            UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
-                            ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                            ChangeEquipmentClick.Drag += OnDrag;
                         }
                     }
                 }
@@ -2259,14 +2418,14 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (wp.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 wp.transform.GetChild(0).gameObject.AddComponent<BagItem>();
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             wp.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             wp.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
                             itemList.Add(wp);
-                            UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
-                            ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                            ChangeEquipmentClick.Drag += OnDrag;
                         }
                     }
                 }
@@ -2292,14 +2451,14 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (eq.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 eq.transform.GetChild(0).gameObject.AddComponent<BagItem>();
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             eq.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             eq.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
                             itemList.Add(eq);
-                            UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
-                            ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                            ChangeEquipmentClick.Drag += OnDrag;
                         }
                     }
                 }
@@ -2341,14 +2500,14 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (wp.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 wp.transform.GetChild(0).gameObject.AddComponent<BagItem>();
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             wp.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             wp.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
                             itemList.Add(wp);
-                            UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
-                            ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                            ChangeEquipmentClick.Drag += OnDrag;
                         }
                     }
                 }
@@ -2374,14 +2533,14 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (eq.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 eq.transform.GetChild(0).gameObject.AddComponent<BagItem>();
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             eq.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             eq.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
                             itemList.Add(eq);
-                            UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
-                            ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                            ChangeEquipmentClick.Drag += OnDrag;
                         }
                     }
                 }

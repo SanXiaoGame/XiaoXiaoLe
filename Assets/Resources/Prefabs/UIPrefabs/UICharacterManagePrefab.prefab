@@ -224,7 +224,6 @@ GameObject:
   - component: {fileID: 114140951931314688}
   - component: {fileID: 114546435483070436}
   - component: {fileID: 222456683838310612}
-  - component: {fileID: 114875710629018544}
   m_Layer: 5
   m_Name: CharacterIcon
   m_TagString: Untagged
@@ -243,7 +242,6 @@ GameObject:
   - component: {fileID: 114928174777670348}
   - component: {fileID: 114449336110390558}
   - component: {fileID: 222780380932125374}
-  - component: {fileID: 114692804313644664}
   m_Layer: 5
   m_Name: StoneKnightTag
   m_TagString: Untagged
@@ -347,7 +345,6 @@ GameObject:
   - component: {fileID: 224318360404719846}
   - component: {fileID: 222393906903594222}
   - component: {fileID: 114264077087352018}
-  - component: {fileID: 114335963587289894}
   m_Layer: 5
   m_Name: Skill03
   m_TagString: Untagged
@@ -483,7 +480,6 @@ GameObject:
   - component: {fileID: 222609785547468886}
   - component: {fileID: 114496321921056614}
   - component: {fileID: 114586724383080798}
-  - component: {fileID: 114914745267068274}
   m_Layer: 5
   m_Name: TeamEditOK
   m_TagString: Untagged
@@ -553,7 +549,6 @@ GameObject:
   - component: {fileID: 222654677684835380}
   - component: {fileID: 114958290179932168}
   - component: {fileID: 114002409393828536}
-  - component: {fileID: 114011412464674312}
   m_Layer: 5
   m_Name: ConfirmButton
   m_TagString: Untagged
@@ -572,7 +567,6 @@ GameObject:
   - component: {fileID: 114024026551730084}
   - component: {fileID: 114125698005102332}
   - component: {fileID: 222957867941136718}
-  - component: {fileID: 114546262821517868}
   m_Layer: 5
   m_Name: EquipmentIcon
   m_TagString: Untagged
@@ -673,7 +667,6 @@ GameObject:
   - component: {fileID: 224458979087723212}
   - component: {fileID: 222711285954882262}
   - component: {fileID: 114277724891460990}
-  - component: {fileID: 114988789316521540}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -723,7 +716,6 @@ GameObject:
   - component: {fileID: 224599522358768730}
   - component: {fileID: 222321021279326816}
   - component: {fileID: 114496488522554070}
-  - component: {fileID: 114088962040007072}
   m_Layer: 5
   m_Name: Skill01
   m_TagString: Untagged
@@ -759,7 +751,6 @@ GameObject:
   - component: {fileID: 114487670929590822}
   - component: {fileID: 114480498909030756}
   - component: {fileID: 222984489859784952}
-  - component: {fileID: 114414108391652842}
   m_Layer: 5
   m_Name: StoneBerserkerTag
   m_TagString: Untagged
@@ -897,7 +888,6 @@ GameObject:
   - component: {fileID: 114561375261971536}
   - component: {fileID: 114844621550005300}
   - component: {fileID: 222542171292245612}
-  - component: {fileID: 114717780974573264}
   m_Layer: 5
   m_Name: StoneCasterTag
   m_TagString: Untagged
@@ -916,7 +906,6 @@ GameObject:
   - component: {fileID: 114080531617534328}
   - component: {fileID: 114845367059226804}
   - component: {fileID: 222855040895193882}
-  - component: {fileID: 114173367930923318}
   m_Layer: 5
   m_Name: StoneHunterTag
   m_TagString: Untagged
@@ -952,7 +941,6 @@ GameObject:
   - component: {fileID: 222275691320558716}
   - component: {fileID: 114166978266284314}
   - component: {fileID: 114458589412854398}
-  - component: {fileID: 114822372932552504}
   m_Layer: 5
   m_Name: CancelButton
   m_TagString: Untagged
@@ -1053,7 +1041,6 @@ GameObject:
   - component: {fileID: 114315996446037212}
   - component: {fileID: 114118877216109252}
   - component: {fileID: 222774867025993836}
-  - component: {fileID: 114390102479760966}
   m_Layer: 5
   m_Name: StoneSaberTag
   m_TagString: Untagged
@@ -1088,7 +1075,6 @@ GameObject:
   - component: {fileID: 224846197387571852}
   - component: {fileID: 222509669790818484}
   - component: {fileID: 114555041256213440}
-  - component: {fileID: 114444242015728414}
   m_Layer: 5
   m_Name: EquipmentGrid02
   m_TagString: Untagged
@@ -1107,7 +1093,6 @@ GameObject:
   - component: {fileID: 222669040099832858}
   - component: {fileID: 114915910922892170}
   - component: {fileID: 114734750918106900}
-  - component: {fileID: 114875234571891886}
   m_Layer: 5
   m_Name: TeamEditUp
   m_TagString: Untagged
@@ -1159,7 +1144,6 @@ GameObject:
   - component: {fileID: 114020202405638372}
   - component: {fileID: 114070595963724230}
   - component: {fileID: 222536576415220116}
-  - component: {fileID: 114118467287133590}
   m_Layer: 5
   m_Name: MainCityIcon
   m_TagString: Untagged
@@ -1280,7 +1264,6 @@ GameObject:
   - component: {fileID: 222107723461265068}
   - component: {fileID: 114423606795214296}
   - component: {fileID: 114287874399206278}
-  - component: {fileID: 114622159156662258}
   m_Layer: 5
   m_Name: TeamEditDown
   m_TagString: Untagged
@@ -1316,7 +1299,6 @@ GameObject:
   - component: {fileID: 224172845380587504}
   - component: {fileID: 222139085925148688}
   - component: {fileID: 114100198890953472}
-  - component: {fileID: 114397380382951992}
   m_Layer: 5
   m_Name: Skill02
   m_TagString: Untagged
@@ -1335,7 +1317,6 @@ GameObject:
   - component: {fileID: 114204324174171246}
   - component: {fileID: 114969362657999986}
   - component: {fileID: 222986901203688564}
-  - component: {fileID: 114761334940741700}
   m_Layer: 5
   m_Name: TeamIcon
   m_TagString: Untagged
@@ -1353,7 +1334,6 @@ GameObject:
   - component: {fileID: 224755172587195474}
   - component: {fileID: 222320369595699090}
   - component: {fileID: 114697346464406394}
-  - component: {fileID: 114047724955484776}
   m_Layer: 5
   m_Name: EquipmentGrid01
   m_TagString: Untagged
@@ -1389,7 +1369,6 @@ GameObject:
   - component: {fileID: 222195348802536438}
   - component: {fileID: 114590195566676256}
   - component: {fileID: 114640968157895310}
-  - component: {fileID: 114132308019664672}
   m_Layer: 5
   m_Name: ConfirmButton
   m_TagString: Untagged
@@ -1442,7 +1421,6 @@ GameObject:
   - component: {fileID: 222101819929099124}
   - component: {fileID: 114118211679844632}
   - component: {fileID: 114154632427039046}
-  - component: {fileID: 114223143383664020}
   m_Layer: 5
   m_Name: CancelButton
   m_TagString: Untagged
@@ -1560,19 +1538,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114011412464674312
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1305723242384290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114020202405638372
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1651,19 +1616,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllowSwitchOff: 0
---- !u!114 &114047724955484776
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1900387380006580}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114062196157050204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1781,19 +1733,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114088962040007072
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1474919934172352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114093173394040364
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1941,19 +1880,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114118467287133590
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1775920051682452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114118877216109252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2044,19 +1970,6 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
---- !u!114 &114132308019664672
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1907590792866648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114140951931314688
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2152,19 +2065,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114173367930923318
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1588523283748734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114186308466842258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2285,19 +2185,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 000
---- !u!114 &114223143383664020
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1953818006435598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114239963583731220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2687,19 +2574,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114335963587289894
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1238113425755132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114365083619455016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2750,19 +2624,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114390102479760966
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1672356526178762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114394096097707444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2790,19 +2651,6 @@ MonoBehaviour:
   m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114397380382951992
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1873380370059740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114404892758551482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2890,19 +2738,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114414108391652842
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1498506828937380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114423606795214296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2988,19 +2823,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114444242015728414
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1700097993252428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114449336110390558
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3327,19 +3149,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114546262821517868
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1321236739824564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114546435483070436
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3627,19 +3436,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114622159156662258
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1855464910696016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114638178878249592
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3828,19 +3624,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114692804313644664
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1164780434707550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114697346464406394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3907,19 +3690,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
---- !u!114 &114717780974573264
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1583826397875538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114734750918106900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4000,19 +3770,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllowSwitchOff: 1
---- !u!114 &114761334940741700
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1894374019100992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114764455501360392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4171,19 +3928,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 000
---- !u!114 &114822372932552504
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1611098075758988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114831893249369658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4367,32 +4111,6 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
---- !u!114 &114875234571891886
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1713694359072248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
---- !u!114 &114875710629018544
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1162959586427182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114876455573064344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4453,19 +4171,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114914745267068274
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1270181500016216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114915910922892170
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4830,19 +4535,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114988789316521540
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1433590786118750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b52f996280897e498858ba88f16b292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114993039925464980
 MonoBehaviour:
   m_ObjectHideFlags: 1
