@@ -59,11 +59,11 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
     GameObject returnMainCityButton;
     UISceneWidget bindingReturnMainCityButton;
 
-    //激活
-    public void OnEntering()
+    /// <summary>
+    /// 赋值
+    /// </summary>
+    private void Start()
     {
-        gameObject.SetActive(true);
-        //赋值
         characterName = transform.Find(ConstData.DrunkeryContentBG_Name).GetComponent<Text>();
         characterPrice = transform.Find(ConstData.DrunkeryContentBG_Price).GetComponent<Text>();
         HP = transform.Find(ConstData.DrunkeryContentBG_HP).GetComponent<Text>();
@@ -93,7 +93,7 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
         characterSpot = new Transform[drunkeryCharacterNumber];
         for (int i = 0; i < characterSpot.Length; i++)
         {
-            characterSpot[i]= transform.Find(ConstData.CharacterSpot).GetChild(i);
+            characterSpot[i] = transform.Find(ConstData.CharacterSpot).GetChild(i);
         }
 
         SummonButton = transform.Find(ConstData.SummonButton).gameObject;
@@ -101,7 +101,7 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
         confirmFrame = transform.Find(ConstData.ConfirmFrame_ContentText).GetComponent<Text>();
         confirmButton = transform.Find(ConstData.ConfirmFrame_ConfirmButton).gameObject;
         cancelButton = transform.Find(ConstData.ConfirmFrame_CancelButton).gameObject;
-        
+
         bindingSummonButton = UISceneWidget.Get(SummonButton);
         bindingSummonButton.PointerClick += SummonButtonPointerClick;
         bindingConfirmButton = UISceneWidget.Get(confirmButton);
@@ -112,6 +112,12 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
         characterObj = new GameObject[drunkeryCharacterNumber];
         //随机生成人物协程
         StartCoroutine("RandomInstantiationCharacters");
+    }
+
+    //激活
+    public void OnEntering()
+    {
+        gameObject.SetActive(true);
     }
     //退出
     public void OnExiting()

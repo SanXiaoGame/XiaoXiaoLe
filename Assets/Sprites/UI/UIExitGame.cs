@@ -17,13 +17,9 @@ public class UIExitGame : MonoBehaviour, IUIBase
     UISceneWidget determineButtonClick;
     UISceneWidget cancelButtonClick;
 
-    /// <summary>
-    /// 进入界面
-    /// </summary>
-    public void OnEntering()
+    private void Start()
     {
-        gameObject.SetActive(true);
-        GameManager.Instance.GamePause();
+        UIManager.Instance.GamePause();
         determine = transform.Find("ExitBG/Determine").gameObject;
         cancel = transform.Find("ExitBG/Cancel").gameObject;
         determineButtonClick = UISceneWidget.Get(determine);
@@ -34,6 +30,13 @@ public class UIExitGame : MonoBehaviour, IUIBase
             determineButtonClick.PointerClick += DetermineButtonFunc;
             cancelButtonClick.PointerClick += CancelButtonFunc;
         }
+    }
+    /// <summary>
+    /// 进入界面
+    /// </summary>
+    public void OnEntering()
+    {
+        gameObject.SetActive(true);
     }
     /// <summary>
     /// 界面暂停
@@ -55,7 +58,7 @@ public class UIExitGame : MonoBehaviour, IUIBase
     public void OnExiting()
     {
         gameObject.SetActive(false);
-        GameManager.Instance.GamePause();
+        UIManager.Instance.GamePause();
     }
 
     /// <summary>
