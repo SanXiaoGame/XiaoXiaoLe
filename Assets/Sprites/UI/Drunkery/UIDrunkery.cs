@@ -59,11 +59,6 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
     GameObject returnMainCityButton;
     UISceneWidget bindingReturnMainCityButton;
 
-    private void Start()
-    {
-        OnEntering();
-    }
-
     //激活
     public void OnEntering()
     {
@@ -154,7 +149,7 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
         _characterListData = SQLiteManager.Instance.characterDataSource[temp];
         //更新内容栏
         characterName.text = _characterListData.character_Name;
-        //characterPrice.text = _characterListData.GoldCoin.ToString();
+        characterPrice.text = _characterListData.GoldCoin.ToString();
         characterPrice.text = StringSplicingTool.StringSplicing("招募价格：", "500");
         HP.text = StringSplicingTool.StringSplicing("HP：", _characterListData.character_HP.ToString());
         string[] AD_APText = { "AD：", _characterListData.character_AD.ToString(), "  ", "AP：", _characterListData.character_AP.ToString() };
