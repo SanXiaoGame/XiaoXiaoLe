@@ -43,3 +43,15 @@ public enum BlockName
     /// </summary>
     Saber
 }
+//人物场地类型
+public enum CharacterFieldType
+{
+    /// <summary>
+    /// 酒店
+    /// </summary>
+    Hotel = 0,
+    /// <summary>
+    /// 商店
+    /// </summary>
+    Shop
+}

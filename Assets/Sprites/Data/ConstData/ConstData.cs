@@ -56,6 +56,10 @@ public struct ConstData
     /// </summary>
     public const string UIMainCityPrefab = "UIMainCityPrefab";
     /// <summary>
+    /// 主城界面GameArea预制体
+    /// </summary>
+    public const string UIMainCityPrefab_GameArea = "UIMainCityPrefab_GameArea";
+    /// <summary>
     /// 角色管理界面——角色条
     /// </summary>
     public const string CharacterBar = "CharacterBar";
@@ -77,33 +81,53 @@ public struct ConstData
     /// <summary>
     /// 系统操作区
     /// </summary>
-    public const string SystemArea = "SystemArea/";
+    //----------------  角色管理页面  -------------------
+    public const string SystemArea = "SystemArea";
     public const string SystemArea_CharacterIcon = "SystemArea/CharacterIcon";
     public const string SystemArea_TeamIcon = "SystemArea/TeamIcon";
     public const string SystemArea_EquipmentIcon = "SystemArea/EquipmentIcon";
     public const string SystemArea_MainCityIcon = "SystemArea/MainCityIcon";
+    //------------------  主城方面  ---------------------
+    public const string SystemArea_CharacterButton = "SystemArea/CharacterButton";
+    public const string SystemArea_StoreButton = "SystemArea/StoreButton";
+    public const string SystemArea_SuperMarketButton = "SystemArea/SuperMarketButton";
+    public const string SystemArea_DrunkeryButton = "SystemArea/DrunkeryButton";
+    public const string SystemArea_SettingButton = "SystemArea/SettingButton";
+    public const string SystemArea_BattleButton = "SystemArea/BattleButton";
     /// <summary>
     /// 控制区
     /// </summary>
-    public const string ControllerArea = "ControllerArea/";
+    //----------------  角色管理页面  -------------------
+    public const string ControllerArea = "ControllerArea";
     public const string ControllerArea_ItemListBG = "ControllerArea/ItemListBG";
     public const string ControllerArea_ListContent2 = "ControllerArea/ItemListBG/ListViewport/ListContent";
     public const string ControllerArea_CharacterListBG = "ControllerArea/CharacterListBG";
     public const string ControllerArea_ListContent = "ControllerArea/CharacterListBG/ListViewport/ListContent";
+    //------------------  主城方面  ---------------------
+    public const string ControllerArea_ItemListBG_WP = "ControllerArea/ItemListBG_WP";
+    public const string ControllerArea_ItemListBG_EQ = "ControllerArea/ItemListBG_EQ";
+    public const string ControllerArea_ItemListBG_CO = "ControllerArea/ItemListBG_CO";
+    public const string ControllerArea_ItemListBG_MT = "ControllerArea/ItemListBG_MT";
     /// <summary>
     /// 控制区附属
     /// </summary>
-    public const string ControllerExArea = "ControllerExArea/";
+    //----------------  角色管理页面  -------------------
+    public const string ControllerExArea = "ControllerExArea";
     public const string ControllerExArea_SkillMode = "ControllerExArea/SkillMode";
     public const string ControllerExArea_TeamMode = "ControllerExArea/TeamMode";
     public const string ControllerExArea_TeamModeUP = "ControllerExArea/TeamMode/TeamEditUp";
     public const string ControllerExArea_TeamModeDOWN = "ControllerExArea/TeamMode/TeamEditDown";
     public const string ControllerExArea_TeamModeCONFIRM = "ControllerExArea/TeamMode/TeamEditOK";
     public const string ControllerExArea_EquipmentMode = "ControllerExArea/EquipmentMode";
+    //------------------  主城方面  ---------------------
+    public const string ControllerExArea_WeaponBag = "ControllerExArea/WeaponBag";
+    public const string ControllerExArea_EquipmentBag = "ControllerExArea/EquipmentBag";
+    public const string ControllerExArea_ConsumableBag = "ControllerExArea/ConsumableBag";
+    public const string ControllerExArea_MaterialBag = "ControllerExArea/MaterialBag";
     /// <summary>
     /// 筛选
     /// </summary>
-    public const string Filter = "Filter/";
+    public const string Filter = "Filter";
     public const string Filter_StoneSaberTag = "Filter/StoneSaberTag";
     public const string StoneSaberTag = "StoneSaberTag";
     public const string Filter_StoneKnightTag = "Filter/StoneKnightTag";
@@ -117,7 +141,8 @@ public struct ConstData
     /// <summary>
     /// 游戏画面区
     /// </summary>
-    public const string GameArea = "GameArea/";
+    //----------------  角色管理页面  -------------------
+    public const string GameArea = "GameArea";
     public const string GameArea_MessageFrame = "GameArea/MessageFrame";
     public const string GameArea_MessageFrame_Name = "GameArea/MessageFrame/Name";
     public const string GameArea_MessageFrame_LV = "GameArea/MessageFrame/LV";
@@ -133,6 +158,10 @@ public struct ConstData
     public const string GameArea_Step04 = "GameArea/Step04";
     public const string GameArea_Step05 = "GameArea/Step05";
     public const string GameArea_GoldCoin = "GameArea/GoldFrame/GoldCoin";
+    //------------------  主城方面  ---------------------
+    public const string GameArea_MessageFrame_NameAndClass = "GameArea/MessageFrame/NameAndClass";
+    public const string GameArea_MessageFrame_Property = "GameArea/MessageFrame/Property";
+
     /// <summary>
     /// 介绍栏
     /// </summary>
@@ -590,4 +619,9 @@ public struct ConstData
     public const string ListType_Equipment = "Equipment";
     public const string ListType_Consumable = "Consumable";
     public const string ListType_Material = "Material";
+    //背包种类
+    public const string WeaponBag = "WeaponBag";
+    public const string EquipmentBag = "EquipmentBag";
+    public const string ConsumableBag = "ConsumableBag";
+    public const string MaterialBag = "MaterialBag";
 }
