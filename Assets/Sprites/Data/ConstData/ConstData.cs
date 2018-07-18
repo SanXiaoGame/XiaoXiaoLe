@@ -94,6 +94,10 @@ public struct ConstData
     public const string SystemArea_DrunkeryButton = "SystemArea/DrunkeryButton";
     public const string SystemArea_SettingButton = "SystemArea/SettingButton";
     public const string SystemArea_BattleButton = "SystemArea/BattleButton";
+    //------------------  酒店  ---------------------
+    public const string CharacterButton = "CharacterDisplayContent/CharacterButton";
+    public const string CharacterSpot = "CharacterDisplayContent/CharacterSpot";
+    public const string SummonButton = "SummonButton";
     /// <summary>
     /// 控制区
     /// </summary>
@@ -108,6 +112,12 @@ public struct ConstData
     public const string ControllerArea_ItemListBG_EQ = "ControllerArea/ItemListBG_EQ";
     public const string ControllerArea_ItemListBG_CO = "ControllerArea/ItemListBG_CO";
     public const string ControllerArea_ItemListBG_MT = "ControllerArea/ItemListBG_MT";
+    //------------------  酒店  ---------------------
+    public const string DrunkeryContentBG_Name = "DrunkeryContentBG/NameBG/Name";
+    public const string DrunkeryContentBG_Price = "DrunkeryContentBG/PriceBG/Price";
+    public const string DrunkeryContentBG_HP = "DrunkeryContentBG/HPBG/HP";
+    public const string DrunkeryContentBG_AD_AP = "DrunkeryContentBG/AD_APBG/AD_AP";
+    public const string DrunkeryContentBG_DEF_RES = "DrunkeryContentBG/DEF_RESBG/DEF_RES";
     /// <summary>
     /// 控制区附属
     /// </summary>
