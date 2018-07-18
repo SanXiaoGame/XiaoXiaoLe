@@ -112,9 +112,9 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
     /// <param 携带装备="player_Equipment"></param>
     /// <param 等级="player_Level"></param>
     /// <param 经验="player_EXP"></param>
-    public void InsetDataToTable(int id, string player_Name, string player_Class, string player_Description, int player_HP, int player_AD, int player_AP, int player_DEF, int player_RES, int player_SkillOneID, int player_SkillTwoID, int player_SkillThreeID, int player_EXHP, int player_EXAD, int player_EXAP, int player_EXDEF, int player_EXRES, int player_Weapon, int player_Equipment, int player_Level, int player_EXP)
+    public void InsetDataToTable(int id, string player_Name, string player_Class, string player_Description, int player_HP, int player_AD, int player_AP, int player_DEF, int player_RES, int player_SkillOneID, int player_SkillTwoID, int player_SkillThreeID, int player_EXHP, int player_EXAD, int player_EXAP, int player_EXDEF, int player_EXRES, int player_Weapon, int player_Equipment, int player_Level, int player_EXP,int GoldCoin,int Diamond,int PrefabsID)
     {
-        string[] values = new string[] { id.ToString(), player_Name, player_Class, player_Description, player_HP.ToString(), player_AD.ToString(), player_AP.ToString(), player_DEF.ToString(), player_RES.ToString(), player_SkillOneID.ToString(), player_SkillTwoID.ToString(), player_SkillThreeID.ToString(), player_EXHP.ToString(), player_EXAD.ToString(), player_EXAP.ToString(), player_EXDEF.ToString(), player_EXRES.ToString(), player_Weapon.ToString(), player_Equipment.ToString(), player_Level.ToString(), player_EXP.ToString() };
+        string[] values = new string[] { id.ToString(), player_Name, player_Class, player_Description, player_HP.ToString(), player_AD.ToString(), player_AP.ToString(), player_DEF.ToString(), player_RES.ToString(), player_SkillOneID.ToString(), player_SkillTwoID.ToString(), player_SkillThreeID.ToString(), player_EXHP.ToString(), player_EXAD.ToString(), player_EXAP.ToString(), player_EXDEF.ToString(), player_EXRES.ToString(), player_Weapon.ToString(), player_Equipment.ToString(), player_Level.ToString(), player_EXP.ToString(), GoldCoin.ToString(), Diamond.ToString(), PrefabsID.ToString() };
         writeData.InsertDataToSQL(ConstData.Player, values);
     }
 

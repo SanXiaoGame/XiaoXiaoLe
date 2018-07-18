@@ -108,10 +108,10 @@ public class DBOperation
     /// <param 值集合="values"></param>
     public void InsertDataToTable(string tbName, string[] values)
     {
-        string sqlQuery = "INSERT INTO " + tbName + " VALUES(" + values[0] + "'" + values[1] + "'" + "'" + values[2] + "'" + "'" + values[3] + "'";
+        string sqlQuery = "INSERT INTO " + tbName + " VALUES(" + values[0] + "," + "'" + values[1] + "'" + "," + "'" + values[2] + "'" +","+ "'" + values[3] + "'"; ;
         for (int i = 0; i < values.Length - 4; i++)
         {
-            sqlQuery = StringSplicingTool.StringSplicing(sqlQuery, values[i]);
+            sqlQuery = StringSplicingTool.StringSplicing(StringSplicingTool.StringSplicing(sqlQuery, ","), values[i]);
         }
         sqlQuery = StringSplicingTool.StringSplicing(sqlQuery, ")");
         ExcuteSQLQuery(sqlQuery);

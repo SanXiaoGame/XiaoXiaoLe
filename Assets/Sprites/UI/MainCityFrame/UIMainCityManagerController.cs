@@ -270,7 +270,7 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
     }
     void DrunkeryEnter(PointerEventData eventData)
     {
-
+        UIManager.Instance.PushUIStack("UIDrunkeryPrefab");
     }
     void SettingEnter(PointerEventData eventData)
     {
