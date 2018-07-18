@@ -13,14 +13,17 @@ public class UILoading : MonoBehaviour,IUIBase
     //加载条
     Slider loadingSlider;
 
+    private void Start()
+    {
+        loadingSlider = transform.GetChild(0).GetComponent<Slider>();
+        SceneAss_Manager.Instance.readDataEnd += isLpad;
+    }
     /// <summary>
     /// 进入界面
     /// </summary>
     public void OnEntering()
     {
         gameObject.SetActive(true);
-        loadingSlider = transform.GetChild(0).GetComponent<Slider>();
-        SceneAss_Manager.Instance.readDataEnd += isLpad;
     }
     /// <summary>
     /// 界面暂停
