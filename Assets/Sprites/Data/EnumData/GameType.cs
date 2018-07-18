@@ -19,27 +19,15 @@ public enum BlockObjectType
     HighSkillType
 }
 
-//块的名字
-public enum BlockName
+//人物场地类型
+public enum CharacterFieldType
 {
     /// <summary>
-    /// 战士块名
+    /// 酒店
     /// </summary>
-    Berserker = 0,
+    Hotel = 0,
     /// <summary>
-    /// 法师块名
+    /// 商店
     /// </summary>
-    Caster,
-    /// <summary>
-    /// 弓箭手块名
-    /// </summary>
-    Hunter,
-    /// <summary>
-    /// 骑士块名
-    /// </summary>
-    Knight,
-    /// <summary>
-    /// 弓箭手块名
-    /// </summary>
-    Saber
+    Shop
 }
