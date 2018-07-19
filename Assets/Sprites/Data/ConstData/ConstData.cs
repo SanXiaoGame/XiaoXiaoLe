@@ -60,6 +60,10 @@ public struct ConstData
     /// </summary>
     public const string UIMainCityPrefab_GameArea = "UIMainCityPrefab_GameArea";
     /// <summary>
+    /// 酒馆界面预制体
+    /// </summary>
+    public const string UIDrunkeryPrefab = "UIDrunkeryPrefab";
+    /// <summary>
     /// 角色管理界面——角色条
     /// </summary>
     public const string CharacterBar = "CharacterBar";
@@ -75,6 +79,10 @@ public struct ConstData
     /// 装备图标
     /// </summary>
     public const string ItemIcon = "ItemIcon";
+    /// <summary>
+    /// 格子光圈
+    /// </summary>
+    public const string pitchOn = "pitchOn";
     #endregion
 
     #region UI区域名
