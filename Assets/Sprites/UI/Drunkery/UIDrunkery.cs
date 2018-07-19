@@ -184,8 +184,7 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
     {
         print("招募成功");
         int playerMaxID = SQLiteManager.Instance.playerDataSource.Keys.Last() + 1;
-        int GoldCoin = 500;
-        SQLiteManager.Instance.InsetDataToTable(playerMaxID, _characterListData.character_Name, _characterListData.character_Class, _characterListData.character_Description, _characterListData.character_HP, _characterListData.character_AD, _characterListData.character_AP, _characterListData.character_DEF, _characterListData.character_RES, _characterListData.character_SkillOneID, _characterListData.character_SkillTwoID, _characterListData.character_SkillThreeID, _characterListData.character_EXHP, _characterListData.character_EXAD, _characterListData.character_EXAP, _characterListData.character_EXDEF, _characterListData.character_EXRES, _characterListData.character_Weapon, _characterListData.character_Equipment, _characterListData.character_Level, _characterListData.character_EXP, GoldCoin, 0, _characterListData.character_Id);
+        SQLiteManager.Instance.InsetDataToTable(playerMaxID, _characterListData.character_Name, _characterListData.character_Class, _characterListData.character_Description, _characterListData.character_HP, _characterListData.character_AD, _characterListData.character_AP, _characterListData.character_DEF, _characterListData.character_RES, _characterListData.character_SkillOneID, _characterListData.character_SkillTwoID, _characterListData.character_SkillThreeID, _characterListData.character_EXHP, _characterListData.character_EXAD, _characterListData.character_EXAP, _characterListData.character_EXDEF, _characterListData.character_EXRES, _characterListData.character_Weapon, _characterListData.character_Equipment, _characterListData.character_Level, _characterListData.character_EXP, _characterListData.GoldCoin, _characterListData.Diamond, _characterListData.PrefabsID);
         confirmFrameObj.SetActive(false);
     }
     /// <summary>
