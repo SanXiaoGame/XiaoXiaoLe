@@ -124,6 +124,9 @@ public class ReadData
             int character_Level = reader.GetInt32(reader.GetOrdinal("character_Level"));
             int character_Weapon = reader.GetInt32(reader.GetOrdinal("character_Weapon"));
             int character_Equipment = reader.GetInt32(reader.GetOrdinal("character_Equipment"));
+            int GoldCoin = reader.GetInt32(reader.GetOrdinal("GoldCoin"));
+            int Diamond = reader.GetInt32(reader.GetOrdinal("Diamond"));
+            int PrefabsID = reader.GetInt32(reader.GetOrdinal("PrefabsID"));
             //创建模型
             CharacterListData characterListData = new CharacterListData();
             characterListData.character_Id = character_Id;
@@ -147,6 +150,9 @@ public class ReadData
             characterListData.character_Level = character_Level;
             characterListData.character_Weapon = character_Weapon;
             characterListData.character_Equipment = character_Equipment;
+            characterListData.GoldCoin = GoldCoin;
+            characterListData.Diamond = Diamond;
+            characterListData.PrefabsID = PrefabsID;
 
             //加入到数据库
             SQLiteManager.Instance.characterDataSource.Add(characterListData.character_Id, characterListData);
