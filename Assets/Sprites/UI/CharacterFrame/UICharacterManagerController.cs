@@ -304,6 +304,7 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         G_IntroductionFrame = transform.Find(ConstData.Introduction).gameObject;
         G_ConfirmFrame = transform.Find(ConstData.ConfirmFrame).gameObject;
         #endregion
+
         //装备区拖拽获取
         itemList_Drag = transform.Find(ConstData.ControllerArea_ItemListBG).gameObject;
         //信息初始化
@@ -1278,15 +1279,24 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                     _textBar[2] = (SQLiteManager.Instance.playerDataSource[(1300 + i)].Level).ToString();
                     _tempHeroBar.transform.GetChild(2).GetComponent<Text>().text = StringSplicingTool.StringSplicing(_textBar);
                     _tempHeroBar.name = (1300 + i).ToString();
+                    UISceneWidget selectClick;
+                    UISceneWidget dismissalClick;
                     if (_tempHeroBar.transform.GetChild(3).GetComponent<UISceneWidget>() == null)
                     {
                         //绑定选择的点击方法
                         GameObject select = _tempHeroBar.transform.GetChild(3).gameObject; ;
-                        UISceneWidget selectClick = UISceneWidget.Get(select);
+                        selectClick = UISceneWidget.Get(select);
                         selectClick.PointerClick += CharacterSelect;
                         //绑定解雇按钮的点击方法
                         GameObject dismissal = _tempHeroBar.transform.GetChild(4).gameObject;
-                        UISceneWidget dismissalClick = UISceneWidget.Get(dismissal);
+                        dismissalClick = UISceneWidget.Get(dismissal);
+                        dismissalClick.PointerClick += CharacterDismissal;
+                    }
+                    else
+                    {
+                        selectClick = _tempHeroBar.transform.GetChild(3).GetComponent<UISceneWidget>();
+                        selectClick.PointerClick += CharacterSelect;
+                        dismissalClick = _tempHeroBar.transform.GetChild(4).GetComponent<UISceneWidget>();
                         dismissalClick.PointerClick += CharacterDismissal;
                     }
                     //添加Toggle组件以及设置群组
@@ -1351,15 +1361,24 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                         _textBar[2] = (SQLiteManager.Instance.playerDataSource[(1300 + i)].Level).ToString();
                         _tempHeroBar.transform.GetChild(2).GetComponent<Text>().text = StringSplicingTool.StringSplicing(_textBar);
                         _tempHeroBar.name = (1300 + i).ToString();
+                        UISceneWidget selectClick;
+                        UISceneWidget dismissalClick;
                         if (_tempHeroBar.transform.GetChild(3).GetComponent<UISceneWidget>() == null)
                         {
                             //绑定选择的点击方法
                             GameObject select = _tempHeroBar.transform.GetChild(3).gameObject; ;
-                            UISceneWidget selectClick = UISceneWidget.Get(select);
+                            selectClick = UISceneWidget.Get(select);
                             selectClick.PointerClick += CharacterSelect;
                             //绑定解雇按钮的点击方法
                             GameObject dismissal = _tempHeroBar.transform.GetChild(4).gameObject;
-                            UISceneWidget dismissalClick = UISceneWidget.Get(dismissal);
+                            dismissalClick = UISceneWidget.Get(dismissal);
+                            dismissalClick.PointerClick += CharacterDismissal;
+                        }
+                        else
+                        {
+                            selectClick = _tempHeroBar.transform.GetChild(3).GetComponent<UISceneWidget>();
+                            selectClick.PointerClick += CharacterSelect;
+                            dismissalClick = _tempHeroBar.transform.GetChild(4).GetComponent<UISceneWidget>();
                             dismissalClick.PointerClick += CharacterDismissal;
                         }
                         //添加Toggle组件以及设置群组
@@ -1426,15 +1445,24 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                         _textBar[2] = (SQLiteManager.Instance.playerDataSource[(1300 + i)].Level).ToString();
                         _tempHeroBar.transform.GetChild(2).GetComponent<Text>().text = StringSplicingTool.StringSplicing(_textBar);
                         _tempHeroBar.name = (1300 + i).ToString();
+                        UISceneWidget selectClick;
+                        UISceneWidget dismissalClick;
                         if (_tempHeroBar.transform.GetChild(3).GetComponent<UISceneWidget>() == null)
                         {
                             //绑定选择的点击方法
                             GameObject select = _tempHeroBar.transform.GetChild(3).gameObject; ;
-                            UISceneWidget selectClick = UISceneWidget.Get(select);
+                            selectClick = UISceneWidget.Get(select);
                             selectClick.PointerClick += CharacterSelect;
                             //绑定解雇按钮的点击方法
                             GameObject dismissal = _tempHeroBar.transform.GetChild(4).gameObject;
-                            UISceneWidget dismissalClick = UISceneWidget.Get(dismissal);
+                            dismissalClick = UISceneWidget.Get(dismissal);
+                            dismissalClick.PointerClick += CharacterDismissal;
+                        }
+                        else
+                        {
+                            selectClick = _tempHeroBar.transform.GetChild(3).GetComponent<UISceneWidget>();
+                            selectClick.PointerClick += CharacterSelect;
+                            dismissalClick = _tempHeroBar.transform.GetChild(4).GetComponent<UISceneWidget>();
                             dismissalClick.PointerClick += CharacterDismissal;
                         }
                         //添加Toggle组件以及设置群组
@@ -1501,15 +1529,24 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                         _textBar[2] = (SQLiteManager.Instance.playerDataSource[(1300 + i)].Level).ToString();
                         _tempHeroBar.transform.GetChild(2).GetComponent<Text>().text = StringSplicingTool.StringSplicing(_textBar);
                         _tempHeroBar.name = (1300 + i).ToString();
+                        UISceneWidget selectClick;
+                        UISceneWidget dismissalClick;
                         if (_tempHeroBar.transform.GetChild(3).GetComponent<UISceneWidget>() == null)
                         {
                             //绑定选择的点击方法
                             GameObject select = _tempHeroBar.transform.GetChild(3).gameObject; ;
-                            UISceneWidget selectClick = UISceneWidget.Get(select);
+                            selectClick = UISceneWidget.Get(select);
                             selectClick.PointerClick += CharacterSelect;
                             //绑定解雇按钮的点击方法
                             GameObject dismissal = _tempHeroBar.transform.GetChild(4).gameObject;
-                            UISceneWidget dismissalClick = UISceneWidget.Get(dismissal);
+                            dismissalClick = UISceneWidget.Get(dismissal);
+                            dismissalClick.PointerClick += CharacterDismissal;
+                        }
+                        else
+                        {
+                            selectClick = _tempHeroBar.transform.GetChild(3).GetComponent<UISceneWidget>();
+                            selectClick.PointerClick += CharacterSelect;
+                            dismissalClick = _tempHeroBar.transform.GetChild(4).GetComponent<UISceneWidget>();
                             dismissalClick.PointerClick += CharacterDismissal;
                         }
                         //添加Toggle组件以及设置群组
@@ -1576,15 +1613,24 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                         _textBar[2] = (SQLiteManager.Instance.playerDataSource[(1300 + i)].Level).ToString();
                         _tempHeroBar.transform.GetChild(2).GetComponent<Text>().text = StringSplicingTool.StringSplicing(_textBar);
                         _tempHeroBar.name = (1300 + i).ToString();
+                        UISceneWidget selectClick;
+                        UISceneWidget dismissalClick;
                         if (_tempHeroBar.transform.GetChild(3).GetComponent<UISceneWidget>() == null)
                         {
                             //绑定选择的点击方法
                             GameObject select = _tempHeroBar.transform.GetChild(3).gameObject; ;
-                            UISceneWidget selectClick = UISceneWidget.Get(select);
+                            selectClick = UISceneWidget.Get(select);
                             selectClick.PointerClick += CharacterSelect;
                             //绑定解雇按钮的点击方法
                             GameObject dismissal = _tempHeroBar.transform.GetChild(4).gameObject;
-                            UISceneWidget dismissalClick = UISceneWidget.Get(dismissal);
+                            dismissalClick = UISceneWidget.Get(dismissal);
+                            dismissalClick.PointerClick += CharacterDismissal;
+                        }
+                        else
+                        {
+                            selectClick = _tempHeroBar.transform.GetChild(3).GetComponent<UISceneWidget>();
+                            selectClick.PointerClick += CharacterSelect;
+                            dismissalClick = _tempHeroBar.transform.GetChild(4).GetComponent<UISceneWidget>();
                             dismissalClick.PointerClick += CharacterDismissal;
                         }
                         //添加Toggle组件以及设置群组
@@ -1651,15 +1697,24 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                         _textBar[2] = (SQLiteManager.Instance.playerDataSource[(1300 + i)].Level).ToString();
                         _tempHeroBar.transform.GetChild(2).GetComponent<Text>().text = StringSplicingTool.StringSplicing(_textBar);
                         _tempHeroBar.name = (1300 + i).ToString();
+                        UISceneWidget selectClick;
+                        UISceneWidget dismissalClick;
                         if (_tempHeroBar.transform.GetChild(3).GetComponent<UISceneWidget>() == null)
                         {
                             //绑定选择的点击方法
                             GameObject select = _tempHeroBar.transform.GetChild(3).gameObject; ;
-                            UISceneWidget selectClick = UISceneWidget.Get(select);
+                            selectClick = UISceneWidget.Get(select);
                             selectClick.PointerClick += CharacterSelect;
                             //绑定解雇按钮的点击方法
                             GameObject dismissal = _tempHeroBar.transform.GetChild(4).gameObject;
-                            UISceneWidget dismissalClick = UISceneWidget.Get(dismissal);
+                            dismissalClick = UISceneWidget.Get(dismissal);
+                            dismissalClick.PointerClick += CharacterDismissal;
+                        }
+                        else
+                        {
+                            selectClick = _tempHeroBar.transform.GetChild(3).GetComponent<UISceneWidget>();
+                            selectClick.PointerClick += CharacterSelect;
+                            dismissalClick = _tempHeroBar.transform.GetChild(4).GetComponent<UISceneWidget>();
                             dismissalClick.PointerClick += CharacterDismissal;
                         }
                         //添加Toggle组件以及设置群组
@@ -1704,9 +1759,20 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         //清空现有角色条
         for (int i = 0; i < playerList.Count; i++)
         {
+            //名字重置
             playerList[i].name = "CharacterBar";
+            //按钮重置
             playerList[i].transform.GetChild(4).gameObject.SetActive(true);
+            //颜色重置
             playerList[i].transform.GetComponent<Image>().sprite = ResourcesManager.Instance.FindSprite("LineList");
+            //绑定事件清空
+            if (playerList[i].transform.GetChild(3).GetComponent<UISceneWidget>() != null)
+            {
+                //解除绑定
+                playerList[i].transform.GetChild(3).GetComponent<UISceneWidget>().PointerClick -= CharacterSelect;
+                playerList[i].transform.GetChild(4).GetComponent<UISceneWidget>().PointerClick -= CharacterDismissal;
+            }
+            //完成回收
             ObjectPoolManager.Instance.RecycleMyGameObject(playerList[i]);
         }
         //清空列表
@@ -2095,13 +2161,22 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                         if (wp.transform.GetChild(0).GetComponent<BagItem>() == null)
                         {
                             wp.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                            UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
-                            ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                            ChangeEquipmentClick.Drag += OnDrag;
                         }
                         //获得数据
                         wp.transform.GetChild(0).GetComponent<BagItem>().GetData();
                         wp.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                        //绑定事件
+                        if (wp.transform.GetComponent<UISceneWidget>() == null)
+                        {
+                            UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
+                            ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                            ChangeEquipmentClick.Drag += OnDrag;
+                        }
+                        else
+                        {
+                            wp.transform.GetComponent<UISceneWidget>().PointerClick += WeaponSelectFrame;
+                            wp.transform.GetComponent<UISceneWidget>().Drag += OnDrag;
+                        }
                         itemList.Add(wp);
                     }
                 }
@@ -2124,13 +2199,22 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                         if (eq.transform.GetChild(0).GetComponent<BagItem>() == null)
                         {
                             eq.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                            UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
-                            ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                            ChangeEquipmentClick.Drag += OnDrag;
                         }
                         //获得数据
                         eq.transform.GetChild(0).GetComponent<BagItem>().GetData();
                         eq.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                        //绑定事件
+                        if (eq.transform.GetComponent<UISceneWidget>() == null)
+                        {
+                            UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
+                            ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                            ChangeEquipmentClick.Drag += OnDrag;
+                        }
+                        else
+                        {
+                            eq.transform.GetComponent<UISceneWidget>().PointerClick += WeaponSelectFrame;
+                            eq.transform.GetComponent<UISceneWidget>().Drag += OnDrag;
+                        }
                         itemList.Add(eq);
                     }
                 }
@@ -2172,13 +2256,22 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (wp.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 wp.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
-                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             wp.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             wp.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (wp.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
+                            }
+                            else
+                            {
+                                wp.transform.GetComponent<UISceneWidget>().PointerClick += WeaponSelectFrame;
+                                wp.transform.GetComponent<UISceneWidget>().Drag += OnDrag;
+                            }
                             itemList.Add(wp);
                         }
                     }
@@ -2205,13 +2298,22 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (eq.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 eq.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
-                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             eq.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             eq.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (eq.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
+                            }
+                            else
+                            {
+                                eq.transform.GetComponent<UISceneWidget>().PointerClick += WeaponSelectFrame;
+                                eq.transform.GetComponent<UISceneWidget>().Drag += OnDrag;
+                            }
                             itemList.Add(eq);
                         }
                     }
@@ -2254,13 +2356,22 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (wp.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 wp.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
-                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             wp.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             wp.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (wp.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
+                            }
+                            else
+                            {
+                                wp.transform.GetComponent<UISceneWidget>().PointerClick += WeaponSelectFrame;
+                                wp.transform.GetComponent<UISceneWidget>().Drag += OnDrag;
+                            }
                             itemList.Add(wp);
                         }
                     }
@@ -2287,13 +2398,22 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (eq.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 eq.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
-                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             eq.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             eq.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (eq.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
+                            }
+                            else
+                            {
+                                eq.transform.GetComponent<UISceneWidget>().PointerClick += WeaponSelectFrame;
+                                eq.transform.GetComponent<UISceneWidget>().Drag += OnDrag;
+                            }
                             itemList.Add(eq);
                         }
                     }
@@ -2336,13 +2456,22 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (wp.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 wp.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
-                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             wp.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             wp.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (wp.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
+                            }
+                            else
+                            {
+                                wp.transform.GetComponent<UISceneWidget>().PointerClick += WeaponSelectFrame;
+                                wp.transform.GetComponent<UISceneWidget>().Drag += OnDrag;
+                            }
                             itemList.Add(wp);
                         }
                     }
@@ -2369,13 +2498,22 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (eq.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 eq.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
-                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             eq.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             eq.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (eq.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
+                            }
+                            else
+                            {
+                                eq.transform.GetComponent<UISceneWidget>().PointerClick += WeaponSelectFrame;
+                                eq.transform.GetComponent<UISceneWidget>().Drag += OnDrag;
+                            }
                             itemList.Add(eq);
                         }
                     }
@@ -2418,13 +2556,22 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (wp.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 wp.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
-                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             wp.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             wp.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (wp.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
+                            }
+                            else
+                            {
+                                wp.transform.GetComponent<UISceneWidget>().PointerClick += WeaponSelectFrame;
+                                wp.transform.GetComponent<UISceneWidget>().Drag += OnDrag;
+                            }
                             itemList.Add(wp);
                         }
                     }
@@ -2451,13 +2598,22 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (eq.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 eq.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
-                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             eq.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             eq.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (eq.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
+                            }
+                            else
+                            {
+                                eq.transform.GetComponent<UISceneWidget>().PointerClick += WeaponSelectFrame;
+                                eq.transform.GetComponent<UISceneWidget>().Drag += OnDrag;
+                            }
                             itemList.Add(eq);
                         }
                     }
@@ -2500,13 +2656,22 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (wp.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 wp.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
-                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             wp.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             wp.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (wp.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(wp);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
+                            }
+                            else
+                            {
+                                wp.transform.GetComponent<UISceneWidget>().PointerClick += WeaponSelectFrame;
+                                wp.transform.GetComponent<UISceneWidget>().Drag += OnDrag;
+                            }
                             itemList.Add(wp);
                         }
                     }
@@ -2533,13 +2698,22 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                             if (eq.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 eq.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
-                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
-                                ChangeEquipmentClick.Drag += OnDrag;
                             }
                             //获得数据
                             eq.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             eq.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (eq.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget ChangeEquipmentClick = UISceneWidget.Get(eq);
+                                ChangeEquipmentClick.PointerClick += WeaponSelectFrame;
+                                ChangeEquipmentClick.Drag += OnDrag;
+                            }
+                            else
+                            {
+                                eq.transform.GetComponent<UISceneWidget>().PointerClick += WeaponSelectFrame;
+                                eq.transform.GetComponent<UISceneWidget>().Drag += OnDrag;
+                            }
                             itemList.Add(eq);
                         }
                     }
@@ -2570,7 +2744,15 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         //回收所有格
         for (int i = 0; i < itemList.Count; i++)
         {
+            //名字重置
             itemList[i].name = ConstData.GridEx;
+            //取消绑定
+            if (itemList[i].transform.GetComponent<UISceneWidget>() != null)
+            {
+                itemList[i].transform.GetComponent<UISceneWidget>().PointerClick -= WeaponSelectFrame;
+                itemList[i].transform.GetComponent<UISceneWidget>().Drag -= OnDrag;
+            }
+            //完成回收
             ObjectPoolManager.Instance.RecycleMyGameObject(itemList[i]);
         }
         for (int j = 0; j < null_itemList.Count; j++)

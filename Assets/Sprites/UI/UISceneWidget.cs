@@ -32,7 +32,7 @@ public class UISceneWidget : EventTrigger
     public static UISceneWidget Get(GameObject obj)
     {
         UISceneWidget widget = obj.GetComponent<UISceneWidget>();
-        if (!widget)
+        if (widget == null)
         {
             widget = obj.AddComponent<UISceneWidget>();
         }
