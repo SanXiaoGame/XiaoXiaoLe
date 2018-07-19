@@ -62,12 +62,14 @@ public class ColumnScript : MonoBehaviour
 
             objectPrefab = GameManager.Instance.playingObjectPrefabs[index] as GameObject;
 
-            GameObject block = ObjectPoolManager.Instance.InstantiateMyGameObject(objectPrefab);
+            //获取UIRect组件
+            RectTransform block = ObjectPoolManager.Instance.InstantiateMyGameObject(objectPrefab).GetComponent<RectTransform>();
 
             block.name = objectPrefab.name;
-            block.transform.parent = transform;
-            block.transform.localPosition = new Vector3(0, -i * 200, 0);
-            block.GetComponent<RectTransform>().localScale = Vector3.one;
+            block.parent = transform;
+            //block.transform.localPosition = new Vector3(0, -i * 200, 0);
+            block.anchoredPosition3D = new Vector3(0, -i * objectPrefab.GetComponent<RectTransform>().sizeDelta.y, 0);
+            block.localScale = Vector3.one;
             block.GetComponent<BlockObject>().myColumnScript = this;
             block.GetComponent<BlockObject>().ColumnNumber = i;
             BlockObjectsScriptList.Add(block.GetComponent<BlockObject>());
