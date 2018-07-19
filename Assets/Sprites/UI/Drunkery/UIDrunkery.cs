@@ -93,7 +93,7 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
         characterSpot = new Transform[drunkeryCharacterNumber];
         for (int i = 0; i < characterSpot.Length; i++)
         {
-            characterSpot[i]= transform.Find(ConstData.CharacterSpot).GetChild(i);
+            characterSpot[i] = transform.Find(ConstData.CharacterSpot).GetChild(i);
         }
 
         SummonButton = transform.Find(ConstData.SummonButton).gameObject;
