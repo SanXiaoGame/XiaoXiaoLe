@@ -110,8 +110,6 @@ public class GameManager : ManagerBase<GameManager>
     {
         //播放消的声音
         AudioManager.Instance.PlayEffectMusic(SoundEffect.ClearCube);
-        print("播放消的声音");
-
         for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
         {
             ColumnManager.Instance.gameColumns[i].DeleteBrustedBlock();

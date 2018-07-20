@@ -56,6 +56,8 @@ public struct CharacterListData
     public int character_Weapon;
     public int character_Equipment;
     public int GoldCoin;
+    public int Diamond;
+    public int PrefabsID;
     //进化后对应数值
     public int character_EXHP;
     public int character_EXAD;

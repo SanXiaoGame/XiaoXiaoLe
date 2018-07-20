@@ -9,14 +9,33 @@ public class MainCityBGDrag : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("a");
-        offset = transform.position - Input.mousePosition;
+        Vector3 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousepos2D = new Vector2(mousepos.x, mousepos.y);
+        RaycastHit2D hitpoint;
+        if (hitpoint = Physics2D.Raycast(mousepos2D, Vector2.zero))
+        {
+            offset = transform.position - new Vector3(hitpoint.point.x,hitpoint.point.y,0);
+        }
     }
 
     private void OnMouseDrag()
     {
-        //transform.position = new Vector3(Input.mousePosition.x + offset.x, transform.position.y, transform.position.z);
-        Debug.Log("b");
-        transform.position = Input.mousePosition;
+        Vector3 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousepos2D = new Vector2(mousepos.x, mousepos.y);
+        RaycastHit2D hitpoint;
+        if (hitpoint = Physics2D.Raycast(mousepos2D, Vector2.zero))
+        {
+            transform.position = new Vector3(hitpoint.point.x + offset.x, transform.position.y, transform.position.z);
+            if (Camera.main.WorldToScreenPoint(transform.position).x > 0)
+            {
+                transform.position = ResourcesManager.Instance.FindUIPrefab(ConstData.UIMainCityPrefab_GameArea).transform.position;
+            }
+            if (Camera.main.WorldToScreenPoint(transform.position).x < -3222)
+            {
+
+                transform.position = ResourcesManager.Instance.FindUIPrefab(ConstData.UIMainCityPrefab_GameArea).transform.position -
+                    new Vector3(12.582f, 0, 0);
+            }
+        }
     }
 }

@@ -18,6 +18,8 @@ public class ColumnManager : ManagerBase<ColumnManager>
     internal int ColumnNumber = -1;
     //记录吃了交换药后选中的两个块
     internal List<BlockObject> exchangeBlock = new List<BlockObject>();
+    //列的父物体
+    RectTransform columnParent;
 
     protected override void Awake()
     {
@@ -26,23 +28,25 @@ public class ColumnManager : ManagerBase<ColumnManager>
 
     private void Start()
     {
+        //找列的父物体
+        columnParent = transform.Find(ConstData.ColumnParentObj).GetComponent<RectTransform>();
         gameColumns = new ColumnScript[numberOfColumns];
         for (int i = 0; i < gameColumns.Length; i++)
         {
             //实例化出对应的列空物体，添加ColumnScript
-            GameObject blockTemp = new GameObject();
-            gameColumns[i] = blockTemp.AddComponent<ColumnScript>();
-            //blockTemp.transform.parent = columnParent;
-            blockTemp.transform.parent = transform;
-            blockTemp.transform.localScale = Vector3.one;
-            blockTemp.name = "Column" + i;
-        }
-
-        //列的排序
-        for (int i = 0; i < gameColumns.Length; i++)
-        {
+            RectTransform blockColumnTemp = new GameObject(StringSplicingTool.StringSplicing("Column", i.ToString())).AddComponent<RectTransform>();
+            gameColumns[i] = blockColumnTemp.gameObject.AddComponent<ColumnScript>();
+            //列的排序
             gameColumns[i].columnIndex = i;
-            gameColumns[i].transform.localPosition = new Vector3(-500 + i * 200f, 500f, 0f);
+
+            //设置父物体物体
+            blockColumnTemp.parent = columnParent;
+            blockColumnTemp.localScale = Vector3.one;
+            blockColumnTemp.sizeDelta = new Vector2(columnParent.sizeDelta.x / numberOfRows, columnParent.sizeDelta.y / numberOfColumns);
+            //列的位置
+            blockColumnTemp.anchorMax = new Vector2(0, 1);
+            blockColumnTemp.anchorMin = new Vector2(0, 1);
+            blockColumnTemp.anchoredPosition3D = new Vector3(columnParent.sizeDelta.x / numberOfRows * i + blockColumnTemp.sizeDelta.x * 0.5f, -blockColumnTemp.sizeDelta.y * 0.5f, 0f);
         }
     }
 
@@ -80,6 +84,6 @@ public class ColumnManager : ManagerBase<ColumnManager>
     internal GameObject PreviousColumnBlock(int i)
     {
         int num = ColumnNumber;
-        return transform.GetChild(num - 1).GetChild(i).gameObject;
+        return columnParent.GetChild(num - 1).GetChild(i).gameObject;
     }
 }

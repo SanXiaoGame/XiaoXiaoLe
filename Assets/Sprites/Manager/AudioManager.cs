@@ -168,6 +168,5 @@ public class AudioManager : ManagerBase<AudioManager>
             //加入队列
             effectMusic.Enqueue(tempAudio);
         }));
-        Debug.Log("回收");
     }
 }

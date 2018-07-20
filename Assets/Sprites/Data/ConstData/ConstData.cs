@@ -60,6 +60,10 @@ public struct ConstData
     /// </summary>
     public const string UIMainCityPrefab_GameArea = "UIMainCityPrefab_GameArea";
     /// <summary>
+    /// 酒馆界面预制体
+    /// </summary>
+    public const string UIDrunkeryPrefab = "UIDrunkeryPrefab";
+    /// <summary>
     /// 角色管理界面——角色条
     /// </summary>
     public const string CharacterBar = "CharacterBar";
@@ -75,6 +79,10 @@ public struct ConstData
     /// 装备图标
     /// </summary>
     public const string ItemIcon = "ItemIcon";
+	/// <summary>
+    /// 格子光圈
+    /// </summary>
+    public const string pitchOn = "pitchOn";
     #endregion
 
     #region UI区域名
@@ -98,6 +106,11 @@ public struct ConstData
     public const string CharacterButton = "CharacterDisplayContent/CharacterButton";
     public const string CharacterSpot = "CharacterDisplayContent/CharacterSpot";
     public const string SummonButton = "SummonButton";
+    //------------------  商城  ---------------------
+    public const string SystemArea_ShopBuyButton = "SystemArea/ShopBuyButton";
+    public const string SystemArea_SuperMarketBuyButton = "SystemArea/SuperMarketBuyButton";
+    public const string SystemArea_ContractButton = "SystemArea/ContractButton";
+    public const string SystemArea_MainCityButton = "SystemArea/MainCityButton";
     /// <summary>
     /// 控制区
     /// </summary>
@@ -118,6 +131,8 @@ public struct ConstData
     public const string DrunkeryContentBG_HP = "DrunkeryContentBG/HPBG/HP";
     public const string DrunkeryContentBG_AD_AP = "DrunkeryContentBG/AD_APBG/AD_AP";
     public const string DrunkeryContentBG_DEF_RES = "DrunkeryContentBG/DEF_RESBG/DEF_RES";
+    //------------------  商城  ---------------------
+    public const string ShoppingMall_ConfirmButton = "ConfirmButton";
     /// <summary>
     /// 控制区附属
     /// </summary>
@@ -134,6 +149,11 @@ public struct ConstData
     public const string ControllerExArea_EquipmentBag = "ControllerExArea/EquipmentBag";
     public const string ControllerExArea_ConsumableBag = "ControllerExArea/ConsumableBag";
     public const string ControllerExArea_MaterialBag = "ControllerExArea/MaterialBag";
+    //------------------  商城  ---------------------
+    public const string ShoppingMall_Weapon = "ControllerExArea/WeaponBag/WeaponIcon";
+    public const string ShoppingMall_Equipment = "ControllerExArea/EquipmentBag/EquipmentIcon";
+    public const string ShoppingMall_Consumable = "ControllerExArea/ConsumableBag/ConsumableIcon";
+    public const string ShoppingMall_Material = "ControllerExArea/MaterialBag/MaterialIcon";
     /// <summary>
     /// 筛选
     /// </summary>
@@ -171,6 +191,10 @@ public struct ConstData
     //------------------  主城方面  ---------------------
     public const string GameArea_MessageFrame_NameAndClass = "GameArea/MessageFrame/NameAndClass";
     public const string GameArea_MessageFrame_Property = "GameArea/MessageFrame/Property";
+    //------------------  商城  ---------------------
+    public const string ShoppingMall_FirstLine = "GameArea/MessageFrame/FirstLine";
+    public const string ShoppingMall_SecondLine = "GameArea/MessageFrame/SecondLine";
+    public const string GameArea_Diamonds = "GameArea/DiamondsFrame/DiamondsIcon";
 
     /// <summary>
     /// 介绍栏
@@ -260,7 +284,11 @@ public struct ConstData
     public const string Skill_Hunter3 = "3009";
     #endregion
 
-    #region 固定位置
+    #region 固定父物体
+    /// <summary>
+    /// 列的父物体
+    /// </summary>
+    public const string ColumnParentObj = "/Canvas/ColumnParent";
     #endregion
 
     #region 金币上限

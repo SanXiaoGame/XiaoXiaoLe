@@ -12,6 +12,8 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
     //选中的道具
     GameObject itemG;
     int itemID;
+    GameObject itemHalo;
+    GameObject itemHaloPrefabs;
     //显示信息
     Text nameAndClass;
     Text property;
@@ -91,6 +93,8 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
             };
         nameAndClass.text = "[无]";
         property.text = StringSplicingTool.StringSplicing(tempText01);
+        itemHaloPrefabs = ResourcesManager.Instance.FindUIPrefab(ConstData.pitchOn);
+        itemHalo = null;
         itemList_WP = new List<GameObject>();
         null_itemList_WP = new List<GameObject>();
         itemList_EQ = new List<GameObject>();
@@ -235,17 +239,19 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
     public void OnPausing()
     {
         gameObject.SetActive(false);
+        GameArea.SetActive(false);
     }
     //界面唤醒
     public void OnResuming()
     {
         gameObject.SetActive(true);
-        AllListCreate();
         //筛选重置
         for (int i = 0; i < filterList.Count; i++)
         {
             filterList[i].GetComponent<Toggle>().isOn = false;
         }
+        AllListCreate();
+        GameArea.SetActive(true);
     }
 
 
@@ -270,7 +276,7 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
     }
     void DrunkeryEnter(PointerEventData eventData)
     {
-        UIManager.Instance.PushUIStack("UIDrunkeryPrefab");
+        UIManager.Instance.PushUIStack(ConstData.UIDrunkeryPrefab);
     }
     void SettingEnter(PointerEventData eventData)
     {
@@ -284,8 +290,30 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
     //控制区
     void ItemSelect(PointerEventData eventData)
     {
+        Debug.Log("a");
         itemG = eventData.pointerEnter.gameObject;
         itemID = Convert.ToInt32(itemG.name);
+        //生成选中光圈
+        if (itemHalo == null)
+        {
+            itemHalo = ObjectPoolManager.Instance.InstantiateMyGameObject(itemHaloPrefabs);
+            //改变父物体到选中的目标
+            itemHalo.transform.parent = itemG.transform.parent;
+            itemHalo.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+            itemHalo.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            if (itemG.transform.parent.childCount == 1)
+            {
+                ObjectPoolManager.Instance.RecycleMyGameObject(itemHalo);
+                itemHalo = ObjectPoolManager.Instance.InstantiateMyGameObject(itemHaloPrefabs);
+                //改变父物体到选中的目标
+                itemHalo.transform.parent = itemG.transform.parent;
+                itemHalo.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+                itemHalo.transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
         switch (itemG.tag)
         {
             case ConstData.EquipmentType:
@@ -493,6 +521,12 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
             case ConstData.WeaponBag:
                 for (int i = 0; i < itemList_WP.Count; i++)
                 {
+                    //解绑事件
+                    if(itemList_WP[i].GetComponent<UISceneWidget>() != null)
+                    {
+                        itemList_WP[i].GetComponent<UISceneWidget>().PointerClick -= ItemSelect;
+                    }
+                    //完成回收
                     ObjectPoolManager.Instance.RecycleMyGameObject(itemList_WP[i]);
                 }
                 itemList_WP.Clear();
@@ -505,6 +539,12 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
             case ConstData.EquipmentBag:
                 for (int i = 0; i < itemList_EQ.Count; i++)
                 {
+                    //解绑事件
+                    if (itemList_EQ[i].GetComponent<UISceneWidget>() != null)
+                    {
+                        itemList_EQ[i].GetComponent<UISceneWidget>().PointerClick -= ItemSelect;
+                    }
+                    //完成回收
                     ObjectPoolManager.Instance.RecycleMyGameObject(itemList_EQ[i]);
                 }
                 itemList_EQ.Clear();
@@ -517,6 +557,12 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
             case ConstData.ConsumableBag:
                 for (int i = 0; i < itemList_CO.Count; i++)
                 {
+                    //解绑事件
+                    if (itemList_CO[i].GetComponent<UISceneWidget>() != null)
+                    {
+                        itemList_CO[i].GetComponent<UISceneWidget>().PointerClick -= ItemSelect;
+                    }
+                    //完成回收
                     ObjectPoolManager.Instance.RecycleMyGameObject(itemList_CO[i]);
                 }
                 itemList_CO.Clear();
@@ -529,6 +575,12 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
             case ConstData.MaterialBag:
                 for (int i = 0; i < itemList_MT.Count; i++)
                 {
+                    //解绑事件
+                    if (itemList_MT[i].GetComponent<UISceneWidget>() != null)
+                    {
+                        itemList_MT[i].GetComponent<UISceneWidget>().PointerClick -= ItemSelect;
+                    }
+                    //完成回收
                     ObjectPoolManager.Instance.RecycleMyGameObject(itemList_MT[i]);
                 }
                 itemList_MT.Clear();
@@ -587,12 +639,20 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
                         if (wp.transform.GetChild(0).GetComponent<BagItem>() == null)
                         {
                             wp.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                            UISceneWidget EquipmentClick = UISceneWidget.Get(wp);
-                            EquipmentClick.PointerClick += ItemSelect;
                         }
                         //获得数据
                         wp.transform.GetChild(0).GetComponent<BagItem>().GetData();
                         wp.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                        //绑定事件
+                        if (wp.transform.GetComponent<UISceneWidget>() == null)
+                        {
+                            UISceneWidget EquipmentClick = UISceneWidget.Get(wp);
+                            EquipmentClick.PointerClick += ItemSelect;
+                        }
+                        else
+                        {
+                            wp.transform.GetComponent<UISceneWidget>().PointerClick += ItemSelect;
+                        }
                         itemList_WP.Add(wp);
                     }
                 }
@@ -631,12 +691,20 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
                             if (wp.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 wp.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget EquipmentClick = UISceneWidget.Get(wp);
-                                EquipmentClick.PointerClick += ItemSelect;
                             }
                             //获得数据
                             wp.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             wp.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (wp.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget EquipmentClick = UISceneWidget.Get(wp);
+                                EquipmentClick.PointerClick += ItemSelect;
+                            }
+                            else
+                            {
+                                wp.transform.GetComponent<UISceneWidget>().PointerClick += ItemSelect;
+                            }
                             itemList_WP.Add(wp);
                         }
                     }
@@ -676,12 +744,20 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
                             if (wp.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 wp.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget EquipmentClick = UISceneWidget.Get(wp);
-                                EquipmentClick.PointerClick += ItemSelect;
                             }
                             //获得数据
                             wp.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             wp.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (wp.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget EquipmentClick = UISceneWidget.Get(wp);
+                                EquipmentClick.PointerClick += ItemSelect;
+                            }
+                            else
+                            {
+                                wp.transform.GetComponent<UISceneWidget>().PointerClick += ItemSelect;
+                            }
                             itemList_WP.Add(wp);
                         }
                     }
@@ -721,12 +797,20 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
                             if (wp.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 wp.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget EquipmentClick = UISceneWidget.Get(wp);
-                                EquipmentClick.PointerClick += ItemSelect;
                             }
                             //获得数据
                             wp.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             wp.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (wp.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget EquipmentClick = UISceneWidget.Get(wp);
+                                EquipmentClick.PointerClick += ItemSelect;
+                            }
+                            else
+                            {
+                                wp.transform.GetComponent<UISceneWidget>().PointerClick += ItemSelect;
+                            }
                             itemList_WP.Add(wp);
                         }
                     }
@@ -766,12 +850,20 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
                             if (wp.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 wp.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget EquipmentClick = UISceneWidget.Get(wp);
-                                EquipmentClick.PointerClick += ItemSelect;
                             }
                             //获得数据
                             wp.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             wp.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (wp.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget EquipmentClick = UISceneWidget.Get(wp);
+                                EquipmentClick.PointerClick += ItemSelect;
+                            }
+                            else
+                            {
+                                wp.transform.GetComponent<UISceneWidget>().PointerClick += ItemSelect;
+                            }
                             itemList_WP.Add(wp);
                         }
                     }
@@ -811,12 +903,20 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
                             if (wp.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 wp.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget EquipmentClick = UISceneWidget.Get(wp);
-                                EquipmentClick.PointerClick += ItemSelect;
                             }
                             //获得数据
                             wp.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             wp.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (wp.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget EquipmentClick = UISceneWidget.Get(wp);
+                                EquipmentClick.PointerClick += ItemSelect;
+                            }
+                            else
+                            {
+                                wp.transform.GetComponent<UISceneWidget>().PointerClick += ItemSelect;
+                            }
                             itemList_WP.Add(wp);
                         }
                     }
@@ -863,12 +963,20 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
                         if (eq.transform.GetChild(0).GetComponent<BagItem>() == null)
                         {
                             eq.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                            UISceneWidget EquipmentClick = UISceneWidget.Get(eq);
-                            EquipmentClick.PointerClick += ItemSelect;
                         }
                         //获得数据
                         eq.transform.GetChild(0).GetComponent<BagItem>().GetData();
                         eq.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                        //绑定事件
+                        if (eq.transform.GetComponent<UISceneWidget>() == null)
+                        {
+                            UISceneWidget EquipmentClick = UISceneWidget.Get(eq);
+                            EquipmentClick.PointerClick += ItemSelect;
+                        }
+                        else
+                        {
+                            eq.transform.GetComponent<UISceneWidget>().PointerClick += ItemSelect;
+                        }
                         itemList_EQ.Add(eq);
                     }
                 }
@@ -907,12 +1015,20 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
                             if (eq.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 eq.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget EquipmentClick = UISceneWidget.Get(eq);
-                                EquipmentClick.PointerClick += ItemSelect;
                             }
                             //获得数据
                             eq.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             eq.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (eq.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget EquipmentClick = UISceneWidget.Get(eq);
+                                EquipmentClick.PointerClick += ItemSelect;
+                            }
+                            else
+                            {
+                                eq.transform.GetComponent<UISceneWidget>().PointerClick += ItemSelect;
+                            }
                             itemList_EQ.Add(eq);
                         }
                     }
@@ -952,12 +1068,20 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
                             if (eq.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 eq.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget EquipmentClick = UISceneWidget.Get(eq);
-                                EquipmentClick.PointerClick += ItemSelect;
                             }
                             //获得数据
                             eq.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             eq.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (eq.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget EquipmentClick = UISceneWidget.Get(eq);
+                                EquipmentClick.PointerClick += ItemSelect;
+                            }
+                            else
+                            {
+                                eq.transform.GetComponent<UISceneWidget>().PointerClick += ItemSelect;
+                            }
                             itemList_EQ.Add(eq);
                         }
                     }
@@ -997,12 +1121,20 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
                             if (eq.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 eq.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget EquipmentClick = UISceneWidget.Get(eq);
-                                EquipmentClick.PointerClick += ItemSelect;
                             }
                             //获得数据
                             eq.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             eq.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (eq.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget EquipmentClick = UISceneWidget.Get(eq);
+                                EquipmentClick.PointerClick += ItemSelect;
+                            }
+                            else
+                            {
+                                eq.transform.GetComponent<UISceneWidget>().PointerClick += ItemSelect;
+                            }
                             itemList_EQ.Add(eq);
                         }
                     }
@@ -1042,12 +1174,20 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
                             if (eq.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 eq.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget EquipmentClick = UISceneWidget.Get(eq);
-                                EquipmentClick.PointerClick += ItemSelect;
                             }
                             //获得数据
                             eq.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             eq.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (eq.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget EquipmentClick = UISceneWidget.Get(eq);
+                                EquipmentClick.PointerClick += ItemSelect;
+                            }
+                            else
+                            {
+                                eq.transform.GetComponent<UISceneWidget>().PointerClick += ItemSelect;
+                            }
                             itemList_EQ.Add(eq);
                         }
                     }
@@ -1087,12 +1227,20 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
                             if (eq.transform.GetChild(0).GetComponent<BagItem>() == null)
                             {
                                 eq.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                                UISceneWidget EquipmentClick = UISceneWidget.Get(eq);
-                                EquipmentClick.PointerClick += ItemSelect;
                             }
                             //获得数据
                             eq.transform.GetChild(0).GetComponent<BagItem>().GetData();
                             eq.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                            //绑定事件
+                            if (eq.transform.GetComponent<UISceneWidget>() == null)
+                            {
+                                UISceneWidget EquipmentClick = UISceneWidget.Get(eq);
+                                EquipmentClick.PointerClick += ItemSelect;
+                            }
+                            else
+                            {
+                                eq.transform.GetComponent<UISceneWidget>().PointerClick += ItemSelect;
+                            }
                             itemList_EQ.Add(eq);
                         }
                     }
@@ -1135,12 +1283,20 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
                 if (co.transform.GetChild(0).GetComponent<BagItem>() == null)
                 {
                     co.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                    UISceneWidget ItemClick = UISceneWidget.Get(co);
-                    ItemClick.PointerClick += ItemSelect;
                 }
                 //获得数据
                 co.transform.GetChild(0).GetComponent<BagItem>().GetData();
                 co.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                //绑定事件
+                if (co.transform.GetComponent<UISceneWidget>() == null)
+                {
+                    UISceneWidget ItemClick = UISceneWidget.Get(co);
+                    ItemClick.PointerClick += ItemSelect;
+                }
+                else
+                {
+                    co.transform.GetComponent<UISceneWidget>().PointerClick += ItemSelect;
+                }
                 itemList_CO.Add(co);
             }
         }
@@ -1180,12 +1336,20 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
                 if (mt.transform.GetChild(0).GetComponent<BagItem>() == null)
                 {
                     mt.transform.GetChild(0).gameObject.AddComponent<BagItem>();
-                    UISceneWidget ItemClick = UISceneWidget.Get(mt);
-                    ItemClick.PointerClick += ItemSelect;
                 }
                 //获得数据
                 mt.transform.GetChild(0).GetComponent<BagItem>().GetData();
                 mt.transform.GetChild(0).GetComponent<BagItem>().myGrid = i + 1;
+                //绑定事件
+                if (mt.transform.GetComponent<UISceneWidget>() == null)
+                {
+                    UISceneWidget ItemClick = UISceneWidget.Get(mt);
+                    ItemClick.PointerClick += ItemSelect;
+                }
+                else
+                {
+                    mt.transform.GetComponent<UISceneWidget>().PointerClick += ItemSelect;
+                }
                 itemList_MT.Add(mt);
             }
         }
