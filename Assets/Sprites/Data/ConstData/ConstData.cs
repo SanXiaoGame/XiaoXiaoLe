@@ -64,6 +64,10 @@ public struct ConstData
     /// </summary>
     public const string UIDrunkeryPrefab = "UIDrunkeryPrefab";
     /// <summary>
+    /// 商城界面预制体
+    /// </summary>
+    public const string UIShoppingMallPrefab = "UIShoppingMallPrefab";
+    /// <summary>
     /// 角色管理界面——角色条
     /// </summary>
     public const string CharacterBar = "CharacterBar";
@@ -192,9 +196,8 @@ public struct ConstData
     public const string GameArea_MessageFrame_NameAndClass = "GameArea/MessageFrame/NameAndClass";
     public const string GameArea_MessageFrame_Property = "GameArea/MessageFrame/Property";
     //------------------  商城  ---------------------
-    public const string ShoppingMall_FirstLine = "GameArea/MessageFrame/FirstLine";
-    public const string ShoppingMall_SecondLine = "GameArea/MessageFrame/SecondLine";
-    public const string GameArea_Diamonds = "GameArea/DiamondsFrame/DiamondsIcon";
+    public const string ShoppingMalTextContent = "GameArea/MessageFrame/Content";
+    public const string GameArea_Diamonds = "GameArea/DiamondsFrame/DiamondsCoin";
 
     /// <summary>
     /// 介绍栏
@@ -209,6 +212,11 @@ public struct ConstData
     public const string ConfirmFrame_ContentText = "ConfirmFrame/ContentBG/Content";
     public const string ConfirmFrame_ConfirmButton = "ConfirmFrame/ConfirmButton";
     public const string ConfirmFrame_CancelButton = "ConfirmFrame/CancelButton";
+    //------------------  商城  ---------------------
+    public const string RechargeFrame = "RechargeFrame";
+    public const string RechargeInputField = "RechargeFrame/RechargeInputField";
+    public const string RechargeCloseButton = "RechargeFrame/CloseButton";
+    public const string RechargeConfirmButton = "RechargeFrame/RechargeConfirmButton";
     /// <summary>
     /// 装备替换窗口
     /// </summary>
@@ -635,6 +643,14 @@ public struct ConstData
     public const string player_GoldCoin = "GoldCoin";
     public const string player_Diamond = "Diamond";
     public const string player_PrefabsID = "PrefabsID";
+    #endregion
+
+    #region Bag表的字段
+    public const string Bag_Grid = "Bag_Grid";
+    public const string Bag_Weapon = "Bag_Weapon";
+    public const string Bag_Equipment = "Bag_Equipment";
+    public const string Bag_Consumable = "Bag_Consumable";
+    public const string Bag_Material = "Bag_Material";
     #endregion
 
     //主手位置路径

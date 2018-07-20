@@ -272,7 +272,7 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
     }
     void SuperMarketEnter(PointerEventData eventData)
     {
-
+        UIManager.Instance.PushUIStack(ConstData.UIShoppingMallPrefab);
     }
     void DrunkeryEnter(PointerEventData eventData)
     {
