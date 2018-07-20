@@ -67,7 +67,6 @@ public class ColumnScript : MonoBehaviour
 
             block.name = objectPrefab.name;
             block.parent = transform;
-            //block.transform.localPosition = new Vector3(0, -i * 200, 0);
             block.anchoredPosition3D = new Vector3(0, -i * objectPrefab.GetComponent<RectTransform>().sizeDelta.y, 0);
             block.localScale = Vector3.one;
             block.GetComponent<BlockObject>().myColumnScript = this;
