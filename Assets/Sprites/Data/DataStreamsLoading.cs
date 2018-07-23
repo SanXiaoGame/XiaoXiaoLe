@@ -31,7 +31,7 @@ public class DataStreamsLoading : MonoBehaviour
         //首先获取流路径
         string streamPath;
         //合并路径
-        streamPath = System.IO.Path.Combine(Application.streamingAssetsPath, paths);
+        streamPath = StringSplicingTool.StringSplicing(new string[] { Application.streamingAssetsPath, "/", paths });
 
 /*#if UNITY_ANDROID
         streamPath = "jar:file://" + streamPath;

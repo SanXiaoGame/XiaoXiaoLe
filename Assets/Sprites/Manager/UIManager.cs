@@ -14,13 +14,15 @@ public class UIManager : ManagerBase<UIManager>
     Dictionary<string, IUIBase> CurrentUI = new Dictionary<string, IUIBase>();
     //所有UI的父级画布
     Transform uiParent;
+    //控制退出按钮的点击次数
+    internal bool isClickEscape = false;
 
     /// <summary>
     /// 检测退出按钮的点击
     /// </summary>
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !isClickEscape)
         {
             //显示退出界面
             PushUIStack(ConstData.ExitPrefab);

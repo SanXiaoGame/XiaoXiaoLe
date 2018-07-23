@@ -26,10 +26,13 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
     public  Dictionary<int, PlayerData> playerDataSource = new Dictionary<int, PlayerData>();
     public  Dictionary<int, SkillData> skillDataSource = new Dictionary<int, SkillData>();
     public  Dictionary<int, StateData> stateDataSource = new Dictionary<int, StateData>();
-    public  Dictionary<string, HeroData> team = new Dictionary<string, HeroData>();        //小队字典--from Duke 
-    protected override void Awake()
+    public  Dictionary<string, HeroData> team = new Dictionary<string, HeroData>();        //小队字典--from Duke
+
+    /// <summary>
+    /// 加载数据挂起SQLiteManager
+    /// </summary>   
+    internal void LoadDataFunc()
     {
-        base.Awake();
         //启动流路径(将需要操作的文件从流路径拷贝到沙盒中)
         StreamsLoading = gameObject.AddComponent<DataStreamsLoading>();
 
@@ -42,13 +45,11 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
     /// <summary>
     /// 当文件从流路径拷贝到沙盒路径完成时执行的回调函数，一旦该函数被成功回调，则意味着拷贝文件已完成，此时可执行存取等数据库操作
     /// </summary>
-    string dataBasePath;
     internal void OnLoadFinished()
     {
         Debug.Log("路径拷贝完成");
         //数据库存放沙盒的路径
-        //dataBasePath = System.IO.Path.Combine(Application.persistentDataPath, ConstData.SQLITE_NAME);
-        dataBasePath = StringSplicingTool.StringSplicing(new string[] { Application.persistentDataPath,"/", ConstData.SQLITE_NAME });
+        string dataBasePath = StringSplicingTool.StringSplicing(new string[] { Application.persistentDataPath,"/", ConstData.SQLITE_NAME });
         //初始化读和写的功能
         readData = new ReadData(dataBasePath);
         writeData = new WriteData(dataBasePath);
@@ -75,6 +76,9 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         readData.GetData(ConstData.State);
         readData.GetData(ConstData.Player);
         print("获取完数据");
+        //赋值金币类
+        CurrencyManager.Instance.LoadCurrencyDataFromSQLite();
+
         //队伍字典初始化键
         team.Add(ConstData.FlagMan, null);
         team.Add(ConstData.Saber, null);
@@ -82,9 +86,6 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         team.Add(ConstData.Berserker, null);
         team.Add(ConstData.Caster, null);
         team.Add(ConstData.Hunter, null);
-
-        //执行读取结束委托
-        SceneAss_Manager.Instance.ExecutionOfEvent(1);
     }
 
     /// <summary>

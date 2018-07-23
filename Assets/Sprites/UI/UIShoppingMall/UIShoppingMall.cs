@@ -92,11 +92,31 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
     int[] _itemMaterial = { 2301, 2302, 2303, 2304, 2305 };
     #endregion
 
+    //充值窗口
+    GameObject _rechargeFrame;
+    //充值关闭
+    GameObject _rechargeCloseButton;
+    //确认充值
+    GameObject _rechargeConfirmButton;
+    //充值输入框
+    InputField _rechargeInputField;
+    //充值窗口按钮绑定
+    UISceneWidget bindingRechargeCloseButton;
+    UISceneWidget bindingRechargeConfirmButton;
+
     /// <summary>
     /// 赋值
     /// </summary>
     private void Awake()
     {
+        //充值窗口
+        _rechargeFrame = transform.Find(ConstData.RechargeFrame).gameObject;
+        //充值关闭
+        _rechargeCloseButton = transform.Find(ConstData.RechargeCloseButton).gameObject;
+        //确认充值
+        _rechargeConfirmButton = transform.Find(ConstData.RechargeConfirmButton).gameObject;
+        //充值输入框
+        _rechargeInputField = transform.Find(ConstData.RechargeInputField).GetComponent<InputField>();
         //格子
         grid = ResourcesManager.Instance.FindUIPrefab(ConstData.Grid);
         //光圈
@@ -158,6 +178,11 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
         if (bindingConsumableButton != null) { bindingConsumableButton.PointerClick += ConsumableTab; }
         bindingMaterialButton = UISceneWidget.Get(_material);
         if (bindingMaterialButton != null) { bindingMaterialButton.PointerClick += MaterialTab; }
+        //充值界面按钮
+        bindingRechargeCloseButton = UISceneWidget.Get(_rechargeCloseButton);
+        if (bindingRechargeCloseButton != null) { bindingRechargeCloseButton.PointerClick += CancelRechargeFunc; }
+        bindingRechargeConfirmButton = UISceneWidget.Get(_rechargeConfirmButton);
+        if (bindingRechargeConfirmButton != null) { bindingRechargeConfirmButton.PointerClick += ConfirmRechargeFunc; }
 
         //显示钻石数
         _diamonds.text = CurrencyManager.Instance.DiamondDisplay();
@@ -495,7 +520,7 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
     /// </summary>
     void SuperMarketBuyButtonFunc(PointerEventData data)
     {
-        print("切换商店充值界面按钮");
+        _rechargeFrame.SetActive(true);
     }
 
     /// <summary>
@@ -541,6 +566,25 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
         _tabID = 4;
         ItemRecycleFunc();
         ItemInstantiationFunc(_itemMaterial, ConstData.ItemType);
+    }
+
+    /// <summary>
+    /// 确认充值
+    /// </summary>
+    /// <param name="data"></param>
+    void ConfirmRechargeFunc(PointerEventData data)
+    {
+        print("确认充值");
+        _rechargeFrame.SetActive(false);
+    }
+
+    /// <summary>
+    /// 取消充值
+    /// </summary>
+    /// <param name="data"></param>
+    void CancelRechargeFunc(PointerEventData data)
+    {
+        _rechargeFrame.SetActive(false);
     }
 
     /// <summary>
