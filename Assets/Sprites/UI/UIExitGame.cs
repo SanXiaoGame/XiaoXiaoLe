@@ -59,6 +59,7 @@ public class UIExitGame : MonoBehaviour, IUIBase
     {
         gameObject.SetActive(false);
         UIManager.Instance.GamePause();
+        UIManager.Instance.isClickEscape = false;
     }
 
     /// <summary>

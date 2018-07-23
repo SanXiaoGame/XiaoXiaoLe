@@ -31,7 +31,14 @@ public struct ConstData
     #endregion
 
     #region 所有场景名
+    /// <summary>
+    /// 加载场景名
+    /// </summary>
     public const string LoadingScene = "LoadingScene";
+    /// <summary>
+    /// 主城场景名
+    /// </summary>
+    public const string MainScene = "MainScene";
     #endregion
 
     #region 所有UI预制体名
