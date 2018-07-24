@@ -284,7 +284,7 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
     }
     void BattleEnter(PointerEventData eventData)
     {
-
+        UIManager.Instance.PushUIStack(ConstData.UIChoiceLevelPrefab);
     }
 
     //控制区
