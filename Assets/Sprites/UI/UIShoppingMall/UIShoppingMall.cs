@@ -219,9 +219,9 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
     {
         //记录格子号
         int number = 0;
-        for (int i = 0; i < _grids.GetLength(i); i++)
+        for (int i = 0; i < _grids.GetLength(0); i++)
         {
-            for (int j = 0; j < _grids.GetLength(i); j++)
+            for (int j = 0; j < _grids.GetLength(1); j++)
             {
                 if (_grids[i, j].transform.childCount > 0)
                 {
@@ -235,20 +235,20 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                 }
                 //生成物品
                 GameObject tempitem = ObjectPoolManager.Instance.InstantiateMyGameObject(item);
-                BagItem _bagItem;
+                BagItem _tempBagItem;
                 if (tempitem.GetComponent<BagItem>() == null)
                 {
                     tempitem.AddComponent<BagItem>();
                 }
-                _bagItem = tempitem.GetComponent<BagItem>();
+                _tempBagItem = tempitem.GetComponent<BagItem>();
                 switch (type)
                 {
                     case ConstData.ItemType:
-                        _bagItem.mydata_item = SQLiteManager.Instance.itemDataSource[itemArr[number]];
+                        _tempBagItem.mydata_item = SQLiteManager.Instance.itemDataSource[itemArr[number]];
                         tempitem.tag = ConstData.ItemType;
                         break;
                     case ConstData.EquipmentType:
-                        _bagItem.mydata_equipt = SQLiteManager.Instance.equipmentDataSource[itemArr[number]];
+                        _tempBagItem.mydata_equipt = SQLiteManager.Instance.equipmentDataSource[itemArr[number]];
                         tempitem.tag = ConstData.EquipmentType;
                         break;
                 }
@@ -276,7 +276,7 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
     {
         for (int i = 0; i < _grids.GetLength(0); i++)
         {
-            for (int j = 0; j < _grids.GetLength(i); j++)
+            for (int j = 0; j < _grids.GetLength(1); j++)
             {
                 if (_grids[i, j].transform.childCount < 1)
                 {
@@ -380,7 +380,7 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
             return;
         }
         string name = _bagItem.tag == ConstData.ItemType ? _bagItem.mydata_item.item_Name : _bagItem.mydata_equipt.equipmentNmae;
-        string[] str = { "你确定要购买 ", "<color=#ff0000>", name, "</color>", " 吗？" };
+        string[] str = { "你确定要购买 ", "<color=#ff0000>", name, "</color>吗？" };
         _contentText.text = StringSplicingTool.StringSplicing(str);
     }
 

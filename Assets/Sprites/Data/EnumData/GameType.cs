@@ -31,3 +31,20 @@ public enum CharacterFieldType
     /// </summary>
     Shop
 }
+
+//选关确认窗口类型
+public enum UIChoiceLevelConfirmFrameType
+{
+    /// <summary>
+    /// 选关用
+    /// </summary>
+    ChoiceLevel = 0,
+    /// <summary>
+    /// 物品用
+    /// </summary>
+    Item,
+    /// <summary>
+    /// 消耗品栏用
+    /// </summary>   
+    ConsumableBar
+}

@@ -75,6 +75,10 @@ public struct ConstData
     /// </summary>
     public const string UIShoppingMallPrefab = "UIShoppingMallPrefab";
     /// <summary>
+    /// 选择关卡界面预制体
+    /// </summary>
+    public const string UIChoiceLevelPrefab = "UIChoiceLevelPrefab";
+    /// <summary>
     /// 角色管理界面——角色条
     /// </summary>
     public const string CharacterBar = "CharacterBar";
@@ -144,6 +148,13 @@ public struct ConstData
     public const string DrunkeryContentBG_DEF_RES = "DrunkeryContentBG/DEF_RESBG/DEF_RES";
     //------------------  商城  ---------------------
     public const string ShoppingMall_ConfirmButton = "ConfirmButton";
+    //------------------  关卡选择  ---------------------
+    public const string ChoiceLevel_ConsumableBar = "ControllerExArea/ConsumableBar";
+    public const string ChoiceLevel_ChoiceConfirmButton = "ControllerExArea/ChoiceConfirmButton";
+    public const string ChoiceLevel_LeftButton = "ControllerExArea/LeftButton";
+    public const string ChoiceLevel_RightButton = "ControllerExArea/RightButton";
+    public const string ChoiceLevel_CheckpointContent = "ControllerExArea/ChoiceConfirmButton/CheckpointContent";
+    public const string ChoiceLevel_ChoiceLevelContent = "ChoiceLevelContent";
     /// <summary>
     /// 控制区附属
     /// </summary>
