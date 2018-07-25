@@ -43,6 +43,8 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
 
     //存储生成的人物数组
     GameObject[] characterObj;
+    //选中人物编号
+    int characteNumber = 0;
 
     //酒店人物出现数量（默认：3）
     int drunkeryCharacterNumber = 3;
@@ -59,11 +61,18 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
     GameObject returnMainCityButton;
     UISceneWidget bindingReturnMainCityButton;
 
+    //显示金币数
+    Text _goldFrame;
+
     /// <summary>
     /// 赋值
     /// </summary>
     private void Start()
     {
+        //金币
+        _goldFrame = transform.Find(ConstData.GameArea_GoldCoin).GetComponent<Text>();
+        _goldFrame.text = CurrencyManager.Instance.GoldCoinDisplay();
+
         characterName = transform.Find(ConstData.DrunkeryContentBG_Name).GetComponent<Text>();
         characterPrice = transform.Find(ConstData.DrunkeryContentBG_Price).GetComponent<Text>();
         HP = transform.Find(ConstData.DrunkeryContentBG_HP).GetComponent<Text>();
@@ -71,11 +80,7 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
         DEF_RES = transform.Find(ConstData.DrunkeryContentBG_DEF_RES).GetComponent<Text>();
         returnMainCityButton = transform.Find(ConstData.SystemArea_MainCityIcon).gameObject;
         //清空内容
-        characterName.text = "000";
-        characterPrice.text = "000";
-        HP.text = "000";
-        AD_AP.text = "000";
-        DEF_RES.text = "000";
+        ClearAllPurchaseData();
 
         //返回主城按钮绑定
         bindingReturnMainCityButton = UISceneWidget.Get(returnMainCityButton);
@@ -142,21 +147,19 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
     void CharacterButtonPointerClick(PointerEventData data)
     {
         summonIcon = true;
-        int num = 0;
         for (int i = 0; i < CharacterButton.Length; i++)
         {
             if (CharacterButton[i].isOn)
             {
-                num = i;
+                characteNumber = i;
                 break;
             }
         }
-        int temp = int.Parse(characterObj[num].name);
+        int temp = int.Parse(characterObj[characteNumber].name);
         _characterListData = SQLiteManager.Instance.characterDataSource[temp];
         //更新内容栏
         characterName.text = _characterListData.character_Name;
-        characterPrice.text = _characterListData.GoldCoin.ToString();
-        characterPrice.text = StringSplicingTool.StringSplicing("招募价格：", "500");
+        characterPrice.text = StringSplicingTool.StringSplicing("招募价格：", _characterListData.GoldCoin.ToString());
         HP.text = StringSplicingTool.StringSplicing("HP：", _characterListData.character_HP.ToString());
         string[] AD_APText = { "AD：", _characterListData.character_AD.ToString(), "  ", "AP：", _characterListData.character_AP.ToString() };
         AD_AP.text = StringSplicingTool.StringSplicing(AD_APText);
@@ -182,10 +185,67 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
     /// <param name="data"></param>
     void ConfirmButtonClick(PointerEventData data)
     {
-        print("招募成功");
+        //检测人物数量
+        if (SQLiteManager.Instance.playerDataSource.Count >= 16)
+        {
+            confirmFrame.text = "<color=#ff0000>人物已满！</color>";
+            return;
+        }
+        //检测金币数量
+        if (_characterListData.GoldCoin > CurrencyManager.Instance.goldCoin)
+        {
+            confirmFrame.text = "<color=#ff0000>金币不足！</color>";
+            return;
+        }
+
         int playerMaxID = SQLiteManager.Instance.playerDataSource.Keys.Last() + 1;
+        #region 创造新人物
+        PlayerData playerData = new PlayerData();
+        playerData.player_Id = playerMaxID;
+        playerData.player_Name = _characterListData.character_Name;
+        playerData.player_Class = _characterListData.character_Class;
+        playerData.player_Description = _characterListData.character_Description;
+        playerData.HP = _characterListData.character_HP;
+        playerData.AD = _characterListData.character_AD;
+        playerData.AP = _characterListData.character_AP;
+        playerData.DEF = _characterListData.character_DEF;
+        playerData.RES = _characterListData.character_RES;
+        playerData.EXP = _characterListData.character_EXP;
+        playerData.skillOneID = _characterListData.character_SkillOneID;
+        playerData.skillTwoID = _characterListData.character_SkillTwoID;
+        playerData.skillThreeID = _characterListData.character_SkillThreeID;
+        playerData.EXHP = _characterListData.character_EXHP;
+        playerData.EXAD = _characterListData.character_EXAD;
+        playerData.EXAP = _characterListData.character_EXAP;
+        playerData.EXDEF = _characterListData.character_EXDEF;
+        playerData.EXRES = _characterListData.character_EXRES;
+        playerData.Level = _characterListData.character_Level;
+        playerData.Weapon = _characterListData.character_Weapon;
+        playerData.Equipment = _characterListData.character_Equipment;
+        playerData.GoldCoin = _characterListData.GoldCoin;
+        playerData.Diamond = _characterListData.Diamond;
+        playerData.PrefabsID = _characterListData.PrefabsID;
+        //存进字典
+        SQLiteManager.Instance.playerDataSource.Add(playerMaxID, playerData);
+        #endregion
         SQLiteManager.Instance.InsetDataToTable(playerMaxID, _characterListData.character_Name, _characterListData.character_Class, _characterListData.character_Description, _characterListData.character_HP, _characterListData.character_AD, _characterListData.character_AP, _characterListData.character_DEF, _characterListData.character_RES, _characterListData.character_SkillOneID, _characterListData.character_SkillTwoID, _characterListData.character_SkillThreeID, _characterListData.character_EXHP, _characterListData.character_EXAD, _characterListData.character_EXAP, _characterListData.character_EXDEF, _characterListData.character_EXRES, _characterListData.character_Weapon, _characterListData.character_Equipment, _characterListData.character_Level, _characterListData.character_EXP, _characterListData.GoldCoin, _characterListData.Diamond, _characterListData.PrefabsID);
         confirmFrameObj.SetActive(false);
+        //刷新金币
+        CurrencyManager.Instance.GoldCoinDecrease(_characterListData.GoldCoin);
+        _goldFrame.text = CurrencyManager.Instance.GoldCoinDisplay();
+        //清空之前数据
+        ClearAllPurchaseData();
+        summonIcon = false;
+        for (int i = 0; i < CharacterButton.Length; i++)
+        {
+            CharacterButton[i].enabled = false;
+            CharacterButton[i].isOn = false;
+            CharacterButton[i].enabled = true;
+        }
+        //回收购买过的人物
+        ObjectPoolManager.Instance.RecycleMyGameObject(characterObj[characteNumber]);
+        //刷新出新人物
+        RandomInstantiationCharacterFunc(characteNumber);
     }
     /// <summary>
     /// 取消按钮
@@ -206,6 +266,22 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
     }
 
     /// <summary>
+    /// 随机生成人物的方法
+    /// </summary>
+    /// <param 人物生成点="spot"></param>
+    void RandomInstantiationCharacterFunc(int spot)
+    {
+        int characterID = RandomManager.Instance.GetRandomCharacter(CharacterFieldType.Hotel);
+        GameObject tempResources = ResourcesManager.Instance.FindPlayerPrefab(characterID.ToString());
+        GameObject tempCharacter = ObjectPoolManager.Instance.InstantiateMyGameObject(tempResources);
+        tempCharacter.name = tempResources.name;
+        tempCharacter.transform.parent = characterSpot[spot];
+        tempCharacter.transform.localPosition = Vector3.zero;
+        tempCharacter.GetComponent<Animator>().SetBool("isWait", true);
+        characterObj[spot] = tempCharacter;
+    }
+
+    /// <summary>
     /// 随机生成人物协程
     /// </summary>
     /// <returns></returns>
@@ -217,14 +293,7 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
             
             for (int i = 0; i < drunkeryCharacterNumber; i++)
             {
-                int characterID = RandomManager.Instance.GetRandomCharacter(CharacterFieldType.Hotel);
-                GameObject tempResources = ResourcesManager.Instance.FindPlayerPrefab(characterID.ToString());
-                GameObject tempCharacter = ObjectPoolManager.Instance.InstantiateMyGameObject(tempResources);
-                tempCharacter.name = tempResources.name;
-                tempCharacter.transform.parent = characterSpot[i];
-                tempCharacter.transform.localPosition = Vector3.zero;
-                tempCharacter.GetComponent<Animator>().SetBool("isWait", true);
-                characterObj[i] = tempCharacter;
+                RandomInstantiationCharacterFunc(i);
             }
         }
         yield return new WaitForSeconds(drunkeryRefreshTime);
@@ -236,5 +305,17 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
         isInstantiationCharacter = true;
         StopCoroutine("RandomInstantiationCharacters");
         StartCoroutine("RandomInstantiationCharacters");
+    }
+
+    /// <summary>
+    /// 初始化之前数据
+    /// </summary>
+    void ClearAllPurchaseData()
+    {
+        characterName.text = "请选择";
+        characterPrice.text = "请选择";
+        HP.text = "请选择";
+        AD_AP.text = "请选择";
+        DEF_RES.text = "请选择";
     }
 }
