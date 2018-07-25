@@ -17,11 +17,11 @@ public class PropsFunction : MonoBehaviour
         {
             propsClick.PointerDown += PropsOnClick;
         }
-        flagman = transform.Find("/1001").gameObject;
     }
 
     private void PropsOnClick(PointerEventData eventData)
     {
+        flagman = GameObject.FindGameObjectWithTag(ConstData.FlagMan);
         if (GameManager.Instance.props_CubeBreakSwitch == false
             && GameManager.Instance.props_CubeChangeSwitch == false
             && GameManager.Instance.props_SkillCubeSwitch == false)

@@ -79,6 +79,18 @@ public struct ConstData
     /// </summary>
     public const string UIChoiceLevelPrefab = "UIChoiceLevelPrefab";
     /// <summary>
+    /// 战斗界面预制体
+    /// </summary>
+    public const string UIBattlePrefab = "UIBattlePrefab";
+    /// <summary>
+    /// 商店界面预制体
+    /// </summary>
+    public const string UIStorePrefab = "UIStorePrefab";
+    /// <summary>
+    /// 商店界面GameArea预制体
+    /// </summary>
+    public const string UIStore_GameArea = "UIStore_GameArea";
+    
     /// 角色管理界面——角色条
     /// </summary>
     public const string CharacterBar = "CharacterBar";
@@ -98,6 +110,10 @@ public struct ConstData
     /// 格子光圈
     /// </summary>
     public const string pitchOn = "pitchOn";
+    /// <summary>
+    /// 第一关场景
+    /// </summary>
+    public const string Stage01 = "Stage01";
     #endregion
 
     #region UI区域名
@@ -126,6 +142,11 @@ public struct ConstData
     public const string SystemArea_SuperMarketBuyButton = "SystemArea/SuperMarketBuyButton";
     public const string SystemArea_ContractButton = "SystemArea/ContractButton";
     public const string SystemArea_MainCityButton = "SystemArea/MainCityButton";
+    //------------------  商店  ---------------------
+    public const string SystemArea_BuyIcon = "SystemArea/BuyIcon";
+    public const string SystemArea_SellIcon = "SystemArea/SellIcon";
+    //------------------  战斗  ---------------------
+    public const string SystemArea_SettingIcon = "SystemArea/SettingIcon";
     /// <summary>
     /// 控制区
     /// </summary>
@@ -155,6 +176,16 @@ public struct ConstData
     public const string ChoiceLevel_RightButton = "ControllerExArea/RightButton";
     public const string ChoiceLevel_CheckpointContent = "ControllerExArea/ChoiceConfirmButton/CheckpointContent";
     public const string ChoiceLevel_ChoiceLevelContent = "ChoiceLevelContent";
+    //------------------  商店  ---------------------
+    public const string ControllerArea_StoreListBG_WP = "ControllerArea/StoreListBG_WP";
+    public const string ControllerArea_StoreListBG_EQ = "ControllerArea/StoreListBG_EQ";
+    public const string ControllerArea_StoreListBG_CO = "ControllerArea/StoreListBG_CO";
+    public const string ControllerArea_StoreListBG_MT = "ControllerArea/StoreListBG_MT";
+    public const string ControllerArea_StoreListContent_WP = "ControllerArea/StoreListBG_WP/ListViewport/ListContent";
+    public const string ControllerArea_StoreListContent_EQ = "ControllerArea/StoreListBG_EQ/ListViewport/ListContent";
+    public const string ControllerArea_StoreListContent_CO = "ControllerArea/StoreListBG_CO/ListViewport/ListContent";
+    public const string ControllerArea_StoreListContent_MT = "ControllerArea/StoreListBG_MT/ListViewport/ListContent";
+    public const string Store_BuyConfirm = "GameArea/BuyConfirm";
     /// <summary>
     /// 控制区附属
     /// </summary>
@@ -176,6 +207,16 @@ public struct ConstData
     public const string ShoppingMall_Equipment = "ControllerExArea/EquipmentBag/EquipmentIcon";
     public const string ShoppingMall_Consumable = "ControllerExArea/ConsumableBag/ConsumableIcon";
     public const string ShoppingMall_Material = "ControllerExArea/MaterialBag/MaterialIcon";
+    //------------------  商店  ---------------------
+    public const string ControllerExArea_WeaponStore = "ControllerExArea/WeaponStore";
+    public const string ControllerExArea_EquipmentStore = "ControllerExArea/EquipmentStore";
+    public const string ControllerExArea_ConsumableStore = "ControllerExArea/ConsumableStore";
+    public const string ControllerExArea_MaterialStore = "ControllerExArea/MaterialStore";
+    //------------------  战斗  ---------------------
+    public const string ControllerExArea_ItemOne = "ControllerExArea/ItemOne";
+    public const string ControllerExArea_ItemTwo = "ControllerExArea/ItemTwo";
+    public const string ControllerExArea_ItemThree = "ControllerExArea/ItemThree";
+    public const string ControllerExArea_ItemFour = "ControllerExArea/ItemFour";
     /// <summary>
     /// 筛选
     /// </summary>
@@ -216,7 +257,9 @@ public struct ConstData
     //------------------  商城  ---------------------
     public const string ShoppingMalTextContent = "GameArea/MessageFrame/Content";
     public const string GameArea_Diamonds = "GameArea/DiamondsFrame/DiamondsCoin";
-
+    //------------------  商店  ---------------------
+    public const string GameArea_GoodsIntro = "GameArea/MessageFrame/GoodsIntro";
+    public const string GameArea_BuyConfirm = "GameArea/BuyConfirm";
     /// <summary>
     /// 介绍栏
     /// </summary>
@@ -314,7 +357,7 @@ public struct ConstData
     /// <summary>
     /// 列的父物体
     /// </summary>
-    public const string ColumnParentObj = "/Canvas/ColumnParent";
+    public const string ColumnParentObj = "/Canvas/UIBattlePrefab/ColumnParent";
     #endregion
 
     #region 金币上限
@@ -501,6 +544,10 @@ public struct ConstData
     /// </summary>
     public const string MonsterPoint = "MonsterPoint";
     /// <summary>
+    /// BOSS刷怪点
+    /// </summary>
+    public const string BossPoint = "BossPoint";
+    /// <summary>
     /// 墙壁
     /// </summary>
     public const string Wall = "Wall";
@@ -663,7 +710,7 @@ public struct ConstData
     public const string player_PrefabsID = "PrefabsID";
     #endregion
 
-    #region Bag表的字段
+    #region 背包表的字段
     public const string Bag_Grid = "Bag_Grid";
     public const string Bag_Weapon = "Bag_Weapon";
     public const string Bag_Equipment = "Bag_Equipment";

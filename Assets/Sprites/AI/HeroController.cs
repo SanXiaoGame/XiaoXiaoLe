@@ -295,6 +295,40 @@ public class HeroController : MonoBehaviour
     }
 
     /// <summary>
+    /// 监测碰到的点
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == ConstData.WinFlagTag)
+        {
+            switch (myClass)
+            {
+                case ConstData.Saber:
+                    vp_Timer.In(0.2f, new vp_Timer.Callback
+                        (delegate () { moveSwitch = false; }));
+                    break;
+                case ConstData.Knight:
+                    vp_Timer.In(1.0f, new vp_Timer.Callback
+                        (delegate () { moveSwitch = false; }));
+                    break;
+                case ConstData.Berserker:
+                    vp_Timer.In(1.8f, new vp_Timer.Callback
+                        (delegate () { moveSwitch = false; }));
+                    break;
+                case ConstData.Caster:
+                    vp_Timer.In(2.6f, new vp_Timer.Callback
+                        (delegate () { moveSwitch = false; }));
+                    break;
+                case ConstData.Hunter:
+                    vp_Timer.In(3.4f, new vp_Timer.Callback
+                        (delegate () { moveSwitch = false; }));
+                    break;
+            }
+        }
+    }
+
+    /// <summary>
     /// 监测是否有敌人进入攻击范围，是就锁定
     /// </summary>
     /// <param name="collision"></param>
@@ -1042,12 +1076,12 @@ public class HeroController : MonoBehaviour
 
     internal void RecWeapon()
     {
-        if (myClass != ConstData.Hunter)
+        if (myClass != ConstData.Hunter && myClass != ConstData.FlagMan)
         {
             ObjectPoolManager.Instance.RecycleMyGameObject(minorFist.transform.GetChild(0).gameObject);
             ObjectPoolManager.Instance.RecycleMyGameObject(mainFist.transform.GetChild(0).gameObject);
         }
-        else if (myClass == ConstData.Hunter)
+        else if (myClass == ConstData.Hunter && myClass != ConstData.FlagMan)
         {
             ObjectPoolManager.Instance.RecycleMyGameObject(minorFist.transform.GetChild(0).gameObject);
         }
