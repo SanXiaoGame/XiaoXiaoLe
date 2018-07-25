@@ -105,7 +105,7 @@ public class FlagManController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "MonsterPoint")
+        if (collision.tag == ConstData.MonsterPoint)
         {
             battleSwitch = true;
             flagMove = false;
@@ -141,5 +141,10 @@ public class FlagManController : MonoBehaviour
             enemyAll[i].GetComponent<EnemyControllers>().targetPlayer = null;
             enemyAll[i].GetComponent<EnemyControllers>().moveSwitch_Battle = true;
         }
+    }
+
+    internal void RecWeapon()
+    {
+
     }
 }

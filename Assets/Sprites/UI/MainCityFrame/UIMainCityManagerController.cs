@@ -61,6 +61,8 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
     GameObject berserkerStone;
     GameObject casterStone;
     GameObject hunterStone;
+    GameObject errorFrame;
+    GameObject errorConfirm;
 
     private void Awake()
     {
@@ -70,6 +72,8 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
     //进入界面
     public void OnEntering()
     {
+        gameObject.SetActive(true);
+
         #region 游戏画面区
         GameArea = ObjectPoolManager.Instance.InstantiateMyGameObject
             (ResourcesManager.Instance.FindUIPrefab(ConstData.UIMainCityPrefab_GameArea));
@@ -82,6 +86,8 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
         itemGrid = ResourcesManager.Instance.FindUIPrefab(ConstData.Grid);
         itemBar = ResourcesManager.Instance.FindUIPrefab(ConstData.GridEx);
         GoldCoin = transform.Find(ConstData.GameArea_GoldCoin).GetComponent<Text>();
+        errorFrame = transform.Find(ConstData.ErrorFrame).gameObject;
+        errorConfirm = errorFrame.transform.GetChild(2).gameObject;
         #endregion
 
         //初始化设置
@@ -121,11 +127,19 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
             UISceneWidget charaButtonClick = UISceneWidget.Get(charaButton);
             charaButtonClick.PointerClick += CharacterEnter;
         }
+        else
+        {
+            charaButton.GetComponent<UISceneWidget>().PointerClick += CharacterEnter;
+        }
         storeButton = transform.Find(ConstData.SystemArea_StoreButton).gameObject;
         if (storeButton.GetComponent<UISceneWidget>() == null)
         {
             UISceneWidget storeButtonClick = UISceneWidget.Get(storeButton);
             storeButtonClick.PointerClick += StoreEnter;
+        }
+        else
+        {
+            storeButton.GetComponent<UISceneWidget>().PointerClick += StoreEnter;
         }
         superMarketButton = transform.Find(ConstData.SystemArea_SuperMarketButton).gameObject;
         if(superMarketButton.GetComponent<UISceneWidget>() == null)
@@ -133,11 +147,19 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
             UISceneWidget superMarketButtonClick = UISceneWidget.Get(superMarketButton);
             superMarketButtonClick.PointerClick += SuperMarketEnter;
         }
+        else
+        {
+            superMarketButton.GetComponent<UISceneWidget>().PointerClick += SuperMarketEnter;
+        }
         drunkeryButton = transform.Find(ConstData.SystemArea_DrunkeryButton).gameObject;
         if (drunkeryButton.GetComponent<UISceneWidget>() == null)
         {
             UISceneWidget drunkeryButtonClick = UISceneWidget.Get(drunkeryButton);
             drunkeryButtonClick.PointerClick += DrunkeryEnter;
+        }
+        else
+        {
+            drunkeryButton.GetComponent<UISceneWidget>().PointerClick += DrunkeryEnter;
         }
         settingButton = transform.Find(ConstData.SystemArea_SettingButton).gameObject;
         if (settingButton.GetComponent<UISceneWidget>() == null)
@@ -145,11 +167,19 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
             UISceneWidget settingButtonClick = UISceneWidget.Get(settingButton);
             settingButtonClick.PointerClick += SettingEnter;
         }
+        else
+        {
+            settingButton.GetComponent<UISceneWidget>().PointerClick += SettingEnter;
+        }
         BattleButton = transform.Find(ConstData.SystemArea_BattleButton).gameObject;
         if (BattleButton.GetComponent<UISceneWidget>() == null)
         {
             UISceneWidget BattleButtonClick = UISceneWidget.Get(BattleButton);
             BattleButtonClick.PointerClick += BattleEnter;
+        }
+        else
+        {
+            BattleButton.GetComponent<UISceneWidget>().PointerClick += BattleEnter;
         }
         #endregion
 
@@ -168,11 +198,19 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
             UISceneWidget WeaponBagClick = UISceneWidget.Get(WeaponBag);
             WeaponBagClick.PointerClick += WeaponBagChange;
         }
+        else
+        {
+            WeaponBag.GetComponent<UISceneWidget>().PointerClick += WeaponBagChange;
+        }
         EquipmentBag = transform.Find(ConstData.ControllerExArea_EquipmentBag).gameObject;
         if (EquipmentBag.GetComponent<UISceneWidget>() == null)
         {
             UISceneWidget EquipmentBagClick = UISceneWidget.Get(EquipmentBag);
             EquipmentBagClick.PointerClick += EquipmentBagChange;
+        }
+        else
+        {
+            EquipmentBag.GetComponent<UISceneWidget>().PointerClick += EquipmentBagChange;
         }
         ConsumableBag = transform.Find(ConstData.ControllerExArea_ConsumableBag).gameObject;
         if (ConsumableBag.GetComponent<UISceneWidget>() == null)
@@ -180,11 +218,19 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
             UISceneWidget ConsumableBagClick = UISceneWidget.Get(ConsumableBag);
             ConsumableBagClick.PointerClick += ConsumableBagChange;
         }
+        else
+        {
+            ConsumableBag.GetComponent<UISceneWidget>().PointerClick += ConsumableBagChange;
+        }
         MaterialBag = transform.Find(ConstData.ControllerExArea_MaterialBag).gameObject;
         if (MaterialBag.GetComponent<UISceneWidget>() == null)
         {
             UISceneWidget MaterialBagClick = UISceneWidget.Get(MaterialBag);
             MaterialBagClick.PointerClick += MaterialBagChange;
+        }
+        else
+        {
+            MaterialBag.GetComponent<UISceneWidget>().PointerClick += MaterialBagChange;
         }
         #endregion
 
@@ -195,11 +241,19 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
             UISceneWidget saberStoneClick = UISceneWidget.Get(saberStone);
             saberStoneClick.PointerClick += SaberFilter;
         }
+        else
+        {
+            saberStone.GetComponent<UISceneWidget>().PointerClick += SaberFilter;
+        }
         knightStone = transform.Find(ConstData.Filter_StoneKnightTag).gameObject;
         if (knightStone.GetComponent<UISceneWidget>() == null)
         {
             UISceneWidget knightStoneClick = UISceneWidget.Get(knightStone);
             knightStoneClick.PointerClick += KnightFilter;
+        }
+        else
+        {
+            knightStone.GetComponent<UISceneWidget>().PointerClick += KnightFilter;
         }
         berserkerStone = transform.Find(ConstData.Filter_StoneBerserkerTag).gameObject;
         if (berserkerStone.GetComponent<UISceneWidget>() == null)
@@ -207,17 +261,29 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
             UISceneWidget berserkerStoneClick = UISceneWidget.Get(berserkerStone);
             berserkerStoneClick.PointerClick += BerserkerFilter;
         }
+        else
+        {
+            berserkerStone.GetComponent<UISceneWidget>().PointerClick += BerserkerFilter;
+        }
         casterStone = transform.Find(ConstData.Filter_StoneCasterTag).gameObject;
         if (casterStone.GetComponent<UISceneWidget>() == null)
         {
             UISceneWidget casterStoneClick = UISceneWidget.Get(casterStone);
             casterStoneClick.PointerClick += CasterFilter;
         }
+        else
+        {
+            casterStone.GetComponent<UISceneWidget>().PointerClick += CasterFilter;
+        }
         hunterStone = transform.Find(ConstData.Filter_StoneHunterTag).gameObject;
         if (hunterStone.GetComponent<UISceneWidget>() == null)
         {
             UISceneWidget hunterStoneClick = UISceneWidget.Get(hunterStone);
             hunterStoneClick.PointerClick += HunterFilter;
+        }
+        else
+        {
+            hunterStone.GetComponent<UISceneWidget>().PointerClick += HunterFilter;
         }
         filterList.Add(saberStone);
         filterList.Add(knightStone);
@@ -228,23 +294,73 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
 
         //金币显示
         GoldCoin.text = CurrencyManager.Instance.GoldCoinDisplay();
+        //确定键绑定
+        if (errorConfirm.GetComponent<UISceneWidget>() == null)
+        {
+            UISceneWidget errorConfirmClick = UISceneWidget.Get(errorConfirm);
+            errorConfirmClick.PointerClick += ErrorOK;
+        }
+        else
+        {
+            errorConfirm.GetComponent<UISceneWidget>().PointerClick += ErrorOK;
+        }
 
     }
     //离开界面
     public void OnExiting()
     {
         gameObject.SetActive(false);
+        //各区域解绑
+        charaButton.GetComponent<UISceneWidget>().PointerClick -= CharacterEnter;
+        storeButton.GetComponent<UISceneWidget>().PointerClick -= StoreEnter;
+        superMarketButton.GetComponent<UISceneWidget>().PointerClick -= SuperMarketEnter;
+        drunkeryButton.GetComponent<UISceneWidget>().PointerClick -= DrunkeryEnter;
+        settingButton.GetComponent<UISceneWidget>().PointerClick -= SettingEnter;
+        BattleButton.GetComponent<UISceneWidget>().PointerClick -= BattleEnter;
+        WeaponBag.GetComponent<UISceneWidget>().PointerClick -= WeaponBagChange;
+        EquipmentBag.GetComponent<UISceneWidget>().PointerClick -= EquipmentBagChange;
+        ConsumableBag.GetComponent<UISceneWidget>().PointerClick -= ConsumableBagChange;
+        MaterialBag.GetComponent<UISceneWidget>().PointerClick -= MaterialBagChange;
+        saberStone.GetComponent<UISceneWidget>().PointerClick -= SaberFilter;
+        knightStone.GetComponent<UISceneWidget>().PointerClick -= KnightFilter;
+        berserkerStone.GetComponent<UISceneWidget>().PointerClick -= BerserkerFilter;
+        casterStone.GetComponent<UISceneWidget>().PointerClick -= CasterFilter;
+        hunterStone.GetComponent<UISceneWidget>().PointerClick -= HunterFilter;
+        errorConfirm.GetComponent<UISceneWidget>().PointerClick -= ErrorOK;
     }
     //界面暂停
     public void OnPausing()
     {
+        if (itemHalo != null)
+        {
+            ObjectPoolManager.Instance.RecycleMyGameObject(itemHalo);
+        }
         gameObject.SetActive(false);
         GameArea.SetActive(false);
+        //各区域解绑
+        charaButton.GetComponent<UISceneWidget>().PointerClick -= CharacterEnter;
+        storeButton.GetComponent<UISceneWidget>().PointerClick -= StoreEnter;
+        superMarketButton.GetComponent<UISceneWidget>().PointerClick -= SuperMarketEnter;
+        drunkeryButton.GetComponent<UISceneWidget>().PointerClick -= DrunkeryEnter;
+        settingButton.GetComponent<UISceneWidget>().PointerClick -= SettingEnter;
+        BattleButton.GetComponent<UISceneWidget>().PointerClick -= BattleEnter;
+        WeaponBag.GetComponent<UISceneWidget>().PointerClick -= WeaponBagChange;
+        EquipmentBag.GetComponent<UISceneWidget>().PointerClick -= EquipmentBagChange;
+        ConsumableBag.GetComponent<UISceneWidget>().PointerClick -= ConsumableBagChange;
+        MaterialBag.GetComponent<UISceneWidget>().PointerClick -= MaterialBagChange;
+        saberStone.GetComponent<UISceneWidget>().PointerClick -= SaberFilter;
+        knightStone.GetComponent<UISceneWidget>().PointerClick -= KnightFilter;
+        berserkerStone.GetComponent<UISceneWidget>().PointerClick -= BerserkerFilter;
+        casterStone.GetComponent<UISceneWidget>().PointerClick -= CasterFilter;
+        hunterStone.GetComponent<UISceneWidget>().PointerClick -= HunterFilter;
+        errorConfirm.GetComponent<UISceneWidget>().PointerClick -= ErrorOK;
     }
     //界面唤醒
     public void OnResuming()
     {
         gameObject.SetActive(true);
+        //金币显示
+        GoldCoin.text = CurrencyManager.Instance.GoldCoinDisplay();
         //筛选重置
         for (int i = 0; i < filterList.Count; i++)
         {
@@ -252,6 +368,31 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
         }
         AllListCreate();
         GameArea.SetActive(true);
+        string[] tempText01 = new string[]
+            {
+                "HP:",
+                "000",
+                "\nAD:000 AP:000 DEF:00 RES:00",
+            };
+        nameAndClass.text = "[无]";
+        property.text = StringSplicingTool.StringSplicing(tempText01);
+        //各区域重绑
+        charaButton.GetComponent<UISceneWidget>().PointerClick += CharacterEnter;
+        storeButton.GetComponent<UISceneWidget>().PointerClick += StoreEnter;
+        superMarketButton.GetComponent<UISceneWidget>().PointerClick += SuperMarketEnter;
+        drunkeryButton.GetComponent<UISceneWidget>().PointerClick += DrunkeryEnter;
+        settingButton.GetComponent<UISceneWidget>().PointerClick += SettingEnter;
+        BattleButton.GetComponent<UISceneWidget>().PointerClick += BattleEnter;
+        WeaponBag.GetComponent<UISceneWidget>().PointerClick += WeaponBagChange;
+        EquipmentBag.GetComponent<UISceneWidget>().PointerClick += EquipmentBagChange;
+        ConsumableBag.GetComponent<UISceneWidget>().PointerClick += ConsumableBagChange;
+        MaterialBag.GetComponent<UISceneWidget>().PointerClick += MaterialBagChange;
+        saberStone.GetComponent<UISceneWidget>().PointerClick += SaberFilter;
+        knightStone.GetComponent<UISceneWidget>().PointerClick += KnightFilter;
+        berserkerStone.GetComponent<UISceneWidget>().PointerClick += BerserkerFilter;
+        casterStone.GetComponent<UISceneWidget>().PointerClick += CasterFilter;
+        hunterStone.GetComponent<UISceneWidget>().PointerClick += HunterFilter;
+        errorConfirm.GetComponent<UISceneWidget>().PointerClick += ErrorOK;
     }
 
 
@@ -268,7 +409,7 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
     }
     void StoreEnter(PointerEventData eventData)
     {
-
+        UIManager.Instance.PushUIStack(ConstData.UIStorePrefab);
     }
     void SuperMarketEnter(PointerEventData eventData)
     {
@@ -284,13 +425,25 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
     }
     void BattleEnter(PointerEventData eventData)
     {
-        UIManager.Instance.PushUIStack(ConstData.UIChoiceLevelPrefab);
+        UIBattle.ItemOneID = 2201;
+        UIBattle.ItemTwoID = 2203;
+        UIBattle.ItemThreeID = 2205;
+        UIBattle.ItemFourID = 2207;
+        if (SQLiteManager.Instance.team[ConstData.FlagMan] != null && SQLiteManager.Instance.team[ConstData.Saber] != null &&
+            SQLiteManager.Instance.team[ConstData.Knight] != null && SQLiteManager.Instance.team[ConstData.Berserker] != null &&
+            SQLiteManager.Instance.team[ConstData.Caster] != null && SQLiteManager.Instance.team[ConstData.Hunter] != null)
+        {
+            UIManager.Instance.PushUIStack(ConstData.UIChoiceLevelPrefab);
+        }
+        else
+        {
+            errorFrame.SetActive(true);
+        }
     }
 
     //控制区
     void ItemSelect(PointerEventData eventData)
     {
-        Debug.Log("a");
         itemG = eventData.pointerEnter.gameObject;
         itemID = Convert.ToInt32(itemG.name);
         //生成选中光圈
@@ -395,6 +548,10 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
                 break;
         }
     }
+    void ErrorOK(PointerEventData eventData)
+    {
+        errorFrame.SetActive(false);
+    }
 
     //控制区附属
     void WeaponBagChange(PointerEventData eventData)
@@ -482,6 +639,7 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
             LimitListCreate(ConstData.Hunter);
         }
     }
+    
 
 
 

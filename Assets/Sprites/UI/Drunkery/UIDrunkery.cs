@@ -188,12 +188,16 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
         //检测人物数量
         if (SQLiteManager.Instance.playerDataSource.Count >= 16)
         {
+            confirmButton.SetActive(false);
+            cancelButton.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
             confirmFrame.text = "<color=#ff0000>人物已满！</color>";
             return;
         }
         //检测金币数量
         if (_characterListData.GoldCoin > CurrencyManager.Instance.goldCoin)
         {
+            confirmButton.SetActive(false);
+            cancelButton.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
             confirmFrame.text = "<color=#ff0000>金币不足！</color>";
             return;
         }
@@ -253,6 +257,8 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
     /// <param name="data"></param>
     void CancelButtonClick(PointerEventData data)
     {
+        confirmButton.SetActive(true);
+        cancelButton.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(225, -245);
         confirmFrameObj.SetActive(false);
     }
 

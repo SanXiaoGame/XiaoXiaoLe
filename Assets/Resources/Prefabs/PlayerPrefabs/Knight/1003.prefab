@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 4314315844276798}
   - component: {fileID: 95808571495580948}
   - component: {fileID: 58581497861530992}
+  - component: {fileID: 50786854453371832}
   m_Layer: 10
   m_Name: 1003
   m_TagString: Player
@@ -783,6 +784,26 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1918218002931074}
   m_Mesh: {fileID: 43216921392210050, guid: df5ac385fee38944e883d5e488e31dcf, type: 2}
+--- !u!50 &50786854453371832
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1185612771296992}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &58581497861530992
 CircleCollider2D:
   m_ObjectHideFlags: 1

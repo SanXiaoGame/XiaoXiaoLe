@@ -33,6 +33,7 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
     GameObject confirmFrame_EQ;
     Text deleteCharacterMessage;
     Text selecteEquipmentMessage;
+    Text editMessage;
     //技能图标
     Image skillImage_A;
     Image skillImage_B;
@@ -45,6 +46,8 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
     //选中要替换的装备
     GameObject equipmentG;
     int equipmentID;
+    //当前筛选模式
+    int filterID;
 
     //角色条预制体
     GameObject characterBar;
@@ -79,6 +82,8 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
     GameObject G_FilterFrame;
     GameObject G_IntroductionFrame;
     GameObject G_ConfirmFrame;
+    GameObject G_TeamEditOverFrame;
+    GameObject G_EditOverOK;
 
     private void Awake()
     {
@@ -110,6 +115,7 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         //初始化设置//
         isTeam = false;
         isEquipt = false;
+        filterID = 0;
         gameObject.SetActive(true);
         selecteHero = null;
         selectPlayer = null;
@@ -134,6 +140,9 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         characterBar = ResourcesManager.Instance.FindUIPrefab(ConstData.CharacterBar);
         itemGrid = ResourcesManager.Instance.FindUIPrefab(ConstData.Grid);
         itemBar = ResourcesManager.Instance.FindUIPrefab(ConstData.GridEx);
+        G_TeamEditOverFrame = transform.Find(ConstData.TeamEditOverFrame).gameObject;
+        G_EditOverOK = G_TeamEditOverFrame.transform.GetChild(2).gameObject;
+        editMessage = G_TeamEditOverFrame.transform.GetChild(1).GetChild(0).GetComponent<Text>();
 
         #region UI组件获取（动态显示选中物品和英雄对象信息）
         heroName = transform.Find(ConstData.GameArea_MessageFrame_Name).GetComponent<Text>();
@@ -221,6 +230,9 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         GameObject skill01 = transform.Find(ConstData.ControllerExArea_SkillMode).transform.GetChild(0).gameObject;
         GameObject skill02 = transform.Find(ConstData.ControllerExArea_SkillMode).transform.GetChild(1).gameObject;
         GameObject skill03 = transform.Find(ConstData.ControllerExArea_SkillMode).transform.GetChild(2).gameObject;
+        skill01.transform.GetChild(0).GetComponent<Image>().sprite = ResourcesManager.Instance.FindSprite(ConstData.SkillNull);
+        skill02.transform.GetChild(0).GetComponent<Image>().sprite = ResourcesManager.Instance.FindSprite(ConstData.SkillNull);
+        skill03.transform.GetChild(0).GetComponent<Image>().sprite = ResourcesManager.Instance.FindSprite(ConstData.SkillNull);
         if (skill01.GetComponent<UISceneWidget>() == null && skill02.GetComponent<UISceneWidget>() == null &&
             skill03.GetComponent<UISceneWidget>() == null)
         {
@@ -309,6 +321,16 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         itemList_Drag = transform.Find(ConstData.ControllerArea_ItemListBG).gameObject;
         //信息初始化
         HeroDataDisplay();
+        //队伍编辑完成按钮绑定
+        if (G_EditOverOK.GetComponent<UISceneWidget>() == null)
+        {
+            UISceneWidget G_EditOverOKClick = UISceneWidget.Get(G_EditOverOK);
+            G_EditOverOKClick.PointerClick += EditOK;
+        }
+        else
+        {
+            G_EditOverOK.GetComponent<UISceneWidget>().PointerClick += EditOK;
+        }
     }
     //退出界面
     public void OnExiting()
@@ -332,6 +354,8 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         G_IntroductionFrame.gameObject.SetActive(false);
         //确认框隐藏
         G_ConfirmFrame.gameObject.SetActive(false);
+        //各区域解绑
+        G_EditOverOK.GetComponent<UISceneWidget>().PointerClick -= EditOK;
     }
     //暂停界面（无方法）
     public void OnPausing()
@@ -342,6 +366,8 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
     public void OnResuming()
     {
         gameObject.SetActive(true);
+        //金币显示
+        GoldCoin.text = CurrencyManager.Instance.GoldCoinDisplay();
     }
 
     //系统操作区切换显示的功能界面
@@ -618,7 +644,50 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
     //确认取消窗口
     void ConfirmOK(PointerEventData eventData)
     {
-        Debug.Log("你删除了一个角色");
+        //清空画面
+        GameAreaClear("Team", "");
+        int price = (int)(SQLiteManager.Instance.playerDataSource[deleteNum].GoldCoin * 0.1f);
+        DeleteHero(deleteNum);
+        //刷新列表
+        switch (filterID)
+        {
+            case 0:
+                CharacterBarCreate(ConstData.All);
+                break;
+            case 1:
+                CharacterBarCreate(ConstData.Saber);
+                break;
+            case 2:
+                CharacterBarCreate(ConstData.Knight);
+                break;
+            case 3:
+                CharacterBarCreate(ConstData.Berserker);
+                break;
+            case 4:
+                CharacterBarCreate(ConstData.Caster);
+                break;
+            case 5:
+                CharacterBarCreate(ConstData.Hunter);
+                break;
+        }
+        //刷新画面
+        if (selecteHero.player_Id == deleteNum)
+        {
+            selecteHero = null;
+            selectPlayer = null;
+            selectBarNum = 0;
+        }
+        if (selecteHero != null)
+        {
+            GameObject chara = ObjectPoolManager.Instance.InstantiateMyGameObject(selectPlayer);
+            chara.transform.position = step01.transform.GetChild(0).transform.position;
+            chara.transform.parent = step01.transform;
+            chara.name = (selecteHero.player_Id).ToString();
+            chara.GetComponent<Animator>().SetBool("isWait", true);
+        }
+        HeroDataDisplay();
+        //金币增加
+        CurrencyManager.Instance.GoldCoinIncrease(price);
         confirmFrame.gameObject.SetActive(false);
         deleteNum = 0;
     }
@@ -686,7 +755,18 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
             HeroData hut = new HeroData();
             hut.playerData = tempTeamDic[ConstData.Hunter];
             SQLiteManager.Instance.team[ConstData.Hunter] = hut;
+            G_TeamEditOverFrame.SetActive(true);
+            editMessage.text = "队伍编辑完成！";
         }
+        else
+        {
+            G_TeamEditOverFrame.SetActive(true);
+            editMessage.text = "队伍人数不足，请继续添加队伍角色";
+        }
+    }
+    void EditOK(PointerEventData eventData)
+    {
+        G_TeamEditOverFrame.SetActive(false);
     }
     //点击装备槽里的武器和防具查看详情
     void WeaponHoleMessage(PointerEventData eventData)
@@ -752,7 +832,7 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
     //装备选中窗口
     void WeaponSelectFrame(PointerEventData eventData)
     {
-        if (selecteHero != null)
+        if (selecteHero != null && selecteHero.player_Class != ConstData.FlagMan)
         {
             equipmentG = eventData.pointerEnter;
             equipmentID = eventData.pointerEnter.transform.GetComponent<BagItem>().mydata_equipt.equipment_Id;
@@ -908,6 +988,9 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                 selecteHero.Weapon = equipmentID;
                 //新武器字典变更
                 SQLiteManager.Instance.playerDataSource[selecteHero.player_Id].Weapon = equipmentID;
+                //新武器数据库表变更
+                SQLiteManager.Instance.UpdataDataFromTable
+                    (ConstData.Player, ConstData.player_Weapon, equipmentID, ConstData.player_ID, selecteHero.player_Id);
                 if (SQLiteManager.Instance.team[selecteHero.player_Class] != null)
                 {
                     if (SQLiteManager.Instance.team[selecteHero.player_Class].playerData.player_Id == selecteHero.player_Id)
@@ -917,32 +1000,31 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                 }
                 //背包字典变更
                 SQLiteManager.Instance.bagDataSource[equipmentG.GetComponent<BagItem>().myGrid].Bag_Weapon = outWeapon;
+                //背包数据库表变更
+                SQLiteManager.Instance.UpdataDataFromTable
+                    (ConstData.Bag, ConstData.Bag_Weapon, outWeapon, ConstData.Bag_Grid, equipmentG.GetComponent<BagItem>().myGrid);
                 //装备格刷新
                 ItemBarCreate(ConstData.All);
-                foreach (GameObject filt in filterList)
+                switch (filterID)
                 {
-                    if (filt.GetComponent<Toggle>().isOn == true)
-                    {
-                        switch (filt.name)
-                        {
-                            case ConstData.StoneSaberTag:
-                                ItemBarCreate(ConstData.Saber);
-                                break;
-                            case ConstData.StoneKnightTag:
-                                ItemBarCreate(ConstData.Knight);
-                                break;
-                            case ConstData.StoneBerserkerTag:
-                                ItemBarCreate(ConstData.Berserker);
-                                break;
-                            case ConstData.StoneCasterTag:
-                                ItemBarCreate(ConstData.Caster);
-                                break;
-                            case ConstData.StoneHunterTag:
-                                ItemBarCreate(ConstData.Hunter);
-                                break;
-                        }
-                        return;
-                    }
+                    case 0:
+                        ItemBarCreate(ConstData.All);
+                        break;
+                    case 1:
+                        ItemBarCreate(ConstData.Saber);
+                        break;
+                    case 2:
+                        ItemBarCreate(ConstData.Knight);
+                        break;
+                    case 3:
+                        ItemBarCreate(ConstData.Berserker);
+                        break;
+                    case 4:
+                        ItemBarCreate(ConstData.Caster);
+                        break;
+                    case 5:
+                        ItemBarCreate(ConstData.Hunter);
+                        break;
                 }
                 //显示武器刷新
                 UpdataTheEquipment();
@@ -954,6 +1036,9 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                 selecteHero.Equipment = equipmentID;
                 //新防具字典变更
                 SQLiteManager.Instance.playerDataSource[selecteHero.player_Id].Equipment = equipmentID;
+                //新防具数据库表变更
+                SQLiteManager.Instance.UpdataDataFromTable
+                    (ConstData.Player, ConstData.player_Equipment, equipmentID, ConstData.player_ID, selecteHero.player_Id);
                 if (SQLiteManager.Instance.team[selecteHero.player_Class] != null)
                 {
                     if (SQLiteManager.Instance.team[selecteHero.player_Class].playerData.player_Id == selecteHero.player_Id)
@@ -963,32 +1048,31 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                 }
                 //背包字典变更
                 SQLiteManager.Instance.bagDataSource[equipmentG.GetComponent<BagItem>().myGrid].Bag_Equipment = outEquipt;
+                //背包数据库表变更
+                SQLiteManager.Instance.UpdataDataFromTable
+                    (ConstData.Bag, ConstData.Bag_Equipment, outEquipt, ConstData.Bag_Grid, equipmentG.GetComponent<BagItem>().myGrid);
                 //装备格刷新
                 ItemBarCreate(ConstData.All);
-                foreach (GameObject filt in filterList)
+                switch (filterID)
                 {
-                    if (filt.GetComponent<Toggle>().isOn == true)
-                    {
-                        switch (filt.name)
-                        {
-                            case ConstData.StoneSaberTag:
-                                ItemBarCreate(ConstData.Saber);
-                                break;
-                            case ConstData.StoneKnightTag:
-                                ItemBarCreate(ConstData.Knight);
-                                break;
-                            case ConstData.StoneBerserkerTag:
-                                ItemBarCreate(ConstData.Berserker);
-                                break;
-                            case ConstData.StoneCasterTag:
-                                ItemBarCreate(ConstData.Caster);
-                                break;
-                            case ConstData.StoneHunterTag:
-                                ItemBarCreate(ConstData.Hunter);
-                                break;
-                        }
-                        return;
-                    }
+                    case 0:
+                        ItemBarCreate(ConstData.All);
+                        break;
+                    case 1:
+                        ItemBarCreate(ConstData.Saber);
+                        break;
+                    case 2:
+                        ItemBarCreate(ConstData.Knight);
+                        break;
+                    case 3:
+                        ItemBarCreate(ConstData.Berserker);
+                        break;
+                    case 4:
+                        ItemBarCreate(ConstData.Caster);
+                        break;
+                    case 5:
+                        ItemBarCreate(ConstData.Hunter);
+                        break;
                 }
                 //显示武器刷新
                 UpdataTheEquipment();
@@ -1066,7 +1150,7 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         textArray[1] = SQLiteManager.Instance.playerDataSource[deleteNum].player_Name;
         textArray[2] = "”吗？ \n";
         textArray[3] = "解雇能获得金币：";
-        textArray[4] = (SQLiteManager.Instance.playerDataSource[deleteNum].GoldCoin * 0.1f).ToString();
+        textArray[4] = StringSplicingTool.StringSplicing(((int)(SQLiteManager.Instance.playerDataSource[deleteNum].GoldCoin * 0.1f)).ToString());
         deleteCharacterMessage.text = StringSplicingTool.StringSplicing(textArray);
     }
     //筛选区选中
@@ -1076,11 +1160,13 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         {
             CharacterBarCreate(ConstData.All);
             ItemBarCreate(ConstData.All);
+            filterID = 0;
         }
         else
         {
             CharacterBarCreate(ConstData.Saber);
             ItemBarCreate(ConstData.Saber);
+            filterID = 1;
         }
     }
     void KnightFilter(PointerEventData eventData)
@@ -1089,11 +1175,13 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         {
             CharacterBarCreate(ConstData.All);
             ItemBarCreate(ConstData.All);
+            filterID = 0;
         }
         else
         {
             CharacterBarCreate(ConstData.Knight);
             ItemBarCreate(ConstData.Knight);
+            filterID = 2;
         }
     }
     void BerserkerFilter(PointerEventData eventData)
@@ -1102,11 +1190,13 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         {
             CharacterBarCreate(ConstData.All);
             ItemBarCreate(ConstData.All);
+            filterID = 0;
         }
         else
         {
             CharacterBarCreate(ConstData.Berserker);
             ItemBarCreate(ConstData.Berserker);
+            filterID = 3;
         }
     }
     void CasterFilter(PointerEventData eventData)
@@ -1115,11 +1205,13 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         {
             CharacterBarCreate(ConstData.All);
             ItemBarCreate(ConstData.All);
+            filterID = 0;
         }
         else
         {
             CharacterBarCreate(ConstData.Caster);
             ItemBarCreate(ConstData.Caster);
+            filterID = 4;
         }
     }
     void HunterFilter(PointerEventData eventData)
@@ -1128,11 +1220,13 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         {
             CharacterBarCreate(ConstData.All);
             ItemBarCreate(ConstData.All);
+            filterID = 0;
         }
         else
         {
             CharacterBarCreate(ConstData.Hunter);
             ItemBarCreate(ConstData.Hunter);
+            filterID = 5;
         }
     }
 
@@ -2788,7 +2882,7 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
     {
         //清除现有展示信息
         EquipmentClear();
-        if (selecteHero != null)
+        if (selecteHero != null && selecteHero.player_Class != ConstData.FlagMan)
         {
             //更新武器展示信息
             GameObject tempWP = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindUIPrefab(ConstData.ItemIcon));
@@ -2804,6 +2898,19 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
             tempEQ.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
             tempEQ.GetComponent<Image>().sprite = ResourcesManager.Instance.FindSprite((selecteHero.Equipment).ToString());
             tempEQ.GetComponent<Image>().raycastTarget = false;
+        }
+        else
+        {
+            if (transform.Find(ConstData.ControllerExArea_EquipmentMode).GetChild(0).childCount > 1)
+            {
+                ObjectPoolManager.Instance.RecycleMyGameObject
+                    (transform.Find(ConstData.ControllerExArea_EquipmentMode).GetChild(0).GetChild(1).gameObject);
+            }
+            if (transform.Find(ConstData.ControllerExArea_EquipmentMode).GetChild(1).childCount > 1)
+            {
+                ObjectPoolManager.Instance.RecycleMyGameObject
+                    (transform.Find(ConstData.ControllerExArea_EquipmentMode).GetChild(1).GetChild(1).gameObject);
+            }
         }
         HeroDataDisplay();
     }
@@ -2821,21 +2928,32 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
             EXP.minValue = SQLiteManager.Instance.lVDataSource[selecteHero.Level - 1].level_MaxEXP;
             EXP.maxValue = SQLiteManager.Instance.lVDataSource[selecteHero.Level].level_MaxEXP;
             EXP.value = selecteHero.EXP;
-            HP.text = (selecteHero.HP +
+            if (selecteHero.player_Class != ConstData.FlagMan)
+            {
+                HP.text = (selecteHero.HP +
                 SQLiteManager.Instance.equipmentDataSource[selecteHero.Weapon].equipment_HP +
                 SQLiteManager.Instance.equipmentDataSource[selecteHero.Equipment].equipment_HP).ToString();
-            AD.text = (selecteHero.AD +
-                SQLiteManager.Instance.equipmentDataSource[selecteHero.Weapon].equipment_AD +
-                SQLiteManager.Instance.equipmentDataSource[selecteHero.Equipment].equipment_AD).ToString();
-            AP.text = (selecteHero.AP +
-                SQLiteManager.Instance.equipmentDataSource[selecteHero.Weapon].equipment_AP +
-                SQLiteManager.Instance.equipmentDataSource[selecteHero.Equipment].equipment_AP).ToString();
-            DEF.text = (selecteHero.DEF +
-                SQLiteManager.Instance.equipmentDataSource[selecteHero.Weapon].equipment_DEF +
-                SQLiteManager.Instance.equipmentDataSource[selecteHero.Equipment].equipment_DEF).ToString();
-            RES.text = (selecteHero.RES +
-                SQLiteManager.Instance.equipmentDataSource[selecteHero.Weapon].equipment_RES +
-                SQLiteManager.Instance.equipmentDataSource[selecteHero.Equipment].equipment_RES).ToString();
+                AD.text = (selecteHero.AD +
+                    SQLiteManager.Instance.equipmentDataSource[selecteHero.Weapon].equipment_AD +
+                    SQLiteManager.Instance.equipmentDataSource[selecteHero.Equipment].equipment_AD).ToString();
+                AP.text = (selecteHero.AP +
+                    SQLiteManager.Instance.equipmentDataSource[selecteHero.Weapon].equipment_AP +
+                    SQLiteManager.Instance.equipmentDataSource[selecteHero.Equipment].equipment_AP).ToString();
+                DEF.text = (selecteHero.DEF +
+                    SQLiteManager.Instance.equipmentDataSource[selecteHero.Weapon].equipment_DEF +
+                    SQLiteManager.Instance.equipmentDataSource[selecteHero.Equipment].equipment_DEF).ToString();
+                RES.text = (selecteHero.RES +
+                    SQLiteManager.Instance.equipmentDataSource[selecteHero.Weapon].equipment_RES +
+                    SQLiteManager.Instance.equipmentDataSource[selecteHero.Equipment].equipment_RES).ToString();
+            }
+            else
+            {
+                HP.text = selecteHero.HP.ToString();
+                AD.text = selecteHero.AD.ToString();
+                AP.text = selecteHero.AP.ToString();
+                DEF.text = selecteHero.DEF.ToString();
+                RES.text = selecteHero.RES.ToString();
+            }
         }
         else
         {
@@ -2867,4 +2985,21 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         itemList_Drag.GetComponent<ScrollRect>().OnEndDrag(data);
     }
     #endregion
+
+    /// <summary>
+    /// 删除角色
+    /// </summary>
+    /// <param name="heroID"></param>
+    void DeleteHero(int heroID)
+    {
+        //先删除数据库表里的该角色
+        SQLiteManager.Instance.DeleteTableData(ConstData.Player, ConstData.player_ID, heroID);
+        //字典和数据库表自适应排列
+        for (int i = heroID; i < (1300 + SQLiteManager.Instance.playerDataSource.Count - 1); i++)
+        {
+            SQLiteManager.Instance.playerDataSource[i] = SQLiteManager.Instance.playerDataSource[i + 1];
+            SQLiteManager.Instance.UpdataDataFromTable(ConstData.Player, ConstData.player_ID, i, ConstData.player_ID, (i + 1));
+        }
+        SQLiteManager.Instance.playerDataSource.Remove((1300 + SQLiteManager.Instance.playerDataSource.Count - 1));
+    }
 }
