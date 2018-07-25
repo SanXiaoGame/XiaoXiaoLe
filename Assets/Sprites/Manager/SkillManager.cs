@@ -7,31 +7,15 @@ using UnityEngine;
 public class SkillManager : ManagerBase<SkillManager>
 {
     //各英雄对象
-    GameObject saber;
-    GameObject knight;
-    GameObject berserker;
-    GameObject caster;
-    GameObject hunter;
+    internal GameObject saber;
+    internal GameObject knight;
+    internal GameObject berserker;
+    internal GameObject caster;
+    internal GameObject hunter;
 
     protected override void Awake()
     {
         base.Awake();
-        //通过team字典里的预制体字段获取各职业对应的场内对象
-        saber = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Saber].playerData.PrefabsID).gameObject;
-        knight = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Knight].playerData.PrefabsID).gameObject;
-        berserker = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Berserker].playerData.PrefabsID).gameObject;
-        caster = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Caster].playerData.PrefabsID).gameObject;
-        hunter = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Hunter].playerData.PrefabsID).gameObject;
-    }
-
-    private void OnEnable()
-    {
-        //通过team字典里的预制体字段获取各职业对应的场内对象
-        saber = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Saber].playerData.PrefabsID).gameObject;
-        knight = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Knight].playerData.PrefabsID).gameObject;
-        berserker = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Berserker].playerData.PrefabsID).gameObject;
-        caster = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Caster].playerData.PrefabsID).gameObject;
-        hunter = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Hunter].playerData.PrefabsID).gameObject;
     }
 
     /// <summary>

@@ -216,6 +216,7 @@ public class EnemyStates : MonoBehaviour
                 myanim.SetTrigger("Dead");
                 triggerEnemy.enabled = false;
                 StatesClearEnemy();
+                MonsterPointManagerStage01.enemyList.Remove(gameObject);
                 vp_Timer.In(1.0f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(gameObject); }));
                 return;
             }

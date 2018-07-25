@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 4244696735765054}
   - component: {fileID: 95913653368973878}
   - component: {fileID: 58056860330082012}
+  - component: {fileID: 50264584434486198}
   m_Layer: 10
   m_Name: 1010
   m_TagString: Player
@@ -804,6 +805,26 @@ Transform:
   m_Father: {fileID: 4412590312214786}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 21.618002}
+--- !u!50 &50264584434486198
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1529311643798250}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &58056860330082012
 CircleCollider2D:
   m_ObjectHideFlags: 1
