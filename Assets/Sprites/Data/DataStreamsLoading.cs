@@ -67,13 +67,15 @@ public class DataStreamsLoading : MonoBehaviour
         if (!System.IO.File.Exists(copyToPath))
         {
             //创建文件流
-            System.IO.FileStream fs = new System.IO.FileStream(copyToPath, System.IO.FileMode.Create);
-            //写入文件流
-            fs.Write(copyTargetBtyes, 0, copyTargetBtyes.Length);
-            //清除
-            fs.Flush();
-            //关闭
-            fs.Close();
+            using (System.IO.FileStream fs = new System.IO.FileStream(copyToPath, System.IO.FileMode.Create))
+            {
+                //写入文件流
+                fs.Write(copyTargetBtyes, 0, copyTargetBtyes.Length);
+                //清除
+                fs.Flush();
+                //关闭
+                fs.Close();
+            }
         }
     }
 }
