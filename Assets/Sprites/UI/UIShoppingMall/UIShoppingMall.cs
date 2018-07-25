@@ -322,13 +322,13 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
             switch (_bagItem.mydata_equipt.equipmentClass)
             {
                 case ConstData.Berserker:
-                    temp = "战士";
+                    temp = "狂战士";
                     break;
                 case ConstData.Caster:
-                    temp = "法师";
+                    temp = "魔法师";
                     break;
                 case ConstData.Hunter:
-                    temp = "弓箭手";
+                    temp = "猎人";
                     break;
                 case ConstData.Knight:
                     temp = "骑士";
@@ -338,7 +338,7 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                     break;
             }
             _price = _bagItem.mydata_equipt.equipmentPrice;
-            _itemContent = new string[] { "[", _bagItem.mydata_equipt.equipmentNmae, "] ", "装备职业：", temp, " 价格：", _price.ToString(), "\n", "HP：", _bagItem.mydata_equipt.equipment_HP.ToString(), "\nAD：", _bagItem.mydata_equipt.equipment_AD.ToString(), "  AP：", _bagItem.mydata_equipt.equipment_AP.ToString(), _bagItem.mydata_equipt.equipment_AD.ToString(), "  DEF：", _bagItem.mydata_equipt.equipment_DEF.ToString(), "  RES：", _bagItem.mydata_equipt.equipment_RES.ToString() };
+            _itemContent = new string[] { "[", _bagItem.mydata_equipt.equipmentNmae, "] ", "装备职业：", temp, " 价格：", _price.ToString(), "\n", "HP：", _bagItem.mydata_equipt.equipment_HP.ToString(), "\nAD：", _bagItem.mydata_equipt.equipment_AD.ToString(), "  AP：", _bagItem.mydata_equipt.equipment_AP.ToString(), "  DEF：", _bagItem.mydata_equipt.equipment_DEF.ToString(), "  RES：", _bagItem.mydata_equipt.equipment_RES.ToString() };
         }
         _textContent.text = StringSplicingTool.StringSplicing(_itemContent);
         GenerateAperture(_bagItem.transform);
@@ -413,6 +413,8 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
     {
         if (CurrencyManager.Instance.diamond < _price)
         {
+            _confirm.SetActive(false);
+            _cancel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
             _contentText.text = "所需钻石不足";
             return;
         }
@@ -432,10 +434,14 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                     itemtType = ConstData.Bag_Weapon;
                     itemID = _bagItem.mydata_equipt.equipment_Id;
                     SQLiteManager.Instance.bagDataSource[key].Bag_Weapon = itemID;
+                    _confirm.SetActive(true);
+                    _cancel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(225, -245);
                     break;
                 }
                 else if (SQLiteManager.Instance.bagDataSource[key].Bag_Grid == _grids.Length)
                 {
+                    _confirm.SetActive(false);
+                    _cancel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
                     isFullLattice = true;
                     _contentText.text = "背包满了";
                 }
@@ -448,10 +454,14 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                     itemtType = ConstData.Bag_Equipment;
                     itemID = _bagItem.mydata_equipt.equipment_Id;
                     SQLiteManager.Instance.bagDataSource[key].Bag_Equipment = itemID;
+                    _confirm.SetActive(true);
+                    _cancel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(225, -245);
                     break;
                 }
                 else if (SQLiteManager.Instance.bagDataSource[key].Bag_Grid == _grids.Length)
                 {
+                    _confirm.SetActive(false);
+                    _cancel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
                     isFullLattice = true;
                     _contentText.text = "背包满了";
                 }
@@ -464,10 +474,14 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                     itemtType = ConstData.Bag_Consumable;
                     itemID = _bagItem.mydata_item.item_Id;
                     SQLiteManager.Instance.bagDataSource[key].Bag_Consumable = itemID;
+                    _confirm.SetActive(true);
+                    _cancel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(225, -245);
                     break;
                 }
                 else if (SQLiteManager.Instance.bagDataSource[key].Bag_Grid == _grids.Length)
                 {
+                    _confirm.SetActive(false);
+                    _cancel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
                     isFullLattice = true;
                     _contentText.text = "背包满了";
                 }
@@ -480,10 +494,14 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                     itemtType = ConstData.Bag_Material;
                     itemID = _bagItem.mydata_item.item_Id;
                     SQLiteManager.Instance.bagDataSource[key].Bag_Material = itemID;
+                    _confirm.SetActive(true);
+                    _cancel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(225, -245);
                     break;
                 }
                 else if (SQLiteManager.Instance.bagDataSource[key].Bag_Grid == _grids.Length)
                 {
+                    _confirm.SetActive(false);
+                    _cancel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
                     isFullLattice = true;
                     _contentText.text = "背包满了";
                 }
@@ -504,6 +522,8 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
     /// </summary>
     void CancelFunc(PointerEventData data)
     {
+        _confirm.SetActive(true);
+        _cancel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(225, -245);
         _confirmFrame.SetActive(false);
     }
 

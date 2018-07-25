@@ -270,6 +270,8 @@ public struct ConstData
     /// 确认窗口
     /// </summary>
     public const string ConfirmFrame = "ConfirmFrame";
+    public const string ErrorFrame = "ErrorFrame";
+    public const string TeamEditOverFrame = "TeamEditOverFrame";
     public const string ConfirmFrame_ContentText = "ConfirmFrame/ContentBG/Content";
     public const string ConfirmFrame_ConfirmButton = "ConfirmFrame/ConfirmButton";
     public const string ConfirmFrame_CancelButton = "ConfirmFrame/CancelButton";
