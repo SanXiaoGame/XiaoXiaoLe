@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
@@ -25,7 +26,7 @@ public class UIManager : ManagerBase<UIManager>
         if (Input.GetKeyDown(KeyCode.Escape) && !isClickEscape)
         {
             //显示退出界面
-            PushUIStack(ConstData.ExitPrefab);
+            PushUIStack(ConstData.UIExitGame);
         }
     }
 
@@ -65,6 +66,11 @@ public class UIManager : ManagerBase<UIManager>
         obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
         //UI的缩放
         obj.GetComponent<RectTransform>().localScale = Vector3.one;
+        //添加对应的UI脚本
+        if (obj.GetComponent(Type.GetType(uiname)) == null)
+        {
+            obj.AddComponent(Type.GetType(uiname));
+        }
         //取得界面脚本的基础接口
         IUIBase iuibase = obj.GetComponent<IUIBase>();
         //新生成的UI加入CurrentUI的字典

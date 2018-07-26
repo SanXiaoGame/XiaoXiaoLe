@@ -33,6 +33,12 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
     /// </summary>   
     internal void LoadDataFunc()
     {
+        //设置声音存档默认值
+        if (!PlayerPrefs.HasKey("BGMMute")) { PlayerPrefs.SetInt("BGMMute", 1); }
+        if (!PlayerPrefs.HasKey("effectMute")) { PlayerPrefs.SetInt("effectMute", 1); }
+        if (!PlayerPrefs.HasKey("bgMusicVolume")) { PlayerPrefs.SetFloat("bgMusicVolume", 1); }
+        if (!PlayerPrefs.HasKey("effectVolume")) { PlayerPrefs.SetFloat("effectVolume", 1); }
+
         //启动流路径(将需要操作的文件从流路径拷贝到沙盒中)
         StreamsLoading = gameObject.AddComponent<DataStreamsLoading>();
 

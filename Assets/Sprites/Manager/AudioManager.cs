@@ -15,22 +15,21 @@ public class AudioManager : ManagerBase<AudioManager>
     AudioSource tempAudio;
 
     //是否静音
-    bool bgMusicMute = false;
-    bool effectMusicMute = false;
+    internal bool bgMusicMute;
+    internal bool effectMusicMute;
     //临时存储静音值
     int intMute;
     //临时存储歌
     AudioClip clip;
 
     //音乐音量和音效音量 默认1f
-    float bgMusicVolume = 1f;
-    float effectVolume = 1f;
+    internal float bgMusicVolume;
+    internal float effectVolume;
 
     //初始化播放器管理类
     protected override void Awake()
     {
         base.Awake();
-        PlayerPrefs.SetFloat("effectVolum", 1);
         //添加背景播放器
         bgMusic = gameObject.AddComponent<AudioSource>();
         //获取是否静音
@@ -54,23 +53,6 @@ public class AudioManager : ManagerBase<AudioManager>
         bgMusic.loop = true;
         bgMusic.Play();
     }
-
-    /// <summary>
-    /// 返回指定的音效播放器(暂存)
-    /// </summary>
-    /// <param 播放器所在游戏物体名="audioNumber"></param>
-    /// <returns></returns>
-    /*public AudioSource GameAudio(SoundEffect audioType)
-    {
-        foreach (SoundEffect key in effectMusic.Keys)
-        {
-            if (key == audioType)
-            {
-                return effectMusic[audioType];
-            }
-        }
-        return null;
-    }*/
 
     //背景播放器静音开关
     public void BGMute(bool isMute)
