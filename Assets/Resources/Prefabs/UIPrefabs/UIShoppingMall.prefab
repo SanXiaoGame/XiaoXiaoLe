@@ -238,9 +238,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224614009581217156}
-  - component: {fileID: 114594148581986438}
   m_Layer: 5
-  m_Name: UIShoppingMallPrefab
+  m_Name: UIShoppingMall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1861,17 +1860,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114594148581986438
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1341834008174982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43e2da3c899ca4040866dfc89ffec60c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114621298792202862
 MonoBehaviour:
   m_ObjectHideFlags: 1

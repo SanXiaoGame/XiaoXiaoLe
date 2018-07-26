@@ -43,13 +43,13 @@ public struct ConstData
 
     #region 所有UI预制体名
     /// <summary>
-    /// 加载界面预制体
-    /// </summary>
-    public const string LoadingPrefab = "LoadingBG";
-    /// <summary>
     /// 退出游戏界面预制体
     /// </summary>
-    public const string ExitPrefab = "ExitPrefab";
+    public const string UIExitGame = "UIExitGame";
+    /// <summary>
+    /// 设置界面预制体
+    /// </summary>
+    public const string UISetting = "UISetting";
     /// <summary>
     /// 人物管理界面预制体
     /// </summary>
@@ -61,7 +61,7 @@ public struct ConstData
     /// <summary>
     /// 主城界面预制体
     /// </summary>
-    public const string UIMainCityPrefab = "UIMainCityPrefab";
+    public const string UIMainCityPrefab = "UIMainCityManagerController";
     /// <summary>
     /// 主城界面GameArea预制体
     /// </summary>
@@ -69,11 +69,11 @@ public struct ConstData
     /// <summary>
     /// 酒馆界面预制体
     /// </summary>
-    public const string UIDrunkeryPrefab = "UIDrunkeryPrefab";
+    public const string UIDrunkery = "UIDrunkery";
     /// <summary>
     /// 商城界面预制体
     /// </summary>
-    public const string UIShoppingMallPrefab = "UIShoppingMallPrefab";
+    public const string UIShoppingMall = "UIShoppingMall";
     /// <summary>
     /// 选择关卡界面预制体
     /// </summary>
@@ -186,6 +186,13 @@ public struct ConstData
     public const string ControllerArea_StoreListContent_CO = "ControllerArea/StoreListBG_CO/ListViewport/ListContent";
     public const string ControllerArea_StoreListContent_MT = "ControllerArea/StoreListBG_MT/ListViewport/ListContent";
     public const string Store_BuyConfirm = "GameArea/BuyConfirm";
+    //------------------  设置  ---------------------
+    public const string MusicButton = "SettingBG/MusicButton";
+    public const string SoundEffectButton = "SettingBG/SoundEffectButton";
+    public const string MusicSlider = "SettingBG/MusicSlider";
+    public const string SoundEffectSlider = "SettingBG/SoundEffectSlider";
+    public const string SettingReturnGame = "SettingBG/ReturnGame";
+    public const string SettingQuitGame = "SettingBG/QuitGame";
     /// <summary>
     /// 控制区附属
     /// </summary>

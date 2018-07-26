@@ -39,9 +39,8 @@ GameObject:
   - component: {fileID: 224991763425668146}
   - component: {fileID: 222314711740117502}
   - component: {fileID: 114073320879648562}
-  - component: {fileID: 114925047700150452}
   m_Layer: 5
-  m_Name: ExitPrefab
+  m_Name: UIExitGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -422,17 +421,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u9000\u51FA\u6E38\u620F"
---- !u!114 &114925047700150452
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1360548999988482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51a6971df32379b48b07c405042dfff9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &222097632378279032
 CanvasRenderer:
   m_ObjectHideFlags: 1
