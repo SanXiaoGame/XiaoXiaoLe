@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -104,6 +105,35 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
     UISceneWidget bindingRechargeCloseButton;
     UISceneWidget bindingRechargeConfirmButton;
 
+    #region 契约套餐系列相关
+    GameObject mask;
+
+    int projectID;
+    int CardCount;
+    GameObject controllerEX;
+    GameObject superMarketParent;
+    GameObject listParent;
+    GameObject project01;
+    GameObject project02;
+    GameObject project03;
+    GameObject project04;
+    GameObject project05;
+    Text projectMessage;
+    GameObject ProjectConfirmFrame;
+    GameObject ConfirmOK;
+    GameObject CancelNO;
+
+    GameObject getCharaFrame;
+    GameObject propertyUpFrame;
+    GameObject getFrame;
+    GameObject upFrame;
+    GameObject StateUp;
+    Text StateUpText;
+
+    GameObject getItemFrame;
+    GameObject getItemFrameOK;
+    #endregion
+
     /// <summary>
     /// 赋值
     /// </summary>
@@ -186,6 +216,46 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
 
         //显示钻石数
         _diamonds.text = CurrencyManager.Instance.DiamondDisplay();
+
+        //契约套餐相关
+        mask = transform.Find("Mask").gameObject;
+        UISceneWidget maskClick = UISceneWidget.Get(mask);
+        maskClick.PointerClick += CloseMask;
+        CardCount = 0;
+        controllerEX = transform.Find("ControllerExArea").gameObject;
+        superMarketParent = transform.Find(ConstData.ShoppingMall_ItemListBG).gameObject;
+        listParent = transform.Find(ConstData.ShoppingMall_ContractSetListBG).gameObject;
+        project01 = transform.Find(ConstData.ShoppingMall_CharaVIP).gameObject;
+        project02 = transform.Find(ConstData.ShoppingMall_CharaFive).gameObject;
+        project03 = transform.Find(ConstData.ShoppingMall_CharaLevelUP).gameObject;
+        project04 = transform.Find(ConstData.ShoppingMall_CharaToBeStronge).gameObject;
+        project05 = transform.Find(ConstData.ShoppingMall_Fruit).gameObject;
+
+        ProjectConfirmFrame = transform.Find(ConstData.ContractSetConfirmFrame).gameObject;
+        projectMessage = ProjectConfirmFrame.transform.GetChild(1).GetChild(0).GetComponent<Text>();
+        ConfirmOK = ProjectConfirmFrame.transform.GetChild(2).gameObject;
+        CancelNO = ProjectConfirmFrame.transform.GetChild(3).gameObject;
+        
+        UISceneWidget P1Click = UISceneWidget.Get(project01);
+        P1Click.PointerClick += SetClick;
+        UISceneWidget P2Click = UISceneWidget.Get(project02);
+        P2Click.PointerClick += SetClick;
+        UISceneWidget P3Click = UISceneWidget.Get(project03);
+        P3Click.PointerClick += SetClick;
+        UISceneWidget P4Click = UISceneWidget.Get(project04);
+        P4Click.PointerClick += SetClick;
+        UISceneWidget P5Click = UISceneWidget.Get(project05);
+        P5Click.PointerClick += SetClick;
+
+        getCharaFrame = ResourcesManager.Instance.FindUIPrefab(ConstData.getCharaFrame);
+        propertyUpFrame = ResourcesManager.Instance.FindUIPrefab(ConstData.propertyUpFrame);
+        StateUp = transform.Find(ConstData.StateUpText).gameObject;
+        StateUpText = StateUp.GetComponent<Text>();
+
+        getItemFrame = transform.Find(ConstData.GetItemFrame).gameObject;
+        getItemFrameOK = getItemFrame.transform.GetChild(2).gameObject;
+        UISceneWidget getItemFrameOKClick = UISceneWidget.Get(getItemFrameOK);
+        getItemFrameOKClick.PointerClick += CloseGetFrame;
     }
 
     //进入
@@ -194,6 +264,11 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
         gameObject.SetActive(true);
         ItemInstantiationFunc(_itemWeapon, ConstData.EquipmentType);
         _textContent.text = "请选择物品";
+        //分类重置
+        _weapon.GetComponent<Toggle>().isOn = true;
+        _equipment.GetComponent<Toggle>().isOn = false;
+        _consumable.GetComponent<Toggle>().isOn = false;
+        _material.GetComponent<Toggle>().isOn = false;
     }
     //退出
     public void OnExiting()
@@ -211,6 +286,454 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
     {
         gameObject.SetActive(true);
     }
+
+    #region 契约套餐系列
+    void CloseMask(PointerEventData data)
+    {
+        mask.SetActive(false);
+        if (getFrame != null)
+        {
+            if (getFrame.transform.childCount == 2)
+            {
+                getFrame.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame.transform.GetChild(1).gameObject);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame);
+                Debug.Log(getFrame.transform.GetChild(1).name);
+            }
+            else if (getFrame.transform.childCount == 3)
+            {
+                getFrame.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame.transform.GetChild(1).gameObject);
+                getFrame.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame.transform.GetChild(1).gameObject);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame);
+            }
+            else if (getFrame.transform.childCount == 4)
+            {
+                getFrame.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame.transform.GetChild(1).gameObject);
+                getFrame.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame.transform.GetChild(1).gameObject);
+                getFrame.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame.transform.GetChild(1).gameObject);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame);
+            }
+            else if (getFrame.transform.childCount == 5)
+            {
+                getFrame.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame.transform.GetChild(1).gameObject);
+                getFrame.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame.transform.GetChild(1).gameObject);
+                getFrame.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame.transform.GetChild(1).gameObject);
+                getFrame.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame.transform.GetChild(1).gameObject);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame);
+            }
+            else if (getFrame.transform.childCount == 6)
+            {
+                getFrame.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame.transform.GetChild(1).gameObject);
+                getFrame.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame.transform.GetChild(1).gameObject);
+                getFrame.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame.transform.GetChild(1).gameObject);
+                getFrame.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame.transform.GetChild(1).gameObject);
+                getFrame.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame.transform.GetChild(1).gameObject);
+                ObjectPoolManager.Instance.RecycleMyGameObject(getFrame);
+            }
+        }
+        if (upFrame != null)
+        {
+            if (upFrame.transform.childCount > 1)
+            {
+                upFrame.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
+                ObjectPoolManager.Instance.RecycleMyGameObject(upFrame.transform.GetChild(1).gameObject);
+            }
+            ObjectPoolManager.Instance.RecycleMyGameObject(upFrame);
+        }
+    }
+    void CloseGetFrame(PointerEventData data)
+    {
+        getItemFrame.SetActive(false);
+        if (getItemFrame.transform.childCount > 3)
+        {
+            ObjectPoolManager.Instance.RecycleMyGameObject(getItemFrame.transform.GetChild(3).gameObject);
+        }
+    }
+    void SetClick(PointerEventData data)
+    {
+        switch (data.pointerEnter.gameObject.name)
+        {
+            case "project01":
+                projectID = 1;
+                ProjectConfirmFrame.SetActive(true);
+                projectMessage.text = "[VIP契约招募]\n支付一张VIP招募券，进行一次特殊招募，获得稀有角色的概率提升至50%。";
+                break;
+            case "project02":
+                projectID = 2;
+                ProjectConfirmFrame.SetActive(true);
+                projectMessage.text = "[契约招募]\n支付2640钻石，连续进行五次特殊招募，获得稀有角色的概率提升至20%。";
+                break;
+            case "project03":
+                projectID = 3;
+                ProjectConfirmFrame.SetActive(true);
+                projectMessage.text = "[荣誉契约]\n支付1260钻石，可购买一份荣誉契约，契约可选择一名已拥有英雄，使其等级立即达到最高。";
+                break;
+            case "project04":
+                projectID = 4;
+                ProjectConfirmFrame.SetActive(true);
+                projectMessage.text = "[符文契约]\n支付690钻石，可购买一份符文契约，可进行五次符文判定，" +
+                    "每次判定成功则选中英雄的随机一项属性提升1-10点，该项目活动期间仅可购买一次。";
+                break;
+            case "project05":
+                projectID = 5;
+                ProjectConfirmFrame.SetActive(true);
+                projectMessage.text = "[冒险者契约]\n支付4568钻石，可获得一份传说契约箱，箱内有全套5枚传说果实。";
+                break;
+        }
+        //绑定按钮
+        if (ConfirmOK.GetComponent<UISceneWidget>() == null)
+        {
+            UISceneWidget confirmOKClick = UISceneWidget.Get(ConfirmOK);
+            confirmOKClick.PointerClick += Project_OK;
+        }
+        else
+        {
+            ConfirmOK.GetComponent<UISceneWidget>().PointerClick += Project_OK;
+        }
+        if (CancelNO.GetComponent<UISceneWidget>() == null)
+        {
+            UISceneWidget CancelNOClick = UISceneWidget.Get(CancelNO);
+            CancelNOClick.PointerClick += Project_NO;
+        }
+        else
+        {
+            CancelNO.GetComponent<UISceneWidget>().PointerClick += Project_NO;
+        }
+    }
+    void Project_OK(PointerEventData data)
+    {
+        switch (projectID)
+        {
+            case 1:
+                //数一下VIP券数量
+                CardCount = 0;
+                for (int i = 0; i < SQLiteManager.Instance.bagDataSource.Count; i++)
+                {
+                    if (SQLiteManager.Instance.bagDataSource[(i+1)].Bag_Material == 2307)
+                    {
+                        CardCount++;
+                    }
+                }
+                //一级判断：VIP券是否够
+                if (CardCount > 0)
+                {
+                    //二级判断：角色列表是否还有空位
+                    if (SQLiteManager.Instance.playerDataSource.Count < 15)
+                    {
+                        //删除VIP招募券
+                        CostCard();
+                        //生成招募界面
+                        getFrame = ObjectPoolManager.Instance.InstantiateMyGameObject(getCharaFrame);
+                        getFrame.transform.position = getCharaFrame.transform.position;
+                        //生成招募到的角色
+                        int getPlayerID = RandomManager.Instance.GetRandomCharacter(CharacterFieldType.VIP);
+                        GameObject ply = ObjectPoolManager.Instance.InstantiateMyGameObject
+                            (ResourcesManager.Instance.FindPlayerPrefab((getPlayerID).ToString()));
+                        ply.transform.parent = getFrame.transform;
+                        ply.transform.position = getFrame.transform.GetChild(0).transform.position;
+                        ply.GetComponent<Animator>().SetBool("isWait", true);
+                        //获得角色存入字典和数据库表
+                        GetChara(getPlayerID);
+                        //打开遮罩
+                        mask.SetActive(true);
+                        //按钮复位
+                        ConfirmOK.SetActive(true);
+                        CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(225, -245);
+                        //结束重置
+                        ProjectConfirmFrame.SetActive(false);
+                        ConfirmOK.GetComponent<UISceneWidget>().PointerClick -= Project_OK;
+                        CancelNO.GetComponent<UISceneWidget>().PointerClick -= Project_NO;
+                        projectID = 0;
+                        //显示钻石数
+                        _diamonds.text = CurrencyManager.Instance.DiamondDisplay();
+                    }
+                    else
+                    {
+                        ConfirmOK.gameObject.SetActive(false);
+                        CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
+                        projectMessage.text = "人数已满，招募失败。";
+                    }
+                }
+                else
+                {
+                    ConfirmOK.gameObject.SetActive(false);
+                    CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
+                    projectMessage.text = "VIP招募券不足。";
+                }
+                break;
+            case 2:
+                //一级判断：判断钻石是否足够
+                if (CurrencyManager.Instance.diamond > 2640)
+                {
+                    //二级判断：角色列表是否还有空位
+                    if (SQLiteManager.Instance.playerDataSource.Count <= 10)
+                    {
+                        //删除钻石
+                        CurrencyManager.Instance.DiamondDecrease(2640);
+                        //生成招募界面
+                        getFrame = ObjectPoolManager.Instance.InstantiateMyGameObject(getCharaFrame);
+                        getFrame.transform.position = getCharaFrame.transform.position;
+                        //生成招募到的角色
+                        //---1号---
+                        int getPlayerID01 = RandomManager.Instance.GetRandomCharacter(CharacterFieldType.SuperMarket);
+                        GameObject ply1 = ObjectPoolManager.Instance.InstantiateMyGameObject
+                            (ResourcesManager.Instance.FindPlayerPrefab((getPlayerID01).ToString()));
+                        ply1.transform.parent = getFrame.transform;
+                        ply1.transform.position = getFrame.transform.GetChild(0).transform.position;
+                        ply1.GetComponent<Animator>().SetBool("isWait", true);
+                        //---2号---
+                        int getPlayerID02 = RandomManager.Instance.GetRandomCharacter(CharacterFieldType.SuperMarket);
+                        GameObject ply2 = ObjectPoolManager.Instance.InstantiateMyGameObject
+                            (ResourcesManager.Instance.FindPlayerPrefab((getPlayerID02).ToString()));
+                        ply2.transform.parent = getFrame.transform;
+                        ply2.transform.position = getFrame.transform.GetChild(0).transform.position + new Vector3(1.0f,0,0);
+                        ply2.GetComponent<Animator>().SetBool("isWait", true);
+                        //---3号---
+                        int getPlayerID03 = RandomManager.Instance.GetRandomCharacter(CharacterFieldType.SuperMarket);
+                        GameObject ply3 = ObjectPoolManager.Instance.InstantiateMyGameObject
+                            (ResourcesManager.Instance.FindPlayerPrefab((getPlayerID03).ToString()));
+                        ply3.transform.parent = getFrame.transform;
+                        ply3.transform.position = getFrame.transform.GetChild(0).transform.position - new Vector3(-1.0f,0,0);
+                        ply3.GetComponent<Animator>().SetBool("isWait", true);
+                        //---4号---
+                        int getPlayerID04 = RandomManager.Instance.GetRandomCharacter(CharacterFieldType.SuperMarket);
+                        GameObject ply4 = ObjectPoolManager.Instance.InstantiateMyGameObject
+                            (ResourcesManager.Instance.FindPlayerPrefab((getPlayerID04).ToString()));
+                        ply4.transform.parent = getFrame.transform;
+                        ply4.transform.position = getFrame.transform.GetChild(0).transform.position + new Vector3(2.0f,0,0);
+                        ply4.GetComponent<Animator>().SetBool("isWait", true);
+                        //---5号---
+                        int getPlayerID05 = RandomManager.Instance.GetRandomCharacter(CharacterFieldType.SuperMarket);
+                        GameObject ply5 = ObjectPoolManager.Instance.InstantiateMyGameObject
+                            (ResourcesManager.Instance.FindPlayerPrefab((getPlayerID05).ToString()));
+                        ply5.transform.parent = getFrame.transform;
+                        ply5.transform.position = getFrame.transform.GetChild(0).transform.position - new Vector3(-2.0f,0,0);
+                        ply5.GetComponent<Animator>().SetBool("isWait", true);
+
+                        //获得角色存入字典和数据库表
+                        GetChara(getPlayerID01);
+                        GetChara(getPlayerID02);
+                        GetChara(getPlayerID03);
+                        GetChara(getPlayerID04);
+                        GetChara(getPlayerID05);
+                        //打开遮罩
+                        mask.SetActive(true);
+                        //按钮复位
+                        ConfirmOK.SetActive(true);
+                        CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(225, -245);
+                        //结束重置
+                        ProjectConfirmFrame.SetActive(false);
+                        ConfirmOK.GetComponent<UISceneWidget>().PointerClick -= Project_OK;
+                        CancelNO.GetComponent<UISceneWidget>().PointerClick -= Project_NO;
+                        projectID = 0;
+                        //显示钻石数
+                        _diamonds.text = CurrencyManager.Instance.DiamondDisplay();
+                    }
+                    else
+                    {
+                        ConfirmOK.gameObject.SetActive(false);
+                        CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
+                        projectMessage.text = "角色列表空位不足，招募失败，请确保您所拥有的角色在10人或10人以下。";
+                    }
+                }
+                else
+                {
+                    ConfirmOK.gameObject.SetActive(false);
+                    CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
+                    projectMessage.text = "钻石不足，请充值。";
+                }
+                    break;
+            case 3:
+                //一级判断：判断钻石是否足够
+                if (CurrencyManager.Instance.diamond > 1260)
+                {
+                    if (SQLiteManager.Instance.bagDataSource[36].Bag_Material == 0)
+                    {
+                        //扣除钻石
+                        CurrencyManager.Instance.DiamondDecrease(1260);
+                        //获得道具
+                        GetItem(2308);
+                        //按钮复位
+                        ConfirmOK.SetActive(true);
+                        CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(225, -245);
+                        //结束重置
+                        ProjectConfirmFrame.SetActive(false);
+                        ConfirmOK.GetComponent<UISceneWidget>().PointerClick -= Project_OK;
+                        CancelNO.GetComponent<UISceneWidget>().PointerClick -= Project_NO;
+                        projectID = 0;
+                        //打开获得道具窗口
+                        getItemFrame.SetActive(true);
+                        GameObject tempitem = ObjectPoolManager.Instance.InstantiateMyGameObject
+                            (ResourcesManager.Instance.FindUIPrefab(ConstData.GridEx));
+                        tempitem.transform.GetChild(0).GetComponent<Image>().sprite = ResourcesManager.Instance.FindSprite("2308");
+                        tempitem.transform.parent = getItemFrame.transform;
+                        tempitem.transform.localScale = new Vector3(1, 1, 1);
+                        tempitem.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+                        //删除库存
+                        SQLiteManager.Instance.itemDataSource[2308].Stockpile -= 1;
+                        SQLiteManager.Instance.UpdataDataFromTable
+                            (ConstData.Item, "item_Stockpile", SQLiteManager.Instance.itemDataSource[2308].Stockpile,
+                            "ID", 2308);
+                        //显示钻石数
+                        _diamonds.text = CurrencyManager.Instance.DiamondDisplay();
+                    }
+                    else
+                    {
+                        ConfirmOK.gameObject.SetActive(false);
+                        CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
+                        projectMessage.text = "背包空间不足，购买失败。";
+                    }
+                    
+                }
+                else
+                {
+                    ConfirmOK.gameObject.SetActive(false);
+                    CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
+                    projectMessage.text = "钻石不足，请充值。";
+                }
+                break;
+            case 4:
+                //一级判断：判断钻石是否足够
+                if (CurrencyManager.Instance.diamond > 690)
+                {
+                    if (SQLiteManager.Instance.itemDataSource[2309].Stockpile > 0)
+                    {
+                        if (SQLiteManager.Instance.bagDataSource[36].Bag_Material == 0)
+                        {
+                            //扣除钻石
+                            CurrencyManager.Instance.DiamondDecrease(690);
+                            //获得道具
+                            GetItem(2309);
+                            //按钮复位
+                            ConfirmOK.SetActive(true);
+                            CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(225, -245);
+                            //结束重置
+                            ProjectConfirmFrame.SetActive(false);
+                            ConfirmOK.GetComponent<UISceneWidget>().PointerClick -= Project_OK;
+                            CancelNO.GetComponent<UISceneWidget>().PointerClick -= Project_NO;
+                            projectID = 0;
+                            //打开获得道具窗口
+                            getItemFrame.SetActive(true);
+                            GameObject tempitem = ObjectPoolManager.Instance.InstantiateMyGameObject
+                                (ResourcesManager.Instance.FindUIPrefab(ConstData.GridEx));
+                            tempitem.transform.GetChild(0).GetComponent<Image>().sprite = ResourcesManager.Instance.FindSprite("2309");
+                            tempitem.transform.parent = getItemFrame.transform;
+                            tempitem.transform.localScale = new Vector3(1, 1, 1);
+                            tempitem.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+                            //删除库存
+                            SQLiteManager.Instance.itemDataSource[2309].Stockpile -= 1;
+                            SQLiteManager.Instance.UpdataDataFromTable
+                                (ConstData.Item, "item_Stockpile", SQLiteManager.Instance.itemDataSource[2309].Stockpile,
+                                "ID", 2309);
+                            //显示钻石数
+                            _diamonds.text = CurrencyManager.Instance.DiamondDisplay();
+                        }
+                        else
+                        {
+                            ConfirmOK.gameObject.SetActive(false);
+                            CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
+                            projectMessage.text = "背包空间不足，购买失败。";
+                        }
+                    }
+                    else
+                    {
+                        ConfirmOK.gameObject.SetActive(false);
+                        CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
+                        projectMessage.text = "活动结束，请勿重复购买。";
+                    }
+                }
+                else
+                {
+                    ConfirmOK.gameObject.SetActive(false);
+                    CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
+                    projectMessage.text = "钻石不足，请充值。";
+                }
+                break;
+            case 5:
+                //一级判断：判断钻石是否足够
+                if (CurrencyManager.Instance.diamond > 4568)
+                {
+                    if (SQLiteManager.Instance.itemDataSource[2310].Stockpile > 0)
+                    {
+                        if (SQLiteManager.Instance.bagDataSource[36].Bag_Material == 0)
+                        {
+                            //扣除钻石
+                            CurrencyManager.Instance.DiamondDecrease(4568);
+                            //获得道具
+                            GetItem(2310);
+                            //按钮复位
+                            ConfirmOK.SetActive(true);
+                            CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(225, -245);
+                            //结束重置
+                            ProjectConfirmFrame.SetActive(false);
+                            ConfirmOK.GetComponent<UISceneWidget>().PointerClick -= Project_OK;
+                            CancelNO.GetComponent<UISceneWidget>().PointerClick -= Project_NO;
+                            projectID = 0;
+                            //打开获得道具窗口
+                            getItemFrame.SetActive(true);
+                            GameObject tempitem = ObjectPoolManager.Instance.InstantiateMyGameObject
+                                (ResourcesManager.Instance.FindUIPrefab(ConstData.GridEx));
+                            tempitem.transform.GetChild(0).GetComponent<Image>().sprite = ResourcesManager.Instance.FindSprite("2310");
+                            tempitem.transform.parent = getItemFrame.transform;
+                            tempitem.transform.localScale = new Vector3(1, 1, 1);
+                            tempitem.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+                            //删除库存
+                            SQLiteManager.Instance.itemDataSource[2310].Stockpile -= 1;
+                            SQLiteManager.Instance.UpdataDataFromTable
+                                (ConstData.Item, "item_Stockpile", SQLiteManager.Instance.itemDataSource[2310].Stockpile,
+                                "ID", 2310);
+                            //显示钻石数
+                            _diamonds.text = CurrencyManager.Instance.DiamondDisplay();
+                        }
+                        else
+                        {
+                            ConfirmOK.gameObject.SetActive(false);
+                            CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
+                            projectMessage.text = "背包空间不足，购买失败。";
+                        }
+                    }
+                    else
+                    {
+                        ConfirmOK.gameObject.SetActive(false);
+                        CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
+                        projectMessage.text = "仅新用户限购一次，请勿重复购买。";
+                    }
+                }
+                else
+                {
+                    ConfirmOK.gameObject.SetActive(false);
+                    CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
+                    projectMessage.text = "钻石不足，请充值。";
+                }
+                break;
+        }
+    }
+    void Project_NO(PointerEventData data)
+    {
+        //按钮复位
+        ConfirmOK.SetActive(true);
+        CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(225, -245);
+        //关闭窗口和按钮解绑
+        ProjectConfirmFrame.SetActive(false);
+        ConfirmOK.GetComponent<UISceneWidget>().PointerClick -= Project_OK;
+        CancelNO.GetComponent<UISceneWidget>().PointerClick -= Project_NO;
+        projectID = 0;
+    }
+    #endregion
 
     /// <summary>
     /// 物品实例化方法
@@ -338,7 +861,7 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                     break;
             }
             _price = _bagItem.mydata_equipt.equipmentPrice;
-            _itemContent = new string[] { "[", _bagItem.mydata_equipt.equipmentNmae, "] ", "装备职业：", temp, " 价格：", _price.ToString(), "\n", "HP：", _bagItem.mydata_equipt.equipment_HP.ToString(), "\nAD：", _bagItem.mydata_equipt.equipment_AD.ToString(), "  AP：", _bagItem.mydata_equipt.equipment_AP.ToString(), "  DEF：", _bagItem.mydata_equipt.equipment_DEF.ToString(), "  RES：", _bagItem.mydata_equipt.equipment_RES.ToString() };
+            _itemContent = new string[] { "[", _bagItem.mydata_equipt.equipmentNmae, "] ", "装备职业：", temp, " 价格：", _price.ToString(), "\n", "HP：", _bagItem.mydata_equipt.equipment_HP.ToString(), "  AD：", _bagItem.mydata_equipt.equipment_AD.ToString(), "  AP：", _bagItem.mydata_equipt.equipment_AP.ToString(), "  DEF：", _bagItem.mydata_equipt.equipment_DEF.ToString(), "  RES：", _bagItem.mydata_equipt.equipment_RES.ToString() };
         }
         _textContent.text = StringSplicingTool.StringSplicing(_itemContent);
         GenerateAperture(_bagItem.transform);
@@ -532,7 +1055,15 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
     /// </summary>
     void ShopBuyButtonFunc(PointerEventData data)
     {
-        print("激活商店内容");
+        //控制区
+        superMarketParent.SetActive(true);
+        listParent.SetActive(false);
+        //控制附属区
+        controllerEX.SetActive(true);
+        //确认按钮
+        transform.Find("ConfirmButton").gameObject.SetActive(true);
+        //更改文字
+        _textContent.gameObject.transform.parent.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -548,7 +1079,15 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
     /// </summary>
     void ContractButtonFunc(PointerEventData data)
     {
-        print("激活招募内容");
+        //控制区
+        superMarketParent.SetActive(false);
+        listParent.SetActive(true);
+        //控制附属区
+        controllerEX.SetActive(false);
+        //确认按钮
+        transform.Find("ConfirmButton").gameObject.SetActive(false);
+        //更改文字
+        _textContent.gameObject.transform.parent.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -613,5 +1152,88 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
     void MainCityButtonFunc(PointerEventData data)
     {
         UIManager.Instance.PopUIStack();
+    }
+
+    /// <summary>
+    /// 支付VIP卡
+    /// </summary>
+    void CostCard()
+    {
+        for (int i = 1; i < SQLiteManager.Instance.bagDataSource.Count; i++)
+        {
+            if (SQLiteManager.Instance.bagDataSource[i].Bag_Material == 2307)
+            {
+                SQLiteManager.Instance.bagDataSource[i].Bag_Material = SQLiteManager.Instance.bagDataSource[(i + 1)].Bag_Material;
+                SQLiteManager.Instance.UpdataDataFromTable
+                    (ConstData.Bag, ConstData.Bag_Material, SQLiteManager.Instance.bagDataSource[i + 1].Bag_Material, ConstData.Bag_Grid, i);
+            }
+        }
+        SQLiteManager.Instance.bagDataSource[SQLiteManager.Instance.bagDataSource.Count].Bag_Material = 0;
+        SQLiteManager.Instance.UpdataDataFromTable
+                (ConstData.Bag, ConstData.Bag_Material, 0, ConstData.Bag_Grid, SQLiteManager.Instance.bagDataSource.Count);
+    }
+    /// <summary>
+    /// 抽取获得的角色存入字典和数据库
+    /// </summary>
+    /// <param name="charaID"></param>
+    void GetChara(int charaID)
+    {
+        int newPlayerID = SQLiteManager.Instance.playerDataSource.Keys.Last() + 1;
+        CharacterListData getPlayerData = SQLiteManager.Instance.characterDataSource[charaID];
+        PlayerData newPlayerData = new PlayerData();
+        newPlayerData.player_Id = newPlayerID;
+        newPlayerData.player_Name = getPlayerData.character_Name;
+        newPlayerData.player_Class = getPlayerData.character_Class;
+        newPlayerData.player_Description = getPlayerData.character_Description;
+        newPlayerData.HP = getPlayerData.character_HP;
+        newPlayerData.AD = getPlayerData.character_AD;
+        newPlayerData.AP = getPlayerData.character_AP;
+        newPlayerData.DEF = getPlayerData.character_DEF;
+        newPlayerData.RES = getPlayerData.character_RES;
+        newPlayerData.skillOneID = getPlayerData.character_SkillOneID;
+        newPlayerData.skillTwoID = getPlayerData.character_SkillTwoID;
+        newPlayerData.skillThreeID = getPlayerData.character_SkillThreeID;
+        newPlayerData.EXHP = getPlayerData.character_EXHP;
+        newPlayerData.EXAD = getPlayerData.character_EXAD;
+        newPlayerData.EXAP = getPlayerData.character_EXAP;
+        newPlayerData.EXDEF = getPlayerData.character_EXDEF;
+        newPlayerData.EXRES = getPlayerData.character_EXRES;
+        newPlayerData.Level = getPlayerData.character_Level;
+        newPlayerData.EXP = getPlayerData.character_EXP;
+        newPlayerData.Weapon = getPlayerData.character_Weapon;
+        newPlayerData.Equipment = getPlayerData.character_Equipment;
+        newPlayerData.GoldCoin = getPlayerData.GoldCoin;
+        newPlayerData.Diamond = getPlayerData.Diamond;
+        newPlayerData.PrefabsID = getPlayerData.PrefabsID;
+
+        //存进字典
+        SQLiteManager.Instance.playerDataSource.Add(newPlayerID, newPlayerData);
+        //存到数据库
+        SQLiteManager.Instance.InsetDataToTable
+            (newPlayerID, getPlayerData.character_Name, getPlayerData.character_Class, getPlayerData.character_Description,
+            getPlayerData.character_HP, getPlayerData.character_AD, getPlayerData.character_AP,
+            getPlayerData.character_DEF, getPlayerData.character_RES,
+            getPlayerData.character_SkillOneID, getPlayerData.character_SkillTwoID, getPlayerData.character_SkillThreeID,
+            getPlayerData.character_EXHP, getPlayerData.character_EXAD, getPlayerData.character_EXAP,
+            getPlayerData.character_EXDEF, getPlayerData.character_EXRES,
+            getPlayerData.character_Weapon, getPlayerData.character_Equipment,
+            getPlayerData.character_Level, getPlayerData.character_EXP,
+            getPlayerData.GoldCoin, getPlayerData.Diamond, getPlayerData.PrefabsID);
+    }
+    /// <summary>
+    /// 获取道具存入字典和数据库
+    /// </summary>
+    /// <param name="itemID"></param>
+    void GetItem(int itemID)
+    {
+        for (int i = 0; i < SQLiteManager.Instance.bagDataSource.Count; i++)
+        {
+            if (SQLiteManager.Instance.bagDataSource[(i + 1)].Bag_Material == 0)
+            {
+                SQLiteManager.Instance.bagDataSource[(i + 1)].Bag_Material = itemID;
+                SQLiteManager.Instance.UpdataDataFromTable(ConstData.Bag, ConstData.Bag_Material, itemID, ConstData.Bag_Grid, (i + 1));
+                return;
+            }
+        }
     }
 }

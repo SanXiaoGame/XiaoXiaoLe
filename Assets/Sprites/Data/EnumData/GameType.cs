@@ -27,9 +27,13 @@ public enum CharacterFieldType
     /// </summary>
     Hotel = 0,
     /// <summary>
-    /// 商店
+    /// 商城
     /// </summary>
-    Shop
+    SuperMarket,
+    /// <summary>
+    /// 商城VIP
+    /// </summary>
+    VIP,
 }
 
 //选关确认窗口类型
