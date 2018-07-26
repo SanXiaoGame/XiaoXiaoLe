@@ -167,8 +167,21 @@ public struct ConstData
     public const string DrunkeryContentBG_HP = "DrunkeryContentBG/HPBG/HP";
     public const string DrunkeryContentBG_AD_AP = "DrunkeryContentBG/AD_APBG/AD_AP";
     public const string DrunkeryContentBG_DEF_RES = "DrunkeryContentBG/DEF_RESBG/DEF_RES";
+    public const string DrunkeryContentBG_ClassLogo = "DrunkeryContentBG/NameBG/LineIcon/ClassIcon";
     //------------------  商城  ---------------------
     public const string ShoppingMall_ConfirmButton = "ConfirmButton";
+    public const string ShoppingMall_ItemListBG = "ControllerArea/ItemListBG";
+    public const string ShoppingMall_ContractSetListBG = "ControllerArea/ContractSetListBG";
+    public const string ShoppingMall_ContractSetListParent = "ControllerArea/ContractSetListBG/ListViewport/ListContent";
+    public const string ShoppingMall_CharaVIP = "ControllerArea/ContractSetListBG/ListViewport/ListContent/project01";
+    public const string ShoppingMall_CharaFive = "ControllerArea/ContractSetListBG/ListViewport/ListContent/project02";
+    public const string ShoppingMall_CharaLevelUP = "ControllerArea/ContractSetListBG/ListViewport/ListContent/project03";
+    public const string ShoppingMall_CharaToBeStronge = "ControllerArea/ContractSetListBG/ListViewport/ListContent/project04";
+    public const string ShoppingMall_Fruit = "ControllerArea/ContractSetListBG/ListViewport/ListContent/project05";
+    public const string getCharaFrame = "getCharaFrame";
+    public const string propertyUpFrame = "propertyUpFrame";
+    public const string StateUpText = "StateUpText";
+    public const string GetItemFrame = "GetItemFrame";
     //------------------  关卡选择  ---------------------
     public const string ChoiceLevel_ConsumableBar = "ControllerExArea/ConsumableBar";
     public const string ChoiceLevel_ChoiceConfirmButton = "ControllerExArea/ChoiceConfirmButton";
@@ -287,6 +300,7 @@ public struct ConstData
     public const string RechargeInputField = "RechargeFrame/RechargeInputField";
     public const string RechargeCloseButton = "RechargeFrame/CloseButton";
     public const string RechargeConfirmButton = "RechargeFrame/RechargeConfirmButton";
+    public const string ContractSetConfirmFrame = "ContractSetConfirmFrame";
     /// <summary>
     /// 装备替换窗口
     /// </summary>

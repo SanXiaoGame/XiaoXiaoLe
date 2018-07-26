@@ -24,6 +24,8 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
     //选中人物按钮
     Toggle[] CharacterButton;
     UISceneWidget[] bindingCharacterButton;
+    //选中人物的LOGO
+    Image classLogo;
     //人物生成点数组
     Transform[] characterSpot;
     //确认招募按钮
@@ -79,6 +81,7 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
         AD_AP = transform.Find(ConstData.DrunkeryContentBG_AD_AP).GetComponent<Text>();
         DEF_RES = transform.Find(ConstData.DrunkeryContentBG_DEF_RES).GetComponent<Text>();
         returnMainCityButton = transform.Find(ConstData.SystemArea_MainCityIcon).gameObject;
+        classLogo = transform.Find(ConstData.DrunkeryContentBG_ClassLogo).GetComponent<Image>();
         //清空内容
         ClearAllPurchaseData();
 
@@ -165,6 +168,7 @@ public class UIDrunkery : MonoBehaviour,IUIBase {
         AD_AP.text = StringSplicingTool.StringSplicing(AD_APText);
         string[] DEF_RESText = { "DEF：", _characterListData.character_DEF.ToString(), "  ", "RES：", _characterListData.character_RES.ToString() };
         DEF_RES.text = StringSplicingTool.StringSplicing(DEF_RESText);
+        classLogo.sprite = ResourcesManager.Instance.FindSprite(_characterListData.character_Class);
     }
     /// <summary>
     /// 确认人物的按钮
