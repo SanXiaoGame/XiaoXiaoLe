@@ -492,6 +492,10 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
             SQLiteManager.Instance.team[ConstData.Saber].totalHP = SQLiteManager.Instance.team[ConstData.Saber].playerData.HP +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Saber].playerData.Weapon].equipment_HP +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Saber].playerData.Equipment].equipment_HP;
+            if (SQLiteManager.Instance.team[ConstData.Saber].totalHP <= 0)
+            {
+                SQLiteManager.Instance.team[ConstData.Saber].totalHP = 1;
+            }
             SQLiteManager.Instance.team[ConstData.Saber].totalAD = SQLiteManager.Instance.team[ConstData.Saber].playerData.AD +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Saber].playerData.Weapon].equipment_AD +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Saber].playerData.Equipment].equipment_AD;
@@ -506,6 +510,10 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
             SQLiteManager.Instance.team[ConstData.Knight].totalHP = SQLiteManager.Instance.team[ConstData.Knight].playerData.HP +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Knight].playerData.Weapon].equipment_HP +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Knight].playerData.Equipment].equipment_HP;
+            if (SQLiteManager.Instance.team[ConstData.Knight].totalHP <= 0)
+            {
+                SQLiteManager.Instance.team[ConstData.Knight].totalHP = 1;
+            }
             SQLiteManager.Instance.team[ConstData.Knight].totalAD = SQLiteManager.Instance.team[ConstData.Knight].playerData.AD +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Knight].playerData.Weapon].equipment_AD +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Knight].playerData.Equipment].equipment_AD;
@@ -522,6 +530,10 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
             SQLiteManager.Instance.team[ConstData.Berserker].totalHP = SQLiteManager.Instance.team[ConstData.Berserker].playerData.HP +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Berserker].playerData.Weapon].equipment_HP +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Berserker].playerData.Equipment].equipment_HP;
+            if (SQLiteManager.Instance.team[ConstData.Berserker].totalHP <= 0)
+            {
+                SQLiteManager.Instance.team[ConstData.Berserker].totalHP = 1;
+            }
             SQLiteManager.Instance.team[ConstData.Berserker].totalAD = SQLiteManager.Instance.team[ConstData.Berserker].playerData.AD +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Berserker].playerData.Weapon].equipment_AD +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Berserker].playerData.Equipment].equipment_AD;
@@ -536,6 +548,10 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
             SQLiteManager.Instance.team[ConstData.Caster].totalHP = SQLiteManager.Instance.team[ConstData.Caster].playerData.HP +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Caster].playerData.Weapon].equipment_HP +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Caster].playerData.Equipment].equipment_HP;
+            if (SQLiteManager.Instance.team[ConstData.Caster].totalHP <= 0)
+            {
+                SQLiteManager.Instance.team[ConstData.Caster].totalHP = 1;
+            }
             SQLiteManager.Instance.team[ConstData.Caster].totalAD = 0;
             SQLiteManager.Instance.team[ConstData.Caster].totalAP = SQLiteManager.Instance.team[ConstData.Caster].playerData.AP +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Caster].playerData.Weapon].equipment_AP +
@@ -548,6 +564,10 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
             SQLiteManager.Instance.team[ConstData.Hunter].totalHP = SQLiteManager.Instance.team[ConstData.Hunter].playerData.HP +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Hunter].playerData.Weapon].equipment_HP +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Hunter].playerData.Equipment].equipment_HP;
+            if (SQLiteManager.Instance.team[ConstData.Hunter].totalHP <= 0)
+            {
+                SQLiteManager.Instance.team[ConstData.Hunter].totalHP = 1;
+            }
             SQLiteManager.Instance.team[ConstData.Hunter].totalAD = SQLiteManager.Instance.team[ConstData.Hunter].playerData.AD +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Hunter].playerData.Weapon].equipment_AD +
                 SQLiteManager.Instance.equipmentDataSource[SQLiteManager.Instance.team[ConstData.Hunter].playerData.Equipment].equipment_AD;
@@ -671,11 +691,14 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                 break;
         }
         //刷新画面
-        if (selecteHero.player_Id == deleteNum)
+        if (selecteHero != null)
         {
-            selecteHero = null;
-            selectPlayer = null;
-            selectBarNum = 0;
+            if (selecteHero.player_Id == deleteNum)
+            {
+                selecteHero = null;
+                selectPlayer = null;
+                selectBarNum = 0;
+            }
         }
         if (selecteHero != null)
         {
@@ -2933,6 +2956,12 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                 HP.text = (selecteHero.HP +
                 SQLiteManager.Instance.equipmentDataSource[selecteHero.Weapon].equipment_HP +
                 SQLiteManager.Instance.equipmentDataSource[selecteHero.Equipment].equipment_HP).ToString();
+                if ((selecteHero.HP +
+                SQLiteManager.Instance.equipmentDataSource[selecteHero.Weapon].equipment_HP +
+                SQLiteManager.Instance.equipmentDataSource[selecteHero.Equipment].equipment_HP) <= 0)
+                {
+                    HP.text = "1";
+                }
                 AD.text = (selecteHero.AD +
                     SQLiteManager.Instance.equipmentDataSource[selecteHero.Weapon].equipment_AD +
                     SQLiteManager.Instance.equipmentDataSource[selecteHero.Equipment].equipment_AD).ToString();

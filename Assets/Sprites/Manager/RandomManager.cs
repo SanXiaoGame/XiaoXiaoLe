@@ -13,6 +13,8 @@ public class RandomManager : ManagerBase<RandomManager>
     const float randomMaxNumber = 100f;
     //初级商城人物概率
     float randomShopCharacter = 80f;
+    //初级VIP人物概率
+    float randomVIPCharacter = 50f;
     //初级酒店人物概率
     float randomCharacterOne = 97f;
     //二级普通人物概率
@@ -59,7 +61,18 @@ public class RandomManager : ManagerBase<RandomManager>
         //用于存储不同场地概率
         float prob = 0f;
         //概率切换
-        prob = type == CharacterFieldType.Hotel ? randomCharacterOne : randomShopCharacter;
+        switch (type)
+        {
+            case CharacterFieldType.Hotel:
+                prob = randomCharacterOne;
+                break;
+            case CharacterFieldType.SuperMarket:
+                prob = randomShopCharacter;
+                break;
+            case CharacterFieldType.VIP:
+                prob = randomVIPCharacter;
+                break;
+        }
         //临时存储结果值
         int result = 0;
         //百分比随机数

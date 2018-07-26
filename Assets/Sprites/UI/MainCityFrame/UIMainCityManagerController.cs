@@ -192,7 +192,7 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
         #endregion
 
         #region 控制区附属区域
-        WeaponBag = transform.Find(ConstData.ControllerExArea_WeaponBag).gameObject;
+        WeaponBag = transform.Find(ConstData.ControllerExArea_WeaponBag).GetChild(0).gameObject;
         if (WeaponBag.GetComponent<UISceneWidget>() == null)
         {
             UISceneWidget WeaponBagClick = UISceneWidget.Get(WeaponBag);
@@ -202,7 +202,7 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
         {
             WeaponBag.GetComponent<UISceneWidget>().PointerClick += WeaponBagChange;
         }
-        EquipmentBag = transform.Find(ConstData.ControllerExArea_EquipmentBag).gameObject;
+        EquipmentBag = transform.Find(ConstData.ControllerExArea_EquipmentBag).GetChild(0).gameObject;
         if (EquipmentBag.GetComponent<UISceneWidget>() == null)
         {
             UISceneWidget EquipmentBagClick = UISceneWidget.Get(EquipmentBag);
@@ -212,7 +212,7 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
         {
             EquipmentBag.GetComponent<UISceneWidget>().PointerClick += EquipmentBagChange;
         }
-        ConsumableBag = transform.Find(ConstData.ControllerExArea_ConsumableBag).gameObject;
+        ConsumableBag = transform.Find(ConstData.ControllerExArea_ConsumableBag).GetChild(0).gameObject;
         if (ConsumableBag.GetComponent<UISceneWidget>() == null)
         {
             UISceneWidget ConsumableBagClick = UISceneWidget.Get(ConsumableBag);
@@ -222,7 +222,7 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
         {
             ConsumableBag.GetComponent<UISceneWidget>().PointerClick += ConsumableBagChange;
         }
-        MaterialBag = transform.Find(ConstData.ControllerExArea_MaterialBag).gameObject;
+        MaterialBag = transform.Find(ConstData.ControllerExArea_MaterialBag).GetChild(0).gameObject;
         if (MaterialBag.GetComponent<UISceneWidget>() == null)
         {
             UISceneWidget MaterialBagClick = UISceneWidget.Get(MaterialBag);
@@ -421,7 +421,7 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
     }
     void SettingEnter(PointerEventData eventData)
     {
-
+        
     }
     void BattleEnter(PointerEventData eventData)
     {
