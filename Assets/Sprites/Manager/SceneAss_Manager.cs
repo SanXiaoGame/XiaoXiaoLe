@@ -23,9 +23,15 @@ public class SceneAss_Manager : ManagerBase<SceneAss_Manager>
     internal void LoadingFunc(int sceneID)
     {
         newSceneID = sceneID;
+        //回收之前场景的UI
+        for (int i = 0; i < UIManager.Instance.UIPrefabList.Count; i++)
+        {
+            ObjectPoolManager.Instance.RecycleMyGameObject(UIManager.Instance.UIPrefabList[i]);
+        }
         //清空之前场景的数据
         UIManager.Instance.UIStack.Clear();
         UIManager.Instance.CurrentUI.Clear();
+        UIManager.Instance.UIPrefabList.Clear();
         //进入加载场景
         SceneManager.LoadScene(1);
     }

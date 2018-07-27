@@ -31,7 +31,10 @@ public class AudioManager : ManagerBase<AudioManager>
     {
         base.Awake();
         //添加背景播放器
-        bgMusic = gameObject.AddComponent<AudioSource>();
+        if (gameObject.GetComponent<AudioSource>() == null)
+        {
+            bgMusic = gameObject.AddComponent<AudioSource>();
+        }
         //获取是否静音
         bgMusicMute = PlayerPrefs.GetInt("BGMMute") == 1 ? false : true;
         effectMusicMute = PlayerPrefs.GetInt("effectMute") == 1 ? false : true;
@@ -51,6 +54,8 @@ public class AudioManager : ManagerBase<AudioManager>
         bgMusic.clip = clip;
         bgMusic.spatialBlend = 0f;
         bgMusic.loop = true;
+        bgMusic.volume = bgMusicVolume;
+        bgMusic.mute = bgMusicMute;
         bgMusic.Play();
     }
 
@@ -59,6 +64,8 @@ public class AudioManager : ManagerBase<AudioManager>
     {
         bgMusicMute = isMute;
         intMute = isMute == false ? 1 : 0;
+        //修改播放器数据
+        bgMusic.mute = bgMusicMute;
         PlayerPrefs.SetInt("BGMMute", intMute);
     }
 
@@ -67,6 +74,11 @@ public class AudioManager : ManagerBase<AudioManager>
     {
         effectMusicMute = isMute;
         intMute = isMute == false ? 1 : 0;
+        //修改播放器数据
+        if (tempAudio != null)
+        {
+            tempAudio.mute = effectMusicMute;
+        }
         PlayerPrefs.SetInt("effectMute", intMute);
     }
 
@@ -74,6 +86,8 @@ public class AudioManager : ManagerBase<AudioManager>
     public void BgVolume(float value)
     {
         bgMusicVolume = value;
+        //音乐音量大小
+        bgMusic.volume = bgMusicVolume;
         PlayerPrefs.SetFloat("bgMusicVolume", value);
     }
 
@@ -81,6 +95,11 @@ public class AudioManager : ManagerBase<AudioManager>
     public void EffectVolmue(float value)
     {
         effectVolume = value;
+        //音效音量大小
+        if (tempAudio != null)
+        {
+            tempAudio.volume = effectVolume;
+        }
         PlayerPrefs.SetFloat("effectVolume", value);
     }
 
