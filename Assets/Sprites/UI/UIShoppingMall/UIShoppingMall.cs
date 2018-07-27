@@ -101,6 +101,10 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
     GameObject _rechargeConfirmButton;
     //充值输入框
     InputField _rechargeInputField;
+    //充值显示内容
+    Text _rechargeContent;
+    //临时存储充值内容
+    string _tempContent;
     //充值窗口按钮绑定
     UISceneWidget bindingRechargeCloseButton;
     UISceneWidget bindingRechargeConfirmButton;
@@ -214,6 +218,9 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
         bindingRechargeConfirmButton = UISceneWidget.Get(_rechargeConfirmButton);
         if (bindingRechargeConfirmButton != null) { bindingRechargeConfirmButton.PointerClick += ConfirmRechargeFunc; }
 
+        //显示充值结果
+        _rechargeContent = transform.Find(ConstData.RechargeContent).GetComponent<Text>();
+        _tempContent = _rechargeContent.text;
         //显示钻石数
         _diamonds.text = CurrencyManager.Instance.DiamondDisplay();
 
@@ -235,7 +242,7 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
         projectMessage = ProjectConfirmFrame.transform.GetChild(1).GetChild(0).GetComponent<Text>();
         ConfirmOK = ProjectConfirmFrame.transform.GetChild(2).gameObject;
         CancelNO = ProjectConfirmFrame.transform.GetChild(3).gameObject;
-        
+
         UISceneWidget P1Click = UISceneWidget.Get(project01);
         P1Click.PointerClick += SetClick;
         P1Click.Drag += OnDrag;
@@ -429,7 +436,7 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                 CardCount = 0;
                 for (int i = 0; i < SQLiteManager.Instance.bagDataSource.Count; i++)
                 {
-                    if (SQLiteManager.Instance.bagDataSource[(i+1)].Bag_Material == 2307)
+                    if (SQLiteManager.Instance.bagDataSource[(i + 1)].Bag_Material == 2307)
                     {
                         CardCount++;
                     }
@@ -506,28 +513,28 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                         GameObject ply2 = ObjectPoolManager.Instance.InstantiateMyGameObject
                             (ResourcesManager.Instance.FindPlayerPrefab((getPlayerID02).ToString()));
                         ply2.transform.parent = getFrame.transform;
-                        ply2.transform.position = getFrame.transform.GetChild(0).transform.position + new Vector3(1.0f,0,0);
+                        ply2.transform.position = getFrame.transform.GetChild(0).transform.position + new Vector3(1.0f, 0, 0);
                         ply2.GetComponent<Animator>().SetBool("isWait", true);
                         //---3号---
                         int getPlayerID03 = RandomManager.Instance.GetRandomCharacter(CharacterFieldType.SuperMarket);
                         GameObject ply3 = ObjectPoolManager.Instance.InstantiateMyGameObject
                             (ResourcesManager.Instance.FindPlayerPrefab((getPlayerID03).ToString()));
                         ply3.transform.parent = getFrame.transform;
-                        ply3.transform.position = getFrame.transform.GetChild(0).transform.position - new Vector3(1.0f,0,0);
+                        ply3.transform.position = getFrame.transform.GetChild(0).transform.position - new Vector3(1.0f, 0, 0);
                         ply3.GetComponent<Animator>().SetBool("isWait", true);
                         //---4号---
                         int getPlayerID04 = RandomManager.Instance.GetRandomCharacter(CharacterFieldType.SuperMarket);
                         GameObject ply4 = ObjectPoolManager.Instance.InstantiateMyGameObject
                             (ResourcesManager.Instance.FindPlayerPrefab((getPlayerID04).ToString()));
                         ply4.transform.parent = getFrame.transform;
-                        ply4.transform.position = getFrame.transform.GetChild(0).transform.position + new Vector3(2.0f,0,0);
+                        ply4.transform.position = getFrame.transform.GetChild(0).transform.position + new Vector3(2.0f, 0, 0);
                         ply4.GetComponent<Animator>().SetBool("isWait", true);
                         //---5号---
                         int getPlayerID05 = RandomManager.Instance.GetRandomCharacter(CharacterFieldType.SuperMarket);
                         GameObject ply5 = ObjectPoolManager.Instance.InstantiateMyGameObject
                             (ResourcesManager.Instance.FindPlayerPrefab((getPlayerID05).ToString()));
                         ply5.transform.parent = getFrame.transform;
-                        ply5.transform.position = getFrame.transform.GetChild(0).transform.position - new Vector3(2.0f,0,0);
+                        ply5.transform.position = getFrame.transform.GetChild(0).transform.position - new Vector3(2.0f, 0, 0);
                         ply5.GetComponent<Animator>().SetBool("isWait", true);
 
                         //获得角色存入字典和数据库表
@@ -562,7 +569,7 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                     CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
                     projectMessage.text = "钻石不足，请充值。";
                 }
-                    break;
+                break;
             case 3:
                 //一级判断：判断钻石是否足够
                 if (CurrencyManager.Instance.diamond > 1260)
@@ -603,7 +610,7 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                         CancelNO.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
                         projectMessage.text = "背包空间不足，购买失败。";
                     }
-                    
+
                 }
                 else
                 {
@@ -744,7 +751,7 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
     /// <summary>
     /// 物品实例化方法
     /// </summary>
-    void ItemInstantiationFunc(int[] itemArr,string type)
+    void ItemInstantiationFunc(int[] itemArr, string type)
     {
         //记录格子号
         int number = 0;
@@ -1139,8 +1146,28 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
     /// <param name="data"></param>
     void ConfirmRechargeFunc(PointerEventData data)
     {
-        print("确认充值");
-        _rechargeFrame.SetActive(false);
+        foreach (int id in SQLiteManager.Instance.diamondCode.Keys)
+        {
+            if (_rechargeInputField.text == SQLiteManager.Instance.diamondCode[id].Code)
+            {
+                if (SQLiteManager.Instance.diamondCode[id].Stockpile < 1)
+                {
+                    //充值失败
+                    RechargeFail("<color=#ff0000>充值失败！</color>");
+                    return;
+                }
+                CurrencyManager.Instance.DiamondIncrease(SQLiteManager.Instance.diamondCode[id].Diamond);
+                _rechargeInputField.text = "请输入兑换码...";
+                _diamonds.text = CurrencyManager.Instance.DiamondDisplay();
+                //写入表
+                SQLiteManager.Instance.UpdataDataFromTable(ConstData.DiamondCode, ConstData.Stockpile, 0, "ID", id);
+                SQLiteManager.Instance.diamondCode[id].Stockpile = 0;
+                RechargeFail("<color=#ff0000>充值成功！</color>");
+                return;
+            }
+        }
+        //没有对应码
+        RechargeFail("<color=#ff0000>充值失败！</color>");
     }
 
     /// <summary>
@@ -1258,4 +1285,20 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
         ProjectList_Drag.GetComponent<ScrollRect>().OnEndDrag(data);
     }
     #endregion
+
+    /// <summary>
+    /// 充值内容修改
+    /// </summary>
+    void RechargeFail(string content)
+    {
+        _rechargeContent.text = content;
+        DelayShowRechargeContent();
+    }
+    void DelayShowRechargeContent()
+    {
+        vp_Timer.In(3f, new vp_Timer.Callback(delegate () 
+        {
+            _rechargeContent.text = _tempContent;
+        }));
+    }
 }

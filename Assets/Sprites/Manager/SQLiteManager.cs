@@ -19,6 +19,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
     //数据源：用来保存读到的数据模型
     public Dictionary<int, BagData> bagDataSource = new Dictionary<int, BagData>();
     public Dictionary<int, CharacterListData> characterDataSource = new Dictionary<int, CharacterListData>();
+    public Dictionary<int, DiamondCodeData> diamondCode = new Dictionary<int, DiamondCodeData>();
     public Dictionary<int, EnemyData> enemyDataSource = new Dictionary<int, EnemyData>();
     public Dictionary<int, EquipmentData> equipmentDataSource = new Dictionary<int, EquipmentData>();
     public Dictionary<int, ItemData> itemDataSource = new Dictionary<int, ItemData>();
@@ -63,6 +64,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         //清空数据
         bagDataSource.Clear();
         characterDataSource.Clear();
+        diamondCode.Clear();
         enemyDataSource.Clear();
         equipmentDataSource.Clear();
         itemDataSource.Clear();
@@ -74,6 +76,7 @@ public class SQLiteManager : ManagerBase<SQLiteManager>
         //取出数据存入字典
         readData.GetData(ConstData.Bag);
         readData.GetData(ConstData.CharacterList);
+        readData.GetData(ConstData.DiamondCode);
         readData.GetData(ConstData.Enemy);
         readData.GetData(ConstData.Equipment);
         readData.GetData(ConstData.Item);

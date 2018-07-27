@@ -61,11 +61,11 @@ public class UIManager : ManagerBase<UIManager>
         //UI界面名字一致性
         obj.name = uiname;
         //统一父级
-        obj.GetComponent<RectTransform>().parent = uiParent;
+        obj.transform.parent = uiParent;
         //局部坐标
-        obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
+        obj.transform.localPosition = Vector3.zero;
         //UI的缩放
-        obj.GetComponent<RectTransform>().localScale = Vector3.one;
+        obj.transform.localScale = Vector3.one;
         //添加对应的UI脚本
         if (obj.GetComponent(Type.GetType(uiname)) == null)
         {
