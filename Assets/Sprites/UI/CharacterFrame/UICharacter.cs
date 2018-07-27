@@ -402,6 +402,15 @@ public class UICharacter : MonoBehaviour, IUIBase
             chara.transform.parent = step01.transform;
             chara.name = (selecteHero.player_Id).ToString();
             chara.GetComponent<Animator>().SetBool("isWait", true);
+            selectPrefabsID = selecteHero.PrefabsID;
+        }
+        //如果不是队伍编制模式，显示所有解雇按钮
+        if (isTeam == false)
+        {
+            for (int k = 0; k < playerList.Count; k++)
+            {
+                playerList[k].transform.GetChild(4).gameObject.SetActive(true);
+            }
         }
         //控制区域激活和关闭
         G_ItemListBG.gameObject.SetActive(false);
@@ -414,6 +423,8 @@ public class UICharacter : MonoBehaviour, IUIBase
         G_IntroductionFrame.gameObject.SetActive(false);
         //确认框隐藏
         G_ConfirmFrame.gameObject.SetActive(false);
+        //角色条恢复
+        RedListClear();
     }
     void TeamSwitch(PointerEventData eventData)
     {
@@ -440,6 +451,14 @@ public class UICharacter : MonoBehaviour, IUIBase
         {
             G_CharacterListBG.gameObject.SetActive(true);
         }
+        //如果是队伍编制模式，取消所有解雇按钮
+        if (isTeam == true)
+        {
+            for (int k = 0; k < playerList.Count; k++)
+            {
+                playerList[k].transform.GetChild(4).gameObject.SetActive(false);
+            }
+        }
         //操作区附属激活与关闭
         transform.Find(ConstData.ControllerExArea_SkillMode).gameObject.SetActive(false);
         transform.Find(ConstData.ControllerExArea_TeamMode).gameObject.SetActive(true);
@@ -447,6 +466,8 @@ public class UICharacter : MonoBehaviour, IUIBase
         //多余窗口关闭
         transform.Find(ConstData.Introduction).gameObject.SetActive(false);
         transform.Find(ConstData.ConfirmFrame).gameObject.SetActive(false);
+        //角色条染色
+        RedListDraw();
     }
     void EquipmentSwitch(PointerEventData eventData)
     {
@@ -462,6 +483,7 @@ public class UICharacter : MonoBehaviour, IUIBase
             chara.transform.parent = step01.transform;
             chara.name = (selecteHero.player_Id).ToString();
             chara.GetComponent<Animator>().SetBool("isWait", true);
+            selectPrefabsID = selecteHero.PrefabsID;
         }
         //控制区域激活和关闭
         transform.Find(ConstData.ControllerArea_ItemListBG).gameObject.SetActive(true);
@@ -666,9 +688,23 @@ public class UICharacter : MonoBehaviour, IUIBase
     //确认取消窗口
     void ConfirmOK(PointerEventData eventData)
     {
-        //清空画面
-        GameAreaClear("Team", "");
+        if (SQLiteManager.Instance.team[SQLiteManager.Instance.playerDataSource[deleteNum].player_Class] != null)
+        {
+            if (SQLiteManager.Instance.team[SQLiteManager.Instance.playerDataSource[deleteNum].player_Class].playerData.player_Id == deleteNum)
+            {
+                confirmFrame.transform.GetChild(2).gameObject.SetActive(false);
+                confirmFrame.transform.GetChild(3).transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -245);
+                deleteCharacterMessage.text = "该角色在队伍编制中，无法解雇，请先从队伍中撤下。";
+                return;
+            }
+        }
         int price = (int)(SQLiteManager.Instance.playerDataSource[deleteNum].GoldCoin * 0.1f);
+        //清空临时队伍列表
+        tempTeamDic[ConstData.Saber] = null;
+        tempTeamDic[ConstData.Knight] = null;
+        tempTeamDic[ConstData.Berserker] = null;
+        tempTeamDic[ConstData.Caster] = null;
+        tempTeamDic[ConstData.Hunter] = null;
         DeleteHero(deleteNum);
         //删除选中
         selecteHero = null;
@@ -679,24 +715,47 @@ public class UICharacter : MonoBehaviour, IUIBase
         {
             case 0:
                 CharacterBarCreate(ConstData.All);
+                ItemBarCreate(ConstData.All);
+                UpdataTheEquipment();
+                //清空画面
+                GameAreaClear("Team", "");
                 break;
             case 1:
                 CharacterBarCreate(ConstData.Saber);
+                ItemBarCreate(ConstData.Saber);
+                UpdataTheEquipment();
+                //清空画面
+                GameAreaClear("Team", "");
                 break;
             case 2:
                 CharacterBarCreate(ConstData.Knight);
+                ItemBarCreate(ConstData.Knight);
+                UpdataTheEquipment();
+                //清空画面
+                GameAreaClear("Team", "");
                 break;
             case 3:
                 CharacterBarCreate(ConstData.Berserker);
+                ItemBarCreate(ConstData.Berserker);
+                UpdataTheEquipment();
+                //清空画面
+                GameAreaClear("Team", "");
                 break;
             case 4:
                 CharacterBarCreate(ConstData.Caster);
+                ItemBarCreate(ConstData.Caster);
+                UpdataTheEquipment();
+                //清空画面
+                GameAreaClear("Team", "");
                 break;
             case 5:
                 CharacterBarCreate(ConstData.Hunter);
+                ItemBarCreate(ConstData.Hunter);
+                UpdataTheEquipment();
+                //清空画面
+                GameAreaClear("Team", "");
                 break;
         }
-
         HeroDataDisplay();
         //金币增加
         CurrencyManager.Instance.GoldCoinIncrease(price);
@@ -705,6 +764,8 @@ public class UICharacter : MonoBehaviour, IUIBase
     }
     void CancelNO(PointerEventData eventData)
     {
+        confirmFrame.transform.GetChild(2).gameObject.SetActive(true);
+        confirmFrame.transform.GetChild(3).transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(225, -245);
         confirmFrame.gameObject.SetActive(false);
         deleteNum = 0;
     }
@@ -717,8 +778,31 @@ public class UICharacter : MonoBehaviour, IUIBase
             {
                 //临时队伍添加
                 tempTeamDic[selecteHero.player_Class] = selecteHero;
+                //重新生成角色条
+                switch (filterID)
+                {
+                    case 0:
+                        CharacterBarCreate(ConstData.All);
+                        break;
+                    case 1:
+                        CharacterBarCreate(ConstData.Saber);
+                        break;
+                    case 2:
+                        CharacterBarCreate(ConstData.Knight);
+                        break;
+                    case 3:
+                        CharacterBarCreate(ConstData.Berserker);
+                        break;
+                    case 4:
+                        CharacterBarCreate(ConstData.Caster);
+                        break;
+                    case 5:
+                        CharacterBarCreate(ConstData.Hunter);
+                        break;
+                }
                 //更新显示位置
                 ShowTheTeamMumber(selecteHero.player_Class);
+                RedListDraw();
             }
         }
     }
@@ -731,16 +815,39 @@ public class UICharacter : MonoBehaviour, IUIBase
             {
                 //临时队伍移除
                 tempTeamDic[selecteHero.player_Class] = null;
-                //条去色
-                foreach (GameObject bar in playerList)
+                //重新生成角色条
+                switch (filterID)
                 {
-                    if (bar.name == (selecteHero.player_Id).ToString())
-                    {
-                        bar.GetComponent<Image>().sprite = ResourcesManager.Instance.FindSprite("LineList");
-                    }
+                    case 0:
+                        CharacterBarCreate(ConstData.All);
+                        break;
+                    case 1:
+                        CharacterBarCreate(ConstData.Saber);
+                        break;
+                    case 2:
+                        CharacterBarCreate(ConstData.Knight);
+                        break;
+                    case 3:
+                        CharacterBarCreate(ConstData.Berserker);
+                        break;
+                    case 4:
+                        CharacterBarCreate(ConstData.Caster);
+                        break;
+                    case 5:
+                        CharacterBarCreate(ConstData.Hunter);
+                        break;
                 }
+                //条去色
+                //foreach (GameObject bar in playerList)
+                //{
+                //    if (bar.name == (selecteHero.player_Id).ToString())
+                //    {
+                //        bar.GetComponent<Image>().sprite = characterBar.GetComponent<Image>().sprite;
+                //    }
+                //}
                 //更新显示位置
                 ShowTheTeamMumber(selecteHero.player_Class);
+                RedListDraw();
             }
         }
     }
@@ -789,7 +896,7 @@ public class UICharacter : MonoBehaviour, IUIBase
             {
                 introductionFrame.gameObject.SetActive(true);
                 EquipmentData eqdata = SQLiteManager.Instance.equipmentDataSource
-                    [SQLiteManager.Instance.playerDataSource[selecteHero.player_Id].Weapon];
+                    [selecteHero.Weapon];
                 string[] tempText = new string[]
                     {
                 "\n武器名：",
@@ -819,7 +926,7 @@ public class UICharacter : MonoBehaviour, IUIBase
             {
                 introductionFrame.gameObject.SetActive(true);
                 EquipmentData eqdata = SQLiteManager.Instance.equipmentDataSource
-                    [SQLiteManager.Instance.playerDataSource[selecteHero.player_Id].Equipment];
+                    [selecteHero.Equipment];
                 string[] tempText = new string[]
                     {
                 "\n防具名：",
@@ -1416,23 +1523,33 @@ public class UICharacter : MonoBehaviour, IUIBase
                     //加入列表
                     playerList.Add(_tempHeroBar);
                     //条的颜色是否需要改变判断
+                    //if (isTeam == true)
+                    //{
+                    //    for (int j = 0; j < stepList.Count; j++)
+                    //    {
+                    //        if (stepList[j].transform.childCount != 1)
+                    //        {
+                    //            if (_tempHeroBar.name == stepList[j].transform.GetChild(1).name)
+                    //            {
+                    //                _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
+                    //            }
+                    //        }
+                    //    }
+                    //    if (_tempHeroBar.name == "1300")
+                    //    {
+                    //        _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
+                    //    }
+                    //}
+                    //如果是队伍编制模式，取消所有解雇按钮
                     if (isTeam == true)
                     {
-                        for (int j = 0; j < stepList.Count; j++)
+                        for (int k = 0; k < playerList.Count; k++)
                         {
-                            if (stepList[j].transform.childCount != 1)
-                            {
-                                if (_tempHeroBar.name == stepList[j].transform.GetChild(1).name)
-                                {
-                                    _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
-                                }
-                            }
-                        }
-                        if (_tempHeroBar.name == "1300")
-                        {
-                            _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
+                            playerList[k].transform.GetChild(4).gameObject.SetActive(false);
                         }
                     }
+                    //取消旗手的解雇
+                    playerList[0].transform.GetChild(4).gameObject.SetActive(false);
                 }
                 #endregion
                 break;
@@ -1498,23 +1615,33 @@ public class UICharacter : MonoBehaviour, IUIBase
                         //加入列表
                         playerList.Add(_tempHeroBar);
                         //条的颜色是否需要改变判断
+                        //if (isTeam == true)
+                        //{
+                        //    for (int j = 0; j < stepList.Count; j++)
+                        //    {
+                        //        if (stepList[j].transform.childCount != 1)
+                        //        {
+                        //            if (_tempHeroBar.name == stepList[j].transform.GetChild(1).name)
+                        //            {
+                        //                _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
+                        //            }
+                        //        }
+                        //    }
+                        //    if (_tempHeroBar.name == "1300")
+                        //    {
+                        //        _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
+                        //    }
+                        //}
+                        //如果是队伍编制模式，取消所有解雇按钮
                         if (isTeam == true)
                         {
-                            for (int j = 0; j < stepList.Count; j++)
+                            for (int k = 0; k < playerList.Count; k++)
                             {
-                                if (stepList[j].transform.childCount != 1)
-                                {
-                                    if (_tempHeroBar.name == stepList[j].transform.GetChild(1).name)
-                                    {
-                                        _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
-                                    }
-                                }
-                            }
-                            if (_tempHeroBar.name == "1300")
-                            {
-                                _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
+                                playerList[k].transform.GetChild(4).gameObject.SetActive(false);
                             }
                         }
+                        //取消旗手的解雇
+                        playerList[0].transform.GetChild(4).gameObject.SetActive(false);
                     }
                 }
                 filterCount = 0;
@@ -1582,23 +1709,33 @@ public class UICharacter : MonoBehaviour, IUIBase
                         //加入列表
                         playerList.Add(_tempHeroBar);
                         //条的颜色是否需要改变判断
+                        //if (isTeam == true)
+                        //{
+                        //    for (int j = 0; j < stepList.Count; j++)
+                        //    {
+                        //        if (stepList[j].transform.childCount != 1)
+                        //        {
+                        //            if (_tempHeroBar.name == stepList[j].transform.GetChild(1).name)
+                        //            {
+                        //                _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
+                        //            }
+                        //        }
+                        //    }
+                        //    if (_tempHeroBar.name == "1300")
+                        //    {
+                        //        _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
+                        //    }
+                        //}
+                        //如果是队伍编制模式，取消所有解雇按钮
                         if (isTeam == true)
                         {
-                            for (int j = 0; j < stepList.Count; j++)
+                            for (int k = 0; k < playerList.Count; k++)
                             {
-                                if (stepList[j].transform.childCount != 1)
-                                {
-                                    if (_tempHeroBar.name == stepList[j].transform.GetChild(1).name)
-                                    {
-                                        _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
-                                    }
-                                }
-                            }
-                            if (_tempHeroBar.name == "1300")
-                            {
-                                _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
+                                playerList[k].transform.GetChild(4).gameObject.SetActive(false);
                             }
                         }
+                        //取消旗手的解雇
+                        playerList[0].transform.GetChild(4).gameObject.SetActive(false);
                     }
                 }
                 filterCount2 = 0;
@@ -1666,23 +1803,33 @@ public class UICharacter : MonoBehaviour, IUIBase
                         //加入列表
                         playerList.Add(_tempHeroBar);
                         //条的颜色是否需要改变判断
+                        //if (isTeam == true)
+                        //{
+                        //    for (int j = 0; j < stepList.Count; j++)
+                        //    {
+                        //        if (stepList[j].transform.childCount != 1)
+                        //        {
+                        //            if (_tempHeroBar.name == stepList[j].transform.GetChild(1).name)
+                        //            {
+                        //                _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
+                        //            }
+                        //        }
+                        //    }
+                        //    if (_tempHeroBar.name == "1300")
+                        //    {
+                        //        _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
+                        //    }
+                        //}
+                        //如果是队伍编制模式，取消所有解雇按钮
                         if (isTeam == true)
                         {
-                            for (int j = 0; j < stepList.Count; j++)
+                            for (int k = 0; k < playerList.Count; k++)
                             {
-                                if (stepList[j].transform.childCount != 1)
-                                {
-                                    if (_tempHeroBar.name == stepList[j].transform.GetChild(1).name)
-                                    {
-                                        _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
-                                    }
-                                }
-                            }
-                            if (_tempHeroBar.name == "1300")
-                            {
-                                _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
+                                playerList[k].transform.GetChild(4).gameObject.SetActive(false);
                             }
                         }
+                        //取消旗手的解雇
+                        playerList[0].transform.GetChild(4).gameObject.SetActive(false);
                     }
                 }
                 filterCount3 = 0;
@@ -1750,23 +1897,33 @@ public class UICharacter : MonoBehaviour, IUIBase
                         //加入列表
                         playerList.Add(_tempHeroBar);
                         //条的颜色是否需要改变判断
+                        //if (isTeam == true)
+                        //{
+                        //    for (int j = 0; j < stepList.Count; j++)
+                        //    {
+                        //        if (stepList[j].transform.childCount != 1)
+                        //        {
+                        //            if (_tempHeroBar.name == stepList[j].transform.GetChild(1).name)
+                        //            {
+                        //                _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
+                        //            }
+                        //        }
+                        //    }
+                        //    if (_tempHeroBar.name == "1300")
+                        //    {
+                        //        _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
+                        //    }
+                        //}
+                        //如果是队伍编制模式，取消所有解雇按钮
                         if (isTeam == true)
                         {
-                            for (int j = 0; j < stepList.Count; j++)
+                            for (int k = 0; k < playerList.Count; k++)
                             {
-                                if (stepList[j].transform.childCount != 1)
-                                {
-                                    if (_tempHeroBar.name == stepList[j].transform.GetChild(1).name)
-                                    {
-                                        _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
-                                    }
-                                }
-                            }
-                            if (_tempHeroBar.name == "1300")
-                            {
-                                _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
+                                playerList[k].transform.GetChild(4).gameObject.SetActive(false);
                             }
                         }
+                        //取消旗手的解雇
+                        playerList[0].transform.GetChild(4).gameObject.SetActive(false);
                     }
                 }
                 filterCount4 = 0;
@@ -1834,23 +1991,33 @@ public class UICharacter : MonoBehaviour, IUIBase
                         //加入列表
                         playerList.Add(_tempHeroBar);
                         //条的颜色是否需要改变判断
+                        //if (isTeam == true)
+                        //{
+                        //    for (int j = 0; j < stepList.Count; j++)
+                        //    {
+                        //        if (stepList[j].transform.childCount != 1)
+                        //        {
+                        //            if (_tempHeroBar.name == stepList[j].transform.GetChild(1).name)
+                        //            {
+                        //                _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
+                        //            }
+                        //        }
+                        //    }
+                        //    if (_tempHeroBar.name == "1300")
+                        //    {
+                        //        _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
+                        //    }
+                        //}
+                        //如果是队伍编制模式，取消所有解雇按钮
                         if (isTeam == true)
                         {
-                            for (int j = 0; j < stepList.Count; j++)
+                            for (int k = 0; k < playerList.Count; k++)
                             {
-                                if (stepList[j].transform.childCount != 1)
-                                {
-                                    if (_tempHeroBar.name == stepList[j].transform.GetChild(1).name)
-                                    {
-                                        _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
-                                    }
-                                }
-                            }
-                            if (_tempHeroBar.name == "1300")
-                            {
-                                _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
+                                playerList[k].transform.GetChild(4).gameObject.SetActive(false);
                             }
                         }
+                        //取消旗手的解雇
+                        playerList[0].transform.GetChild(4).gameObject.SetActive(false);
                     }
                 }
                 filterCount5 = 0;
@@ -1901,6 +2068,7 @@ public class UICharacter : MonoBehaviour, IUIBase
                     case "Default":
                         if (step01.transform.childCount != 1)
                         {
+                            step01.transform.GetChild(1).name = step01.transform.GetChild(1).GetChild(0).name;
                             step01.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
                             ObjectPoolManager.Instance.RecycleMyGameObject(step01.transform.GetChild(1).gameObject);
                         }
@@ -1908,8 +2076,7 @@ public class UICharacter : MonoBehaviour, IUIBase
                     case ConstData.Saber:
                         if (step01.transform.childCount != 1)
                         {
-                            step01.transform.GetChild(1).name = (SQLiteManager.Instance.playerDataSource
-                                    [Convert.ToInt32(step01.transform.GetChild(1).name)].PrefabsID).ToString();
+                            step01.transform.GetChild(1).name = step01.transform.GetChild(1).GetChild(0).name;
                             step01.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
                             ObjectPoolManager.Instance.RecycleMyGameObject(step01.transform.GetChild(1).gameObject);
                         }
@@ -1917,8 +2084,7 @@ public class UICharacter : MonoBehaviour, IUIBase
                     case ConstData.Knight:
                         if (step02.transform.childCount != 1)
                         {
-                            step02.transform.GetChild(1).name = (SQLiteManager.Instance.playerDataSource
-                                    [Convert.ToInt32(step02.transform.GetChild(1).name)].PrefabsID).ToString();
+                            step02.transform.GetChild(1).name = step02.transform.GetChild(1).GetChild(0).name;
                             step02.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
                             ObjectPoolManager.Instance.RecycleMyGameObject(step02.transform.GetChild(1).gameObject);
                         }
@@ -1926,8 +2092,7 @@ public class UICharacter : MonoBehaviour, IUIBase
                     case ConstData.Berserker:
                         if (step03.transform.childCount != 1)
                         {
-                            step03.transform.GetChild(1).name = (SQLiteManager.Instance.playerDataSource
-                                    [Convert.ToInt32(step03.transform.GetChild(1).name)].PrefabsID).ToString();
+                            step03.transform.GetChild(1).name = step03.transform.GetChild(1).GetChild(0).name;
                             step03.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
                             ObjectPoolManager.Instance.RecycleMyGameObject(step03.transform.GetChild(1).gameObject);
                         }
@@ -1935,8 +2100,7 @@ public class UICharacter : MonoBehaviour, IUIBase
                     case ConstData.Caster:
                         if (step04.transform.childCount != 1)
                         {
-                            step04.transform.GetChild(1).name = (SQLiteManager.Instance.playerDataSource
-                                    [Convert.ToInt32(step04.transform.GetChild(1).name)].PrefabsID).ToString();
+                            step04.transform.GetChild(1).name = step04.transform.GetChild(1).GetChild(0).name;
                             step04.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
                             ObjectPoolManager.Instance.RecycleMyGameObject(step04.transform.GetChild(1).gameObject);
                         }
@@ -1944,8 +2108,7 @@ public class UICharacter : MonoBehaviour, IUIBase
                     case ConstData.Hunter:
                         if (step05.transform.childCount != 1)
                         {
-                            step05.transform.GetChild(1).name = (SQLiteManager.Instance.playerDataSource
-                                    [Convert.ToInt32(step05.transform.GetChild(1).name)].PrefabsID).ToString();
+                            step05.transform.GetChild(1).name = step05.transform.GetChild(1).GetChild(0).name;
                             step05.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
                             ObjectPoolManager.Instance.RecycleMyGameObject(step05.transform.GetChild(1).gameObject);
                         }
@@ -1957,8 +2120,7 @@ public class UICharacter : MonoBehaviour, IUIBase
                 {
                     if (stepList[i].transform.childCount != 1)
                     {
-                        stepList[i].transform.GetChild(1).name = (SQLiteManager.Instance.playerDataSource
-                            [Convert.ToInt32(stepList[i].transform.GetChild(1).name)].PrefabsID).ToString();
+                        stepList[i].transform.GetChild(1).name = stepList[i].transform.GetChild(1).GetChild(0).name;
                         stepList[i].transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
                         ObjectPoolManager.Instance.RecycleMyGameObject(stepList[i].transform.GetChild(1).gameObject);
                     }
@@ -2020,13 +2182,13 @@ public class UICharacter : MonoBehaviour, IUIBase
                     sbr.name = (tempTeamDic[ConstData.Saber].player_Id).ToString();
                     sbr.transform.GetComponent<Animator>().SetBool("isWait", true);
                     //条变色
-                    foreach (GameObject bar in playerList)
-                    {
-                        if (bar.name == (tempTeamDic[ConstData.Saber].player_Id).ToString())
-                        {
-                            bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
-                        }
-                    }
+                    //foreach (GameObject bar in playerList)
+                    //{
+                    //    if (bar.name == sbr.name)
+                    //    {
+                    //        bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
+                    //    }
+                    //}
                 }
                 if (tempTeamDic[ConstData.Knight] != null)
                 {
@@ -2040,13 +2202,13 @@ public class UICharacter : MonoBehaviour, IUIBase
                     knt.name = (tempTeamDic[ConstData.Knight].player_Id).ToString();
                     knt.transform.GetComponent<Animator>().SetBool("isWait", true);
                     //条变色
-                    foreach (GameObject bar in playerList)
-                    {
-                        if (bar.name == (tempTeamDic[ConstData.Knight].player_Id).ToString())
-                        {
-                            bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
-                        }
-                    }
+                    //foreach (GameObject bar in playerList)
+                    //{
+                    //    if (bar.name == knt.name)
+                    //    {
+                    //        bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
+                    //    }
+                    //}
                 }
                 if (tempTeamDic[ConstData.Berserker] != null)
                 {
@@ -2060,13 +2222,13 @@ public class UICharacter : MonoBehaviour, IUIBase
                     bsk.name = (tempTeamDic[ConstData.Berserker].player_Id).ToString();
                     bsk.transform.GetComponent<Animator>().SetBool("isWait", true);
                     //条变色
-                    foreach (GameObject bar in playerList)
-                    {
-                        if (bar.name == (tempTeamDic[ConstData.Berserker].player_Id).ToString())
-                        {
-                            bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
-                        }
-                    }
+                    //foreach (GameObject bar in playerList)
+                    //{
+                    //    if (bar.name == bsk.name)
+                    //    {
+                    //        bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
+                    //    }
+                    //}
                 }
                 if (tempTeamDic[ConstData.Caster] != null)
                 {
@@ -2080,13 +2242,13 @@ public class UICharacter : MonoBehaviour, IUIBase
                     cst.name = (tempTeamDic[ConstData.Caster].player_Id).ToString();
                     cst.transform.GetComponent<Animator>().SetBool("isWait", true);
                     //条变色
-                    foreach (GameObject bar in playerList)
-                    {
-                        if (bar.name == (tempTeamDic[ConstData.Caster].player_Id).ToString())
-                        {
-                            bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
-                        }
-                    }
+                    //foreach (GameObject bar in playerList)
+                    //{
+                    //    if (bar.name == cst.name)
+                    //    {
+                    //        bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
+                    //    }
+                    //}
                 }
                 if (tempTeamDic[ConstData.Hunter] != null)
                 {
@@ -2100,13 +2262,13 @@ public class UICharacter : MonoBehaviour, IUIBase
                     hut.name = (tempTeamDic[ConstData.Hunter].player_Id).ToString();
                     hut.transform.GetComponent<Animator>().SetBool("isWait", true);
                     //条变色
-                    foreach (GameObject bar in playerList)
-                    {
-                        if (bar.name == (tempTeamDic[ConstData.Hunter].player_Id).ToString())
-                        {
-                            bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
-                        }
-                    }
+                    //foreach (GameObject bar in playerList)
+                    //{
+                    //    if (bar.name == hut.name)
+                    //    {
+                    //        bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
+                    //    }
+                    //}
                 }
                 break;
             case ConstData.Saber:
@@ -2122,13 +2284,13 @@ public class UICharacter : MonoBehaviour, IUIBase
                     sbr.name = (tempTeamDic[ConstData.Saber].player_Id).ToString();
                     sbr.transform.GetComponent<Animator>().SetBool("isWait", true);
                     //条变色
-                    foreach (GameObject bar in playerList)
-                    {
-                        if (bar.name == (tempTeamDic[ConstData.Saber].player_Id).ToString())
-                        {
-                            bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
-                        }
-                    }
+                    //foreach (GameObject bar in playerList)
+                    //{
+                    //    if (bar.name == sbr.name)
+                    //    {
+                    //        bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
+                    //    }
+                    //}
                 }
                 break;
             case ConstData.Knight:
@@ -2144,13 +2306,13 @@ public class UICharacter : MonoBehaviour, IUIBase
                     knt.name = (tempTeamDic[ConstData.Knight].player_Id).ToString();
                     knt.transform.GetComponent<Animator>().SetBool("isWait", true);
                     //条变色
-                    foreach (GameObject bar in playerList)
-                    {
-                        if (bar.name == (tempTeamDic[ConstData.Knight].player_Id).ToString())
-                        {
-                            bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
-                        }
-                    }
+                    //foreach (GameObject bar in playerList)
+                    //{
+                    //    if (bar.name == knt.name)
+                    //    {
+                    //        bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
+                    //    }
+                    //}
                 }
                 break;
             case ConstData.Berserker:
@@ -2166,13 +2328,13 @@ public class UICharacter : MonoBehaviour, IUIBase
                     bsk.name = (tempTeamDic[ConstData.Berserker].player_Id).ToString();
                     bsk.transform.GetComponent<Animator>().SetBool("isWait", true);
                     //条变色
-                    foreach (GameObject bar in playerList)
-                    {
-                        if (bar.name == (tempTeamDic[ConstData.Berserker].player_Id).ToString())
-                        {
-                            bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
-                        }
-                    }
+                    //foreach (GameObject bar in playerList)
+                    //{
+                    //    if (bar.name == bsk.name)
+                    //    {
+                    //        bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
+                    //    }
+                    //}
                 }
                 break;
             case ConstData.Caster:
@@ -2188,13 +2350,13 @@ public class UICharacter : MonoBehaviour, IUIBase
                     cst.name = (tempTeamDic[ConstData.Caster].player_Id).ToString();
                     cst.transform.GetComponent<Animator>().SetBool("isWait", true);
                     //条变色
-                    foreach (GameObject bar in playerList)
-                    {
-                        if (bar.name == (tempTeamDic[ConstData.Caster].player_Id).ToString())
-                        {
-                            bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
-                        }
-                    }
+                    //foreach (GameObject bar in playerList)
+                    //{
+                    //    if (bar.name == cst.name)
+                    //    {
+                    //        bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
+                    //    }
+                    //}
                 }
                 break;
             case ConstData.Hunter:
@@ -2210,13 +2372,13 @@ public class UICharacter : MonoBehaviour, IUIBase
                     hut.name = (tempTeamDic[ConstData.Hunter].player_Id).ToString();
                     hut.transform.GetComponent<Animator>().SetBool("isWait", true);
                     //条变色
-                    foreach (GameObject bar in playerList)
-                    {
-                        if (bar.name == (tempTeamDic[ConstData.Hunter].player_Id).ToString())
-                        {
-                            bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
-                        }
-                    }
+                    //foreach (GameObject bar in playerList)
+                    //{
+                    //    if (bar.name == hut.name)
+                    //    {
+                    //        bar.GetComponent<Image>().sprite = bar.transform.GetChild(0).GetComponent<Image>().sprite;
+                    //    }
+                    //}
                 }
                 break;
         }
@@ -2329,6 +2491,19 @@ public class UICharacter : MonoBehaviour, IUIBase
                 if (itemList.Count < ConstData.GridCount)
                 {
                     for (int i = 0; i < (ConstData.GridCount - itemList.Count); i++)
+                    {
+                        GameObject nullGrid = ObjectPoolManager.Instance.InstantiateMyGameObject(itemGrid);
+                        //指定父物体
+                        nullGrid.transform.parent = transform.Find(ConstData.ControllerArea_ListContent2).transform;
+                        //图的大小设置
+                        nullGrid.transform.localScale = new Vector3(1, 1, 1);
+                        null_itemList.Add(nullGrid);
+                    }
+                }
+                else
+                {
+                    int needGrid = 6 - ((itemList.Count - 36) / 6);
+                    for (int j = 0; j < needGrid; j++)
                     {
                         GameObject nullGrid = ObjectPoolManager.Instance.InstantiateMyGameObject(itemGrid);
                         //指定父物体
@@ -3020,5 +3195,68 @@ public class UICharacter : MonoBehaviour, IUIBase
             SQLiteManager.Instance.UpdataDataFromTable(ConstData.Player, ConstData.player_ID, i, ConstData.player_ID, (i + 1));
         }
         SQLiteManager.Instance.playerDataSource.Remove((1300 + SQLiteManager.Instance.playerDataSource.Count - 1));
+    }
+
+    void RedListClear()
+    {
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            playerList[i].GetComponent<Image>().sprite = characterBar.GetComponent<Image>().sprite;
+        }
+    }
+    void RedListDraw()
+    {
+        RedListClear();
+        playerList[0].GetComponent<Image>().sprite = playerList[0].transform.GetChild(0).GetComponent<Image>().sprite;
+        if (tempTeamDic[ConstData.Saber] != null)
+        {
+            for (int i = 1; i < playerList.Count; i++)
+            {
+                if (playerList[i].name == (tempTeamDic[ConstData.Saber].player_Id).ToString())
+                {
+                    playerList[i].GetComponent<Image>().sprite = playerList[i].transform.GetChild(0).GetComponent<Image>().sprite;
+                }
+            }
+        }
+        if (tempTeamDic[ConstData.Knight] != null)
+        {
+            for (int i = 1; i < playerList.Count; i++)
+            {
+                if (playerList[i].name == (tempTeamDic[ConstData.Knight].player_Id).ToString())
+                {
+                    playerList[i].GetComponent<Image>().sprite = playerList[i].transform.GetChild(0).GetComponent<Image>().sprite;
+                }
+            }
+        }
+        if (tempTeamDic[ConstData.Berserker] != null)
+        {
+            for (int i = 1; i < playerList.Count; i++)
+            {
+                if (playerList[i].name == (tempTeamDic[ConstData.Berserker].player_Id).ToString())
+                {
+                    playerList[i].GetComponent<Image>().sprite = playerList[i].transform.GetChild(0).GetComponent<Image>().sprite;
+                }
+            }
+        }
+        if (tempTeamDic[ConstData.Caster] != null)
+        {
+            for (int i = 1; i < playerList.Count; i++)
+            {
+                if (playerList[i].name == (tempTeamDic[ConstData.Caster].player_Id).ToString())
+                {
+                    playerList[i].GetComponent<Image>().sprite = playerList[i].transform.GetChild(0).GetComponent<Image>().sprite;
+                }
+            }
+        }
+        if (tempTeamDic[ConstData.Hunter] != null)
+        {
+            for (int i = 1; i < playerList.Count; i++)
+            {
+                if (playerList[i].name == (tempTeamDic[ConstData.Hunter].player_Id).ToString())
+                {
+                    playerList[i].GetComponent<Image>().sprite = playerList[i].transform.GetChild(0).GetComponent<Image>().sprite;
+                }
+            }
+        }
     }
 }

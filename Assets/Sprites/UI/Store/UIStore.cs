@@ -201,7 +201,7 @@ public class UIStore : MonoBehaviour, IUIBase
 
         weaponSellList = new int[]
             {
-                2001,2002,2003,2004,2016,2017,2018,2019,2028,2029,2030,2031,2040,2041,2042,2043,2052,2053,2054,2055
+                2001,2002,2003,2004,2005,2006,2007,2016,2017,2018,2019,2020,2021,2022,2028,2029,2030,2031,2032,2033,2034,2040,2041,2042,2043,2044,2045,2046,2052,2053,2054,2055,2056,2057,2058
             };
         equipmentSellList = new int[]
             {
@@ -2986,6 +2986,61 @@ public class UIStore : MonoBehaviour, IUIBase
                 SQLiteManager.Instance.UpdataDataFromTable(ConstData.Bag, ConstData.Bag_Material, itemID, ConstData.Bag_Grid, (i + 1));
                 return;
             }
+        }
+    }
+
+    /// <summary>
+    /// 装备格内容区域自适应长度
+    /// </summary>
+    /// <param 筛选模式="FilterClass"></param>
+    void ItemBarContentAdaptive(int frameID)
+    {
+        switch (frameID)
+        {
+            case 1:
+                int tempheight = 1200;
+                transform.Find(ConstData.ControllerArea_StoreListBG_WP).GetChild(0).GetChild(0).GetComponent<RectTransform>().sizeDelta
+                    = new Vector2(1200, tempheight);
+                if (storeList_WP.Count > ConstData.GridCount)
+                {
+                    tempheight = 1200 + ((int)((storeList_WP.Count - ConstData.GridCount) / 6) + 1) * 200;
+                    transform.Find(ConstData.ControllerArea_StoreListBG_WP).GetChild(0).GetChild(0).GetComponent<RectTransform>().sizeDelta
+                        = new Vector2(1200, tempheight);
+                }
+                break;
+            case 2:
+                int tempheight2 = 1200;
+                transform.Find(ConstData.ControllerArea_StoreListBG_EQ).GetChild(0).GetChild(0).GetComponent<RectTransform>().sizeDelta
+                    = new Vector2(1200, tempheight2);
+                if (storeList_WP.Count > ConstData.GridCount)
+                {
+                    tempheight2 = 1200 + ((int)((storeList_EQ.Count - ConstData.GridCount) / 6) + 1) * 200;
+                    transform.Find(ConstData.ControllerArea_StoreListBG_EQ).GetChild(0).GetChild(0).GetComponent<RectTransform>().sizeDelta
+                        = new Vector2(1200, tempheight2);
+                }
+                break;
+            case 3:
+                int tempheight3 = 1200;
+                transform.Find(ConstData.ControllerArea_StoreListBG_CO).GetChild(0).GetChild(0).GetComponent<RectTransform>().sizeDelta
+                    = new Vector2(1200, tempheight3);
+                if (storeList_WP.Count > ConstData.GridCount)
+                {
+                    tempheight3 = 1200 + ((int)((storeList_CO.Count - ConstData.GridCount) / 6) + 1) * 200;
+                    transform.Find(ConstData.ControllerArea_StoreListBG_CO).GetChild(0).GetChild(0).GetComponent<RectTransform>().sizeDelta
+                        = new Vector2(1200, tempheight3);
+                }
+                break;
+            case 4:
+                int tempheight4 = 1200;
+                transform.Find(ConstData.ControllerArea_StoreListBG_MT).GetChild(0).GetChild(0).GetComponent<RectTransform>().sizeDelta
+                    = new Vector2(1200, tempheight4);
+                if (storeList_WP.Count > ConstData.GridCount)
+                {
+                    tempheight4 = 1200 + ((int)((storeList_MT.Count - ConstData.GridCount) / 6) + 1) * 200;
+                    transform.Find(ConstData.ControllerArea_StoreListBG_MT).GetChild(0).GetChild(0).GetComponent<RectTransform>().sizeDelta
+                        = new Vector2(1200, tempheight4);
+                }
+                break;
         }
     }
 }

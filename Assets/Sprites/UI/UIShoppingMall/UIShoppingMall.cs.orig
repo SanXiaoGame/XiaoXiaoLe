@@ -1299,6 +1299,7 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
     #endregion
 
     /// <summary>
+<<<<<<< Updated upstream
     /// 充值内容修改
     /// </summary>
     void RechargeFail(string content)
@@ -1312,8 +1313,7 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
         {
             _rechargeContent.text = _tempContent;
         }));
-    }
-	/// <summary>
+=======
     /// 装备格内容区域自适应长度
     /// </summary>
     /// <param 筛选模式="FilterClass"></param>
@@ -1326,6 +1326,6 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
             tempheight = 1200 + ((int)((itemList.Count - ConstData.GridCount) / 6) + 1) * 200;
             transform.Find(ConstData.ControllerArea_ListContent2).GetComponent<RectTransform>().sizeDelta = new Vector2(1200, tempheight);
         }
+>>>>>>> Stashed changes
     }
-	
 }
