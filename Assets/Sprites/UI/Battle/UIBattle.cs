@@ -94,14 +94,14 @@ public class UIBattle : MonoBehaviour, IUIBase
         itemFrameList.Add(itemTwo);
         itemFrameList.Add(itemThree);
         itemFrameList.Add(itemFour);
-        //获取相机
-        gameCamera = transform.Find("/GameCamera").gameObject;
     }
 
     //进入界面
     public void OnEntering()
     {
         gameObject.SetActive(true);
+        //获取相机
+        gameCamera = transform.Find("/GameCamera").gameObject;
         //游戏画面区域生成
         GameArea = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindUIPrefab(ConstData.Stage01));
         GameArea.transform.position = ResourcesManager.Instance.FindUIPrefab(ConstData.Stage01).transform.position;
@@ -175,8 +175,8 @@ public class UIBattle : MonoBehaviour, IUIBase
         //清空所有需要清空的东西
         ClearAll();
         ObjectPoolManager.Instance.RecycleMyGameObject(GameArea);
-        UIManager.Instance.PopUIStack();
         ConfirmFrame.SetActive(false);
+        SceneAss_Manager.Instance.LoadingFunc(2);
     }
     /// <summary>
     /// 取消返回

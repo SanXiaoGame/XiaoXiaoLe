@@ -301,6 +301,7 @@ public struct ConstData
     public const string RechargeCloseButton = "RechargeFrame/CloseButton";
     public const string RechargeConfirmButton = "RechargeFrame/RechargeConfirmButton";
     public const string ContractSetConfirmFrame = "ContractSetConfirmFrame";
+    public const string RechargeContent = "RechargeFrame/ContentBG/Content";
     /// <summary>
     /// 装备替换窗口
     /// </summary>
@@ -380,7 +381,7 @@ public struct ConstData
     /// <summary>
     /// 列的父物体
     /// </summary>
-    public const string ColumnParentObj = "/Canvas/UIBattlePrefab/ColumnParent";
+    public const string ColumnParentObj = "/Canvas/UIBattle/ColumnParent";
     #endregion
 
     #region 金币上限
@@ -439,6 +440,10 @@ public struct ConstData
     /// 人物列表
     /// </summary>
     public const string CharacterList = "CharacterList";
+    /// <summary>
+    /// 钻石兑换码表
+    /// </summary>
+    public const string DiamondCode = "DiamondCode";
     /// <summary>
     /// 敌人表
     /// </summary>
@@ -739,6 +744,10 @@ public struct ConstData
     public const string Bag_Equipment = "Bag_Equipment";
     public const string Bag_Consumable = "Bag_Consumable";
     public const string Bag_Material = "Bag_Material";
+    #endregion
+
+    #region 兑换码表的字段
+    public const string Stockpile = "Stockpile";
     #endregion
 
     //主手位置路径

@@ -426,7 +426,7 @@ public class UIChoiceLevelPrefab : MonoBehaviour, IUIBase
         switch (_uiChoiceLevelConfirmFrameType)
         {
             case UIChoiceLevelConfirmFrameType.ChoiceLevel:
-                print("进入战斗场景");
+                SceneAss_Manager.Instance.LoadingFunc(3);
                 break;
             case UIChoiceLevelConfirmFrameType.Item:
                 EquipmentItemFunc();

@@ -192,7 +192,7 @@ public class UIMainCity : MonoBehaviour, IUIBase
         #endregion
 
         #region 控制区附属区域
-        WeaponBag = transform.Find(ConstData.ControllerExArea_WeaponBag).GetChild(0).gameObject;
+        WeaponBag = transform.Find(ConstData.ControllerExArea_WeaponBag).gameObject;
         if (WeaponBag.GetComponent<UISceneWidget>() == null)
         {
             UISceneWidget WeaponBagClick = UISceneWidget.Get(WeaponBag);
@@ -202,7 +202,7 @@ public class UIMainCity : MonoBehaviour, IUIBase
         {
             WeaponBag.GetComponent<UISceneWidget>().PointerClick += WeaponBagChange;
         }
-        EquipmentBag = transform.Find(ConstData.ControllerExArea_EquipmentBag).GetChild(0).gameObject;
+        EquipmentBag = transform.Find(ConstData.ControllerExArea_EquipmentBag).gameObject;
         if (EquipmentBag.GetComponent<UISceneWidget>() == null)
         {
             UISceneWidget EquipmentBagClick = UISceneWidget.Get(EquipmentBag);
@@ -212,7 +212,7 @@ public class UIMainCity : MonoBehaviour, IUIBase
         {
             EquipmentBag.GetComponent<UISceneWidget>().PointerClick += EquipmentBagChange;
         }
-        ConsumableBag = transform.Find(ConstData.ControllerExArea_ConsumableBag).GetChild(0).gameObject;
+        ConsumableBag = transform.Find(ConstData.ControllerExArea_ConsumableBag).gameObject;
         if (ConsumableBag.GetComponent<UISceneWidget>() == null)
         {
             UISceneWidget ConsumableBagClick = UISceneWidget.Get(ConsumableBag);
@@ -222,7 +222,7 @@ public class UIMainCity : MonoBehaviour, IUIBase
         {
             ConsumableBag.GetComponent<UISceneWidget>().PointerClick += ConsumableBagChange;
         }
-        MaterialBag = transform.Find(ConstData.ControllerExArea_MaterialBag).GetChild(0).gameObject;
+        MaterialBag = transform.Find(ConstData.ControllerExArea_MaterialBag).gameObject;
         if (MaterialBag.GetComponent<UISceneWidget>() == null)
         {
             UISceneWidget MaterialBagClick = UISceneWidget.Get(MaterialBag);
@@ -421,7 +421,9 @@ public class UIMainCity : MonoBehaviour, IUIBase
     }
     void SettingEnter(PointerEventData eventData)
     {
-        
+        UIManager.Instance.PushUIStack(ConstData.UISetting);
+        gameObject.SetActive(true);
+        GameArea.SetActive(true);
     }
     void BattleEnter(PointerEventData eventData)
     {
