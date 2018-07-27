@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class UIMainCityManagerController : MonoBehaviour, IUIBase
+public class UIMainCity : MonoBehaviour, IUIBase
 {
     //预制体外：游戏画面区域
     GameObject GameArea;
@@ -405,19 +405,19 @@ public class UIMainCityManagerController : MonoBehaviour, IUIBase
     //系统操作区
     void CharacterEnter(PointerEventData eventData)
     {
-        UIManager.Instance.PushUIStack(ConstData.UICharacterManagePrefab);
+        UIManager.Instance.PushUIStack(ConstData.UICharacter);
     }
     void StoreEnter(PointerEventData eventData)
     {
-        UIManager.Instance.PushUIStack(ConstData.UIStorePrefab);
+        UIManager.Instance.PushUIStack(ConstData.UIStore);
     }
     void SuperMarketEnter(PointerEventData eventData)
     {
-        UIManager.Instance.PushUIStack(ConstData.UIShoppingMallPrefab);
+        UIManager.Instance.PushUIStack(ConstData.UIShoppingMall);
     }
     void DrunkeryEnter(PointerEventData eventData)
     {
-        UIManager.Instance.PushUIStack(ConstData.UIDrunkeryPrefab);
+        UIManager.Instance.PushUIStack(ConstData.UIDrunkery);
     }
     void SettingEnter(PointerEventData eventData)
     {

@@ -13,7 +13,7 @@ public class GameStart : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == ConstData.MainScene)
         {
-            UIManager.Instance.PushUIStack(ConstData.UIMainCityPrefab);
+            UIManager.Instance.PushUIStack(ConstData.UIMainCity);
             return;
         }
         GameObject GameStartBG = transform.Find("/Canvas/BG").gameObject;

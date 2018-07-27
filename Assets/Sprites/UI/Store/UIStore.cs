@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class UIStoreController : MonoBehaviour, IUIBase
+public class UIStore : MonoBehaviour, IUIBase
 {
     //预制体外：游戏画面区域
     GameObject GameArea;
