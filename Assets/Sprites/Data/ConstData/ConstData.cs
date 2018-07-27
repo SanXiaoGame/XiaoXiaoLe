@@ -53,7 +53,7 @@ public struct ConstData
     /// <summary>
     /// 人物管理界面预制体
     /// </summary>
-    public const string UICharacterManagePrefab = "UICharacterManagePrefab";
+    public const string UICharacter = "UICharacter";
     /// <summary>
     /// 角色管理界面GameArea预制体
     /// </summary>
@@ -61,7 +61,7 @@ public struct ConstData
     /// <summary>
     /// 主城界面预制体
     /// </summary>
-    public const string UIMainCityPrefab = "UIMainCityManagerController";
+    public const string UIMainCity = "UIMainCity";
     /// <summary>
     /// 主城界面GameArea预制体
     /// </summary>
@@ -81,11 +81,11 @@ public struct ConstData
     /// <summary>
     /// 战斗界面预制体
     /// </summary>
-    public const string UIBattlePrefab = "UIBattlePrefab";
+    public const string UIBattle = "UIBattle";
     /// <summary>
     /// 商店界面预制体
     /// </summary>
-    public const string UIStorePrefab = "UIStorePrefab";
+    public const string UIStore = "UIStore";
     /// <summary>
     /// 商店界面GameArea预制体
     /// </summary>

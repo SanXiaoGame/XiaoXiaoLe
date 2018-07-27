@@ -90,7 +90,7 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
     int[] _itemWeapon = { 2014, 2015, 2026, 2027, 2038, 2039, 2050, 2051, 2062, 2063 };
     int[] _itemEquipment = { 2105, 2110, 2115, 2120, 2125 };
     int[] _itemConsumable = { 2206, 2207, 2208, 2209, 2210, 2211 };
-    int[] _itemMaterial = { 2301, 2302, 2303, 2304, 2305 };
+    int[] _itemMaterial = { 2301, 2302, 2303, 2304, 2305, 2307 };
     #endregion
 
     //充值窗口
@@ -238,14 +238,19 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
         
         UISceneWidget P1Click = UISceneWidget.Get(project01);
         P1Click.PointerClick += SetClick;
+        P1Click.Drag += OnDrag;
         UISceneWidget P2Click = UISceneWidget.Get(project02);
         P2Click.PointerClick += SetClick;
+        P2Click.Drag += OnDrag;
         UISceneWidget P3Click = UISceneWidget.Get(project03);
         P3Click.PointerClick += SetClick;
+        P3Click.Drag += OnDrag;
         UISceneWidget P4Click = UISceneWidget.Get(project04);
         P4Click.PointerClick += SetClick;
+        P4Click.Drag += OnDrag;
         UISceneWidget P5Click = UISceneWidget.Get(project05);
         P5Click.PointerClick += SetClick;
+        P5Click.Drag += OnDrag;
 
         getCharaFrame = ResourcesManager.Instance.FindUIPrefab(ConstData.getCharaFrame);
         propertyUpFrame = ResourcesManager.Instance.FindUIPrefab(ConstData.propertyUpFrame);
@@ -256,6 +261,8 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
         getItemFrameOK = getItemFrame.transform.GetChild(2).gameObject;
         UISceneWidget getItemFrameOKClick = UISceneWidget.Get(getItemFrameOK);
         getItemFrameOKClick.PointerClick += CloseGetFrame;
+
+        ProjectList_Drag = transform.Find(ConstData.ShoppingMall_ContractSetListBG).gameObject;
     }
 
     //进入
@@ -298,7 +305,6 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                 getFrame.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
                 ObjectPoolManager.Instance.RecycleMyGameObject(getFrame.transform.GetChild(1).gameObject);
                 ObjectPoolManager.Instance.RecycleMyGameObject(getFrame);
-                Debug.Log(getFrame.transform.GetChild(1).name);
             }
             else if (getFrame.transform.childCount == 3)
             {
@@ -507,7 +513,7 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                         GameObject ply3 = ObjectPoolManager.Instance.InstantiateMyGameObject
                             (ResourcesManager.Instance.FindPlayerPrefab((getPlayerID03).ToString()));
                         ply3.transform.parent = getFrame.transform;
-                        ply3.transform.position = getFrame.transform.GetChild(0).transform.position - new Vector3(-1.0f,0,0);
+                        ply3.transform.position = getFrame.transform.GetChild(0).transform.position - new Vector3(1.0f,0,0);
                         ply3.GetComponent<Animator>().SetBool("isWait", true);
                         //---4号---
                         int getPlayerID04 = RandomManager.Instance.GetRandomCharacter(CharacterFieldType.SuperMarket);
@@ -521,7 +527,7 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                         GameObject ply5 = ObjectPoolManager.Instance.InstantiateMyGameObject
                             (ResourcesManager.Instance.FindPlayerPrefab((getPlayerID05).ToString()));
                         ply5.transform.parent = getFrame.transform;
-                        ply5.transform.position = getFrame.transform.GetChild(0).transform.position - new Vector3(-2.0f,0,0);
+                        ply5.transform.position = getFrame.transform.GetChild(0).transform.position - new Vector3(2.0f,0,0);
                         ply5.GetComponent<Animator>().SetBool("isWait", true);
 
                         //获得角色存入字典和数据库表
@@ -1236,4 +1242,20 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
             }
         }
     }
+
+    #region 解决拖拽和点击冲突的问题
+    GameObject ProjectList_Drag;
+    void OnBeginDrag(PointerEventData data)
+    {
+        ProjectList_Drag.GetComponent<ScrollRect>().OnBeginDrag(data);
+    }
+    void OnDrag(PointerEventData data)
+    {
+        ProjectList_Drag.GetComponent<ScrollRect>().OnDrag(data);
+    }
+    void OnEndDrag(PointerEventData data)
+    {
+        ProjectList_Drag.GetComponent<ScrollRect>().OnEndDrag(data);
+    }
+    #endregion
 }
