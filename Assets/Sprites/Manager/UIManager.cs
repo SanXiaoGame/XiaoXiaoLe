@@ -9,10 +9,10 @@ public class UIManager : ManagerBase<UIManager>
 {
     //游戏暂停开关
     bool isGamePause = false;
-
-    Stack<IUIBase> UIStack = new Stack<IUIBase>();
+    //UI堆栈
+    internal Stack<IUIBase> UIStack = new Stack<IUIBase>();
     //保存所有进栈的UI界面
-    Dictionary<string, IUIBase> CurrentUI = new Dictionary<string, IUIBase>();
+    internal Dictionary<string, IUIBase> CurrentUI = new Dictionary<string, IUIBase>();
     //所有UI的父级画布
     Transform uiParent;
     //控制退出按钮的点击次数

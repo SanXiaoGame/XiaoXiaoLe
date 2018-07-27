@@ -381,7 +381,7 @@ public struct ConstData
     /// <summary>
     /// 列的父物体
     /// </summary>
-    public const string ColumnParentObj = "/Canvas/UIBattlePrefab/ColumnParent";
+    public const string ColumnParentObj = "/Canvas/UIBattle/ColumnParent";
     #endregion
 
     #region 金币上限

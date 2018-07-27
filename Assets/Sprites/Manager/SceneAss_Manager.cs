@@ -15,6 +15,21 @@ public class SceneAss_Manager : ManagerBase<SceneAss_Manager>
 
     //加载条
     internal Slider loadingSlider;
+
+    /// <summary>
+    /// 加载专用方法
+    /// </summary>
+    /// <param 场景ID="sceneID"></param>
+    internal void LoadingFunc(int sceneID)
+    {
+        newSceneID = sceneID;
+        //清空之前场景的数据
+        UIManager.Instance.UIStack.Clear();
+        UIManager.Instance.CurrentUI.Clear();
+        //进入加载场景
+        SceneManager.LoadScene(1);
+    }
+
     /// <summary>
     /// 启用协程
     /// </summary>
