@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class UICharacterManagerController : MonoBehaviour, IUIBase
+public class UICharacter : MonoBehaviour, IUIBase
 {
     //预制体外：游戏画面区域
     GameObject GameArea;
@@ -41,6 +41,7 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
     //当前选中的角色和编号
     GameObject selectPlayer;
     int selectBarNum;
+    int selectPrefabsID;
     //选中要解雇的角色编号
     int deleteNum;
     //选中要替换的装备
@@ -120,6 +121,7 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         selecteHero = null;
         selectPlayer = null;
         selectBarNum = 0;
+        selectPrefabsID = 0;
         deleteNum = 0;
         playerList = new List<GameObject>();
         playerList.Clear();
@@ -668,6 +670,10 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
         GameAreaClear("Team", "");
         int price = (int)(SQLiteManager.Instance.playerDataSource[deleteNum].GoldCoin * 0.1f);
         DeleteHero(deleteNum);
+        //删除选中
+        selecteHero = null;
+        selectPlayer = null;
+        selectBarNum = 0;
         //刷新列表
         switch (filterID)
         {
@@ -690,24 +696,7 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                 CharacterBarCreate(ConstData.Hunter);
                 break;
         }
-        //刷新画面
-        if (selecteHero != null)
-        {
-            if (selecteHero.player_Id == deleteNum)
-            {
-                selecteHero = null;
-                selectPlayer = null;
-                selectBarNum = 0;
-            }
-        }
-        if (selecteHero != null)
-        {
-            GameObject chara = ObjectPoolManager.Instance.InstantiateMyGameObject(selectPlayer);
-            chara.transform.position = step01.transform.GetChild(0).transform.position;
-            chara.transform.parent = step01.transform;
-            chara.name = (selecteHero.player_Id).ToString();
-            chara.GetComponent<Animator>().SetBool("isWait", true);
-        }
+
         HeroDataDisplay();
         //金币增加
         CurrencyManager.Instance.GoldCoinIncrease(price);
@@ -1143,11 +1132,11 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                 chara.transform.parent = step01.transform;
                 chara.name = (selecteHero.player_Id).ToString();
                 chara.GetComponent<Animator>().SetBool("isWait", true);
+                selectPrefabsID = selecteHero.PrefabsID;
             }
             else
             {
-                step01.transform.GetChild(1).name = (SQLiteManager.Instance.playerDataSource
-                            [Convert.ToInt32(step01.transform.GetChild(1).name)].PrefabsID).ToString();
+                step01.transform.GetChild(1).name = (selectPrefabsID).ToString();
                 step01.transform.GetChild(1).GetComponent<Animator>().SetBool("isWait", false);
                 ObjectPoolManager.Instance.RecycleMyGameObject(step01.transform.GetChild(1).gameObject);
                 GameObject chara = ObjectPoolManager.Instance.InstantiateMyGameObject(selectPlayer);
@@ -1155,6 +1144,7 @@ public class UICharacterManagerController : MonoBehaviour, IUIBase
                 chara.transform.parent = step01.transform;
                 chara.name = (selecteHero.player_Id).ToString();
                 chara.GetComponent<Animator>().SetBool("isWait", true);
+                selectPrefabsID = selecteHero.PrefabsID;
             }
             
         }
