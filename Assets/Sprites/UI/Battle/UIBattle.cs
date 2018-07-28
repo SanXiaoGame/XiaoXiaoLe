@@ -235,6 +235,7 @@ public class UIBattle : MonoBehaviour, IUIBase
             if (playerList[k].tag == ConstData.FlagMan)
             {
                 GameObject cmra = playerList[k].transform.Find("GameCamera").gameObject;
+                cmra.transform.parent = transform.Find("/Canvas").transform;
                 cmra.transform.parent = null;
                 cmra.transform.position = new Vector3(0, 0, -0.5f);
             }
