@@ -7,12 +7,8 @@ public struct ConstData
     public const string UIPrefabsPath = "Prefabs/UIPrefabs";
     #endregion
 
-    #region 所有英雄角色预制体文件夹
-    public const string PlayerPrefabs = "Prefabs/PlayerPrefabs";
-    #endregion
-
-    #region 所有敌人角色预制体文件夹
-    public const string EnemyPrefabs = "Prefabs/EnemyPrefabs";
+    #region 所有英雄角色和敌人预制体文件夹
+    public const string PlayerPrefabs = "Prefabs/PEPrefabs";
     #endregion
 
     #region 所有战斗武器预制体文件夹
@@ -320,12 +316,7 @@ public struct ConstData
 
     #region 所有游戏英雄技能特效的预制体文件夹
     //所有英雄技能特效的预制体
-    public const string SkillPrefabs = "Prefabs/SkillPrefabs";
-    #endregion
-
-    #region 所有游戏英雄攻击特效的预制体文件夹
-    //所有英雄技能特效的预制体
-    public const string EffectPrefabs = "Prefabs/EffectPrefabs";
+    public const string SkillPrefabs = "Prefabs/SEPrefabs";
     #endregion
 
     #region 音乐文件夹
