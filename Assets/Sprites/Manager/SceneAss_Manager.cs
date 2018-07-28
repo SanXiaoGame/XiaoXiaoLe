@@ -29,6 +29,10 @@ public class SceneAss_Manager : ManagerBase<SceneAss_Manager>
             ObjectPoolManager.Instance.RecycleMyGameObject(UIManager.Instance.UIPrefabList[i]);
         }
         //清空之前场景的数据
+        foreach (IUIBase item in UIManager.Instance.CurrentUI.Values)
+        {
+            item.OnExiting();
+        }
         UIManager.Instance.UIStack.Clear();
         UIManager.Instance.CurrentUI.Clear();
         UIManager.Instance.UIPrefabList.Clear();
