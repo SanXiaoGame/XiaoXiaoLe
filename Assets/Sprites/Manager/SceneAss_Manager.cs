@@ -42,6 +42,12 @@ public class SceneAss_Manager : ManagerBase<SceneAss_Manager>
         {
             UIManager.Instance.uiParent = null;
         }
+        //清空池对象
+        foreach (ObjectPoolBase pool in ObjectPoolManager.Instance.objectPoolDictionary.Values)
+        {
+            pool.EmptyQueue();
+        }
+        ObjectPoolManager.Instance.objectPoolDictionary.Clear();
         //进入加载场景
         SceneManager.LoadScene(1);
     }
@@ -52,9 +58,7 @@ public class SceneAss_Manager : ManagerBase<SceneAss_Manager>
     /// <param 场景名="name"></param>
     internal void ExecutionOfEvent()
     {
-        //StartCoroutine("loadScene", newSceneID);
-        async = SceneManager.LoadSceneAsync(newSceneID);
-        async.allowSceneActivation = false;
+        StartCoroutine("loadScene", newSceneID);
     }
 
     /// <summary>
@@ -62,40 +66,14 @@ public class SceneAss_Manager : ManagerBase<SceneAss_Manager>
     /// </summary>
     /// <param 场景ID="sceneID"></param>
     /// <returns></returns>
-    //IEnumerator loadScene(int sceneID)
-    //{
-    //    async = SceneManager.LoadSceneAsync(sceneID);
-    //    async.allowSceneActivation = false;
-    //    while (async != null && !async.isDone)
-    //    {
-    //        yield return new WaitForSeconds(0.01f);
-    //        // 更新滑动条
-    //        if (loadingSlider.value <= .9f)
-    //        {
-    //            if (loadingSlider.value <= async.progress)
-    //            {
-    //                loadingSlider.value += Time.deltaTime;
-    //            }
-    //        }
-    //        else
-    //        {
-    //            if (loadingSlider.value < loadingSlider.maxValue)
-    //            {
-    //                loadingSlider.value += Time.deltaTime;
-    //            }
-    //            else if (loadingSlider.value == loadingSlider.maxValue)
-    //            {
-    //                async.allowSceneActivation = true;
-    //            }
-    //        }
-    //    }
-    //}
-
-    private void Update()
+    IEnumerator loadScene(int sceneID)
     {
-        if ((async != null && !async.isDone))
+        async = SceneManager.LoadSceneAsync(sceneID);
+        async.allowSceneActivation = false;
+        while (async != null && !async.isDone)
         {
-            //更新滑动条
+            yield return new WaitForSeconds(0.01f);
+            // 更新滑动条
             if (loadingSlider.value <= .9f)
             {
                 if (loadingSlider.value <= async.progress)
