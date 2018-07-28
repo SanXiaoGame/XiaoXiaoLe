@@ -44,7 +44,7 @@ public class Hunter01 : MonoBehaviour
             isTrigger = true;
             ObjectPoolManager.Instance.RecycleMyGameObject(gameObject);
             GameObject bom = ObjectPoolManager.Instance.InstantiateMyGameObject
-                (ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_arrowBoom));
+                (ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_arrowBoom));
             bom.transform.position = transform.position;
             AudioManager.Instance.PlayEffectMusic(SoundEffect.ExplodeArrow_Explosion);
             vp_Timer.In(0.8f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(bom); }));

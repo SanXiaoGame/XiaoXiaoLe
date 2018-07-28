@@ -12,11 +12,11 @@ public enum BlockObjectType
     /// <summary>
     /// 技能块
     /// </summary>
-    SkillType,
+    Flag,
     /// <summary>
     /// 全屏块
     /// </summary>
-    HighSkillType
+    FlagUp
 }
 
 //人物场地类型
@@ -27,7 +27,28 @@ public enum CharacterFieldType
     /// </summary>
     Hotel = 0,
     /// <summary>
-    /// 商店
+    /// 商城
     /// </summary>
-    Shop
+    SuperMarket,
+    /// <summary>
+    /// 商城VIP
+    /// </summary>
+    VIP,
+}
+
+//选关确认窗口类型
+public enum UIChoiceLevelConfirmFrameType
+{
+    /// <summary>
+    /// 选关用
+    /// </summary>
+    ChoiceLevel = 0,
+    /// <summary>
+    /// 物品用
+    /// </summary>
+    Item,
+    /// <summary>
+    /// 消耗品栏用
+    /// </summary>   
+    ConsumableBar
 }

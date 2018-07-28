@@ -36,8 +36,8 @@ public class GameManager : ManagerBase<GameManager>
 
     private void Start()
     {
-        AssignNeighbours(0.5f);
-        AudioManager.Instance.ReplaceBGM(BGM.maincity);
+        //AssignNeighbours(0.5f);
+        //AudioManager.Instance.ReplaceBGM(BGM.maincity);
     }
 
     /// <summary>
@@ -129,6 +129,7 @@ public class GameManager : ManagerBase<GameManager>
     /// </summary>
     private void OnApplicationQuit()
     {
+        print("关闭所有协程");
         StopAllCoroutines();
     }
 }

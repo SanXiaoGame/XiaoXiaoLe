@@ -45,4 +45,16 @@ public class ObjectPoolBase
         obj.SetActive(false);
         gameObjectPrefab.Enqueue(obj);
     }
+
+    /// <summary>
+    /// 清空队列
+    /// </summary>
+    internal void EmptyQueue()
+    {
+        foreach (GameObject obj in gameObjectPrefab)
+        {
+            Object.Destroy(obj);
+        }
+        gameObjectPrefab.Clear();
+    }
 }

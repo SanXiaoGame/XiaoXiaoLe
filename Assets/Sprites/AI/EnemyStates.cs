@@ -216,6 +216,7 @@ public class EnemyStates : MonoBehaviour
                 myanim.SetTrigger("Dead");
                 triggerEnemy.enabled = false;
                 StatesClearEnemy();
+                MonsterPointManagerStage01.enemyList.Remove(gameObject);
                 vp_Timer.In(1.0f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(gameObject); }));
                 return;
             }
@@ -240,10 +241,10 @@ public class EnemyStates : MonoBehaviour
                     {
                         myanim.SetBool("isDiz", true);
                         isDizing = true;
-                        dizG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_diz));
+                        dizG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_diz));
                         dizG2.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
                         dizG2.transform.parent = transform;
-                        dizG2.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_diz).name;
+                        dizG2.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_diz).name;
                     }
                 }
                 else
@@ -260,10 +261,10 @@ public class EnemyStates : MonoBehaviour
                     if (isSilenceing == false)
                     {
                         isSilenceing = true;
-                        silenceG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_silence));
+                        silenceG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_silence));
                         silenceG2.transform.position = gameObject.transform.position;
                         silenceG2.transform.parent = transform;
-                        silenceG2.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_silence).name;
+                        silenceG2.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_silence).name;
                     }
                 }
                 else
@@ -281,10 +282,10 @@ public class EnemyStates : MonoBehaviour
                         AD = ADweak;
                         DEF = DEFweak;
                         isWeaknees = true;
-                        weaknessG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_weakness));
+                        weaknessG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_weakness));
                         weaknessG2.transform.position = gameObject.transform.position;
                         weaknessG2.transform.parent = transform;
-                        weaknessG2.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_weakness).name;
+                        weaknessG2.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_weakness).name;
                     }
                 }
                 else
@@ -304,10 +305,10 @@ public class EnemyStates : MonoBehaviour
                         AP = APweak;
                         RES = RESweak;
                         isFear = true;
-                        fearG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_fear));
+                        fearG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_fear));
                         fearG2.transform.position = gameObject.transform.position;
                         fearG2.transform.parent = transform;
-                        fearG2.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_fear).name;
+                        fearG2.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_fear).name;
                     }
 
                 }
@@ -332,10 +333,10 @@ public class EnemyStates : MonoBehaviour
                     if (isBurning == false)
                     {
                         isBurning = true;
-                        burnG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_fire));
+                        burnG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_fire));
                         burnG2.transform.position = gameObject.transform.position;
                         burnG2.transform.parent = transform;
-                        burnG2.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_fire).name;
+                        burnG2.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_fire).name;
                     }
                 }
                 else
@@ -357,10 +358,10 @@ public class EnemyStates : MonoBehaviour
                     if (isBleeding == false)
                     {
                         isBleeding = true;
-                        bleedG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_bleed));
+                        bleedG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_bleed));
                         bleedG2.transform.position = gameObject.transform.position;
                         bleedG2.transform.parent = transform;
-                        bleedG2.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_bleed).name;
+                        bleedG2.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_bleed).name;
                     }
                 }
                 else
@@ -377,10 +378,10 @@ public class EnemyStates : MonoBehaviour
                     {
                         isInspire = true;
                         currentAD = (int)(AD + AD * 0.2f);
-                        inspireG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_inspire));
+                        inspireG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_inspire));
                         inspireG2.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
                         inspireG2.transform.parent = transform;
-                        inspireG2.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_inspire).name;
+                        inspireG2.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_inspire).name;
                     }
                 }
                 else
@@ -398,10 +399,10 @@ public class EnemyStates : MonoBehaviour
                     {
                         isMuse = true;
                         currentAP = (int)(AP + AP * 0.2f);
-                        museG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_muse));
+                        museG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_muse));
                         museG2.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
                         museG2.transform.parent = transform;
-                        museG2.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_muse).name;
+                        museG2.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_muse).name;
                     }
                 }
                 else
@@ -419,10 +420,10 @@ public class EnemyStates : MonoBehaviour
                     {
                         currentDEF = DEF + 5;
                         isHarden = true;
-                        hardenG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_harden));
+                        hardenG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_harden));
                         hardenG2.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
                         hardenG2.transform.parent = transform;
-                        hardenG2.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_harden).name;
+                        hardenG2.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_harden).name;
                     }
                 }
                 else
@@ -440,10 +441,10 @@ public class EnemyStates : MonoBehaviour
                     {
                         currentRES = RES + 5;
                         isMagicShield = true;
-                        magicShieldG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_magicShied));
+                        magicShieldG2 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_magicShied));
                         magicShieldG2.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
                         magicShieldG2.transform.parent = transform;
-                        magicShieldG2.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_magicShied).name;
+                        magicShieldG2.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_magicShied).name;
                     }
                 }
                 else

@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class ObjectPoolManager : ManagerBase<ObjectPoolManager>
 {
-    //所有块对象池的队列
-    Dictionary<string, ObjectPoolBase> objectPoolDictionary = new Dictionary<string, ObjectPoolBase>();
+    //所有对象池的队列
+    internal Dictionary<string, ObjectPoolBase> objectPoolDictionary = new Dictionary<string, ObjectPoolBase>();
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
     /// <summary>
     /// 在池库中找需要的游戏物体，没有就生成新的池添加进字典
     /// </summary>

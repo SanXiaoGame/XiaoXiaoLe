@@ -31,7 +31,7 @@ public class DataStreamsLoading : MonoBehaviour
         //首先获取流路径
         string streamPath;
         //合并路径
-        streamPath = System.IO.Path.Combine(Application.streamingAssetsPath, paths);
+        streamPath = StringSplicingTool.StringSplicing(new string[] { Application.streamingAssetsPath, "/", paths });
 
 /*#if UNITY_ANDROID
         streamPath = "jar:file://" + streamPath;
@@ -67,13 +67,15 @@ public class DataStreamsLoading : MonoBehaviour
         if (!System.IO.File.Exists(copyToPath))
         {
             //创建文件流
-            System.IO.FileStream fs = new System.IO.FileStream(copyToPath, System.IO.FileMode.Create);
-            //写入文件流
-            fs.Write(copyTargetBtyes, 0, copyTargetBtyes.Length);
-            //清除
-            fs.Flush();
-            //关闭
-            fs.Close();
+            using (System.IO.FileStream fs = new System.IO.FileStream(copyToPath, System.IO.FileMode.Create))
+            {
+                //写入文件流
+                fs.Write(copyTargetBtyes, 0, copyTargetBtyes.Length);
+                //清除
+                fs.Flush();
+                //关闭
+                fs.Close();
+            }
         }
     }
 }

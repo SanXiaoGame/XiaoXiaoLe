@@ -28,7 +28,6 @@ public class ReadData
     /// </summary>
     public void GetData(string tbName)
     {
-        
         //执行查询操作
         SqliteDataReader reader = dbOperation.GetAllDataFromSQLTable(tbName);
         //读取对应表
@@ -39,6 +38,9 @@ public class ReadData
                 break;
             case ConstData.CharacterList:
                 IsCharacterList(reader);
+                break;
+            case ConstData.DiamondCode:
+                IsDiamondCodeData(reader);
                 break;
             case ConstData.Enemy:
                 IsEnemy(reader);
@@ -156,6 +158,30 @@ public class ReadData
 
             //加入到数据库
             SQLiteManager.Instance.characterDataSource.Add(characterListData.character_Id, characterListData);
+        }
+    }
+    /// <summary>
+    /// 是否是兑换码表
+    /// </summary>
+    /// <param 表名="tbName"></param>
+    /// <param 数据阅读器="reader"></param>
+    private void IsDiamondCodeData(SqliteDataReader reader)
+    {
+        while (reader.Read())
+        {
+            //获取读到内容中的字段,来保存对应的值
+            int ID = reader.GetInt32(reader.GetOrdinal("ID"));
+            string Code = reader.GetString(reader.GetOrdinal("Code"));
+            int Diamond = reader.GetInt32(reader.GetOrdinal("Diamond"));
+            int Stockpile = reader.GetInt32(reader.GetOrdinal("Stockpile"));
+            //创建模型
+            DiamondCodeData diamondCodeData = new DiamondCodeData();
+            diamondCodeData.ID = ID;
+            diamondCodeData.Code = Code;
+            diamondCodeData.Diamond = Diamond;
+            diamondCodeData.Stockpile = Stockpile;
+            //加入到数据库
+            SQLiteManager.Instance.diamondCode.Add(diamondCodeData.ID, diamondCodeData);
         }
     }
     /// <summary>

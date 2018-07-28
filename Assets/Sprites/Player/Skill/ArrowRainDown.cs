@@ -18,7 +18,7 @@ public class ArrowRainDown : MonoBehaviour
 
     private void Awake()
     {
-        fireEffect = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_arrowRain);
+        fireEffect = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_arrowRain);
         cld = transform.GetComponent<BoxCollider2D>();
         enemyList = new List<GameObject>();
         user = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Hunter].playerData.PrefabsID).gameObject;
@@ -56,7 +56,7 @@ public class ArrowRainDown : MonoBehaviour
             {
                 enemyList.Add(collision.gameObject);
                 //生成击打特效
-                GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_hit));
+                GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_hit));
                 hit1.transform.position = collision.transform.position;
                 //回收击打特效
                 vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(hit1); }));

@@ -23,7 +23,7 @@ public class FallingStoneBoom : MonoBehaviour
         user = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Caster].playerData.PrefabsID).gameObject;
         flagM = transform.Find("/1001").gameObject;
         enemyList = new List<GameObject>();
-        ballBoom = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_fallingStoneBoom);
+        ballBoom = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_fallingStoneBoom);
     }
 
     private void OnEnable()
@@ -58,7 +58,7 @@ public class FallingStoneBoom : MonoBehaviour
             {
                 enemyList.Add(collision.gameObject);
                 //生成击打特效
-                GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_hit));
+                GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_hit));
                 hit1.transform.position = collision.transform.position;
                 //回收击打特效
                 vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(hit1); }));

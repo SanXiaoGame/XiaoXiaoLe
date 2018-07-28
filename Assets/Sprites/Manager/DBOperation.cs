@@ -128,7 +128,6 @@ public class DBOperation
     public void UpdataDataFormTable(string tbName, string field, int fieldValue, string key, int keyValue)
     {
         string query = ConstData.UPDATE + tbName + ConstData.SET + field + " = " + fieldValue + ConstData.WHERE + key + " = " + keyValue;
-        Debug.Log(query);
         ExcuteSQLQuery(query);
     }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
@@ -8,22 +9,26 @@ public class UIManager : ManagerBase<UIManager>
 {
     //游戏暂停开关
     bool isGamePause = false;
-
-    Stack<IUIBase> UIStack = new Stack<IUIBase>();
+    //UI堆栈
+    internal Stack<IUIBase> UIStack = new Stack<IUIBase>();
     //保存所有进栈的UI界面
-    Dictionary<string, IUIBase> CurrentUI = new Dictionary<string, IUIBase>();
+    internal Dictionary<string, IUIBase> CurrentUI = new Dictionary<string, IUIBase>();
+    //保存所有进栈的UI界面
+    internal List<GameObject> UIPrefabList = new List<GameObject>();
     //所有UI的父级画布
-    Transform uiParent;
+    internal Transform uiParent;
+    //控制退出按钮的点击次数
+    internal bool isClickEscape = false;
 
     /// <summary>
     /// 检测退出按钮的点击
     /// </summary>
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !isClickEscape)
         {
             //显示退出界面
-            PushUIStack(ConstData.ExitPrefab);
+            PushUIStack(ConstData.UIExitGame);
         }
     }
 
@@ -52,21 +57,31 @@ public class UIManager : ManagerBase<UIManager>
             }
         }
         //给新加的UI找画布
-        uiParent = transform.Find(ConstData.CanvasName);
+        if (uiParent == null)
+        {
+            uiParent = transform.Find(ConstData.CanvasName);
+        }
         //生成资源中取出的预制体
-        GameObject obj = Instantiate(ResourcesManager.Instance.FindUIPrefab(uiname));
+        GameObject obj = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindUIPrefab(uiname));
         //UI界面名字一致性
         obj.name = uiname;
         //统一父级
-        obj.GetComponent<RectTransform>().parent = uiParent;
+        obj.transform.parent = uiParent;
         //局部坐标
-        obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
+        obj.transform.localPosition = Vector3.zero;
         //UI的缩放
-        obj.GetComponent<RectTransform>().localScale = Vector3.one;
+        obj.transform.localScale = Vector3.one;
+        //添加对应的UI脚本
+        if (obj.GetComponent(Type.GetType(uiname)) == null)
+        {
+            obj.AddComponent(Type.GetType(uiname));
+        }
         //取得界面脚本的基础接口
         IUIBase iuibase = obj.GetComponent<IUIBase>();
         //新生成的UI加入CurrentUI的字典
         CurrentUI.Add(uiname, iuibase);
+        //添加场景中的所有UI预制体
+        UIPrefabList.Add(obj);
         //返回一个新生成的UI界面
         return iuibase;
     }
