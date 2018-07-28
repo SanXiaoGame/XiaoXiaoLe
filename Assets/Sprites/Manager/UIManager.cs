@@ -16,7 +16,7 @@ public class UIManager : ManagerBase<UIManager>
     //保存所有进栈的UI界面
     internal List<GameObject> UIPrefabList = new List<GameObject>();
     //所有UI的父级画布
-    Transform uiParent;
+    internal Transform uiParent;
     //控制退出按钮的点击次数
     internal bool isClickEscape = false;
 
@@ -57,7 +57,10 @@ public class UIManager : ManagerBase<UIManager>
             }
         }
         //给新加的UI找画布
-        uiParent = transform.Find(ConstData.CanvasName);
+        if (uiParent == null)
+        {
+            uiParent = transform.Find(ConstData.CanvasName);
+        }
         //生成资源中取出的预制体
         GameObject obj = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindUIPrefab(uiname));
         //UI界面名字一致性

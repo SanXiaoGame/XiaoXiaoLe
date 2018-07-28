@@ -60,7 +60,7 @@ public class ExplosionSlash : MonoBehaviour
                 //获得目标
                 hitTarget = collision.gameObject;
                 //生成击打特效
-                GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_hit));
+                GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_hit));
                 hit1.transform.position = hitTarget.transform.position;
                 //回收击打特效
                 vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(hit1); }));

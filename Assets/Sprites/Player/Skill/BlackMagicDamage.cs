@@ -63,7 +63,7 @@ public class BlackMagicDamage : MonoBehaviour
     void hitEffect()
     {
         //生成击打特效
-        GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_hit));
+        GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_hit));
         hit1.transform.position = transform.position;
         //回收击打特效
         vp_Timer.In(0.1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(hit1); }));

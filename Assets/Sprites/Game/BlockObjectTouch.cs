@@ -108,7 +108,7 @@ public class BlockObjectTouch : MonoBehaviour
                 {
                     GameManager.Instance.props_SkillCubeSwitch = false;
                     blockPos1.GetComponent<BlockObject>().brust = true;
-                    blockPos1.GetComponent<BlockObject>().specialObjectToForm = ResourcesManager.Instance.FindBlock(BlockObjectType.SkillType);
+                    blockPos1.GetComponent<BlockObject>().specialObjectToForm = ResourcesManager.Instance.FindBlock(BlockObjectType.Flag);
                     GameManager.Instance.RemoveBlock();
                     GameManager.Instance.AddMissingBlock();
                     blockPos1 = null;

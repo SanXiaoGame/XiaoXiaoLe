@@ -13,7 +13,7 @@ public class Fissure : MonoBehaviour
 
     private void Awake()
     {
-        boom = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_fissureBoom);
+        boom = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_fissureBoom);
         red = transform.GetChild(0).GetComponent<SpriteRenderer>();
         user = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Berserker].playerData.PrefabsID).gameObject;
         r = red.color;

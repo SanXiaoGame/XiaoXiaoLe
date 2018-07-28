@@ -243,10 +243,10 @@ public class HeroStates : MonoBehaviour
                     {
                         myanim.SetBool("isDiz", true);
                         isDizing = true;
-                        dizG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_diz));
+                        dizG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_diz));
                         dizG.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
                         dizG.transform.parent = transform;
-                        dizG.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_diz).name;
+                        dizG.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_diz).name;
                     }
                 }
                 else
@@ -263,10 +263,10 @@ public class HeroStates : MonoBehaviour
                     if (isSilenceing == false)
                     {
                         isSilenceing = true;
-                        silenceG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_silence));
+                        silenceG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_silence));
                         silenceG.transform.position = gameObject.transform.position;
                         silenceG.transform.parent = transform;
-                        silenceG.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_silence).name;
+                        silenceG.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_silence).name;
                     }
                 }
                 else
@@ -284,10 +284,10 @@ public class HeroStates : MonoBehaviour
                         AD = ADweak;
                         DEF = DEFweak;
                         isWeaknees = true;
-                        weaknessG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_weakness));
+                        weaknessG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_weakness));
                         weaknessG.transform.position = gameObject.transform.position;
                         weaknessG.transform.parent = transform;
-                        weaknessG.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_weakness).name;
+                        weaknessG.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_weakness).name;
                     }
                 }
                 else
@@ -307,10 +307,10 @@ public class HeroStates : MonoBehaviour
                         AP = APweak;
                         RES = RESweak;
                         isFear = true;
-                        fearG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_fear));
+                        fearG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_fear));
                         fearG.transform.position = gameObject.transform.position;
                         fearG.transform.parent = transform;
-                        fearG.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_fear).name;
+                        fearG.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_fear).name;
                     }
 
                 }
@@ -335,10 +335,10 @@ public class HeroStates : MonoBehaviour
                     if (isBurning == false)
                     {
                         isBurning = true;
-                        burnG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_fire));
+                        burnG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_fire));
                         burnG.transform.position = gameObject.transform.position;
                         burnG.transform.parent = transform;
-                        burnG.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_fire).name;
+                        burnG.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_fire).name;
                     }
                 }
                 else
@@ -360,10 +360,10 @@ public class HeroStates : MonoBehaviour
                     if (isBleeding == false)
                     {
                         isBleeding = true;
-                        bleedG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_bleed));
+                        bleedG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_bleed));
                         bleedG.transform.position = gameObject.transform.position;
                         bleedG.transform.parent = transform;
-                        bleedG.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_bleed).name;
+                        bleedG.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_bleed).name;
                     }
                 }
                 else
@@ -380,10 +380,10 @@ public class HeroStates : MonoBehaviour
                     {
                         isInspire = true;
                         currentAD = (int)(AD + AD * 0.2f);
-                        inspireG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_inspire));
+                        inspireG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_inspire));
                         inspireG.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
                         inspireG.transform.parent = transform;
-                        inspireG.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_inspire).name;
+                        inspireG.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_inspire).name;
                     }
                 }
                 else
@@ -401,10 +401,10 @@ public class HeroStates : MonoBehaviour
                     {
                         isMuse = true;
                         currentAP = (int)(AP + AP * 0.2f);
-                        museG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_muse));
+                        museG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_muse));
                         museG.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
                         museG.transform.parent = transform;
-                        museG.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_muse).name;
+                        museG.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_muse).name;
                     }
                 }
                 else
@@ -422,10 +422,10 @@ public class HeroStates : MonoBehaviour
                     {
                         currentDEF = DEF + 5;
                         isHarden = true;
-                        hardenG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_harden));
+                        hardenG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_harden));
                         hardenG.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
                         hardenG.transform.parent = transform;
-                        hardenG.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_harden).name;
+                        hardenG.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_harden).name;
                     }
                 }
                 else
@@ -443,10 +443,10 @@ public class HeroStates : MonoBehaviour
                     {
                         currentRES = RES + 5;
                         isMagicShield = true;
-                        magicShieldG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_magicShied));
+                        magicShieldG = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_magicShied));
                         magicShieldG.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
                         magicShieldG.transform.parent = transform;
-                        magicShieldG.name = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_magicShied).name;
+                        magicShieldG.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_magicShied).name;
                     }
                 }
                 else

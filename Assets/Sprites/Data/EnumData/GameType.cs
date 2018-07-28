@@ -12,11 +12,11 @@ public enum BlockObjectType
     /// <summary>
     /// 技能块
     /// </summary>
-    SkillType,
+    Flag,
     /// <summary>
     /// 全屏块
     /// </summary>
-    HighSkillType
+    FlagUp
 }
 
 //人物场地类型

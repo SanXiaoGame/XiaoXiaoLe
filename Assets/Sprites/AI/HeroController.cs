@@ -94,7 +94,7 @@ public class HeroController : MonoBehaviour
         knight01 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Knight01_Belief);
         knight03 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Knight03_Gungnir);
         berserker01 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Berserker01_LeapAttack);
-        berserker03_hit = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_fissureHit);
+        berserker03_hit = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_fissureHit);
         berserker03_1 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Berserker03_Fissure01);
         berserker03_2 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Berserker03_Fissure02);
         berserker03_3 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Berserker03_Fissure03);
@@ -106,8 +106,8 @@ public class HeroController : MonoBehaviour
         hunter02 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Hunter02_VrilleArrow);
         hunter03_1 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Hunter03_ArrowRainShoot);
         hunter03_2 = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Hunter03_ArrowRainDown);
-        magicBall = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_magicAttack);
-        arrow = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_arrow);
+        magicBall = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_magicAttack);
+        arrow = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_arrow);
     }
 
     private void OnEnable()
@@ -388,7 +388,7 @@ public class HeroController : MonoBehaviour
                     {
                         AudioManager.Instance.PlayEffectMusic(SoundEffect.Hit);
                         //生成击打特效
-                        GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_hit));
+                        GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_hit));
                         hit1.transform.position = targetEnemy.transform.position;
                         //回收击打特效
                         vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(hit1); }));
@@ -940,7 +940,7 @@ public class HeroController : MonoBehaviour
         GameObject VllArw = ObjectPoolManager.Instance.InstantiateMyGameObject(hunter02);
         VllArw.transform.position = transform.position;
         GameObject shootEffect = ObjectPoolManager.Instance.InstantiateMyGameObject
-            (ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_arrowWind));
+            (ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_arrowWind));
         shootEffect.transform.position = mainFist.transform.position;
         vp_Timer.In(0.8f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(shootEffect); }));
     }

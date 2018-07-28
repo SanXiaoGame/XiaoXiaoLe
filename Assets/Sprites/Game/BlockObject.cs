@@ -45,8 +45,8 @@ public class BlockObject : MonoBehaviour
 
     private void Start()
     {
-        skillBlock = ResourcesManager.Instance.FindBlock(BlockObjectType.SkillType);
-        highSkillBlock = ResourcesManager.Instance.FindBlock(BlockObjectType.HighSkillType);
+        skillBlock = ResourcesManager.Instance.FindBlock(BlockObjectType.Flag);
+        highSkillBlock = ResourcesManager.Instance.FindBlock(BlockObjectType.FlagUp);
         //默认邻近的块为4个
         adjacentItems = new BlockObject[4];
     }
