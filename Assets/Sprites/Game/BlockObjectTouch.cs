@@ -31,6 +31,7 @@ public class BlockObjectTouch : MonoBehaviour
 
     private void Awake()
     {
+        blockClick = null;
         blockImage = GetComponent<Image>();
     }
 
@@ -186,28 +187,28 @@ public class BlockObjectTouch : MonoBehaviour
         try
         {
             // fingerSegmentX=0 则是上下拖动
-            if (fingerSegmentX == 0)
-            {
-                if (fingerSegmentY > 0)
-                {
-                    blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[2].transform;
-                }
-                else
-                {
-                    blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[3].transform;
-                }
-            }
-            else if (fingerSegmentY == 0)
-            {
-                if (fingerSegmentX > 0)
-                {
-                    blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[1].transform;
-                }
-                else
-                {
-                    blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[0].transform;
-                }
-            }
+			if (fingerSegmentX == 0)
+			{
+				if (fingerSegmentY > 0)
+				{
+					blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[2].transform;
+				}
+				else
+				{
+					blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[3].transform;
+				}
+			}
+			else if (fingerSegmentY == 0)
+			{
+				if (fingerSegmentX > 0)
+				{
+					blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[1].transform;
+				}
+				else
+				{
+					blockPos2 = blockPos1.GetComponent<BlockObject>().adjacentItems[0].transform;
+				}
+			}
         }
         catch (System.Exception ex)
         {

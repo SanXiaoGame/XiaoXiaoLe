@@ -97,6 +97,11 @@ public class UIBattle : MonoBehaviour, IUIBase
         itemFrameList.Add(itemFour);
     }
 
+    private void Start()
+    {
+        GameManager.Instance.AssignNeighbours(0.5f);
+    }
+
     //进入界面
     public void OnEntering()
     {
