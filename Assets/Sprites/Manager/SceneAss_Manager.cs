@@ -13,6 +13,8 @@ public class SceneAss_Manager : ManagerBase<SceneAss_Manager>
     //新的场景名
     internal int newSceneID;
 
+    AsyncOperation async;
+
     //加载条
     internal Slider loadingSlider;
 
@@ -33,9 +35,13 @@ public class SceneAss_Manager : ManagerBase<SceneAss_Manager>
         {
             item.OnExiting();
         }
-        UIManager.Instance.UIStack.Clear();
-        UIManager.Instance.CurrentUI.Clear();
-        UIManager.Instance.UIPrefabList.Clear();
+        if (UIManager.Instance.UIStack.Count > 0) { UIManager.Instance.UIStack.Clear(); }
+        if (UIManager.Instance.CurrentUI.Count > 0) { UIManager.Instance.CurrentUI.Clear(); }
+        if (UIManager.Instance.UIPrefabList.Count > 0) { UIManager.Instance.UIPrefabList.Clear(); }
+        if (UIManager.Instance.uiParent != null)
+        {
+            UIManager.Instance.uiParent = null;
+        }
         //进入加载场景
         SceneManager.LoadScene(1);
     }
@@ -46,10 +52,9 @@ public class SceneAss_Manager : ManagerBase<SceneAss_Manager>
     /// <param 场景名="name"></param>
     internal void ExecutionOfEvent()
     {
-        if (SceneManager.GetActiveScene().name == ConstData.LoadingScene)
-        {
-            StartCoroutine("loadScene", newSceneID);
-        }
+        //StartCoroutine("loadScene", newSceneID);
+        async = SceneManager.LoadSceneAsync(newSceneID);
+        async.allowSceneActivation = false;
     }
 
     /// <summary>
@@ -57,14 +62,40 @@ public class SceneAss_Manager : ManagerBase<SceneAss_Manager>
     /// </summary>
     /// <param 场景ID="sceneID"></param>
     /// <returns></returns>
-    IEnumerator loadScene(int sceneID)
+    //IEnumerator loadScene(int sceneID)
+    //{
+    //    async = SceneManager.LoadSceneAsync(sceneID);
+    //    async.allowSceneActivation = false;
+    //    while (async != null && !async.isDone)
+    //    {
+    //        yield return new WaitForSeconds(0.01f);
+    //        // 更新滑动条
+    //        if (loadingSlider.value <= .9f)
+    //        {
+    //            if (loadingSlider.value <= async.progress)
+    //            {
+    //                loadingSlider.value += Time.deltaTime;
+    //            }
+    //        }
+    //        else
+    //        {
+    //            if (loadingSlider.value < loadingSlider.maxValue)
+    //            {
+    //                loadingSlider.value += Time.deltaTime;
+    //            }
+    //            else if (loadingSlider.value == loadingSlider.maxValue)
+    //            {
+    //                async.allowSceneActivation = true;
+    //            }
+    //        }
+    //    }
+    //}
+
+    private void Update()
     {
-        AsyncOperation async = SceneManager.LoadSceneAsync(sceneID);
-        async.allowSceneActivation = false;
-        while (async != null && !async.isDone)
+        if ((async != null && !async.isDone))
         {
-            yield return new WaitForSeconds(0.01f);
-            // 更新滑动条
+            //更新滑动条
             if (loadingSlider.value <= .9f)
             {
                 if (loadingSlider.value <= async.progress)

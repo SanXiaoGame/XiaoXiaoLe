@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class GameStart : MonoBehaviour
 {
@@ -10,15 +11,14 @@ public class GameStart : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == ConstData.MainScene)
+        switch (SceneManager.GetActiveScene().name)
         {
-            UIManager.Instance.PushUIStack(ConstData.UIMainCity);
-            return;
-        }
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "TestScene")
-        {
-            UIManager.Instance.PushUIStack(ConstData.UIBattle);
-            return;
+            case ConstData.MainScene:
+                UIManager.Instance.PushUIStack(ConstData.UIMainCity);
+                return;
+            case "TestScene":
+                UIManager.Instance.PushUIStack(ConstData.UIBattle);
+                return;
         }
         //启动数据库
         SQLiteManager.Instance.LoadDataFunc();

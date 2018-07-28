@@ -28,9 +28,9 @@ public class MonsterPointManagerStage01 : MonoBehaviour
         //列表初始化
         enemyList = new List<GameObject>();
         //加载怪物预制体
-        slm1 = ResourcesManager.Instance.FindEnemyPrefab("1101");
-        slm2 = ResourcesManager.Instance.FindEnemyPrefab("1102");
-        slm3 = ResourcesManager.Instance.FindEnemyPrefab("1103");
+        slm1 = ResourcesManager.Instance.FindPlayerPrefab("1101");
+        slm2 = ResourcesManager.Instance.FindPlayerPrefab("1102");
+        slm3 = ResourcesManager.Instance.FindPlayerPrefab("1103");
     }
 
     private void Update()

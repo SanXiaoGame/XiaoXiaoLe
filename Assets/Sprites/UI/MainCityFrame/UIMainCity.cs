@@ -119,7 +119,7 @@ public class UIMainCity : MonoBehaviour, IUIBase
         itemList_MT.Clear();
         null_itemList_MT.Clear();
         filterList.Clear();
-
+        ItemClear(ConstData.All);
         #region 系统操作区
         charaButton = transform.Find(ConstData.SystemArea_CharacterButton).gameObject;
         if (charaButton.GetComponent<UISceneWidget>() == null)

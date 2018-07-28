@@ -8,7 +8,7 @@ public class BlackMagicBoom : MonoBehaviour
 
     private void Awake()
     {
-        boomEffect = ResourcesManager.Instance.FindPrefab(EffectPrefabs.Effect_blackMagic);
+        boomEffect = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_blackMagic);
     }
 
     private void OnEnable()
