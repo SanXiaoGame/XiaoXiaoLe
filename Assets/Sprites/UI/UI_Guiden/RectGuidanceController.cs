@@ -9,16 +9,21 @@ using UnityEngine.UI;
 public class RectGuidanceController : MonoBehaviour
 {
 
-	/// <summary>
-	/// 高亮显示的目标
-	/// </summary>
-	public Image Target;
-	public Image[] Target2= new Image[4];
+    /// <summary>
+    /// 高亮显示的目标
+    /// </summary>
+    public Image Target;
+    public int targetNum;
+	//public Image[] Target2= new Image[4];
+    public List<Image> Target3 = new List<Image>() ;
+    public List<Vector3[]> cornerList = new List<Vector3[]>();
+    private Vector3[] myConer = new Vector3[4];
     private Vector3[] _corners1 = new Vector3[4];
     private Vector3[] _corners2 = new Vector3[4];
     private Vector3[] _corners3 = new Vector3[4];
     private Vector3[] _corners4 = new Vector3[4];
-
+    private Vector3[] targetCorners = new Vector3[4];
+    List<Vector3[]> list = new List<Vector3 []>();
     /// <summary>
     /// 区域范围缓存
     /// </summary>
@@ -77,45 +82,154 @@ public class RectGuidanceController : MonoBehaviour
 			canvas.GetComponent<Camera>(), out position);
 		return position;
 	}
+    float min_x, max_x, min_y, max_y;
+    /// <summary>
+    /// 求目标死角顶点
+    /// </summary>
+    /// <param name="list"></param>
+    /// <param name="min_x"></param>
+    /// <param name="max_x"></param>
+    /// <param name="min_y"></param>
+    /// <param name="max_y"></param>
+    private  void  Min_Max(List<Vector3[]> list ,out float min_x, out float max_x, out float min_y, out float max_y)
+    {
+        min_x = list[0][0].x;
+        max_x = list[0][0].x;
+        min_y = list[0][0].y;
+        max_y = list[0][0].y;
+        for (int i = 0; i < list.Count; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                //Debug.Log(i+"这是min_x" + min_x);
+                if (min_x > list[i][j].x)
+                {
+                    min_x = list[i][j].x;
+                }
+            }
+        }
 
-	private void Awake()
+        for (int i = 0; i < list.Count; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                if (max_x < list[i][j].x)
+                {
+                    max_x = list[i][j].x;
+                }
+            }
+        }
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                if (min_y > list[i][j].y)
+                {
+                    min_y = list[i][j].y;
+                }
+            }
+        }
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                if (max_y < list[i][j].y)
+                {
+                    max_y = list[i][j].y;
+                }
+            }
+        }
+
+    }
+    private void Start()
 	{
-		_eventPenetrate = GetComponent<GuidanceEventPenetrate>();
+        //Debug.Log("Target长度:" + Target3.Count);
+        cornerList.Clear();
+        list.Clear();
+        _eventPenetrate = GetComponent<GuidanceEventPenetrate>();
         if (_eventPenetrate != null)
         {
-            _eventPenetrate.SetTargetImage(Target2[0]);
-            _eventPenetrate.SetTargetImage(Target2[1]);
-            _eventPenetrate.SetTargetImage(Target2[2]);
-            _eventPenetrate.SetTargetImage(Target2[3]);
+            for (int i = 0; i < Target3.Count; i++)
+            {
+                _eventPenetrate.SetTargetImage(Target3[i]);
+                cornerList.Add(_corners);
+            }
+            //_eventPenetrate.SetTargetImage(Target2[0]);
+            //_eventPenetrate.SetTargetImage(Target2[1]);
+            //_eventPenetrate.SetTargetImage(Target2[2]);
+            //_eventPenetrate.SetTargetImage(Target2[3]);
         }
 			
+        Debug.Log("cornerlist长度" + cornerList.Count);
 		//获取画布
 		Canvas canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         //获取高亮区域四个顶点的世界坐标
-        Target.rectTransform.GetWorldCorners(_corners);
+        //Target.rectTransform.GetWorldCorners(_corners);
         //Debug.Log(_corners[0]);
         //Debug.Log(_corners[1]);
         //Debug.Log(_corners[2]);
         //Debug.Log(_corners[3]);
-        Target2[0].rectTransform.GetWorldCorners(_corners1);
-        Target2[1].rectTransform.GetWorldCorners(_corners2);
-        Target2[2].rectTransform.GetWorldCorners(_corners3);
-        Target2[3].rectTransform.GetWorldCorners(_corners4);
-        _corners[0] = _corners1[0];
-        _corners[1] = _corners4[1];
-        _corners[2] = _corners4[2];
-        _corners[3] = _corners1[3];
-        Debug.Log(_corners[0]);
-        Debug.Log(_corners[1]);
-        Debug.Log(_corners[2]);
-        Debug.Log(_corners[3]);
-        //计算高亮显示区域咋画布中的范围
-        _targetOffsetX = Vector2.Distance(WorldToCanvasPos(canvas, _corners[0]), WorldToCanvasPos(canvas, _corners[3])) / 2f;
-		_targetOffsetY = Vector2.Distance(WorldToCanvasPos(canvas, _corners[0]), WorldToCanvasPos(canvas, _corners[1])) / 2f;
-		//计算高亮显示区域的中心
-		float x = _corners[0].x + ((_corners[3].x - _corners[0].x) / 2f);
-		float y = _corners[0].y + ((_corners[1].y - _corners[0].y) / 2f);
-		Vector3 centerWorld = new Vector3(x,y,0);
+        //for (int i = 0; i < Target3.Count; i++)
+        //{
+        //    Target3[i].rectTransform.GetWorldCorners(cornerList[i]);
+        //    //for (int j = 0; j < 4; j++)
+        //    //{
+        //    //    Debug.Log("第" + i + "个X轴度:" + cornerList[i][j].x + "Y轴度:" + cornerList[i][j].y);
+        //    //    if (j==0)
+        //    //    {
+        //    //        list.Add(cornerList[i]);
+        //    //    }
+        //    //}
+        //}
+        ////Target3[0].rectTransform.GetWorldCorners(cornerList[0]);
+        ////Target3[1].rectTransform.GetWorldCorners(cornerList[1]);
+        ////Target3[2].rectTransform.GetWorldCorners(cornerList[2]);
+        ////Target3[3].rectTransform.GetWorldCorners(cornerList[3]);
+        ////list.Add(cornerList[0]);
+        ////list.Add(cornerList[1]);
+        ////list.Add(cornerList[2]);
+        ////list.Add(cornerList[3]);
+        ////for (int i = 0; i < cornerList.Count; i++)
+        ////{
+        ////    for (int j = 0; j < 4; j++)
+        ////    {
+        ////        Debug.Log("第" + i + "个X轴度:" + cornerList[i][j].x + "Y轴度:" + cornerList[i][j].y);
+        ////    }
+        ////    list.Add(cornerList[i]);
+        ////}
+
+        Target3[0].rectTransform.GetWorldCorners(_corners1);
+        Target3[1].rectTransform.GetWorldCorners(_corners2);
+        Target3[2].rectTransform.GetWorldCorners(_corners3);
+        Target3[3].rectTransform.GetWorldCorners(_corners4);
+        list.Add(_corners1);
+        list.Add(_corners2);
+        list.Add(_corners3);
+        list.Add(_corners4);
+        Min_Max(list, out min_x, out max_x, out min_y, out max_y);
+        Debug.Log("x轴最小值" + min_x + "x轴最大值" + max_x + "y轴最小值" + min_y + "y轴最大值" + max_y);
+  //      _corners[0] = _corners1[0];
+  //      _corners[1] = _corners4[1];
+  //      _corners[2] = _corners4[2];
+  //      _corners[3] = _corners1[3];
+  //      Debug.Log(_corners[0]);
+  //      Debug.Log(_corners[1]);
+  //      Debug.Log(_corners[2]);
+  //      Debug.Log(_corners[3]);
+  //      //计算高亮显示区域咋画布中的范围
+  //      _targetOffsetX = Vector2.Distance(WorldToCanvasPos(canvas, _corners[0]), WorldToCanvasPos(canvas, _corners[3])) / 2f;
+		//_targetOffsetY = Vector2.Distance(WorldToCanvasPos(canvas, _corners[0]), WorldToCanvasPos(canvas, _corners[1])) / 2f;
+
+        _targetOffsetX = (max_x-min_x) / 2f;
+        _targetOffsetY = (max_y-min_y) / 2f;
+        //计算高亮显示区域的中心
+        //float x = _corners[0].x + ((_corners[3].x - _corners[0].x) / 2f);
+        //float y = _corners[0].y + ((_corners[1].y - _corners[0].y) / 2f);
+        float x = (max_x + min_x) / 2f; 
+        float y = (max_y + min_y) / 2f; 
+        Vector3 centerWorld = new Vector3(x,y,0);
 		Vector2 center = WorldToCanvasPos(canvas, centerWorld);
 		//设置遮罩材料中中心变量
 		Vector4 centerMat = new Vector4(center.x,center.y,0,0);
