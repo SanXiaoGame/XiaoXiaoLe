@@ -83,21 +83,6 @@ public class DBOperation
     {
         //建立查询语句
         string query = ConstData.SELECT + ConstData.FROM01 + tableName;
-        //Debug.Log(query);
-        return ExcuteSQLQuery(query);
-    }
-
-    /// <summary>
-    /// 获取表中一个数据
-    /// </summary>
-    /// <param 表的字段="field01"></param>
-    /// <param 表的限定字段="field02"></param>
-    /// <param 值="codition"></param>
-    /// <returns></returns>
-    public SqliteDataReader GetDataFromSQLTable(string field01, string field02,string codition)
-    {
-        //建立查询语句
-        string query = ConstData.SELECT + field01 + ConstData.FROM02 + "这里是表名" + ConstData.WHERE + field02 + " = " + "'" + codition + "'";
         return ExcuteSQLQuery(query);
     }
 
@@ -118,7 +103,7 @@ public class DBOperation
     }
 
     /// <summary>
-    /// 更新指定存档数据
+    /// 更新指定存档数据(int版)
     /// </summary>
     /// <param 表名="tbName"></param>
     /// <param 更新的字段="field"></param>
@@ -127,7 +112,21 @@ public class DBOperation
     /// <param 条件字段的值="keyValue"></param>
     public void UpdataDataFormTable(string tbName, string field, int fieldValue, string key, int keyValue)
     {
-        string query = ConstData.UPDATE + tbName + ConstData.SET + field + " = " + fieldValue + ConstData.WHERE + key + " = " + keyValue;
+        string query = StringSplicingTool.StringSplicing(new string[] { ConstData.UPDATE, tbName, ConstData.SET, field, " = ", fieldValue.ToString(), ConstData.WHERE, key, " = ", keyValue.ToString() });
+        ExcuteSQLQuery(query);
+    }
+
+    /// <summary>
+    /// 更新指定存档数据(string版)
+    /// </summary>
+    /// <param 表名="tbName"></param>
+    /// <param 更新的字段="field"></param>
+    /// <param 更新字段的值="fieldValue"></param>
+    /// <param 条件字段="key"></param>
+    /// <param 条件字段的值="keyValue"></param>
+    public void UpdataDataFormTable(string tbName, string field, string fieldValue, string key, int keyValue)
+    {
+        string query = StringSplicingTool.StringSplicing(new string[] { ConstData.UPDATE, tbName, ConstData.SET, field, " = ", "'", fieldValue, "'", ConstData.WHERE, key, " = ", keyValue.ToString() });
         ExcuteSQLQuery(query);
     }
 
@@ -139,8 +138,7 @@ public class DBOperation
     /// <param 对应ID号="keyValue"></param>
     public void DeleteTableData(string tbName, string key, int keyValue)
     {
-        string query = ConstData.DELETE + ConstData.FROM02 + tbName + ConstData.WHERE + key + " = " + keyValue;
-        Debug.Log(query);
+        string query = StringSplicingTool.StringSplicing(new string[] { ConstData.DELETE, ConstData.FROM02, tbName, ConstData.WHERE, key, " = ", keyValue.ToString() });
         ExcuteSQLQuery(query);
     }
 }

@@ -38,4 +38,17 @@ public class ObjectPoolManager : ManagerBase<ObjectPoolManager>
             }
         }
     }
+
+    /// <summary>
+    /// 清空方法
+    /// </summary>
+    internal void EmptyFunc()
+    {
+        //清空池对象
+        foreach (ObjectPoolBase pool in objectPoolDictionary.Values)
+        {
+            pool.EmptyQueue();
+        }
+        objectPoolDictionary.Clear();
+    }
 }

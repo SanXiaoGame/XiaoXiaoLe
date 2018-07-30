@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameStart : MonoBehaviour
 {
+    //临时存储初始的UI
+    private string UIName;
     /// <summary>
     /// 赋值
     /// </summary>
@@ -14,7 +16,8 @@ public class GameStart : MonoBehaviour
         switch (SceneManager.GetActiveScene().name)
         {
             case ConstData.MainScene:
-                UIManager.Instance.PushUIStack(ConstData.UIMainCity);
+                UIName = SQLiteManager.Instance.playerDataSource[1300].player_Name == "初始旗手" ? ConstData.UIEstablishCharacter : ConstData.UIMainCity;
+                UIManager.Instance.PushUIStack(UIName);
                 return;
             case "TestScene":
                 UIManager.Instance.PushUIStack(ConstData.UIBattle);

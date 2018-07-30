@@ -10,13 +10,13 @@ public class UIManager : ManagerBase<UIManager>
     //游戏暂停开关
     bool isGamePause = false;
     //UI堆栈
-    internal Stack<IUIBase> UIStack = new Stack<IUIBase>();
+    Stack<IUIBase> UIStack = new Stack<IUIBase>();
     //保存所有进栈的UI界面
-    internal Dictionary<string, IUIBase> CurrentUI = new Dictionary<string, IUIBase>();
+    Dictionary<string, IUIBase> CurrentUI = new Dictionary<string, IUIBase>();
     //保存所有进栈的UI界面
-    internal List<GameObject> UIPrefabList = new List<GameObject>();
+    //internal List<GameObject> UIPrefabList = new List<GameObject>();
     //所有UI的父级画布
-    internal Transform uiParent;
+    Transform uiParent;
     //控制退出按钮的点击次数
     internal bool isClickEscape = false;
 
@@ -81,7 +81,7 @@ public class UIManager : ManagerBase<UIManager>
         //新生成的UI加入CurrentUI的字典
         CurrentUI.Add(uiname, iuibase);
         //添加场景中的所有UI预制体
-        UIPrefabList.Add(obj);
+        //UIPrefabList.Add(obj);
         //返回一个新生成的UI界面
         return iuibase;
     }
@@ -127,5 +127,20 @@ public class UIManager : ManagerBase<UIManager>
             IUIBase newPop = UIStack.Peek();
             newPop.OnResuming();
         }
+    }
+
+    /// <summary>
+    /// 清理UI数据
+    /// </summary>
+    internal void ClearUIData()
+    {
+        //清除画布
+        if (uiParent != null)
+        {
+            uiParent = null;
+        }
+
+        if (UIStack.Count > 0) { UIStack.Clear(); }
+        if (CurrentUI.Count > 0) { CurrentUI.Clear(); }
     }
 }

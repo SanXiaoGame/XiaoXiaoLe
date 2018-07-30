@@ -204,7 +204,6 @@ public class BlockObject : MonoBehaviour
                 return true;
             }
         }
-
         return false;
     }
 

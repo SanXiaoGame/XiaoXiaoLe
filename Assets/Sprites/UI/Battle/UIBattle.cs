@@ -194,9 +194,6 @@ public class UIBattle : MonoBehaviour, IUIBase
     {
         //清空所有需要清空的东西
         ClearAll();
-        ObjectPoolManager.Instance.RecycleMyGameObject(GameArea);
-        ConfirmFrame.SetActive(false);
-        UIManager.Instance.GamePause();
         SceneAss_Manager.Instance.LoadingFunc(2);
     }
     /// <summary>
