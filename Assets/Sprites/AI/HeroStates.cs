@@ -219,11 +219,15 @@ public class HeroStates : MonoBehaviour
             //二级判断：英雄HP是否已经没了，决定是否关闭存活开关和跳出判断，只要不被复活，再也无法继续后续判断
             if (currentHP <= 0 && transform.GetComponent<HeroController>().alive == true)
             {
-                vp_Timer.In(3.0f, new vp_Timer.Callback(delegate () { gameObject.SetActive(false); }));
-                transform.GetComponent<HeroController>().isAlive = false;
-                transform.GetComponent<HeroController>().alive = false;
                 mycld.enabled = false;
                 myanim.SetTrigger("Dead");
+                transform.position -= new Vector3(0.3f, 0, 0);
+                //播放死亡音效
+                AudioManager.Instance.PlayEffectMusic(SoundEffect.Die);
+                transform.GetComponent<HeroController>().isAlive = false;
+                transform.GetComponent<HeroController>().alive = false;
+                //死亡列表增加
+                UIBattle.deadCharaList.Add(gameObject);
                 StatesClear();
                 return;
             }

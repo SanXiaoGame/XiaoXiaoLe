@@ -424,7 +424,6 @@ public class UISettlement : MonoBehaviour, IUIBase
     void CreateGetItemList()
     {
         ExtractItem();
-        Debug.Log(GetItemList.Count);
         if (GetItemList.Count >= 5)
         {
             for (int i = 0; i < 5; i++)

@@ -442,23 +442,18 @@ public class HeroController : MonoBehaviour
             {
                 case ConstData.Saber:
                     Skill_A_Saber();
-                    Debug.Log("SaberA");
                     break;
                 case ConstData.Knight:
                     Skill_A_Knight();
-                    Debug.Log("KnightA");
                     break;
                 case ConstData.Berserker:
                     Skill_A_Berserker();
-                    Debug.Log("BerserkerA");
                     break;
                 case ConstData.Caster:
                     Skill_A_Caster();
-                    Debug.Log("CasterA");
                     break;
                 case ConstData.Hunter:
                     Skill_A_Hunter();
-                    Debug.Log("HunterA");
                     break;
             }
         }

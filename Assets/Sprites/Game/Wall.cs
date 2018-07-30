@@ -18,7 +18,7 @@ public class Wall : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Player" || collision.tag == "Enemy")
+        if (collision.tag == "Enemy")
         {
             //collision.transform.position = new Vector3(savePoint.x - 0.02f, savePoint.y, savePoint.z);
             collision.GetComponent<EnemyControllers>().CancelInvoke("Dashed");
