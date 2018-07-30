@@ -59,6 +59,10 @@ public struct ConstData
     /// </summary>
     public const string UIMainCity = "UIMainCity";
     /// <summary>
+    /// 创建人物界面预制体
+    /// </summary>
+    public const string UIEstablishCharacter = "UIEstablishCharacter";
+    /// <summary>
     /// 主城界面GameArea预制体
     /// </summary>
     public const string UIMainCityPrefab_GameArea = "UIMainCityPrefab_GameArea";
@@ -346,6 +350,11 @@ public struct ConstData
     public const string RechargeConfirmButton = "RechargeFrame/RechargeConfirmButton";
     public const string ContractSetConfirmFrame = "ContractSetConfirmFrame";
     public const string RechargeContent = "RechargeFrame/ContentBG/Content";
+    //------------------  人物创建  ---------------------
+    public const string NameInputField = "UIEstablishFrame/ContentBG/NameInputField";
+    public const string EstablishCancelButton = "UIEstablishFrame/CancelButton";
+    public const string EstablishCharacterSpot = "CharacterSpot";
+    public const string EstablishCharacterConfirmFrame = "UIEstablishFrame/ContentBG/Content";
     /// <summary>
     /// 装备替换窗口
     /// </summary>

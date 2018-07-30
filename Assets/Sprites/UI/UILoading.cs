@@ -11,6 +11,11 @@ public class UILoading : MonoBehaviour
 {
     private void Start()
     {
+        //清理UI数据
+        UIManager.Instance.ClearUIData();
+        //清空池对象
+        ObjectPoolManager.Instance.EmptyFunc();
+        //选背景图
         if (SceneAss_Manager.Instance.newSceneID == 2)
         {
             transform.GetComponent<Image>().sprite = ResourcesManager.Instance.FindSprite("BG3");

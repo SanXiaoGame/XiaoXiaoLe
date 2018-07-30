@@ -38,7 +38,7 @@ public class WriteData
     }
 
     /// <summary>
-    /// 更新指定存档数据
+    /// 更新指定存档数据(int)
     /// </summary>
     /// <param 表名="tbName"></param>
     /// <param 更新的字段="field"></param>
@@ -46,6 +46,19 @@ public class WriteData
     /// <param 条件字段="key"></param>
     /// <param 条件字段的值="keyValue"></param>
     public void UpdataDataFromSQL(string tbName, string field, int fieldValue, string key, int keyValue)
+    {
+        dbOperation.UpdataDataFormTable(tbName, field, fieldValue, key, keyValue);
+    }
+
+    /// <summary>
+    /// 更新指定存档数据(string)
+    /// </summary>
+    /// <param 表名="tbName"></param>
+    /// <param 更新的字段="field"></param>
+    /// <param 更新字段的值="fieldValue"></param>
+    /// <param 条件字段="key"></param>
+    /// <param 条件字段的值="keyValue"></param>
+    public void UpdataDataFromSQL(string tbName, string field, string fieldValue, string key, int keyValue)
     {
         dbOperation.UpdataDataFormTable(tbName, field, fieldValue, key, keyValue);
     }
