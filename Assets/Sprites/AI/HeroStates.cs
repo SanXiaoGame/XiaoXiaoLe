@@ -161,6 +161,10 @@ public class HeroStates : MonoBehaviour
         RES = RESbase;
         currentRES = RES;
 
+        if (gameObject.activeSelf == false)
+        {
+            gameObject.SetActive(false);
+        }
         //重开重力
         //transform.GetComponent<Rigidbody2D>().gravityScale = 1;
         //重开触发器
@@ -215,11 +219,12 @@ public class HeroStates : MonoBehaviour
             //二级判断：英雄HP是否已经没了，决定是否关闭存活开关和跳出判断，只要不被复活，再也无法继续后续判断
             if (currentHP <= 0 && transform.GetComponent<HeroController>().alive == true)
             {
+                vp_Timer.In(3.0f, new vp_Timer.Callback(delegate () { gameObject.SetActive(false); }));
                 transform.GetComponent<HeroController>().isAlive = false;
                 transform.GetComponent<HeroController>().alive = false;
+                mycld.enabled = false;
                 myanim.SetTrigger("Dead");
                 StatesClear();
-                
                 return;
             }
             //二级判断：如果已经被复活了，进入这里时会重新激活是否正在存活（alive）

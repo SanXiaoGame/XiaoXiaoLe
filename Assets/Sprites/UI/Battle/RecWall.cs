@@ -11,5 +11,9 @@ public class RecWall : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
+        if (collision.tag == ConstData.Enemy)
+        {
+            Destroy(collision.gameObject);
+        }
     }
 }

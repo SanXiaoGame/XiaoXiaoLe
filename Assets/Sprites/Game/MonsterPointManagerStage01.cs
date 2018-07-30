@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -96,6 +97,9 @@ public class MonsterPointManagerStage01 : MonoBehaviour
                     enemyList.Add(slm1_01);
                     enemyList.Add(slm1_02);
                     enemyList.Add(slm1_03);
+                    Debug.Log(slm1_01.GetComponent<EnemyStates>().currentHP);
+                    Debug.Log(slm1_02.GetComponent<EnemyStates>().currentHP);
+                    Debug.Log(slm1_03.GetComponent<EnemyStates>().currentHP);
                     pointStandby = true;
                     #endregion
                     break;
@@ -223,6 +227,9 @@ public class MonsterPointManagerStage01 : MonoBehaviour
                     break;
                 case "BossPoint":
                     #region 第四刷怪点
+                    //切换音乐
+                    AudioManager.Instance.ReplaceBGM(BGM.boss_intro);
+                    PlayMusicAndPauseCancel();
                     colid.enabled = false;
                     GameObject slm1_12 = ObjectPoolManager.Instance.InstantiateMyGameObject(slm1);
                     GameObject slm1_13 = ObjectPoolManager.Instance.InstantiateMyGameObject(slm1);
@@ -311,4 +318,10 @@ public class MonsterPointManagerStage01 : MonoBehaviour
         }
     }
 
+    private void PlayMusicAndPauseCancel()
+    {
+        vp_Timer.In(6.0f, new vp_Timer.Callback(delegate () {
+            AudioManager.Instance.ReplaceBGM(BGM.boss_loop);
+        }));
+    }
 }

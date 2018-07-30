@@ -28,6 +28,8 @@ public class WinflagController : MonoBehaviour
     {
         if (collision.tag == ConstData.Player)
         {
+            //播放音乐
+            AudioManager.Instance.ReplaceBGM(BGM.victory);
             if (flagMan == null)
             {
                 flagMan = GameObject.FindGameObjectWithTag(ConstData.FlagMan);
@@ -80,11 +82,12 @@ public class WinflagController : MonoBehaviour
     {
         vp_Timer.In(3.8f, new vp_Timer.Callback(delegate () 
         {
+            transform.Find("/Canvas/UIBattle").GetComponent<UIBattle>().PushWin();
             for (int i = 0; i < playerList.Count; i++)
             {
                 playerList[i].transform.GetComponent<Animator>().SetTrigger("Win");
             }
+            vp_Timer.In(1.5f, new vp_Timer.Callback(delegate () { UIManager.Instance.PushUIStack(ConstData.UISettlement); }));
         }));
-        vp_Timer.In(2.0f, new vp_Timer.Callback(delegate () { UIManager.Instance.PushUIStack(ConstData.UISettlement); }));
     }
 }

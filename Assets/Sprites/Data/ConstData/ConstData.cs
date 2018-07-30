@@ -285,6 +285,8 @@ public struct ConstData
     public const string ControllerExArea_ItemTwo = "ControllerExArea/ItemTwo";
     public const string ControllerExArea_ItemThree = "ControllerExArea/ItemThree";
     public const string ControllerExArea_ItemFour = "ControllerExArea/ItemFour";
+    public const string WIN = "WIN";
+    public const string LOSE = "LOSE";
     /// <summary>
     /// 筛选
     /// </summary>

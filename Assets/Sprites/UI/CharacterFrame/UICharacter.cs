@@ -1524,24 +1524,6 @@ public class UICharacter : MonoBehaviour, IUIBase
                     _tempHeroBar.GetComponent<Toggle>().graphic = _tempHeroBar.transform.GetChild(0).GetComponent<Image>();
                     //加入列表
                     playerList.Add(_tempHeroBar);
-                    //条的颜色是否需要改变判断
-                    //if (isTeam == true)
-                    //{
-                    //    for (int j = 0; j < stepList.Count; j++)
-                    //    {
-                    //        if (stepList[j].transform.childCount != 1)
-                    //        {
-                    //            if (_tempHeroBar.name == stepList[j].transform.GetChild(1).name)
-                    //            {
-                    //                _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
-                    //            }
-                    //        }
-                    //    }
-                    //    if (_tempHeroBar.name == "1300")
-                    //    {
-                    //        _tempHeroBar.GetComponent<Image>().sprite = _tempHeroBar.transform.GetChild(0).GetComponent<Image>().sprite;
-                    //    }
-                    //}
                     //如果是队伍编制模式，取消所有解雇按钮
                     if (isTeam == true)
                     {
@@ -1552,6 +1534,8 @@ public class UICharacter : MonoBehaviour, IUIBase
                     }
                     //取消旗手的解雇
                     playerList[0].transform.GetChild(4).gameObject.SetActive(false);
+                    //染色
+                    RedListDraw();
                 }
                 #endregion
                 break;
@@ -1644,6 +1628,8 @@ public class UICharacter : MonoBehaviour, IUIBase
                         }
                         //取消旗手的解雇
                         playerList[0].transform.GetChild(4).gameObject.SetActive(false);
+                        //染色
+                        RedListDraw();
                     }
                 }
                 filterCount = 0;
@@ -1738,6 +1724,8 @@ public class UICharacter : MonoBehaviour, IUIBase
                         }
                         //取消旗手的解雇
                         playerList[0].transform.GetChild(4).gameObject.SetActive(false);
+                        //染色
+                        RedListDraw();
                     }
                 }
                 filterCount2 = 0;
@@ -1832,6 +1820,8 @@ public class UICharacter : MonoBehaviour, IUIBase
                         }
                         //取消旗手的解雇
                         playerList[0].transform.GetChild(4).gameObject.SetActive(false);
+                        //染色
+                        RedListDraw();
                     }
                 }
                 filterCount3 = 0;
@@ -1926,6 +1916,8 @@ public class UICharacter : MonoBehaviour, IUIBase
                         }
                         //取消旗手的解雇
                         playerList[0].transform.GetChild(4).gameObject.SetActive(false);
+                        //染色
+                        RedListDraw();
                     }
                 }
                 filterCount4 = 0;
@@ -2020,6 +2012,8 @@ public class UICharacter : MonoBehaviour, IUIBase
                         }
                         //取消旗手的解雇
                         playerList[0].transform.GetChild(4).gameObject.SetActive(false);
+                        //染色
+                        RedListDraw();
                     }
                 }
                 filterCount5 = 0;

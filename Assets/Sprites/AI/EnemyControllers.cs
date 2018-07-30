@@ -19,7 +19,7 @@ public class EnemyControllers : MonoBehaviour
     //是否正在释放技能
     internal bool skillIsOperation = false;
     //攻击间隔计时
-    internal int attackRate = 0;
+    internal int attackRate = 50;
     //最终伤害
     internal int totalDamage;
 
@@ -188,17 +188,32 @@ public class EnemyControllers : MonoBehaviour
                 //回收击打特效
                 vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(hit1); }));
                 //计算伤害
-                if (targetPlayer.GetComponent<HeroStates>().god == false)
+                if (targetPlayer.tag == ConstData.Player)
+                {
+                    if (targetPlayer.GetComponent<HeroStates>().god == false)
+                    {
+                        totalDamage = (int)
+                            (
+                            (
+                            transform.GetComponent<EnemyStates>().currentAD * 1f -
+                            (transform.GetComponent<EnemyStates>().currentAD * 1f) *
+                            (targetPlayer.GetComponent<HeroStates>().currentDEF * 0.01f)
+                            ) * 0.1f
+                            );
+                        targetPlayer.GetComponent<HeroStates>().currentHP -= totalDamage;
+                    }
+                }
+                else
                 {
                     totalDamage = (int)
-                        (
-                        (
-                        transform.GetComponent<EnemyStates>().currentAD * 1f -
-                        (transform.GetComponent<EnemyStates>().currentAD * 1f) *
-                        (targetPlayer.GetComponent<HeroStates>().currentDEF * 0.01f)
-                        ) * 0.1f
-                        );
-                    targetPlayer.GetComponent<HeroStates>().currentHP -= totalDamage;
+                            (
+                            (
+                            transform.GetComponent<EnemyStates>().currentAD * 1f -
+                            (transform.GetComponent<EnemyStates>().currentAD * 1f) *
+                            (targetPlayer.GetComponent<FlagManController>().currentDEF * 0.01f)
+                            ) * 0.1f
+                            );
+                    targetPlayer.GetComponent<FlagManController>().currentHP -= totalDamage;
                 }
             }
         }

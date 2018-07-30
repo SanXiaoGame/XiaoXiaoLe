@@ -47,6 +47,9 @@ public class UIBattle : MonoBehaviour, IUIBase
     GameObject HPBarPrefab;
     GameObject CanvasParent;
 
+    GameObject WIN;
+    GameObject LOSE;
+
     #region 战斗专用
     internal static int ItemOneID;
     internal static int ItemTwoID;
@@ -105,6 +108,9 @@ public class UIBattle : MonoBehaviour, IUIBase
         itemFrameList.Add(itemTwo);
         itemFrameList.Add(itemThree);
         itemFrameList.Add(itemFour);
+        //获取胜利失败
+        WIN = transform.Find(ConstData.WIN).gameObject;
+        LOSE = transform.Find(ConstData.LOSE).gameObject;
     }
 
     private void Start()
@@ -240,7 +246,7 @@ public class UIBattle : MonoBehaviour, IUIBase
     /// <summary>
     /// 清除所有对象，还原到初始形态
     /// </summary>
-    void ClearAll()
+    internal void ClearAll()
     {
         //回收墙
         _flg.GetComponent<FlagManController>().RecWall();
@@ -453,5 +459,14 @@ public class UIBattle : MonoBehaviour, IUIBase
         hpBarHut.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(-550, 880);
         hpBarHut.GetComponent<HPBarColorChange>().GetTarget(_hut);
         hpBarList.Add(hpBarHut);
+    }
+
+    internal void PushLose()
+    {
+        LOSE.SetActive(true);
+    }
+    internal void PushWin()
+    {
+        WIN.SetActive(true);
     }
 }
