@@ -11,10 +11,6 @@ public class UILoading : MonoBehaviour
 {
     private void Start()
     {
-        //清理UI数据
-        UIManager.Instance.ClearUIData();
-        //清空池对象
-        ObjectPoolManager.Instance.EmptyFunc();
         //选背景图
         if (SceneAss_Manager.Instance.newSceneID == 2)
         {
@@ -28,6 +24,12 @@ public class UILoading : MonoBehaviour
         {
             transform.GetComponent<Image>().sprite = null;
         }
+
+        //清理UI数据
+        UIManager.Instance.ClearUIData();
+        //清空池对象
+        ObjectPoolManager.Instance.EmptyFunc();
+
         SceneAss_Manager.Instance.loadingSlider = transform.GetChild(0).GetComponent<Slider>();
         SceneAss_Manager.Instance.ExecutionOfEvent();
     }

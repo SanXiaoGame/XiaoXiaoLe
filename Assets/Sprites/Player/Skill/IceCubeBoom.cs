@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class IceCubeBoom : MonoBehaviour
 {
@@ -25,7 +26,10 @@ public class IceCubeBoom : MonoBehaviour
             cubes[i] = transform.GetChild(i).gameObject;
         }
         cld = transform.GetComponent<BoxCollider2D>();
-        user = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Caster].playerData.PrefabsID).gameObject;
+        if (SceneManager.GetActiveScene().name != "LoadingScene")
+        {
+            user = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Caster].playerData.PrefabsID).gameObject;
+        }
         flagM = transform.Find("/1001").gameObject;
         enemyList = new List<GameObject>();
     }
@@ -68,7 +72,13 @@ public class IceCubeBoom : MonoBehaviour
         }
         enemyList.Clear();
         //1秒后破裂
-        vp_Timer.In(1.0f, new vp_Timer.Callback(delegate () { IceBoom(); }));
+        vp_Timer.In(1.0f, new vp_Timer.Callback(delegate ()
+        {
+            if (SceneManager.GetActiveScene().name != "LoadingScene")
+            {
+                IceBoom();
+            }
+        }));
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -82,7 +92,13 @@ public class IceCubeBoom : MonoBehaviour
                 GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_hit));
                 hit1.transform.position = collision.transform.position;
                 //回收击打特效
-                vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(hit1); }));
+                vp_Timer.In(1f, new vp_Timer.Callback(delegate ()
+                {
+                    if (SceneManager.GetActiveScene().name != "LoadingScene")
+                    {
+                        ObjectPoolManager.Instance.RecycleMyGameObject(hit1);
+                    }
+                }));
                 //计算伤害
                 if (collision.GetComponent<EnemyStates>().god == false)
                 {
@@ -99,7 +115,13 @@ public class IceCubeBoom : MonoBehaviour
                     collision.transform.GetComponent<EnemyStates>().GetState(3201, 1.0f);
                 }
                 //清空所有锁定目标
-                vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { flagM.GetComponent<FlagManController>().ClearAllTarget(); }));
+                vp_Timer.In(0.3f, new vp_Timer.Callback(delegate ()
+                {
+                    if (SceneManager.GetActiveScene().name != "LoadingScene")
+                    {
+                        flagM.GetComponent<FlagManController>().ClearAllTarget();
+                    }
+                }));
             }
         }
     }
@@ -110,10 +132,19 @@ public class IceCubeBoom : MonoBehaviour
         AudioManager.Instance.PlayEffectMusic(SoundEffect.Freeze_Broken);
         for (int i = 0; i < cubes.Length; i++)
         {
-            cubes[i].GetComponent<PolygonCollider2D>().enabled = true;
-            cubes[i].GetComponent<Rigidbody2D>().gravityScale = 1;
+            if (cubes[i] != null)
+            {
+                cubes[i].GetComponent<PolygonCollider2D>().enabled = true;
+                cubes[i].GetComponent<Rigidbody2D>().gravityScale = 1;
+            }
         }
-        vp_Timer.In(1.0f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(gameObject); }));
+        vp_Timer.In(1.0f, new vp_Timer.Callback(delegate ()
+        {
+            if (SceneManager.GetActiveScene().name != "LoadingScene")
+            {
+                ObjectPoolManager.Instance.RecycleMyGameObject(gameObject);
+            }
+        }));
     }
 
 

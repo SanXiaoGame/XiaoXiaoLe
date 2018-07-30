@@ -27,6 +27,7 @@ public class UIManager : ManagerBase<UIManager>
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !isClickEscape)
         {
+            isClickEscape = true;
             //显示退出界面
             PushUIStack(ConstData.UIExitGame);
         }

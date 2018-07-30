@@ -163,11 +163,14 @@ public class AudioManager : ManagerBase<AudioManager>
     {
         vp_Timer.In(tempAudio.clip.length, new vp_Timer.Callback(delegate ()
         {
-            //暂停播放
-            tempAudio.Stop();
-            tempAudio.clip = null;
-            //加入队列
-            effectMusic.Enqueue(tempAudio);
+            if (tempAudio != null)
+            {
+                //暂停播放
+                tempAudio.Stop();
+                tempAudio.clip = null;
+                //加入队列
+                effectMusic.Enqueue(tempAudio);
+            }
         }));
     }
 }

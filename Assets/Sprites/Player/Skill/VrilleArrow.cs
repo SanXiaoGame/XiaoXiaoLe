@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class VrilleArrow : MonoBehaviour
 {
@@ -18,7 +19,10 @@ public class VrilleArrow : MonoBehaviour
     {
         cld = transform.GetComponent<BoxCollider2D>();
         enemyList = new List<GameObject>();
-        user = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Hunter].playerData.PrefabsID).gameObject;
+        if (SceneManager.GetActiveScene().name != "LoadingScene")
+        {
+            user = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Hunter].playerData.PrefabsID).gameObject;
+        }
         flagM = transform.Find("/1001").gameObject;
     }
 
@@ -54,7 +58,13 @@ public class VrilleArrow : MonoBehaviour
                 //敌人略微后退
                 collision.GetComponent<EnemyControllers>().InvokeRepeating("Dashed", 0f, 0.02f);
                 vp_Timer.In(0.3f, new vp_Timer.Callback
-                    (delegate () { collision.GetComponent<EnemyControllers>().CancelInvoke("Dashed"); }));
+                    (delegate ()
+                    {
+                        if (SceneManager.GetActiveScene().name != "LoadingScene")
+                        {
+                            collision.GetComponent<EnemyControllers>().CancelInvoke("Dashed");
+                        }
+                    }));
                 //计算伤害
                 if (collision.GetComponent<EnemyStates>().god == false)
                 {
@@ -62,7 +72,13 @@ public class VrilleArrow : MonoBehaviour
                     collision.GetComponent<EnemyStates>().currentHP -= totalDamage;
                 }
                 //清空所有锁定目标
-                vp_Timer.In(0.2f, new vp_Timer.Callback(delegate () { flagM.GetComponent<FlagManController>().ClearAllTarget(); }));
+                vp_Timer.In(0.2f, new vp_Timer.Callback(delegate ()
+                {
+                    if (SceneManager.GetActiveScene().name != "LoadingScene")
+                    {
+                        flagM.GetComponent<FlagManController>().ClearAllTarget();
+                    }
+                }));
             }
         }
     }

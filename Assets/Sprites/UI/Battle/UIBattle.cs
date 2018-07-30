@@ -116,6 +116,8 @@ public class UIBattle : MonoBehaviour, IUIBase
     private void Start()
     {
         GameManager.Instance.AssignNeighbours(0.5f);
+        ColumnManager.Instance.ColumnManagerAssignment();
+        GameManager.Instance.isBusy = false;
     }
 
     //进入界面
@@ -200,6 +202,7 @@ public class UIBattle : MonoBehaviour, IUIBase
     {
         //清空所有需要清空的东西
         ClearAll();
+        UIManager.Instance.GamePause();
         SceneAss_Manager.Instance.LoadingFunc(2);
     }
     /// <summary>
