@@ -37,6 +37,8 @@ public class UIChoiceLevelPrefab : MonoBehaviour, IUIBase
     GameObject[,] _grids;
     //存储选中物品数据
     BagItem _bagItem;
+    //静态格子的列表
+    internal static List<int> staticList = new List<int>();
 
     //消耗品列表
     List<int> _itemConsumableList = new List<int>();
@@ -62,7 +64,8 @@ public class UIChoiceLevelPrefab : MonoBehaviour, IUIBase
         //以到达关卡数
         PlayerPrefs.SetInt("Checkpoint", 1);
         CheckpointDicNumber = PlayerPrefs.GetInt("Checkpoint");
-        
+
+        staticList.Clear();
 
         //返回主城按钮
         GameObject _mainCityButton = transform.Find(ConstData.SystemArea_MainCityIcon).gameObject;
@@ -364,6 +367,7 @@ public class UIChoiceLevelPrefab : MonoBehaviour, IUIBase
                 _bagItem.transform.parent = _consumableBarArr[i].transform;
                 _bagItem.transform.localPosition = Vector3.zero;
                 _bagItem.GetComponent<Image>().raycastTarget = false;
+                staticList.Add(_bagItem.mydata_item.item_Id);
                 _bagItem = null;
                 break;
             }
@@ -412,6 +416,7 @@ public class UIChoiceLevelPrefab : MonoBehaviour, IUIBase
                     _bagItem.transform.parent = _grids[i, j].transform;
                     _bagItem.transform.localPosition = Vector3.zero;
                     _bagItem.GetComponent<Image>().raycastTarget = true;
+                    staticList.Remove(_bagItem.mydata_item.item_Id);
                     return;
                 }
             }

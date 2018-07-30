@@ -43,7 +43,6 @@ public class MonsterPointManagerStage01 : MonoBehaviour
                 FlagManController.battleSwitch = false;
                 FlagManController.flagMove = true;
                 pointStandby = false;
-                Debug.Log("clear");
             }
         }
         if (gameObject.tag == ConstData.BossPoint)
@@ -53,7 +52,6 @@ public class MonsterPointManagerStage01 : MonoBehaviour
                 FlagManController.battleSwitch = false;
                 FlagManController.flagMove = true;
                 pointStandby = false;
-                Debug.Log("clear");
             }
         }
     }

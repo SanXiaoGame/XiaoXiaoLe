@@ -430,10 +430,6 @@ public class UIMainCity : MonoBehaviour, IUIBase
     }
     void BattleEnter(PointerEventData eventData)
     {
-        UIBattle.ItemOneID = 2207;
-        UIBattle.ItemTwoID = 2204;
-        UIBattle.ItemThreeID = 2211;
-        UIBattle.ItemFourID = 2209;
         if (SQLiteManager.Instance.team[ConstData.FlagMan] != null && SQLiteManager.Instance.team[ConstData.Saber] != null &&
             SQLiteManager.Instance.team[ConstData.Knight] != null && SQLiteManager.Instance.team[ConstData.Berserker] != null &&
             SQLiteManager.Instance.team[ConstData.Caster] != null && SQLiteManager.Instance.team[ConstData.Hunter] != null)

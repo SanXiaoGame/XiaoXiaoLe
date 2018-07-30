@@ -22,17 +22,17 @@ public class UIBattle : MonoBehaviour, IUIBase
     GameObject _cst;
     GameObject _hut;
     //角色列表
-    List<GameObject> playerList;
+    List<GameObject> playerList = new List<GameObject>();
     //道具框列表
-    List<GameObject> itemFrameList;
+    List<GameObject> itemFrameList = new List<GameObject>();
     //道具列表
-    List<int> itemList;
+    List<int> itemList = new List<int>();
     //道具对象列表
-    internal static List<GameObject> itemObjList;
+    internal static List<GameObject> itemObjList = new List<GameObject>();
     //血条列表
-    internal static List<GameObject> hpBarList;
+    internal static List<GameObject> hpBarList = new List<GameObject>();
     //阵亡角色列表
-    internal static List<GameObject> deadCharaList;
+    internal static List<GameObject> deadCharaList = new List<GameObject>();
 
     //需要操作的界面
     GameObject settingIcon;
@@ -51,10 +51,11 @@ public class UIBattle : MonoBehaviour, IUIBase
     GameObject LOSE;
 
     #region 战斗专用
-    internal static int ItemOneID;
-    internal static int ItemTwoID;
-    internal static int ItemThreeID;
-    internal static int ItemFourID;
+    List<int> InputItemList = new List<int>();
+    int ItemOneID;
+    int ItemTwoID;
+    int ItemThreeID;
+    int ItemFourID;
     #endregion
 
 
@@ -96,13 +97,6 @@ public class UIBattle : MonoBehaviour, IUIBase
         itemFour = transform.Find(ConstData.ControllerExArea_ItemFour).gameObject;
         HPBarPrefab = ResourcesManager.Instance.FindUIPrefab(ConstData.HPBar);
         CanvasParent = transform.parent.gameObject;
-        //列表初始化
-        playerList = new List<GameObject>();
-        itemFrameList = new List<GameObject>();
-        itemList = new List<int>();
-        itemObjList = new List<GameObject>();
-        hpBarList = new List<GameObject>();
-        deadCharaList = new List<GameObject>();
         //道具栏列表添加
         itemFrameList.Add(itemOne);
         itemFrameList.Add(itemTwo);
@@ -144,11 +138,25 @@ public class UIBattle : MonoBehaviour, IUIBase
         {
             GameArea.SetActive(true);
         }
+        //道具列表初始化
+        InputItemList.Clear();
+        InputItemList.Add(ItemOneID);
+        InputItemList.Add(ItemTwoID);
+        InputItemList.Add(ItemThreeID);
+        InputItemList.Add(ItemFourID);
+        //道具获取
+        for (int i = 0; i < UIChoiceLevelPrefab.staticList.Count; i++)
+        {
+            InputItemList[i] = UIChoiceLevelPrefab.staticList[i];
+        }
         //获得道具信息
-        itemList.Add(ItemOneID);
-        itemList.Add(ItemTwoID);
-        itemList.Add(ItemThreeID);
-        itemList.Add(ItemFourID);
+        for (int i = 0; i < InputItemList.Count; i++)
+        {
+            if (InputItemList[i] != 0)
+            {
+                itemList.Add(InputItemList[i]);
+            }
+        }
         //生成道具
         CreateItem();
         //开始游戏

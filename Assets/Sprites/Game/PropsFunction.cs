@@ -171,21 +171,37 @@ public class PropsFunction : MonoBehaviour
     /// <param name="生命值百分比(小数)"></param>
     void ReviveCross(float HPpercent)
     {
-        int deadID = Convert.ToInt32(UIBattle.deadCharaList[UIBattle.deadCharaList.Count].name);
-        string deadIDstr = deadID.ToString();
-        GameObject a1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPlayerPrefab(deadIDstr));
-        a1.transform.GetComponent<Animator>().SetTrigger("Reset");
-        a1.GetComponent<HeroStates>().currentHP = (int)(a1.GetComponent<HeroStates>().maxHP * HPpercent);
-        a1.transform.position = flagman.transform.position + new Vector3(0.3f, 0, 0);
+        if (UIBattle.deadCharaList.Count != 0)
+        {
+            string deadIDstr = UIBattle.deadCharaList[UIBattle.deadCharaList.Count - 1].name;
+            int deadID = Convert.ToInt32(deadIDstr);
+            GameObject a1 =  UIBattle.deadCharaList[UIBattle.deadCharaList.Count - 1];
+            UIBattle.deadCharaList.Remove(UIBattle.deadCharaList[UIBattle.deadCharaList.Count - 1]);
+            a1.GetComponent<HeroStates>().currentHP = (int)(a1.GetComponent<HeroStates>().maxHP * HPpercent);
+            a1.SetActive(true);
+            a1.transform.GetComponent<HeroController>().isAlive = true;
+            a1.transform.GetComponent<CircleCollider2D>().enabled = true;
+            a1.transform.GetComponent<Animator>().SetTrigger("Reset");
+            a1.transform.position = flagman.transform.position + new Vector3(0, 0, 0);
+            if (FlagManController.battleSwitch == true)
+            {
+                a1.transform.GetComponent<HeroController>().targetEnemy = null;
+                a1.transform.GetComponent<HeroController>().moveSwitch_Battle = true;
+            }
+            else
+            {
+                a1.transform.GetComponent<HeroController>().targetEnemy = null;
+                a1.transform.GetComponent<HeroController>().moveSwitch = true;
+            }
+        }
         //播放复活音效
         AudioManager.Instance.PlayEffectMusic(SoundEffect.Revive);
         //播放复活特效
         GameObject tempEffect = ObjectPoolManager.Instance.InstantiateMyGameObject
             (ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_revive));
-        tempEffect.transform.position = flagman.transform.position + new Vector3(3, 0, 0);
+        tempEffect.transform.position = flagman.transform.position + new Vector3(2.3f, 0.6f, 0);
         vp_Timer.In(0.6f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(tempEffect); }));
-        //改变各种开关
-        a1.transform.GetComponent<HeroController>().moveSwitch_Battle = true;
+        
     }
     /// <summary>
     /// 全屏块消除，同时判断是否视为使用了一次高级旗手块，0为否，1为是
