@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HeroController : MonoBehaviour
 {
@@ -391,7 +392,13 @@ public class HeroController : MonoBehaviour
                         GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_hit));
                         hit1.transform.position = targetEnemy.transform.position;
                         //回收击打特效
-                        vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(hit1); }));
+                        vp_Timer.In(1f, new vp_Timer.Callback(delegate ()
+                        {
+                            if (SceneManager.GetActiveScene().name != "LoadingScene")
+                            {
+                                ObjectPoolManager.Instance.RecycleMyGameObject(hit1);
+                            }
+                        }));
                         //计算伤害
                         if (targetEnemy.GetComponent<EnemyStates>().god == false)
                         {
@@ -658,8 +665,18 @@ public class HeroController : MonoBehaviour
     {
         AudioManager.Instance.PlayEffectMusic(SoundEffect.Belief);
         GameObject st = ObjectPoolManager.Instance.InstantiateMyGameObject(knight01);
-        st.transform.position = transform.position;
-        vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(st); }));
+        if (SceneManager.GetActiveScene().name != "LoadingScene")
+        {
+            st.transform.position = transform.position;
+        }
+        
+        vp_Timer.In(1f, new vp_Timer.Callback(delegate ()
+        {
+            if (SceneManager.GetActiveScene().name != "LoadingScene")
+            {
+                ObjectPoolManager.Instance.RecycleMyGameObject(st);
+            }
+        }));
         transform.GetComponent<HeroStates>().GetState(3210, 5.0f);
         vp_Timer.In(0.2f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
     }
@@ -751,7 +768,13 @@ public class HeroController : MonoBehaviour
             (ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Berserker02_Blood_01));
         st.transform.position = transform.position + new Vector3(0, 1, 0);
         st.transform.parent = transform;
-        vp_Timer.In(5.0f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(st); }));
+        vp_Timer.In(5.0f, new vp_Timer.Callback(delegate ()
+        {
+            if (SceneManager.GetActiveScene().name != "LoadingScene")
+            {
+                ObjectPoolManager.Instance.RecycleMyGameObject(st);
+            }
+        }));
         transform.GetComponent<HeroStates>().GetState(3207, 5.0f);
         transform.GetComponent<HeroStates>().GetState(3209, 5.0f);
         vp_Timer.In(0.8f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
@@ -777,7 +800,13 @@ public class HeroController : MonoBehaviour
                 AudioManager.Instance.PlayEffectMusic(SoundEffect.BoatAnchorHit);
                 GameObject efct = ObjectPoolManager.Instance.InstantiateMyGameObject(berserker03_hit);
                 efct.transform.position = transform.position + new Vector3(1f, -0.15f, 0);
-                vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(efct); }));
+                vp_Timer.In(0.3f, new vp_Timer.Callback(delegate ()
+                {
+                    if (SceneManager.GetActiveScene().name != "LoadingScene")
+                    {
+                        ObjectPoolManager.Instance.RecycleMyGameObject(efct);
+                    }
+                }));
                 vp_Timer.In(0.5f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
                 break;
             case 2:
@@ -817,7 +846,13 @@ public class HeroController : MonoBehaviour
             animHero.SetBool("isRun", false);
             isRun = false;
         }
-        vp_Timer.In(0.5f, new vp_Timer.Callback(delegate () { Skill_A_Caster_IceCube(); }));
+        vp_Timer.In(0.5f, new vp_Timer.Callback(delegate ()
+        {
+            if (SceneManager.GetActiveScene().name != "LoadingScene")
+            {
+                Skill_A_Caster_IceCube();
+            }
+        }));
     }
     internal void Skill_A_Caster_IceCube()
     {
@@ -913,8 +948,11 @@ public class HeroController : MonoBehaviour
     {
         AudioManager.Instance.PlayEffectMusic(SoundEffect.ExplodeArrow_Shoot);
         GameObject expArw = ObjectPoolManager.Instance.InstantiateMyGameObject(hunter01);
-        expArw.transform.position = transform.position + new Vector3(0.2f,0.2f,0);
-        expArw.transform.rotation = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Hunter01_ExplosionArrow).transform.rotation;
+        if (SceneManager.GetActiveScene().name != "LoadingScene")
+        {
+            expArw.transform.position = transform.position + new Vector3(0.2f, 0.2f, 0);
+            expArw.transform.rotation = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Hunter01_ExplosionArrow).transform.rotation;
+        }
     }
     /// <summary>
     /// 猎人二阶技能：螺旋箭
@@ -938,11 +976,20 @@ public class HeroController : MonoBehaviour
     {
         AudioManager.Instance.PlayEffectMusic(SoundEffect.VrilleArrow);
         GameObject VllArw = ObjectPoolManager.Instance.InstantiateMyGameObject(hunter02);
-        VllArw.transform.position = transform.position;
+        if (SceneManager.GetActiveScene().name != "LoadingScene")
+        {
+            VllArw.transform.position = transform.position;
+        }
         GameObject shootEffect = ObjectPoolManager.Instance.InstantiateMyGameObject
             (ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_arrowWind));
         shootEffect.transform.position = mainFist.transform.position;
-        vp_Timer.In(0.8f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(shootEffect); }));
+        vp_Timer.In(0.8f, new vp_Timer.Callback(delegate ()
+        {
+            if (SceneManager.GetActiveScene().name != "LoadingScene")
+            {
+                ObjectPoolManager.Instance.RecycleMyGameObject(shootEffect);
+            }
+        }));
     }
     /// <summary>
     /// 猎人三阶技能：火箭雨
@@ -970,14 +1017,26 @@ public class HeroController : MonoBehaviour
         GameObject upArw = ObjectPoolManager.Instance.InstantiateMyGameObject(hunter03_1);
         upArw.transform.position = transform.position;
         upArw.transform.rotation = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Hunter03_ArrowRainShoot).transform.rotation;
-        vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(upArw); }));
+        vp_Timer.In(1f, new vp_Timer.Callback(delegate ()
+        {
+            if (SceneManager.GetActiveScene().name != "LoadingScene")
+            {
+                ObjectPoolManager.Instance.RecycleMyGameObject(upArw);
+            }
+        }));
         //第二根
         vp_Timer.In(0.1f, new vp_Timer.Callback(delegate ()
         {
             GameObject upArw2 = ObjectPoolManager.Instance.InstantiateMyGameObject(hunter03_1);
             upArw2.transform.position = transform.position;
             upArw2.transform.rotation = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Hunter03_ArrowRainShoot).transform.rotation;
-            vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(upArw2); }));
+            vp_Timer.In(1f, new vp_Timer.Callback(delegate ()
+            {
+                if (SceneManager.GetActiveScene().name != "LoadingScene")
+                {
+                    ObjectPoolManager.Instance.RecycleMyGameObject(upArw2);
+                }
+            }));
         }));
         //第三根
         vp_Timer.In(0.2f, new vp_Timer.Callback(delegate ()
@@ -985,7 +1044,13 @@ public class HeroController : MonoBehaviour
             GameObject upArw3 = ObjectPoolManager.Instance.InstantiateMyGameObject(hunter03_1);
             upArw3.transform.position = transform.position;
             upArw3.transform.rotation = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Hunter03_ArrowRainShoot).transform.rotation;
-            vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(upArw3); }));
+            vp_Timer.In(1f, new vp_Timer.Callback(delegate ()
+            {
+                if (SceneManager.GetActiveScene().name != "LoadingScene")
+                {
+                    ObjectPoolManager.Instance.RecycleMyGameObject(upArw3);
+                }
+            }));
         }));
         //第四根
         vp_Timer.In(0.3f, new vp_Timer.Callback(delegate ()
@@ -993,7 +1058,13 @@ public class HeroController : MonoBehaviour
             GameObject upArw4 = ObjectPoolManager.Instance.InstantiateMyGameObject(hunter03_1);
             upArw4.transform.position = transform.position;
             upArw4.transform.rotation = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Hunter03_ArrowRainShoot).transform.rotation;
-            vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(upArw4); }));
+            vp_Timer.In(1f, new vp_Timer.Callback(delegate ()
+            {
+                if (SceneManager.GetActiveScene().name != "LoadingScene")
+                {
+                    ObjectPoolManager.Instance.RecycleMyGameObject(upArw4);
+                }
+            }));
         }));
         //第五根
         vp_Timer.In(0.4f, new vp_Timer.Callback(delegate ()

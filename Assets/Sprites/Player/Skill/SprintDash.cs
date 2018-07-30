@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SprintDash : MonoBehaviour
 {
@@ -68,24 +69,31 @@ public class SprintDash : MonoBehaviour
                         //取消冲刺位移
                         user.GetComponent<HeroController>().cancel("Skill_A_Saber_Sprint");
                         //关闭技能释放开关
-                        vp_Timer.In(0.4f, new vp_Timer.Callback(delegate () { user.GetComponent<HeroController>().skillIsOperation = false; }));
+                        vp_Timer.In(0.4f, new vp_Timer.Callback(delegate ()
+                        {
+                            if (SceneManager.GetActiveScene().name != "LoadingScene")
+                            {
+                                user.GetComponent<HeroController>().skillIsOperation = false;
+                            }
+                        }));
                         //关闭英雄技能动画
                         user.GetComponent<Animator>().SetBool("SaberOneSkill", false);
                         //敌人被击中后退的重复调用
                         collision.GetComponent<EnemyControllers>().InvokeRepeating("Dashed", 0f, 0.02f);
                         //取消重复调用
-                        vp_Timer.In(0.6f, new vp_Timer.Callback(delegate () { collision.GetComponent<EnemyControllers>().CancelInvoke("Dashed"); }));
-                        //英雄锁定目标丢失（因为敌人已经被击飞到攻击范围外）
-                        //vp_Timer.In(0.2f, new vp_Timer.Callback(delegate () { user.GetComponent<HeroController>().targetEnemy = null; }));
-                        //敌人锁定目标也丢失
-                        //vp_Timer.In(0.2f, new vp_Timer.Callback(delegate () { hitTarget.GetComponent<EnemyControllers>().targetPlayer = null; }));
-                        //英雄战斗位移开启
-                        //user.GetComponent<HeroController>().moveSwitch_Battle = true;
-                        //敌人战斗位移开启
-                        //hitTarget.GetComponent<EnemyControllers>().moveSwitch_Battle = true;
+                        vp_Timer.In(0.6f, new vp_Timer.Callback(delegate ()
+                        {
+                            if (SceneManager.GetActiveScene().name != "LoadingScene")
+                            {
+                                collision.GetComponent<EnemyControllers>().CancelInvoke("Dashed");
+                            }
+                        }));
                         vp_Timer.In(0.2f, new vp_Timer.Callback(delegate ()
                         {
-                            transform.Find("/1001").GetComponent<FlagManController>().ClearAllTarget();
+                            if (SceneManager.GetActiveScene().name != "LoadingScene")
+                            {
+                                transform.Find("/1001").GetComponent<FlagManController>().ClearAllTarget();
+                            }
                         }));
 
                         //生成击打特效

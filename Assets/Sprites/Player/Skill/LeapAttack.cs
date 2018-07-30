@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LeapAttack : MonoBehaviour
 {
@@ -31,7 +32,13 @@ public class LeapAttack : MonoBehaviour
         }
         isOver = false;
         //0.5秒后自动回收该特效
-        vp_Timer.In(0.5f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(gameObject); }));
+        vp_Timer.In(0.5f, new vp_Timer.Callback(delegate ()
+        {
+            if (SceneManager.GetActiveScene().name != "LoadingScene")
+            {
+                ObjectPoolManager.Instance.RecycleMyGameObject(gameObject);
+            }
+        }));
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -44,7 +51,13 @@ public class LeapAttack : MonoBehaviour
                 GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_hit));
                 hit1.transform.position = collision.transform.position;
                 //回收击打特效
-                vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(hit1); }));
+                vp_Timer.In(1f, new vp_Timer.Callback(delegate ()
+                {
+                    if (SceneManager.GetActiveScene().name != "LoadingScene")
+                    {
+                        ObjectPoolManager.Instance.RecycleMyGameObject(hit1);
+                    }
+                }));
                 //计算伤害
                 if (collision.GetComponent<EnemyStates>().god == false)
                 {
@@ -60,9 +73,21 @@ public class LeapAttack : MonoBehaviour
                 collision.GetComponent<EnemyStates>().GetState(3203, 3.0f);
                 //敌人略微后退
                 collision.GetComponent<EnemyControllers>().InvokeRepeating("Dashed", 0f, 0.02f);
-                vp_Timer.In(0.2f, new vp_Timer.Callback(delegate () { collision.GetComponent<EnemyControllers>().CancelInvoke("Dashed"); }));
+                vp_Timer.In(0.2f, new vp_Timer.Callback(delegate ()
+                {
+                    if (SceneManager.GetActiveScene().name != "LoadingScene")
+                    {
+                        collision.GetComponent<EnemyControllers>().CancelInvoke("Dashed");
+                    }
+                }));
                 //清空所有锁定目标
-                vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { flagM.GetComponent<FlagManController>().ClearAllTarget(); }));
+                vp_Timer.In(0.3f, new vp_Timer.Callback(delegate ()
+                {
+                    if (SceneManager.GetActiveScene().name != "LoadingScene")
+                    {
+                        flagM.GetComponent<FlagManController>().ClearAllTarget();
+                    }
+                }));
                 isOver = true;
             }
         }

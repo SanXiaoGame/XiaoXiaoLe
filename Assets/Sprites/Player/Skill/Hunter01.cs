@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Hunter01 : MonoBehaviour
 {
@@ -18,7 +19,10 @@ public class Hunter01 : MonoBehaviour
     private void Awake()
     {
         cld = transform.GetComponent<BoxCollider2D>();
-        user = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Hunter].playerData.PrefabsID).gameObject;
+        if (SceneManager.GetActiveScene().name != "LoadingScene")
+        {
+            user = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Hunter].playerData.PrefabsID).gameObject;
+        }
         flagM = transform.Find("/1001").gameObject;
     }
 

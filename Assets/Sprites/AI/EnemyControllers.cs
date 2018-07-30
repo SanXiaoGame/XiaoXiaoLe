@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyControllers : MonoBehaviour
 {
@@ -186,7 +187,13 @@ public class EnemyControllers : MonoBehaviour
                 GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_hit));
                 hit1.transform.position = targetPlayer.transform.position;
                 //回收击打特效
-                vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(hit1); }));
+                vp_Timer.In(1f, new vp_Timer.Callback(delegate ()
+                {
+                    if (SceneManager.GetActiveScene().name != "LoadingScene")
+                    {
+                        ObjectPoolManager.Instance.RecycleMyGameObject(hit1);
+                    }
+                }));
                 //计算伤害
                 if (targetPlayer.tag == ConstData.Player)
                 {

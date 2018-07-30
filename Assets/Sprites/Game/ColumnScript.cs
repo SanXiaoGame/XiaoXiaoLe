@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 列的功能类
@@ -194,7 +195,10 @@ public class ColumnScript : MonoBehaviour
 
             GameObject block = ObjectPoolManager.Instance.InstantiateMyGameObject(objectPrefab);
             block.name = objectPrefab.name;
-            block.transform.parent = transform;
+            if (SceneManager.GetActiveScene().name != "LoadingScene")
+            {
+                block.transform.parent = transform;
+            }
             block.GetComponent<RectTransform>().localScale = Vector3.one;
             block.transform.localPosition = new Vector3(0, (i + 1) * 200, 0);
             //赋值新的ColumnScript类
@@ -214,7 +218,10 @@ public class ColumnScript : MonoBehaviour
         for (int i = numberOfItemsToAdd; i < BlockObjectsScriptList.Count; i++)
         {
             //下降的动画
-            BlockObjectsScriptList[i].transform.DOLocalMoveY(-i * 200, 0.1f).SetDelay(0.2f).SetEase(Ease.Linear);
+            if (SceneManager.GetActiveScene().name != "LoadingScene")
+            {
+                BlockObjectsScriptList[i].transform.DOLocalMoveY(-i * 200, 0.1f).SetDelay(0.2f).SetEase(Ease.Linear);
+            }
         }
 
         //新的块下降

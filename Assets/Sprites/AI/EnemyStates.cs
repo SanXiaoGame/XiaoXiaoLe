@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyStates : MonoBehaviour
 {
@@ -219,7 +220,13 @@ public class EnemyStates : MonoBehaviour
                 MonsterPointManagerStage01.enemyList.Remove(gameObject);
                 //传输经验值
                 UISettlement.EXPPoolUp(mydata.EXP);
-                vp_Timer.In(1.0f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(gameObject); }));
+                vp_Timer.In(1.0f, new vp_Timer.Callback(delegate ()
+                {
+                    if (SceneManager.GetActiveScene().name != "LoadingScene")
+                    {
+                        ObjectPoolManager.Instance.RecycleMyGameObject(gameObject);
+                    }
+                }));
                 return;
             }
             //二级判断：如果已经被复活了，进入这里时会重新激活是否正在存活（aliving）
@@ -503,7 +510,13 @@ public class EnemyStates : MonoBehaviour
         {
             case 3201://眩晕
                 transform.GetComponent<EnemyControllers>().isDiz = true;
-                vp_Timer.In(keepTime, new vp_Timer.Callback(delegate () { transform.GetComponent<EnemyControllers>().isDiz = false; }));
+                vp_Timer.In(keepTime, new vp_Timer.Callback(delegate ()
+                {
+                    if (SceneManager.GetActiveScene().name != "LoadingScene")
+                    {
+                        transform.GetComponent<EnemyControllers>().isDiz = false;
+                    }
+                }));
                 break;
             case 3202://燃烧
                 burn = true;
@@ -515,7 +528,13 @@ public class EnemyStates : MonoBehaviour
                 break;
             case 3204://沉默
                 transform.GetComponent<EnemyControllers>().isSilence = true;
-                vp_Timer.In(keepTime, new vp_Timer.Callback(delegate () { transform.GetComponent<EnemyControllers>().isSilence = false; }));
+                vp_Timer.In(keepTime, new vp_Timer.Callback(delegate ()
+                {
+                    if (transform.GetComponent<EnemyControllers>() != null)
+                    {
+                        transform.GetComponent<EnemyControllers>().isSilence = false;
+                    }
+                }));
                 break;
             case 3207://振奋
                 inspire = true;

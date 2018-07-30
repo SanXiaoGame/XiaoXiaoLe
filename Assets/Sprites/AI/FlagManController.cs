@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FlagManController : MonoBehaviour
 {
@@ -60,12 +61,22 @@ public class FlagManController : MonoBehaviour
                 battleSwitch = false;
                 //推出失败字体
                 vp_Timer.In(1.0f, new vp_Timer.Callback
-                    (delegate () { transform.Find("/Canvas/UIBattle").GetComponent<UIBattle>().PushLose(); }));
+                    (delegate ()
+                    {
+                        if (SceneManager.GetActiveScene().name != "LoadingScene")
+                        {
+                            transform.Find("/Canvas/UIBattle").GetComponent<UIBattle>().PushLose();
+                        }
+                    }));
                 //返回主城
-                vp_Timer.In(3.0f, new vp_Timer.Callback(delegate () 
+                vp_Timer.In(3.0f, new vp_Timer.Callback(delegate ()
                 {
-                    transform.Find("/Canvas/UIBattle").GetComponent<UIBattle>().ClearAll();
-                    SceneAss_Manager.Instance.LoadingFunc(2); }));
+                    if (SceneManager.GetActiveScene().name != "LoadingScene")
+                    {
+                        transform.Find("/Canvas/UIBattle").GetComponent<UIBattle>().ClearAll();
+                        SceneAss_Manager.Instance.LoadingFunc(2);
+                    }
+                }));
                 return;
             }
             //如果复活了，进入该判断会恢复到存活状态

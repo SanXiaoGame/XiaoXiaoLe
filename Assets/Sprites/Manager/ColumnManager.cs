@@ -21,15 +21,11 @@ public class ColumnManager : ManagerBase<ColumnManager>
     //列的父物体
     RectTransform columnParent;
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
-    private void Start()
+    internal void ColumnManagerAssignment()
     {
         //找列的父物体
         columnParent = transform.Find(ConstData.ColumnParentObj).GetComponent<RectTransform>();
+
         gameColumns = new ColumnScript[numberOfColumns];
         for (int i = 0; i < gameColumns.Length; i++)
         {

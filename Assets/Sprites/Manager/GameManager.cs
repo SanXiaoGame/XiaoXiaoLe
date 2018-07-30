@@ -94,12 +94,15 @@ public class GameManager : ManagerBase<GameManager>
     {
         vp_Timer.In(delay, new vp_Timer.Callback(delegate() 
         {
-            for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
+            if (ColumnManager.Instance.gameColumns != null)
             {
-                ColumnManager.Instance.gameColumns[i].AssignNeighbours();
+                for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
+                {
+                    ColumnManager.Instance.gameColumns[i].AssignNeighbours();
+                }
+                //检查全部块状态
+                CheckBoardState();
             }
-            //检查全部块状态
-            CheckBoardState();
         }));
     }
 
@@ -108,25 +111,27 @@ public class GameManager : ManagerBase<GameManager>
     /// </summary>
     internal void CheckBoardState()
     {
-        //print("检查全部块状态");
         vp_Timer.In(objectFallingDuration, new vp_Timer.Callback(delegate() 
         {
             doesHaveBrustItem = false;
-            for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
+            if (ColumnManager.Instance.gameColumns!=null)
             {
-                for (int j = 0; j < ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList.Count; j++)
+                for (int i = 0; i < ColumnManager.Instance.gameColumns.Length; i++)
                 {
-                    if (ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList[j] != null)
+                    for (int j = 0; j < ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList.Count; j++)
                     {
-                        ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList[j].CheckIfCanBrust();
+                        if (ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList[j] != null)
+                        {
+                            ColumnManager.Instance.gameColumns[i].BlockObjectsScriptList[j].CheckIfCanBrust();
+                        }
                     }
                 }
-            }
 
-            if (doesHaveBrustItem)
-            {
-                RemoveBlock();
-                AddMissingBlock();
+                if (doesHaveBrustItem)
+                {
+                    RemoveBlock();
+                    AddMissingBlock();
+                }
             }
         }));
     }
