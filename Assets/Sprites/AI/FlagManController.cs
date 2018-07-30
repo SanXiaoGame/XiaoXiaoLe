@@ -147,4 +147,12 @@ public class FlagManController : MonoBehaviour
     {
 
     }
+
+    internal void RecWall()
+    {
+        if (wall != null)
+        {
+            Destroy(wall);
+        }
+    }
 }

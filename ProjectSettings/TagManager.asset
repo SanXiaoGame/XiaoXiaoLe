@@ -19,6 +19,8 @@ TagManager:
   - ItemType
   - BossPoint
   - CurePoint
+  - ItemTips
+  - Stage
   layers:
   - Default
   - TransparentFX

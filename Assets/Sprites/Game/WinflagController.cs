@@ -85,5 +85,6 @@ public class WinflagController : MonoBehaviour
                 playerList[i].transform.GetComponent<Animator>().SetTrigger("Win");
             }
         }));
+        vp_Timer.In(2.0f, new vp_Timer.Callback(delegate () { UIManager.Instance.PushUIStack(ConstData.UISettlement); }));
     }
 }

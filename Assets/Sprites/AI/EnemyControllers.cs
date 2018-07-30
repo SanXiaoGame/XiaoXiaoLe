@@ -20,6 +20,8 @@ public class EnemyControllers : MonoBehaviour
     internal bool skillIsOperation = false;
     //攻击间隔计时
     internal int attackRate = 0;
+    //最终伤害
+    internal int totalDamage;
 
     //敌人状态机
     Animator myanim;
@@ -32,7 +34,7 @@ public class EnemyControllers : MonoBehaviour
     {
         myanim = transform.GetComponent<Animator>();
         triggerEnemy = transform.GetComponent<BoxCollider2D>();
-
+        totalDamage = 0;
     }
     private void OnEnable()
     {
@@ -167,6 +169,38 @@ public class EnemyControllers : MonoBehaviour
         {
             transform.GetComponent<Rigidbody2D>().gravityScale = 0;
             transform.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+        }
+    }
+
+    /// <summary>
+    /// 普通攻击的调用
+    /// </summary>
+    internal void EnemyAttack()
+    {
+        if (isDiz == false && isAlive == true && skillIsOperation == false && FlagManController.battleSwitch == true)
+        {
+            if (targetPlayer != null)
+            {
+                AudioManager.Instance.PlayEffectMusic(SoundEffect.Hit);
+                //生成击打特效
+                GameObject hit1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_hit));
+                hit1.transform.position = targetPlayer.transform.position;
+                //回收击打特效
+                vp_Timer.In(1f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(hit1); }));
+                //计算伤害
+                if (targetPlayer.GetComponent<HeroStates>().god == false)
+                {
+                    totalDamage = (int)
+                        (
+                        (
+                        transform.GetComponent<EnemyStates>().currentAD * 1f -
+                        (transform.GetComponent<EnemyStates>().currentAD * 1f) *
+                        (targetPlayer.GetComponent<HeroStates>().currentDEF * 0.01f)
+                        ) * 0.1f
+                        );
+                    targetPlayer.GetComponent<HeroStates>().currentHP -= totalDamage;
+                }
+            }
         }
     }
 

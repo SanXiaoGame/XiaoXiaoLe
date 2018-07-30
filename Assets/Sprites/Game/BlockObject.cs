@@ -257,8 +257,9 @@ public class BlockObject : MonoBehaviour
         {
             GameManager.Instance.doesHaveBrustItem = true;
             GameManager.Instance.AddScore(ConstData.SkillOne);
+            SkillManager.Instance.A_ClassSkill(name);
             brust = true;
-            DelayCallSkill(0.12f, name);
+            //DelayCallSkill(0.12f, name);
         }
     }
 
