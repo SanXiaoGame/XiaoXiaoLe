@@ -79,6 +79,7 @@ public class UIEstablishCharacter : MonoBehaviour, IUIBase
     {
         confirmFrame.SetActive(false);
         _characterAnimator.SetBool("isWait", false);
+        SQLiteManager.Instance.playerDataSource[1300].player_Name = characterInputName.text;
         SQLiteManager.Instance.UpdataDataFromTable(ConstData.Player, ConstData.player_Name, characterInputName.text, ConstData.player_ID, 1300);
         UIManager.Instance.PushUIStack(ConstData.UIMainCity);
     }
