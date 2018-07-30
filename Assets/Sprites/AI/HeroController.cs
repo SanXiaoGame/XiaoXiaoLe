@@ -21,7 +21,7 @@ public class HeroController : MonoBehaviour
     //是否正在释放技能
     internal bool skillIsOperation = false;
     //攻击间隔计时
-    internal int attackRate = 0;
+    internal int attackRate = 50;
     //我的职业
     internal string myClass;
     //最终伤害

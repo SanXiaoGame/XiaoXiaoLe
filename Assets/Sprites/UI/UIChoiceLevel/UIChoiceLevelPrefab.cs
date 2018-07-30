@@ -426,6 +426,10 @@ public class UIChoiceLevelPrefab : MonoBehaviour, IUIBase
         switch (_uiChoiceLevelConfirmFrameType)
         {
             case UIChoiceLevelConfirmFrameType.ChoiceLevel:
+                //播放音乐
+                AudioManager.Instance.ReplaceBGM(BGM.battle_ep1_intro);
+                vp_Timer.In(ResourcesManager.Instance.FindAudioClip(BGM.battle_ep1_intro).length, 
+                    new vp_Timer.Callback(delegate () { AudioManager.Instance.ReplaceBGM(BGM.battle_ep1_loop); }));
                 SceneAss_Manager.Instance.LoadingFunc(3);
                 break;
             case UIChoiceLevelConfirmFrameType.Item:

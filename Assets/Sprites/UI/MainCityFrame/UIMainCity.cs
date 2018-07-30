@@ -73,6 +73,8 @@ public class UIMainCity : MonoBehaviour, IUIBase
     public void OnEntering()
     {
         gameObject.SetActive(true);
+        //播放音乐
+        AudioManager.Instance.ReplaceBGM(BGM.maincity);
 
         #region 游戏画面区
         GameArea = ObjectPoolManager.Instance.InstantiateMyGameObject

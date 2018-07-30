@@ -32,7 +32,9 @@ public class GameStart : MonoBehaviour
         {
             BGWidget.PointerClick += LoadLoadingScene;
         }
-        
+        //播放音乐
+        AudioManager.Instance.ReplaceBGM(BGM.Login_Intro);
+        vp_Timer.In(1.7f, new vp_Timer.Callback(delegate () { AudioManager.Instance.ReplaceBGM(BGM.Login_Loop); }));
     }
     void LoadLoadingScene(PointerEventData data)
     {
