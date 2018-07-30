@@ -28,7 +28,11 @@ public class UIBattle : MonoBehaviour, IUIBase
     //道具列表
     List<int> itemList;
     //道具对象列表
-    List<GameObject> itemObjList;
+    internal static List<GameObject> itemObjList;
+    //血条列表
+    internal static List<GameObject> hpBarList;
+    //阵亡角色列表
+    internal static List<GameObject> deadCharaList;
 
     //需要操作的界面
     GameObject settingIcon;
@@ -40,6 +44,8 @@ public class UIBattle : MonoBehaviour, IUIBase
     GameObject itemTwo;
     GameObject itemThree;
     GameObject itemFour;
+    GameObject HPBarPrefab;
+    GameObject CanvasParent;
 
     #region 战斗专用
     internal static int ItemOneID;
@@ -85,11 +91,15 @@ public class UIBattle : MonoBehaviour, IUIBase
         itemTwo = transform.Find(ConstData.ControllerExArea_ItemTwo).gameObject;
         itemThree = transform.Find(ConstData.ControllerExArea_ItemThree).gameObject;
         itemFour = transform.Find(ConstData.ControllerExArea_ItemFour).gameObject;
+        HPBarPrefab = ResourcesManager.Instance.FindUIPrefab(ConstData.HPBar);
+        CanvasParent = transform.parent.gameObject;
         //列表初始化
         playerList = new List<GameObject>();
         itemFrameList = new List<GameObject>();
         itemList = new List<int>();
         itemObjList = new List<GameObject>();
+        hpBarList = new List<GameObject>();
+        deadCharaList = new List<GameObject>();
         //道具栏列表添加
         itemFrameList.Add(itemOne);
         itemFrameList.Add(itemTwo);
@@ -111,10 +121,13 @@ public class UIBattle : MonoBehaviour, IUIBase
         //游戏画面区域生成
         GameArea = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindUIPrefab(ConstData.Stage01));
         GameArea.transform.position = ResourcesManager.Instance.FindUIPrefab(ConstData.Stage01).transform.position;
+        GameArea.name = ResourcesManager.Instance.FindUIPrefab(ConstData.Stage01).name;
         //重置信息
         playerList.Clear();
         itemList.Clear();
         itemObjList.Clear();
+        hpBarList.Clear();
+        deadCharaList.Clear();
         //生成创建队伍列表的所有角色
         CreateHero();
         //金币信息
@@ -142,12 +155,12 @@ public class UIBattle : MonoBehaviour, IUIBase
     //界面暂停
     public void OnPausing()
     {
-        UIManager.Instance.GamePause();
+        
     }
     //界面唤醒
     public void OnResuming()
     {
-        UIManager.Instance.GamePause();
+        
     }
 
 
@@ -172,6 +185,7 @@ public class UIBattle : MonoBehaviour, IUIBase
     {
         //打开返回主城的窗口
         ConfirmFrame.SetActive(true);
+        UIManager.Instance.GamePause();
     }
     /// <summary>
     /// 确认返回主城
@@ -182,6 +196,7 @@ public class UIBattle : MonoBehaviour, IUIBase
         ClearAll();
         ObjectPoolManager.Instance.RecycleMyGameObject(GameArea);
         ConfirmFrame.SetActive(false);
+        UIManager.Instance.GamePause();
         SceneAss_Manager.Instance.LoadingFunc(2);
     }
     /// <summary>
@@ -191,6 +206,7 @@ public class UIBattle : MonoBehaviour, IUIBase
     {
         //关闭返回主城的窗口
         ConfirmFrame.SetActive(false);
+        UIManager.Instance.GamePause();
     }
     
     
@@ -215,6 +231,7 @@ public class UIBattle : MonoBehaviour, IUIBase
                 tempitem01.transform.parent = itemFrameList[i].transform;
                 tempitem01.transform.localScale = new Vector3(1, 1, 1);
                 tempitem01.transform.position = itemFrameList[i].transform.GetChild(0).transform.position;
+                tempitem01.name = itemList[i].ToString();
                 if (tempitem01.GetComponent<PropsFunction>() == null)
                 {
                     tempitem01.AddComponent<PropsFunction>();
@@ -228,6 +245,8 @@ public class UIBattle : MonoBehaviour, IUIBase
     /// </summary>
     void ClearAll()
     {
+        //回收墙
+        _flg.GetComponent<FlagManController>().RecWall();
         //清空道具栏的对象
         for (int i = 0; i < itemObjList.Count; i++)
         {
@@ -266,7 +285,26 @@ public class UIBattle : MonoBehaviour, IUIBase
             //回收玩家物体
             ObjectPoolManager.Instance.RecycleMyGameObject(playerList[j]);
         }
+        //清空敌人
+        for (int k = 0; k < MonsterPointManagerStage01.enemyList.Count; k++)
+        {
+            //回收怪物物体
+            ObjectPoolManager.Instance.RecycleMyGameObject(MonsterPointManagerStage01.enemyList[k]);
+        }
+        //回收血条们
+        for (int l = 0; l < hpBarList.Count; l++)
+        {
+            ObjectPoolManager.Instance.RecycleMyGameObject(hpBarList[l]);
+        }
+        //单例们重置
+        FlagManController.battleSwitch = false;
+        FlagManController.flagMove = false;
+        ItemOneID = 0;
+        ItemTwoID = 0;
+        ItemThreeID = 0;
+        ItemFourID = 0;
         playerList.Clear();
+        hpBarList.Clear();
     }
     /// <summary>
     /// 创建角色
@@ -281,6 +319,13 @@ public class UIBattle : MonoBehaviour, IUIBase
         gameCamera.transform.parent = _flg.transform;
         playerList.Add(_flg);
         _flg.transform.parent = null;
+        //设置旗手的血条
+        GameObject hpBarFlg = ObjectPoolManager.Instance.InstantiateMyGameObject(HPBarPrefab);
+        hpBarFlg.transform.parent = CanvasParent.transform;
+        hpBarFlg.transform.localScale = new Vector3(1, 1, 1);
+        hpBarFlg.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(-550, 1000);
+        hpBarFlg.GetComponent<HPBarColorChange>().GetTarget(_flg);
+        hpBarList.Add(hpBarFlg);
         //召唤剑士
         _sbr = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPlayerPrefab
             ((SQLiteManager.Instance.team[ConstData.Saber].playerData.PrefabsID).ToString())
@@ -300,6 +345,13 @@ public class UIBattle : MonoBehaviour, IUIBase
         playerList.Add(_sbr);
         SkillManager.Instance.saber = _sbr;
         _sbr.transform.parent = null;
+        //设置剑士的血条
+        GameObject hpBarSbr = ObjectPoolManager.Instance.InstantiateMyGameObject(HPBarPrefab);
+        hpBarSbr.transform.parent = CanvasParent.transform;
+        hpBarSbr.transform.localScale = new Vector3(1, 1, 1);
+        hpBarSbr.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(-300, 1000);
+        hpBarSbr.GetComponent<HPBarColorChange>().GetTarget(_sbr);
+        hpBarList.Add(hpBarSbr);
         //召唤骑士
         _knt = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPlayerPrefab
             ((SQLiteManager.Instance.team[ConstData.Knight].playerData.PrefabsID).ToString())
@@ -319,6 +371,13 @@ public class UIBattle : MonoBehaviour, IUIBase
         playerList.Add(_knt);
         SkillManager.Instance.knight = _knt;
         _knt.transform.parent = null;
+        //设置骑士的血条
+        GameObject hpBarKnt = ObjectPoolManager.Instance.InstantiateMyGameObject(HPBarPrefab);
+        hpBarKnt.transform.parent = CanvasParent.transform;
+        hpBarKnt.transform.localScale = new Vector3(1, 1, 1);
+        hpBarKnt.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(-300, 940);
+        hpBarKnt.GetComponent<HPBarColorChange>().GetTarget(_knt);
+        hpBarList.Add(hpBarKnt);
         //召唤狂战士
         _bsk = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPlayerPrefab
             ((SQLiteManager.Instance.team[ConstData.Berserker].playerData.PrefabsID).ToString())
@@ -338,6 +397,13 @@ public class UIBattle : MonoBehaviour, IUIBase
         playerList.Add(_bsk);
         SkillManager.Instance.berserker = _bsk;
         _bsk.transform.parent = null;
+        //设置狂战士的血条
+        GameObject hpBarBsk = ObjectPoolManager.Instance.InstantiateMyGameObject(HPBarPrefab);
+        hpBarBsk.transform.parent = CanvasParent.transform;
+        hpBarBsk.transform.localScale = new Vector3(1, 1, 1);
+        hpBarBsk.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(-300, 880);
+        hpBarBsk.GetComponent<HPBarColorChange>().GetTarget(_bsk);
+        hpBarList.Add(hpBarBsk);
         //召唤魔法师
         _cst = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPlayerPrefab
             ((SQLiteManager.Instance.team[ConstData.Caster].playerData.PrefabsID).ToString())
@@ -357,6 +423,13 @@ public class UIBattle : MonoBehaviour, IUIBase
         playerList.Add(_cst);
         SkillManager.Instance.caster = _cst;
         _cst.transform.parent = null;
+        //设置魔法师的血条
+        GameObject hpBarCst = ObjectPoolManager.Instance.InstantiateMyGameObject(HPBarPrefab);
+        hpBarCst.transform.parent = CanvasParent.transform;
+        hpBarCst.transform.localScale = new Vector3(1, 1, 1);
+        hpBarCst.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(-550, 940);
+        hpBarCst.GetComponent<HPBarColorChange>().GetTarget(_cst);
+        hpBarList.Add(hpBarCst);
         //召唤猎人
         _hut = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPlayerPrefab
             ((SQLiteManager.Instance.team[ConstData.Hunter].playerData.PrefabsID).ToString())
@@ -376,5 +449,12 @@ public class UIBattle : MonoBehaviour, IUIBase
         playerList.Add(_hut);
         SkillManager.Instance.hunter = _hut;
         _hut.transform.parent = null;
+        //设置猎人的血条
+        GameObject hpBarHut = ObjectPoolManager.Instance.InstantiateMyGameObject(HPBarPrefab);
+        hpBarHut.transform.parent = CanvasParent.transform;
+        hpBarHut.transform.localScale = new Vector3(1, 1, 1);
+        hpBarHut.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(-550, 880);
+        hpBarHut.GetComponent<HPBarColorChange>().GetTarget(_hut);
+        hpBarList.Add(hpBarHut);
     }
 }

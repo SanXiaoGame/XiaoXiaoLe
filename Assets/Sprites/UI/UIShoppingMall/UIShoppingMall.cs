@@ -480,6 +480,8 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                         projectID = 0;
                         //显示钻石数
                         _diamonds.text = CurrencyManager.Instance.DiamondDisplay();
+                        //播放音效
+                        AudioManager.Instance.PlayEffectMusic(SoundEffect.Clearing);
                     }
                     else
                     {
@@ -562,6 +564,8 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                         projectID = 0;
                         //显示钻石数
                         _diamonds.text = CurrencyManager.Instance.DiamondDisplay();
+                        //播放音效
+                        AudioManager.Instance.PlayEffectMusic(SoundEffect.Clearing);
                     }
                     else
                     {
@@ -610,6 +614,8 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                             "ID", 2308);
                         //显示钻石数
                         _diamonds.text = CurrencyManager.Instance.DiamondDisplay();
+                        //播放音效
+                        AudioManager.Instance.PlayEffectMusic(SoundEffect.Clearing);
                     }
                     else
                     {
@@ -661,6 +667,8 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                                 "ID", 2309);
                             //显示钻石数
                             _diamonds.text = CurrencyManager.Instance.DiamondDisplay();
+                            //播放音效
+                            AudioManager.Instance.PlayEffectMusic(SoundEffect.Clearing);
                         }
                         else
                         {
@@ -718,6 +726,8 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                                 "ID", 2310);
                             //显示钻石数
                             _diamonds.text = CurrencyManager.Instance.DiamondDisplay();
+                            //播放音效
+                            AudioManager.Instance.PlayEffectMusic(SoundEffect.Clearing);
                         }
                         else
                         {
@@ -984,6 +994,8 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                     SQLiteManager.Instance.bagDataSource[key].Bag_Weapon = itemID;
                     _confirm.SetActive(true);
                     _cancel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(225, -245);
+                    //播放音效
+                    AudioManager.Instance.PlayEffectMusic(SoundEffect.Buy);
                     break;
                 }
                 else if (SQLiteManager.Instance.bagDataSource[key].Bag_Grid == _grids.Length)
@@ -1004,6 +1016,8 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                     SQLiteManager.Instance.bagDataSource[key].Bag_Equipment = itemID;
                     _confirm.SetActive(true);
                     _cancel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(225, -245);
+                    //播放音效
+                    AudioManager.Instance.PlayEffectMusic(SoundEffect.Buy);
                     break;
                 }
                 else if (SQLiteManager.Instance.bagDataSource[key].Bag_Grid == _grids.Length)
@@ -1024,6 +1038,8 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                     SQLiteManager.Instance.bagDataSource[key].Bag_Consumable = itemID;
                     _confirm.SetActive(true);
                     _cancel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(225, -245);
+                    //播放音效
+                    AudioManager.Instance.PlayEffectMusic(SoundEffect.Buy);
                     break;
                 }
                 else if (SQLiteManager.Instance.bagDataSource[key].Bag_Grid == _grids.Length)
@@ -1044,6 +1060,8 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                     SQLiteManager.Instance.bagDataSource[key].Bag_Material = itemID;
                     _confirm.SetActive(true);
                     _cancel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(225, -245);
+                    //播放音效
+                    AudioManager.Instance.PlayEffectMusic(SoundEffect.Buy);
                     break;
                 }
                 else if (SQLiteManager.Instance.bagDataSource[key].Bag_Grid == _grids.Length)
@@ -1175,6 +1193,8 @@ public class UIShoppingMall : MonoBehaviour, IUIBase
                 SQLiteManager.Instance.UpdataDataFromTable(ConstData.DiamondCode, ConstData.Stockpile, 0, "ID", id);
                 SQLiteManager.Instance.diamondCode[id].Stockpile = 0;
                 RechargeFail("<color=#ff0000>充值成功！</color>");
+                //播放音效
+                AudioManager.Instance.PlayEffectMusic(SoundEffect.FoodCure);
                 return;
             }
         }

@@ -217,6 +217,8 @@ public class EnemyStates : MonoBehaviour
                 triggerEnemy.enabled = false;
                 StatesClearEnemy();
                 MonsterPointManagerStage01.enemyList.Remove(gameObject);
+                //传输经验值
+                UISettlement.EXPPoolUp(mydata.EXP);
                 vp_Timer.In(1.0f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(gameObject); }));
                 return;
             }

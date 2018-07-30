@@ -804,6 +804,8 @@ public class UIStore : MonoBehaviour, IUIBase
                             confirmFrame.SetActive(false);
                             confirmOK.GetComponent<UISceneWidget>().PointerClick -= GoodsBuy;
                             cancelNO.GetComponent<UISceneWidget>().PointerClick -= Cancel;
+                            //播放音效
+                            AudioManager.Instance.PlayEffectMusic(SoundEffect.Buy);
                         }
                         else
                         {
@@ -839,6 +841,8 @@ public class UIStore : MonoBehaviour, IUIBase
                             confirmFrame.SetActive(false);
                             confirmOK.GetComponent<UISceneWidget>().PointerClick -= GoodsBuy;
                             cancelNO.GetComponent<UISceneWidget>().PointerClick -= Cancel;
+                            //播放音效
+                            AudioManager.Instance.PlayEffectMusic(SoundEffect.Buy);
                         }
                     }
                 }
@@ -885,6 +889,8 @@ public class UIStore : MonoBehaviour, IUIBase
                             confirmFrame.SetActive(false);
                             confirmOK.GetComponent<UISceneWidget>().PointerClick -= GoodsBuy;
                             cancelNO.GetComponent<UISceneWidget>().PointerClick -= Cancel;
+                            //播放音效
+                            AudioManager.Instance.PlayEffectMusic(SoundEffect.Buy);
                         }
                         else
                         {
@@ -900,6 +906,8 @@ public class UIStore : MonoBehaviour, IUIBase
                             confirmFrame.SetActive(false);
                             confirmOK.GetComponent<UISceneWidget>().PointerClick -= GoodsBuy;
                             cancelNO.GetComponent<UISceneWidget>().PointerClick -= Cancel;
+                            //播放音效
+                            AudioManager.Instance.PlayEffectMusic(SoundEffect.Buy);
                         }
                     }
                 }
@@ -953,6 +961,8 @@ public class UIStore : MonoBehaviour, IUIBase
                     }
                     //金币刷新
                     GoldCoin.text = CurrencyManager.Instance.GoldCoinDisplay();
+                    //播放音效
+                    AudioManager.Instance.PlayEffectMusic(SoundEffect.Sell);
                 }
                 else
                 {
@@ -989,6 +999,8 @@ public class UIStore : MonoBehaviour, IUIBase
                     }
                     //金币刷新
                     GoldCoin.text = CurrencyManager.Instance.GoldCoinDisplay();
+                    //播放音效
+                    AudioManager.Instance.PlayEffectMusic(SoundEffect.Sell);
                 }
                 break;
             case ConstData.ItemType:
@@ -1007,6 +1019,8 @@ public class UIStore : MonoBehaviour, IUIBase
                     AllListCreate();
                     //金币刷新
                     GoldCoin.text = CurrencyManager.Instance.GoldCoinDisplay();
+                    //播放音效
+                    AudioManager.Instance.PlayEffectMusic(SoundEffect.Sell);
                 }
                 else
                 {
@@ -1023,6 +1037,8 @@ public class UIStore : MonoBehaviour, IUIBase
                     AllListCreate();
                     //金币刷新
                     GoldCoin.text = CurrencyManager.Instance.GoldCoinDisplay();
+                    //播放音效
+                    AudioManager.Instance.PlayEffectMusic(SoundEffect.Sell);
                 }
                 break;
         }

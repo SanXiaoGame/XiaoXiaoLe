@@ -11,77 +11,97 @@ public class PropsFunction : MonoBehaviour
 
     private void Awake()
     {
-        propsClick = UISceneWidget.Get(gameObject);
-
-        if (propsClick != null)
+        if (transform.GetComponent<UISceneWidget>() == null)
         {
+            UISceneWidget propsClick = UISceneWidget.Get(gameObject);
             propsClick.PointerDown += PropsOnClick;
         }
     }
 
-    private void PropsOnClick(PointerEventData eventData)
+    private void Start()
     {
         flagman = GameObject.FindGameObjectWithTag(ConstData.FlagMan);
+    }
+
+    private void PropsOnClick(PointerEventData eventData)
+    {
         if (GameManager.Instance.props_CubeBreakSwitch == false
             && GameManager.Instance.props_CubeChangeSwitch == false
             && GameManager.Instance.props_SkillCubeSwitch == false)
         {
-            switch (eventData.pointerEnter.name)
+            switch (gameObject.name)
             {
                 case ConstData.CureCapsule:
                     CureTeamHealth(0.2f);
-                    Destroy(eventData.pointerEnter);
+                    UIBattle.itemObjList.Remove(gameObject);
+                    Destroy(gameObject);
                     DeleteItemData(2201);
                     break;
                 case ConstData.Stimulant:
-                    TeamGetState(3207, 5);
-                    Destroy(eventData.pointerEnter);
+                    TeamGetState(3207, 5.0f);
+                    UIBattle.itemObjList.Remove(gameObject);
+                    Destroy(gameObject);
                     DeleteItemData(2202);
                     break;
                 case ConstData.ReviveCross:
-                    ReviveCross(0.2f);
-                    Destroy(eventData.pointerEnter);
-                    DeleteItemData(2203);
+                    if (UIBattle.deadCharaList != null)
+                    {
+                        ReviveCross(0.2f);
+                        UIBattle.itemObjList.Remove(gameObject);
+                        Destroy(gameObject);
+                        DeleteItemData(2203);
+                    }
                     break;
                 case ConstData.CubeBreak:
                     CubeBreak();
-                    Destroy(eventData.pointerEnter);
+                    UIBattle.itemObjList.Remove(gameObject);
+                    Destroy(gameObject);
                     DeleteItemData(2204);
                     break;
                 case ConstData.SkeletonSpiritism:
                     CubeResetALL(0);
-                    Destroy(eventData.pointerEnter);
+                    UIBattle.itemObjList.Remove(gameObject);
+                    Destroy(gameObject);
                     DeleteItemData(2205);
                     break;
                 case ConstData.HealthSyringe:
                     CureTeamHealth(0.8f);
-                    Destroy(eventData.pointerEnter);
+                    UIBattle.itemObjList.Remove(gameObject);
+                    Destroy(gameObject);
                     DeleteItemData(2206);
                     break;
                 case ConstData.ParanephrineSyringe:
-                    TeamGetState(3207, 8);
-                    TeamGetState(3209, 8);
-                    Destroy(eventData.pointerEnter);
+                    TeamGetState(3207, 8.0f);
+                    TeamGetState(3209, 8.0f);
+                    UIBattle.itemObjList.Remove(gameObject);
+                    Destroy(gameObject);
                     DeleteItemData(2207);
                     break;
                 case ConstData.HolyCross:
-                    ReviveCross(0.8f);
-                    Destroy(eventData.pointerEnter);
-                    DeleteItemData(2208);
+                    if (UIBattle.deadCharaList != null)
+                    {
+                        ReviveCross(0.8f);
+                        UIBattle.itemObjList.Remove(gameObject);
+                        Destroy(gameObject);
+                        DeleteItemData(2208);
+                    }
                     break;
                 case ConstData.CubeTransfer:
                     CubeTransfer();
-                    Destroy(eventData.pointerEnter);
+                    UIBattle.itemObjList.Remove(gameObject);
+                    Destroy(gameObject);
                     DeleteItemData(2209);
                     break;
                 case ConstData.LuckyCatBalloon:
                     LuckyCat();
-                    Destroy(eventData.pointerEnter);
+                    UIBattle.itemObjList.Remove(gameObject);
+                    Destroy(gameObject);
                     DeleteItemData(2210);
                     break;
                 case ConstData.GhostSpiritism:
                     CubeResetALL(1);
-                    Destroy(eventData.pointerEnter);
+                    UIBattle.itemObjList.Remove(gameObject);
+                    Destroy(gameObject);
                     DeleteItemData(2211);
                     break;
             }
@@ -121,10 +141,10 @@ public class PropsFunction : MonoBehaviour
                 }
             }
         }
-        flagman.GetComponent<HeroStates>().currentHP += (int)(flagman.GetComponent<HeroStates>().maxHP * Percent);
-        if (flagman.GetComponent<HeroStates>().currentHP > flagman.GetComponent<HeroStates>().maxHP)
+        flagman.GetComponent<FlagManController>().currentHP += (int)(flagman.GetComponent<FlagManController>().maxHP * Percent);
+        if (flagman.GetComponent<FlagManController>().currentHP > flagman.GetComponent<FlagManController>().maxHP)
         {
-            flagman.GetComponent<HeroStates>().currentHP = flagman.GetComponent<HeroStates>().maxHP;
+            flagman.GetComponent<FlagManController>().currentHP = flagman.GetComponent<FlagManController>().maxHP;
         }
         Array.Clear(allPlayer, 0, allPlayer.Length);
     }
@@ -133,14 +153,17 @@ public class PropsFunction : MonoBehaviour
     /// </summary>
     /// <param name="状态ID"></param>
     /// <param name="状态持续时间"></param>
-    void TeamGetState(int stateID, int keepTime)
+    void TeamGetState(int stateID, float keepTime)
     {
-        foreach (HeroData item in SQLiteManager.Instance.team.Values)
+        GameObject[] allPlayer = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < allPlayer.Length; i++)
         {
-            StateData tempData = SQLiteManager.Instance.stateDataSource[stateID];
-            tempData.state_KeepTime = keepTime;
-            //item.stateData.Add(tempData);
+            if (allPlayer[i].GetComponent<HeroController>().isAlive == true)
+            {
+                allPlayer[i].GetComponent<HeroStates>().GetState(stateID, keepTime);
+            }
         }
+        Array.Clear(allPlayer, 0, allPlayer.Length);
     }
     /// <summary>
     /// 复活最近阵亡的角色，并将生命值置为x%
@@ -148,13 +171,21 @@ public class PropsFunction : MonoBehaviour
     /// <param name="生命值百分比(小数)"></param>
     void ReviveCross(float HPpercent)
     {
-        //待写：获取最近阵亡角色ID
-        string deadIDstr = " ";
+        int deadID = Convert.ToInt32(UIBattle.deadCharaList[UIBattle.deadCharaList.Count].name);
+        string deadIDstr = deadID.ToString();
         GameObject a1 = ObjectPoolManager.Instance.InstantiateMyGameObject(ResourcesManager.Instance.FindPlayerPrefab(deadIDstr));
         a1.transform.GetComponent<Animator>().SetTrigger("Reset");
-        a1.GetComponent<HeroStates>().currentHP = (int)(a1.GetComponent<HeroStates>().maxHP * 0.2f);
-        a1.transform.position = flagman.transform.position;
+        a1.GetComponent<HeroStates>().currentHP = (int)(a1.GetComponent<HeroStates>().maxHP * HPpercent);
+        a1.transform.position = flagman.transform.position + new Vector3(0.3f, 0, 0);
+        //播放复活音效
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.Revive);
+        //播放复活特效
+        GameObject tempEffect = ObjectPoolManager.Instance.InstantiateMyGameObject
+            (ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_revive));
+        tempEffect.transform.position = flagman.transform.position + new Vector3(3, 0, 0);
+        vp_Timer.In(0.6f, new vp_Timer.Callback(delegate () { ObjectPoolManager.Instance.RecycleMyGameObject(tempEffect); }));
         //改变各种开关
+        a1.transform.GetComponent<HeroController>().moveSwitch_Battle = true;
     }
     /// <summary>
     /// 全屏块消除，同时判断是否视为使用了一次高级旗手块，0为否，1为是
@@ -164,7 +195,32 @@ public class PropsFunction : MonoBehaviour
         ColumnManager.Instance.MedicinalWaterProp();
         if (a == 1)
         {
-            //待写：所有角色放3技能
+            GameObject[] allPlayer = GameObject.FindGameObjectsWithTag("Player");
+            for (int i = 0; i < allPlayer.Length; i++)
+            {
+                if (allPlayer[i].GetComponent<HeroController>().isAlive == true)
+                {
+                    switch (allPlayer[i].GetComponent<HeroController>().myClass)
+                    {
+                        case ConstData.Saber:
+                            allPlayer[i].GetComponent<HeroController>().Skill_C(ConstData.Saber);
+                            break;
+                        case ConstData.Knight:
+                            allPlayer[i].GetComponent<HeroController>().Skill_C(ConstData.Knight);
+                            break;
+                        case ConstData.Berserker:
+                            allPlayer[i].GetComponent<HeroController>().Skill_C(ConstData.Berserker);
+                            break;
+                        case ConstData.Caster:
+                            allPlayer[i].GetComponent<HeroController>().Skill_C(ConstData.Caster);
+                            break;
+                        case ConstData.Hunter:
+                            allPlayer[i].GetComponent<HeroController>().Skill_C(ConstData.Hunter);
+                            break;
+                    }
+                }
+            }
+            Array.Clear(allPlayer, 0, allPlayer.Length);
         }
     }
     /// <summary>

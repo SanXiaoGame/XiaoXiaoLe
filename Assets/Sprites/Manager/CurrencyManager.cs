@@ -62,6 +62,7 @@ public class CurrencyManager : ManagerBase<CurrencyManager>
             goldCoin = ConstData.GoldCoinMax;
         }
         UpdateGoldCoinDataToSQLite();
+        SQLiteManager.Instance.playerDataSource[1300].GoldCoin += increaseValue;
     }
 
     /// <summary>
@@ -83,6 +84,7 @@ public class CurrencyManager : ManagerBase<CurrencyManager>
             goldCoin = 0;
         }
         UpdateGoldCoinDataToSQLite();
+        SQLiteManager.Instance.playerDataSource[1300].GoldCoin -= decreaseValue;
     }
 
     /// <summary>
@@ -104,6 +106,7 @@ public class CurrencyManager : ManagerBase<CurrencyManager>
             diamond = ConstData.GoldCoinMax;
         }
         UpdateDiamondDataToSQLite();
+        SQLiteManager.Instance.playerDataSource[1300].Diamond += increaseValue;
     }
 
     /// <summary>
@@ -125,6 +128,7 @@ public class CurrencyManager : ManagerBase<CurrencyManager>
             diamond = 0;
         }
         UpdateDiamondDataToSQLite();
+        SQLiteManager.Instance.playerDataSource[1300].Diamond -= decreaseValue;
     }
 
     /// <summary>

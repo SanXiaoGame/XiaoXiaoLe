@@ -33,6 +33,8 @@ public class BlockObjectTouch : MonoBehaviour
     {
         blockClick = null;
         blockImage = GetComponent<Image>();
+        blockPos1 = null;
+        blockPos2 = null;
     }
 
     private void Start()

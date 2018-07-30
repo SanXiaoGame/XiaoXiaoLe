@@ -86,7 +86,11 @@ public struct ConstData
     /// 商店界面GameArea预制体
     /// </summary>
     public const string UIStore_GameArea = "UIStore_GameArea";
-    
+    /// <summary>
+    /// 战斗结算界面预制体
+    /// </summary>
+    public const string UISettlement = "UISettlement";
+
     /// 角色管理界面——角色条
     /// </summary>
     public const string CharacterBar = "CharacterBar";
@@ -107,9 +111,53 @@ public struct ConstData
     /// </summary>
     public const string pitchOn = "pitchOn";
     /// <summary>
+    /// 关卡标签
+    /// </summary>
+    public const string Stage = "Stage";
+    /// <summary>
     /// 第一关场景
     /// </summary>
     public const string Stage01 = "Stage01";
+    /// <summary>
+    /// 第二关场景
+    /// </summary>
+    public const string Stage02 = "Stage02";
+    /// <summary>
+    /// 第三关场景
+    /// </summary>
+    public const string Stage03 = "Stage03";
+    /// <summary>
+    /// 第四关场景
+    /// </summary>
+    public const string Stage04 = "Stage04";
+    /// <summary>
+    /// 第五关场景
+    /// </summary>
+    public const string Stage05 = "Stage05";
+    /// <summary>
+    /// 第六关场景
+    /// </summary>
+    public const string Stage06 = "Stage06";
+    /// <summary>
+    /// 第七关场景
+    /// </summary>
+    public const string Stage07 = "Stage07";
+    /// <summary>
+    /// 第八关场景
+    /// </summary>
+    public const string Stage08 = "Stage08";
+    /// <summary>
+    /// 第九关场景
+    /// </summary>
+    public const string Stage09 = "Stage09";
+    /// <summary>
+    /// 第十关场景
+    /// </summary>
+    public const string Stage10 = "Stage10";
+    /// <summary>
+    /// 血条
+    /// </summary>
+    public const string HPBar = "HPBar";
     #endregion
 
     #region UI区域名
@@ -305,6 +353,14 @@ public struct ConstData
     public const string ConfirmFrame_EQ_ContentText = "EquipmentConfirmFrame/ContentBG/Content";
     public const string ConfirmFrame_EQ_ConfirmButton = "EquipmentConfirmFrame/ConfirmButton";
     public const string ConfirmFrame_EQ_CancelButton = "EquipmentConfirmFrame/CancelButton";
+
+    /// <summary>
+    /// 战斗结算界面
+    /// </summary>
+    public const string UISettlement_CharaMessage = "CharaMessage";
+    public const string UISettlement_GoldCoinFrame = "GoldCoinFrame";
+    public const string UISettlement_ItemListFrame = "ItemListFrame";
+    public const string UISettlement_MessageFrame = "MessageFrame";
     #endregion
 
     #region 所有游戏预制体文件夹
@@ -555,6 +611,10 @@ public struct ConstData
     /// </summary>
     public const string FlagManTag = "FlagMan";
     /// <summary>
+    /// 特效标签
+    /// </summary>
+    public const string Effect = "Effect";
+    /// <summary>
     /// 胜利点
     /// </summary>
     public const string WinFlagTag = "WinFlag";
@@ -766,4 +826,5 @@ public struct ConstData
     public const string EquipmentBag = "EquipmentBag";
     public const string ConsumableBag = "ConsumableBag";
     public const string MaterialBag = "MaterialBag";
+
 }

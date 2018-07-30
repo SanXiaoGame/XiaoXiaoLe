@@ -876,6 +876,8 @@ public class UICharacter : MonoBehaviour, IUIBase
             SQLiteManager.Instance.team[ConstData.Hunter] = hut;
             G_TeamEditOverFrame.SetActive(true);
             editMessage.text = "队伍编辑完成！";
+            //播放音效
+            AudioManager.Instance.PlayEffectMusic(SoundEffect.Clearing);
         }
         else
         {
