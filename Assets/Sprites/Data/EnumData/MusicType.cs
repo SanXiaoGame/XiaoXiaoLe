@@ -76,4 +76,12 @@ public enum SoundEffect
     ShuraGate,
     AllFireOpen,
     SmallFreeze,
+    battle_ep1_intro,
+    battle_ep1_loop,
+    boss_intro,
+    boss_loop,
+    Login_Intro,
+    Login_Loop,
+    maincity,
+    victory
 }

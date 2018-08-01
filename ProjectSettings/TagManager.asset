@@ -21,6 +21,8 @@ TagManager:
   - CurePoint
   - ItemTips
   - Stage
+  - Undefined
+  - halo
   layers:
   - Default
   - TransparentFX
@@ -63,6 +65,9 @@ TagManager:
     locked: 0
   - name: Enemy_Slime
     uniqueID: 834181153
+    locked: 0
+  - name: Enemy_Goblin
+    uniqueID: 2111248633
     locked: 0
   - name: Berserker
     uniqueID: 683132381

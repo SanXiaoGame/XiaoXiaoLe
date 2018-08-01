@@ -55,11 +55,11 @@ public class UIChoiceLevelPrefab : MonoBehaviour, IUIBase
     private void Awake()
     {
         //关卡字典临死添加
-        CheckpointDic.Add(1, "女装山脉");
-        CheckpointDic.Add(2, "冲绳萝莉岛");
-        CheckpointDic.Add(3, "Van♂更衣室");
-        CheckpointDic.Add(4, "尻♂名山");
-        CheckpointDic.Add(5, "魔女之家");
+        CheckpointDic.Add(1, "新日暮里");
+        CheckpointDic.Add(2, "幻想乡");
+        CheckpointDic.Add(3, "尻名山");
+        CheckpointDic.Add(4, "昏睡红茶");
+        CheckpointDic.Add(5, "魔女之夜");
         CheckpointDic.Add(6, "洋馆");
         //以到达关卡数
         PlayerPrefs.SetInt("Checkpoint", 1);
@@ -322,6 +322,11 @@ public class UIChoiceLevelPrefab : MonoBehaviour, IUIBase
     void CancelButton(PointerEventData data)
     {
         _confirmFrame.SetActive(false);
+        GameObject o1 = GameObject.FindGameObjectWithTag("halo");
+        if (o1 != null)
+        {
+            ObjectPoolManager.Instance.RecycleMyGameObject(o1);
+        }
     }
     /// <summary>
     /// 消耗栏按钮方法
@@ -433,7 +438,7 @@ public class UIChoiceLevelPrefab : MonoBehaviour, IUIBase
             case UIChoiceLevelConfirmFrameType.ChoiceLevel:
                 //播放音乐
                 AudioManager.Instance.ReplaceBGM(BGM.battle_ep1_intro);
-                vp_Timer.In(ResourcesManager.Instance.FindAudioClip(BGM.battle_ep1_intro).length, 
+                vp_Timer.In(ResourcesManager.Instance.FindAudioClip(BGM.battle_ep1_intro).length - 0.55f, 
                     new vp_Timer.Callback(delegate () { AudioManager.Instance.ReplaceBGM(BGM.battle_ep1_loop); }));
                 SceneAss_Manager.Instance.LoadingFunc(3);
                 break;

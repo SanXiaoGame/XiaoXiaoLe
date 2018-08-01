@@ -963,6 +963,9 @@ public class UIStore : MonoBehaviour, IUIBase
                     GoldCoin.text = CurrencyManager.Instance.GoldCoinDisplay();
                     //播放音效
                     AudioManager.Instance.PlayEffectMusic(SoundEffect.Sell);
+                    //取消选中
+                    itemG = null;
+                    itemID = 0;
                 }
                 else
                 {
@@ -1001,6 +1004,9 @@ public class UIStore : MonoBehaviour, IUIBase
                     GoldCoin.text = CurrencyManager.Instance.GoldCoinDisplay();
                     //播放音效
                     AudioManager.Instance.PlayEffectMusic(SoundEffect.Sell);
+                    //取消选中
+                    itemG = null;
+                    itemID = 0;
                 }
                 break;
             case ConstData.ItemType:
@@ -1021,6 +1027,9 @@ public class UIStore : MonoBehaviour, IUIBase
                     GoldCoin.text = CurrencyManager.Instance.GoldCoinDisplay();
                     //播放音效
                     AudioManager.Instance.PlayEffectMusic(SoundEffect.Sell);
+                    //取消选中
+                    itemG = null;
+                    itemID = 0;
                 }
                 else
                 {
@@ -1039,6 +1048,9 @@ public class UIStore : MonoBehaviour, IUIBase
                     GoldCoin.text = CurrencyManager.Instance.GoldCoinDisplay();
                     //播放音效
                     AudioManager.Instance.PlayEffectMusic(SoundEffect.Sell);
+                    //取消选中
+                    itemG = null;
+                    itemID = 0;
                 }
                 break;
         }

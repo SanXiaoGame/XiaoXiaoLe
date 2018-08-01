@@ -16,7 +16,7 @@ public class IceCubeBoom : MonoBehaviour
     //找到旗手
     GameObject flagM;
     //被击中的目标列表
-    List<GameObject> enemyList;
+    List<GameObject> enemyList = new List<GameObject>();
 
     private void Awake()
     {
@@ -31,7 +31,6 @@ public class IceCubeBoom : MonoBehaviour
             user = transform.Find("/" + SQLiteManager.Instance.team[ConstData.Caster].playerData.PrefabsID).gameObject;
         }
         flagM = transform.Find("/1001").gameObject;
-        enemyList = new List<GameObject>();
     }
 
     private void OnEnable()
@@ -44,10 +43,10 @@ public class IceCubeBoom : MonoBehaviour
                     cubes[i].GetComponent<PolygonCollider2D>().enabled = false;
                     cubes[i].GetComponent<Rigidbody2D>().gravityScale = 0;
                     cubes[i].GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                    cubes[i].transform.position =
-                        ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeOne).transform.GetChild(i).position;
-                    cubes[i].transform.rotation =
-                        ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeOne).transform.GetChild(i).rotation;
+                    cubes[i].transform.localPosition =
+                        ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeOne).transform.GetChild(i).localPosition;
+                    cubes[i].transform.localRotation =
+                        ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeOne).transform.GetChild(i).localRotation;
                     cubes[i].SetActive(true);
                 }
                 break;
@@ -57,10 +56,10 @@ public class IceCubeBoom : MonoBehaviour
                     cubes[i].GetComponent<PolygonCollider2D>().enabled = false;
                     cubes[i].GetComponent<Rigidbody2D>().gravityScale = 0;
                     cubes[i].GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                    cubes[i].transform.position =
-                        ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeTwo).transform.GetChild(i).position;
-                    cubes[i].transform.rotation =
-                        ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeTwo).transform.GetChild(i).rotation;
+                    cubes[i].transform.localPosition =
+                        ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeTwo).transform.GetChild(i).localPosition;
+                    cubes[i].transform.localRotation =
+                        ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeTwo).transform.GetChild(i).localRotation;
                     cubes[i].SetActive(true);
                 }
                 break;

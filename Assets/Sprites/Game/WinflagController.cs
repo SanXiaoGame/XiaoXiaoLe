@@ -8,10 +8,13 @@ public class WinflagController : MonoBehaviour
     GameObject flagMan;
     //开关
     bool isTrigger = false;
+    //音乐开关
+    bool musicSwitch = true;
 
     private void Awake()
     {
         playerList = new List<GameObject>();
+        musicSwitch = true;
     }
 
     private void OnEnable()
@@ -28,8 +31,12 @@ public class WinflagController : MonoBehaviour
     {
         if (collision.tag == ConstData.Player)
         {
-            //播放音乐
-            AudioManager.Instance.ReplaceBGM(BGM.victory);
+            if (musicSwitch == true)
+            {
+                //播放音乐
+                AudioManager.Instance.ReplaceBGM(BGM.victory);
+                musicSwitch = false;
+            }
             if (flagMan == null)
             {
                 flagMan = GameObject.FindGameObjectWithTag(ConstData.FlagMan);

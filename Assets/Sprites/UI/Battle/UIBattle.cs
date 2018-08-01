@@ -193,15 +193,16 @@ public class UIBattle : MonoBehaviour, IUIBase
     void SettingFrameOpen(PointerEventData eventData)
     {
         //设置界面推入栈
+        UIManager.Instance.PushUIStack(ConstData.UISetting);
     }
     /// <summary>
     /// 返回主城确认窗口
     /// </summary>
     void ReturnMainCityConfirm(PointerEventData eventData)
     {
+        UIManager.Instance.GamePause();
         //打开返回主城的窗口
         ConfirmFrame.SetActive(true);
-        UIManager.Instance.GamePause();
     }
     /// <summary>
     /// 确认返回主城
@@ -218,9 +219,9 @@ public class UIBattle : MonoBehaviour, IUIBase
     /// </summary>
     void ReturnCancle(PointerEventData eventData)
     {
+        UIManager.Instance.GamePause();
         //关闭返回主城的窗口
         ConfirmFrame.SetActive(false);
-        UIManager.Instance.GamePause();
     }
     
     
