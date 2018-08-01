@@ -345,6 +345,7 @@ public struct ConstData
     public const string ConfirmFrame_ContentText = "ConfirmFrame/ContentBG/Content";
     public const string ConfirmFrame_ConfirmButton = "ConfirmFrame/ConfirmButton";
     public const string ConfirmFrame_CancelButton = "ConfirmFrame/CancelButton";
+    public const string HintFrame = "HintFrame";
     //------------------  商城  ---------------------
     public const string RechargeFrame = "RechargeFrame";
     public const string RechargeInputField = "RechargeFrame/RechargeInputField";
