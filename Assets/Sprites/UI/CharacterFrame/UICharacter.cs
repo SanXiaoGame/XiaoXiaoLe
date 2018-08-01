@@ -86,6 +86,8 @@ public class UICharacter : MonoBehaviour, IUIBase
     GameObject G_TeamEditOverFrame;
     GameObject G_EditOverOK;
 
+    GameObject HintFrame;
+
     private void Awake()
     {
         
@@ -289,6 +291,13 @@ public class UICharacter : MonoBehaviour, IUIBase
         confirmFrame = transform.Find(ConstData.ConfirmFrame).gameObject;
         GameObject confirm_OK = transform.Find(ConstData.ConfirmFrame_ConfirmButton).gameObject;
         GameObject cancel_NO = transform.Find(ConstData.ConfirmFrame_CancelButton).gameObject;
+        HintFrame = transform.Find(ConstData.HintFrame).gameObject;
+        GameObject iknowButton = HintFrame.transform.GetChild(2).gameObject;
+        if (iknowButton.GetComponent<UISceneWidget>() == null)
+        {
+            UISceneWidget iknowButtonClick = UISceneWidget.Get(iknowButton);
+            iknowButtonClick.PointerClick += IKnow;
+        }
         if (confirm_OK.GetComponent<UISceneWidget>() == null && cancel_NO.GetComponent<UISceneWidget>() == null)
         {
             UISceneWidget confirmClick = UISceneWidget.Get(confirm_OK);
@@ -334,6 +343,7 @@ public class UICharacter : MonoBehaviour, IUIBase
             G_EditOverOK.GetComponent<UISceneWidget>().PointerClick += EditOK;
         }
     }
+    
     //退出界面
     public void OnExiting()
     {
@@ -431,6 +441,8 @@ public class UICharacter : MonoBehaviour, IUIBase
         //改变开关
         isTeam = true;
         isEquipt = false;
+        //打开提示界面
+        HintFrame.SetActive(true);
         //清除角色
         GameAreaClear("Single", "Default");
         if (SQLiteManager.Instance.team[ConstData.FlagMan] != null && SQLiteManager.Instance.team[ConstData.Saber] != null &&
@@ -768,6 +780,10 @@ public class UICharacter : MonoBehaviour, IUIBase
         confirmFrame.transform.GetChild(3).transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(225, -245);
         confirmFrame.gameObject.SetActive(false);
         deleteNum = 0;
+    }
+    void IKnow(PointerEventData eventData)
+    {
+        HintFrame.SetActive(false);
     }
     //队伍增加和删减成员以及队伍编成确定
     void AddTeamMember(PointerEventData eventData)
