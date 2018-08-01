@@ -50,10 +50,15 @@ public class AudioManager : ManagerBase<AudioManager>
     public void ReplaceBGM(BGM bgmType)
     {
         clip = ResourcesManager.Instance.FindAudioClip(bgmType);
+        if (bgMusic.clip != null)
+        {
+            bgMusic.Stop();
+        }
         bgMusic.clip = null;
         bgMusic.clip = clip;
         bgMusic.spatialBlend = 0f;
         bgMusic.loop = true;
+        bgMusic.playOnAwake = false;
         bgMusic.volume = bgMusicVolume;
         bgMusic.mute = bgMusicMute;
         bgMusic.Play();

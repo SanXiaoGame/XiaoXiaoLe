@@ -853,13 +853,13 @@ public class HeroController : MonoBehaviour
     {
         AudioManager.Instance.PlayEffectMusic(SoundEffect.Freeze_Awake);
         GameObject icecube1 = ObjectPoolManager.Instance.InstantiateMyGameObject(caster01_1);
-        icecube1.transform.position = transform.position + new Vector3(1.2f, 0.05f, 0);
+        icecube1.transform.position = transform.position + new Vector3(1.7f, 0.05f, 0);
         icecube1.transform.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeOne).name;
         GameObject icecube2 = ObjectPoolManager.Instance.InstantiateMyGameObject(caster01_2);
-        icecube2.transform.position = transform.position + new Vector3(2.2f, -0.02f, 0);
+        icecube2.transform.position = transform.position + new Vector3(2.7f, -0.02f, 0);
         icecube2.transform.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeTwo).name;
         GameObject icecube3 = ObjectPoolManager.Instance.InstantiateMyGameObject(caster01_1);
-        icecube3.transform.position = transform.position + new Vector3(3.2f, 0.05f, 0);
+        icecube3.transform.position = transform.position + new Vector3(3.7f, 0.05f, 0);
         icecube3.transform.name = ResourcesManager.Instance.FindPrefab(SkillPrefabs.Skill_Caster01_IceCubeOne).name;
         vp_Timer.In(0.3f, new vp_Timer.Callback(delegate () { skillIsOperation = false; }));
     }
@@ -909,8 +909,7 @@ public class HeroController : MonoBehaviour
     {
         AudioManager.Instance.PlayEffectMusic(SoundEffect.BlackMagic_Shoot);
         GameObject blk = ObjectPoolManager.Instance.InstantiateMyGameObject(caster03);
-        blk.transform.position = transform.position + new Vector3(2.2f, -0.126f, 0);
-
+        blk.transform.position = transform.position + new Vector3(2.2f, -1.126f, 0);
     }
 
 

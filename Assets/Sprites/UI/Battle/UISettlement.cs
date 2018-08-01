@@ -345,23 +345,26 @@ public class UISettlement : MonoBehaviour, IUIBase
     /// </summary>
     void GetEXP(string heroClass, int exp)
     {
-        int originLV = SQLiteManager.Instance.team[heroClass].playerData.Level;
-        int totalLV = originLV;
-        int maxEXP = SQLiteManager.Instance.lVDataSource[SQLiteManager.Instance.team[heroClass].playerData.Level].level_MaxEXP;
-        int nowEXP = SQLiteManager.Instance.team[heroClass].playerData.EXP;
-        int totalEXP = nowEXP + exp;
-        SQLiteManager.Instance.team[heroClass].playerData.EXP = totalEXP;
-        SQLiteManager.Instance.UpdataDataFromTable(ConstData.Player, ConstData.player_EXP, totalEXP,
-            ConstData.player_ID, SQLiteManager.Instance.team[heroClass].playerData.player_Id);
-        while (maxEXP < totalEXP)
+        if (SQLiteManager.Instance.team[heroClass].playerData.Level != 50)
         {
-            //LevelUp(heroClass, SQLiteManager.Instance.team[heroClass].playerData.Level, 
-            //    SQLiteManager.Instance.team[heroClass].playerData.Level + 1);
-            SQLiteManager.Instance.team[heroClass].playerData.Level++;
-            totalLV++;
-            maxEXP = SQLiteManager.Instance.lVDataSource[SQLiteManager.Instance.team[heroClass].playerData.Level].level_MaxEXP;
+            int originLV = SQLiteManager.Instance.team[heroClass].playerData.Level;
+            int totalLV = originLV;
+            int maxEXP = SQLiteManager.Instance.lVDataSource[SQLiteManager.Instance.team[heroClass].playerData.Level].level_MaxEXP;
+            int nowEXP = SQLiteManager.Instance.team[heroClass].playerData.EXP;
+            int totalEXP = nowEXP + exp;
+            SQLiteManager.Instance.team[heroClass].playerData.EXP = totalEXP;
+            SQLiteManager.Instance.UpdataDataFromTable(ConstData.Player, ConstData.player_EXP, totalEXP,
+                ConstData.player_ID, SQLiteManager.Instance.team[heroClass].playerData.player_Id);
+            while (maxEXP < totalEXP)
+            {
+                //LevelUp(heroClass, SQLiteManager.Instance.team[heroClass].playerData.Level, 
+                //    SQLiteManager.Instance.team[heroClass].playerData.Level + 1);
+                SQLiteManager.Instance.team[heroClass].playerData.Level++;
+                totalLV++;
+                maxEXP = SQLiteManager.Instance.lVDataSource[SQLiteManager.Instance.team[heroClass].playerData.Level].level_MaxEXP;
+            }
+            LevelUp(heroClass, originLV, totalLV);
         }
-        LevelUp(heroClass, originLV, totalLV);
     }
     /// <summary>
     /// 升级数据存到字典和数据库
@@ -370,8 +373,12 @@ public class UISettlement : MonoBehaviour, IUIBase
     /// <param name="totalLV"></param>
     void LevelUp(string heroClass, int nowLV, int totalLV)
     {
-        if (nowLV != totalLV)
+        if (nowLV != totalLV && nowLV != 50)
         {
+            if (totalLV > 50)
+            {
+                totalLV = 50;
+            }
             int newHP = 0;
             int newAD = 0;
             int newAP = 0;

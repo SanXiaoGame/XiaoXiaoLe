@@ -114,11 +114,22 @@ public class PropsFunction : MonoBehaviour
     /// <param name="要删除的道具ID"></param>
     void DeleteItemData(int ItemID)
     {
+        int deletGrid = 0;
         foreach (BagData item in SQLiteManager.Instance.bagDataSource.Values)
         {
             if (item.Bag_Consumable == ItemID)
             {
-                item.Bag_Consumable = 0;
+                deletGrid = item.Bag_Grid;
+                for (int i = deletGrid; i < SQLiteManager.Instance.bagDataSource.Count; i++)
+                {
+                    SQLiteManager.Instance.bagDataSource[i].Bag_Consumable = SQLiteManager.Instance.bagDataSource[i + 1].Bag_Consumable;
+                    SQLiteManager.Instance.UpdataDataFromTable
+                        (ConstData.Bag, ConstData.Bag_Consumable, SQLiteManager.Instance.bagDataSource[i + 1].Bag_Consumable,
+                        ConstData.Bag_Grid, i);
+                }
+                SQLiteManager.Instance.bagDataSource[SQLiteManager.Instance.bagDataSource.Count].Bag_Consumable = 0;
+                SQLiteManager.Instance.UpdataDataFromTable
+                        (ConstData.Bag, ConstData.Bag_Consumable, 0, ConstData.Bag_Grid, SQLiteManager.Instance.bagDataSource.Count);
                 return;
             }
         }
@@ -139,6 +150,13 @@ public class PropsFunction : MonoBehaviour
                 {
                     allPlayer[i].GetComponent<HeroStates>().currentHP = allPlayer[i].GetComponent<HeroStates>().maxHP;
                 }
+                //播放特效
+                GameObject cure = ObjectPoolManager.Instance.InstantiateMyGameObject
+                            (ResourcesManager.Instance.FindPrefab(SkillPrefabs.Effect_CureStone));
+                cure.transform.position = allPlayer[i].transform.position + new Vector3(0, 0.6f, 0);
+                cure.transform.parent = allPlayer[i].transform;
+                cure.transform.localScale = new Vector3(2, 2, 2);
+                Destroy(cure, 1.0f);
             }
         }
         flagman.GetComponent<FlagManController>().currentHP += (int)(flagman.GetComponent<FlagManController>().maxHP * Percent);
@@ -147,6 +165,8 @@ public class PropsFunction : MonoBehaviour
             flagman.GetComponent<FlagManController>().currentHP = flagman.GetComponent<FlagManController>().maxHP;
         }
         Array.Clear(allPlayer, 0, allPlayer.Length);
+        //播放音效
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.Revive);
     }
     /// <summary>
     /// 全队获得[?]状态x秒
@@ -155,6 +175,7 @@ public class PropsFunction : MonoBehaviour
     /// <param name="状态持续时间"></param>
     void TeamGetState(int stateID, float keepTime)
     {
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.MasterSpark);
         GameObject[] allPlayer = GameObject.FindGameObjectsWithTag("Player");
         for (int i = 0; i < allPlayer.Length; i++)
         {
@@ -211,6 +232,7 @@ public class PropsFunction : MonoBehaviour
         ColumnManager.Instance.MedicinalWaterProp();
         if (a == 1)
         {
+            AudioManager.Instance.PlayEffectMusic(SoundEffect.DarkShadowSummon);
             GameObject[] allPlayer = GameObject.FindGameObjectsWithTag("Player");
             for (int i = 0; i < allPlayer.Length; i++)
             {
@@ -244,6 +266,7 @@ public class PropsFunction : MonoBehaviour
     /// </summary>
     void CubeBreak()
     {
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.FoodCure);
         GameManager.Instance.props_CubeBreakSwitch = true;
     }
     /// <summary>
@@ -251,6 +274,7 @@ public class PropsFunction : MonoBehaviour
     /// </summary>
     void CubeTransfer()
     {
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.FoodCure);
         GameManager.Instance.props_CubeChangeSwitch = true;
     }
     /// <summary>
@@ -258,6 +282,7 @@ public class PropsFunction : MonoBehaviour
     /// </summary>
     void LuckyCat()
     {
+        AudioManager.Instance.PlayEffectMusic(SoundEffect.FoodCure);
         GameManager.Instance.props_SkillCubeSwitch = true;
     }
 }

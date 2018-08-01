@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 90d8eb9eae6794c47a51d74779126bc1
-timeCreated: 1529490662
+timeCreated: 1532955280
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -10,6 +10,11 @@ TextureImporter:
     21300006: highestSlime_7
     21300008: highestSlime_8
     21300010: highestSlime_9
+    21300012: highestSlime_3
+    21300014: highestSlime_4
+    21300016: highestSlime_5
+    21300018: highestSlime_6
+    21300020: highestSlime_10
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -144,6 +149,62 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
+      name: highestSlime_3
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 3
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: highestSlime_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 2
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: highestSlime_5
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 3
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: highestSlime_6
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 2
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
       name: highestSlime_7
       rect:
         serializedVersion: 2
@@ -181,6 +242,20 @@ TextureImporter:
         height: 11
       alignment: 9
       pivot: {x: 0.75, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: highestSlime_10
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 17
+        width: 2
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
