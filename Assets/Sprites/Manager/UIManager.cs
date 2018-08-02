@@ -23,15 +23,15 @@ public class UIManager : ManagerBase<UIManager>
     /// <summary>
     /// 检测退出按钮的点击
     /// </summary>
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape) && !isClickEscape)
-        {
-            isClickEscape = true;
-            //显示退出界面
-            PushUIStack(ConstData.UIExitGame);
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Escape) && !isClickEscape)
+    //    {
+    //        isClickEscape = true;
+    //        //显示退出界面
+    //        PushUIStack(ConstData.UIExitGame);
+    //    }
+    //}
 
     /// <summary>
     /// 游戏暂停

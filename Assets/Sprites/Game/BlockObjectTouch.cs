@@ -93,8 +93,6 @@ public class BlockObjectTouch : MonoBehaviour
         {
             if (eventData.pointerEnter.tag == "Block")
             {
-                //播放点击音效
-
                 blockPos1 = eventData.pointerEnter.transform;
                 //检测是否是吃了删除药
                 if (GameManager.Instance.props_CubeBreakSwitch)
