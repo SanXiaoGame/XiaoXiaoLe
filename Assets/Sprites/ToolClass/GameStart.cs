@@ -33,15 +33,24 @@ public class GameStart : MonoBehaviour
             BGWidget.PointerClick += LoadLoadingScene;
         }
         //播放音乐
-        ChangeBGM();
-        AudioManager.Instance.ReplaceBGM(BGM.Login_Intro);
+        Invoke("DelayOpenBGM", 0.1f);
     }
     void LoadLoadingScene(PointerEventData data)
     {
         SceneAss_Manager.Instance.LoadingFunc(2);
     }
-    void ChangeBGM()
+
+    /// <summary>
+    /// 延迟打开BGM
+    /// </summary>
+    void DelayOpenBGM()
     {
-        vp_Timer.In(0.4f, new vp_Timer.Callback(delegate () { AudioManager.Instance.ReplaceBGM(BGM.Login_Loop); }));
+        StartCoroutine("ChangeBGM");
+    }
+    IEnumerator ChangeBGM()
+    {
+        AudioManager.Instance.ReplaceBGM(BGM.Login_Intro);
+        yield return new WaitForSeconds(ResourcesManager.Instance.FindAudioClip(BGM.Login_Intro).length);
+        AudioManager.Instance.ReplaceBGM(BGM.Login_Loop);
     }
 }

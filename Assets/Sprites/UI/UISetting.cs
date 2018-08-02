@@ -118,20 +118,25 @@ public class UISetting : MonoBehaviour, IUIBase
         soundEffectSlider.value = AudioManager.Instance.effectVolume;
 
         gameObject.SetActive(true);
+
+        UIManager.Instance.GamePause();
     }
     //离开
     public void OnExiting()
     {
         gameObject.SetActive(false);
+        UIManager.Instance.GamePause();
     }
     //暂停
     public void OnPausing()
     {
         gameObject.SetActive(false);
+        UIManager.Instance.GamePause();
     }
     //唤醒
     public void OnResuming()
     {
         gameObject.SetActive(true);
+        UIManager.Instance.GamePause();
     }
 }
